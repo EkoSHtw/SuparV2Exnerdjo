@@ -7,19 +7,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
-public class ServiceCatalog extends ListActivity implements AdapterView.OnItemClickListener {
+public class ServiceCatalog extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ServiceAdapter adapter;
+    private ListView serviceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_service_catalog_around);
+
+        serviceList = (ListView) findViewById(R.id.serviceList);
         // hier werden die Service gespeichert
         adapter = new ServiceAdapter(this);
-        setListAdapter(adapter);
+        serviceList.setAdapter(adapter);
         // auf das Antippen von Listelementen reagieren
-        getListView().setOnItemClickListener(this);
+        serviceList.setOnItemClickListener(this);
         //setContentView(R.layout.activity_service_catalog);
     }
 
