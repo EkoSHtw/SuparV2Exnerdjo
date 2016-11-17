@@ -42,7 +42,5 @@ public class Service extends Task {
 
   public String getCost() {return ""+cost;   }
 
-  public void setCost(float cost) {
-    this.cost = cost;
-  }
+  public void setCost(float cost) {this.cost = cost; }
 }

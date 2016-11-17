@@ -23,12 +23,11 @@ public class ServiceAdapter extends BaseAdapter {
     public ServiceAdapter(Context context){
         // wird für das Aufblasend der XML-Datei benötigt
         inflator = LayoutInflater.from(context);
-        // alle Services aus der INSTANCE ermitteln
+        // alle Services werden aus der INSTANCE ermittelt und in ein Array geschrieben
         services = new ArrayList<>();
         for(int index = 0; index<Services.getSize(); index++){
             Service service = Services.getService(index);
             services.add(service);
-            System.out.println(services.size());
         }
     }
 
@@ -42,9 +41,11 @@ public class ServiceAdapter extends BaseAdapter {
     @Override
     public Object getItem(int position) {return services.get(position);}
 
+    // unsinnige Methode ?
     @Override
     public long getItemId(int position){return position;}
 
+    // erstellt den View
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         ViewHolder holder;
@@ -63,6 +64,7 @@ public class ServiceAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        // den Views ihren Text zuweisen
         Context context = parent.getContext();
         Service service = (Service) getItem(position);
         holder.name.setText(service.getName(context));

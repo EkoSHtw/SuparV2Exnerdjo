@@ -12,10 +12,10 @@ public class Medicine extends Task {
 
   private int sideeffects;
 
-    public Medicine(int name, int description, int usage, int ingerdients, int manufacturer, int sideeffects){
+    public Medicine(int name, int description, int usage, int ingredients, int manufacturer, int sideeffects){
         super(name, description);
         this.usage = usage;
-        this.ingredients = ingerdients;
+        this.ingredients = ingredients;
         this.manufacturer = manufacturer;
         this.sideeffects = sideeffects;
     }

@@ -21,27 +21,32 @@ public class ServiceCatalog extends AppCompatActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_catalog_around);
 
+        // Suchen der Headline in der XML und Zuweisen des Textes
         headline = (TextView) findViewById(R.id.headline);
         headline.setText(R.string.serviceHeadline);
 
+        // Finden des ListViews im Text
         serviceList = (ListView) findViewById(R.id.serviceList);
-        // hier werden die Service gespeichert
+        // ein neuer ServiceAdapter wird erstellt und dem ListView zugewiesen
         adapter = new ServiceAdapter(this);
         serviceList.setAdapter(adapter);
-        // auf das Antippen von Listelementen reagieren
+        // ein OnItemClickListener wird dem ListView zugewiesen
         serviceList.setOnItemClickListener(this);
-        //setContentView(R.layout.activity_service_catalog);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+        // Bestimmen des Services auf den geklickt wurde
         Service service = (Service) adapter.getItem(position);
-        // define what happens onClick
+        // Context bestimmen ?
         Context context = parent.getContext();
+        // ein neues Intent wird erstellt und der Klasse, die gestartet wird zugewiesen
         Intent intent = new Intent(this, ServiceDetail.class);
+        // wichtige Daten über den geklickten Service werden mitgeschickt
         intent.putExtra("name", service.getName(context));
         intent.putExtra("description", service.getDescription(context));
         intent.putExtra("cost", service.getCost());
+        // Das Intent/Activity wird gestartet
         startActivity(intent);
     }
 }

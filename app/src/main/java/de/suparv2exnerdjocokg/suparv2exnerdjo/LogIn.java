@@ -21,13 +21,16 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
+        // Views aus der XML heraussuchen
         description = (TextView) findViewById(R.id.logInDescription);
         userName = (EditText) findViewById(R.id.userNameField);
         password = (EditText) findViewById(R.id.passwordField);
         logInButton = (Button) findViewById(R.id.submitButton);
 
+        // den Views ihren Text zuweisen
         description.setText(R.string.logInDescription);
         logInButton.setText(R.string.weiter);
+        // OnClickListener erstellen, der eine neue Activity startet
         logInButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
