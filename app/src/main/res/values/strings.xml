@@ -19,6 +19,7 @@
     <string name="weiter">Weiter</string>
     <string name="benutzername">Benutzername</string>
     <string name="emptyString"></string>
+    <string name="serviceHeadline">Leistungskatalog</string>
 
     <string name="ganzwaschung">Ganzwaschung</string>
     <string name="ganzwaschungDescription">1. Waschen, Duschen, Baden\n2. Mund-, Zahn- und Lippenpflege\n3. Rasieren\n4. Hautpflege\n5. Haarpflege (Kämmen, ggf. Waschen)\n6. Nagelpflege\n7. An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken\n8. Vorbereiten/Aufräumen des Pflegebereiches</string>

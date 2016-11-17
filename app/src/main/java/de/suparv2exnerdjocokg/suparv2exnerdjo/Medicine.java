@@ -1,45 +1,60 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
-import java.util.Vector;
+import android.content.Context;
 
-public class Medicine  {
-  //extends Task
-  private String usage;
 
-  private String ingredience;
+public class Medicine extends Task {
 
-  private String manufactor;
+  private int usage;
 
-  private String sideeffects;
+  private int ingredients;
 
-  public String getUsage() {
+  private int manufacturer;
+
+  private int sideeffects;
+
+    public Medicine(int name, int description, int usage, int ingerdients, int manufacturer, int sideeffects){
+        super(name, description);
+        this.usage = usage;
+        this.ingredients = ingerdients;
+        this.manufacturer = manufacturer;
+        this.sideeffects = sideeffects;
+    }
+
+  public int getUsage() {
     return usage;
-  }
+  };
 
-  public void setUsage(String usage) {
+  public String getUsage(Context context){return context.getString(getUsage());};
+
+  public void setUsage(int usage) {
     this.usage = usage;
-  }
+  };
 
-  public String getSideeffects() {
+  public int getSideeffects() {
     return sideeffects;
-  }
+  };
 
-  public void setSideeffects(String sideeffects) {
+    public String getSideeffects(Context context){return context.getString(getSideeffects());};
+
+  public void setSideeffects(int sideeffects) {
     this.sideeffects = sideeffects;
   }
 
-  public String getManufactor() {
-    return manufactor;
+  public int getManufacturer() {
+    return manufacturer;
   }
 
-  public void setManufactor(String manufactor) {
-    this.manufactor = manufactor;
+    public String getManufacturer(Context context){return context.getString(getManufacturer());};
+
+  public void setManufactorint(int manufacturer) {this.manufacturer = manufacturer;}
+
+  public int getIngredients() {
+    return ingredients;
   }
 
-  public String getIngredience() {
-    return ingredience;
-  }
+    public String getIngredients(Context context){return context.getString(getIngredients());};
 
-  public void setIngredience(String ingredience) {
-    this.ingredience = ingredience;
+  public void setIngredients(int ingredients) {
+    this.ingredients = ingredients;
   }
 }

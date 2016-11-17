@@ -8,16 +8,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ServiceCatalog extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ServiceAdapter adapter;
     private ListView serviceList;
+    private TextView headline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_catalog_around);
+
+        headline = (TextView) findViewById(R.id.headline);
+        headline.setText(R.string.serviceHeadline);
 
         serviceList = (ListView) findViewById(R.id.serviceList);
         // hier werden die Service gespeichert

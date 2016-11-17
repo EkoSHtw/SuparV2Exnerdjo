@@ -14,8 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- activity android:name=".LogIn" -->
-        <activity android:name=".ServiceCatalog">
+        <activity android:name=".LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +25,7 @@
         <uses-permission android:name="android.permission.READ_CONTACTS" />
 
         <activity android:name=".MainActivity" />
-        <!-- activity android:name=".ServiceCatalog"></activity -->
-        <activity android:name=".LogIn" />
+        <activity android:name=".ServiceCatalog"></activity>
         <activity android:name=".ServiceDetail"></activity>
     </application>
 
