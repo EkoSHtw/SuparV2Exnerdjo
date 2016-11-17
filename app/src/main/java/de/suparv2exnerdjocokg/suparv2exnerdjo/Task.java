@@ -1,26 +1,39 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import android.content.Context;
+
 import java.util.Vector;
 
 public class Task {
 
-  private String name;
+  private int name;
 
-  private String description;
+  private int description;
 
-  public String getName() {
+  public Task (int name, int description){
+    this.name = name;
+    this.description = description;
+  }
+
+  public int getName(){
     return name;
   }
 
-  public void setName(String name) {
+  public String getName(Context context) {
+    return context.getString(getName());
+  }
+
+  public void setName(int name) {
     this.name = name;
   }
 
-  public String getDescription() {
+  public int getDescription(){
     return description;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public String getDescription(Context context) {
+    return context.getString(getDescription());
   }
+
+  public void setDescription(int description) {this.description = description;  }
 }

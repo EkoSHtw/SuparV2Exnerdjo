@@ -2,8 +2,8 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import java.util.Date;
 
-public class Notiz extends Task {
-
+public class Notiz  {
+//extends Task
   private Date timestamp;
 
   public Carer getCarer() {

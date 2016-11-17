@@ -1,8 +1,8 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 import java.util.Vector;
 
-public class Medicine extends Task {
-
+public class Medicine  {
+  //extends Task
   private String usage;
 
   private String ingredience;
