@@ -6,13 +6,15 @@ import java.util.Vector;
 public class ServiceProvided {
 
   private ArrayList<Service> serviceList;
+  private ArrayList<Service> dupeList;
+  private float sum;
 
   public float getSum() {
     return sum;
   }
 
-  public void setSum(float sum) {
-    this.sum = sum;
+  public ArrayList<Service> getDupeList() {
+    return dupeList;
   }
 
   public ArrayList<Service> getServiceList() {
@@ -23,10 +25,14 @@ public class ServiceProvided {
     this.serviceList = serviceList;
   }
 
-  private float sum;
-
-
+/*
   public void calculate() {
+    for(Service service : serviceList) {
+      sum += service.getCost();
+      dupeList.add(service);
+    }
+    serviceList.clear();
   }
+  */
 
 }

@@ -67,17 +67,30 @@ public Client(){
     return erbrachteLeistung;
   }
 
-  public void setErbrachteLeistung(ArrayList<Service> erbrachteLeistung) {
-    this.erbrachteLeistung = erbrachteLeistung;
+  public void addErbrachteLeistung(Service erbrachteLeistung) {
+    this.erbrachteLeistung.add(erbrachteLeistung);
   }
 
   public ArrayList<ClientMedicine> getMedicineList() {
     return medicineList;
   }
 
-  public void setMedicineList(ArrayList<ClientMedicine> medicineList) {
-    this.medicineList = medicineList;
+  public void setMedicineList(ClientMedicine medicine) {
+    medicineList.add(medicine);
+  }
+/*
+  public void deleteMedicine(String medicine){
+    for (ClientMedicine med : medicineList) {
+      if(med.getMedicine().getName() == medicine){
+        medicineList.remove(med);
+        break;
+      }
+    }
   }
 
+  public deleteToDo(ToDo toDelete){
+
+  }
+*/
 
 }
