@@ -1,18 +1,24 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class ToDo {
 
-  private Date timestamp;
+  private Timestamp timestamp;
 
   private GeneralTask task;
 
-  public Date getTimestamp() {
+  public ToDo(Timestamp timestamp, GeneralTask task){
+      this.timestamp = timestamp;
+      this.task = task;
+  }
+
+  public Timestamp getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(Date timestamp) {
+  public void setTimestamp(Timestamp timestamp) {
     this.timestamp = timestamp;
   }
 

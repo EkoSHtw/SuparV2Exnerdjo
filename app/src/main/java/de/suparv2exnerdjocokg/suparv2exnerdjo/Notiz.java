@@ -2,16 +2,18 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.content.Context;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
-public class Notiz extends GeneralTask {
+public class Notiz {
 
-  private Date timestamp;
+      private Timestamp timestamp;
   private Carer carer;
-  private int content;
+  private String content;
+    private String tag;
 
-  public Notiz(int name, int description, Carer carer, int content, Date timestamp){
-    super(name, description);
+    public Notiz(String tag, String content, Carer carer, Timestamp timestamp){
+      this.tag = tag;
     this.carer = carer;
     this.content = content;
     this.timestamp = timestamp;
@@ -29,14 +31,20 @@ public class Notiz extends GeneralTask {
     return timestamp;
   }
 
-  public void setTimestamp(Date timestamp) {
+  public void setTimestamp(Timestamp timestamp) {
     this.timestamp = timestamp;
   }
 
-  public int getContent(){return content;};
+  public String getContent(){return content;};
 
-  public String getContent(Context context){return context.getString(getContent());};
+  public void setContent(String content){this.content = content;}
 
-  public void setContent(int content){this.content = content;}
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
 }

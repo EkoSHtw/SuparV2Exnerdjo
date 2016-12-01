@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_client_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:orientation="horizontal"
     tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity">
 
     <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.MenuFragment"
         android:id="@+id/menu"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"/>
-</RelativeLayout>
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        tools:layout="@layout/fragment_menu" />
+
+    <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.ClientView"
+        android:id="@+id/todo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.8"
+        tools:layout="@layout/fragment_client_view" />
+
+</LinearLayout>
