@@ -9,25 +9,33 @@
         android:id="@+id/client_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/client" />
+        android:text="@string/client"
+        android:layout_margin="2dp"
+        android:textSize="@dimen/menutext_size"/>
     <TextView
         android:id="@+id/basic_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/basic_data"
-        android:layout_below="@id/client_view"/>
+        android:layout_below="@id/client_view"
+        android:layout_margin="2dp"
+        android:textSize="@dimen/menutext_size"/>
     <TextView
         android:id="@+id/calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/calendar"
-        android:layout_below="@id/basic_data"/>
+        android:layout_below="@id/basic_data"
+        android:layout_margin="2dp"
+        android:textSize="@dimen/menutext_size"/>
     <TextView
         android:id="@+id/vital_values"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/vital_value"
-        android:layout_below="@id/calendar"/>
+        android:layout_below="@id/calendar"
+        android:layout_margin="2dp"
+        android:textSize="@dimen/menutext_size"/>
     <Button
         android:id="@+id/checkout"
         android:layout_width="wrap_content"

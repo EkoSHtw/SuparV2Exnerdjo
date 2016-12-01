@@ -25,6 +25,7 @@ public class ServiceCatalog extends AppCompatActivity implements AdapterView.OnI
         headline = (TextView) findViewById(R.id.headline);
         headline.setText(R.string.serviceHeadline);
 
+
         // Finden des ListViews im Text
         serviceList = (ListView) findViewById(R.id.serviceList);
         // ein neuer ServiceAdapter wird erstellt und dem ListView zugewiesen

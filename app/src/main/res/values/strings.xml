@@ -26,11 +26,26 @@
     <string name="teilwaschung">Teilwaschung</string>
     <string name="teilwaschungDescription">1. Teilwaschung (z.B. Intimbereich)\n2. Mund-, Zahn- und Lippenpflege\n3. Rasieren\n4. Hautpflege\n5 .Haarpflege (Kämmen, ggf. Waschen)\n6. Nagelpflege\n7. An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken\n8. Vorbereiten/Aufräumen des Pflegebereiches</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Menu-->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="client">Klienten</string>
     <string name="basic_data">Stammdaten</string>
     <string name="calendar">Kalender</string>
     <string name="vital_value">Vitalwerte</string>
     <string name="logout">Abmelden</string>
+
+    <!--Basic Data -->
+    <string name="clientfirstname">Helga</string>
+    <string name="clientlastname">Stein</string>
+    <string name="clientAddress">Rotsteinweg 21A</string>
+    <string name="postalcCode">1457 Berlin</string>
+    <string name="clientBirthdate">14.04.1958</string>
+    <string name="careLevel">2</string>
+    <string name="fam1">Arnold Stein</string>
+    <string name="fam2">Helene Stein</string>
+    <string name="telephonenumber">015123456</string>
+    <string name="telephonenumber2">017123456</string>
+    <string name="infodump">Schwerhörig.
+    Trinkt gerne Tee. Redet gerne über Formel 1.</string>
+    <string name="concerns">test</string>
 </resources>
