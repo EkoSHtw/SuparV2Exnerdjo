@@ -5,15 +5,10 @@ import android.content.Context;
 public class Medicine {
 
   private int name;
-
   private int description;
-
   private int usage;
-
   private int ingredients;
-
   private int manufacturer;
-
   private int sideeffects;
 
     public Medicine(int name, int description, int usage, int ingredients, int manufacturer, int sideeffects){

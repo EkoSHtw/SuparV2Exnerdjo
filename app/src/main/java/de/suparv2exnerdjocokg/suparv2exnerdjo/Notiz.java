@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.Date;
 
-public class Notiz extends Task {
+public class Notiz extends GeneralTask {
 
   private Date timestamp;
   private Carer carer;

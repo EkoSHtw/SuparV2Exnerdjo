@@ -1,13 +1,12 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import java.util.Date;
-import java.util.Vector;
 
 public class ToDo {
 
   private Date timestamp;
 
-  private Task task;
+  private GeneralTask task;
 
   public Date getTimestamp() {
     return timestamp;
@@ -17,11 +16,11 @@ public class ToDo {
     this.timestamp = timestamp;
   }
 
-  public Task getTask() {
+  public GeneralTask getTask() {
     return task;
   }
 
-  public void setTask(Task task) {
+  public void setTask(GeneralTask task) {
     this.task = task;
   }
 }
