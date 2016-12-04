@@ -1,7 +1,5 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
-import android.content.Context;
-
 import java.sql.Timestamp;
 
 public class Note {
@@ -36,17 +34,16 @@ public class Note {
         this.timestamp = timestamp;
     }
 
-    public int getContent() {
+    public String getContent() {
         return content;
     }
 
-    public String getContent(Context context) {
-        return context.getString(getContent());
-    }
+//    public String getContent(Context context) {
+//        return context.getString(getContent());
+//    }
 
-    ;
 
-    public void setContent(int content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

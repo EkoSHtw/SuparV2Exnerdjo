@@ -11,4 +11,10 @@
         android:id="@+id/menu"
         android:layout_width="100dp"
         android:layout_height="match_parent"/>
+
+    <fragment
+        class="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment"
+        android:id="@+id/logBook"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
 </RelativeLayout>
