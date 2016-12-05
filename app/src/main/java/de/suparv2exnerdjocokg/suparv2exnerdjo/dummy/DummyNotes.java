@@ -29,7 +29,7 @@ public class DummyNotes {
 
 
     static {
-       ITEMS.add(new Notiz("Tag1", "Hi, ich bin eine Notiz", new Carer("Jimmy"), new Timestamp(System.currentTimeMillis())));
+       ITEMS.add(new Notiz("Tag1", "Hi, ich bin eine  seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeehr lange Notiz", new Carer("Jimmy"), new Timestamp(System.currentTimeMillis())));
         ITEMS.add(new Notiz("Tag2", "Hi, ich bin noch eine Notiz", new Carer("Timmy"), new Timestamp(System.currentTimeMillis())));
     }
 

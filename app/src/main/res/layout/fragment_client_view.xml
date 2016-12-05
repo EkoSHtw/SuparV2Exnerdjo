@@ -4,13 +4,17 @@
     android:layout_height="match_parent"
     tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.ClientView">
 
-
     <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.TodoFragment"
         android:id="@+id/todos"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.5"
         tools:layout="@layout/fragment_todo_list" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"/>
 
     <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.ToDoNotes"
         android:id="@+id/todoSecond"
