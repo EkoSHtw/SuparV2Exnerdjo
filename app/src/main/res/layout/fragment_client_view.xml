@@ -17,7 +17,7 @@
         android:background="@color/colorAccent"/>
 
     <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.ToDoNotes"
-        android:id="@+id/todoSecond"
+        android:id="@+id/todoNotes"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.5"

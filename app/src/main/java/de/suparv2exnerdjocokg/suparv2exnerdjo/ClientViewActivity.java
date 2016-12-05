@@ -1,6 +1,7 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.net.Uri;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -18,7 +19,22 @@ public class ClientViewActivity extends AppCompatActivity implements ClientView.
     }
 
     @Override
-    public void onListFragmentInteraction(ToDo toDo) {
+    public void onListFragmentInteraction(int position) {
+        ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.todo);
+        if(newFrag != null){
+            newFrag.updateClientView(position);
+        }else{
+            newFrag = new ClientView();
+            Bundle args = new Bundle();
+            args.putInt(ClientView.ARG_Position, position);
+            newFrag.setArguments(args);
 
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+            trans.replace(R.id.todo, newFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
+        }
     }
 }

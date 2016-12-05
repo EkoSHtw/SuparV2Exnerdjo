@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ public class ClientView extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     //private static final String ARG_PARAM1 = "param1";
     //private static final String ARG_PARAM2 = "param2";
+    public static String ARG_Position;
 
     // TODO: Rename and change types of parameters
     //private String mParam1;
@@ -71,6 +73,25 @@ public class ClientView extends Fragment {
     public void onButtonPressed(ToDo toDo) {
         if (mListener != null) {
             mListener.onFragmentInteraction(toDo);
+        }
+    }
+
+    public void updateClientView(int position){
+        ToDoNotes tFrag = (ToDoNotes)  getChildFragmentManager().findFragmentById(R.id.todoNotes);
+        if(tFrag!=null) {
+            tFrag.updateFragView(position);
+        }else{
+            tFrag = new ToDoNotes();
+            Bundle args = new Bundle();
+            args.putInt(ClientView.ARG_Position, position);
+            tFrag.setArguments(args);
+
+            FragmentTransaction trans = getChildFragmentManager().beginTransaction();
+
+            trans.replace(R.id.todoNotes, tFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
         }
     }
 

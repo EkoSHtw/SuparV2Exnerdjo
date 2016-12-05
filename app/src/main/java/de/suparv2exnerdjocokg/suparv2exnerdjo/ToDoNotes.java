@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,6 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ToDoNotes extends Fragment {
-
-
 
     public ToDoNotes() {
         // Required empty public constructor
@@ -54,6 +53,25 @@ public class ToDoNotes extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(ToDo toDo) {
 
+    }
+
+    public void updateFragView(int position){
+        FixedNotesFragment fnFrag = (FixedNotesFragment) getChildFragmentManager().findFragmentById(R.id.fixedNotes);
+        if(fnFrag != null){
+            fnFrag.updateFragView(position);
+        }else{
+            fnFrag = new FixedNotesFragment();
+            Bundle args = new Bundle();
+            args.putInt(ClientView.ARG_Position, position);
+            fnFrag.setArguments(args);
+
+            FragmentTransaction trans = getChildFragmentManager().beginTransaction();
+
+            trans.replace(R.id.fixedNotes, fnFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
+        }
     }
 
     @Override

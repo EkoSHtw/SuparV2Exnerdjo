@@ -27,7 +27,7 @@ public class DummyToDos {
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, ToDo> ITEM_MAP = new HashMap<String, ToDo>();
+    public static final Map<Integer, ToDo> ITEM_MAP = new HashMap<>();
 
 
     static {
@@ -35,6 +35,5 @@ public class DummyToDos {
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.ganzwaschung, R.string.ganzwaschungDescription, R.string.ganzwaschung)));
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.teilwaschung, R.string.teilwaschungDescription, R.string.teilwaschung)));
     }
-
 
 }

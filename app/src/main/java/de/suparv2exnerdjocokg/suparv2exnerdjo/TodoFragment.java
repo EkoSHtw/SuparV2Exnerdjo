@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,9 +26,11 @@ public class TodoFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    public static String ARG_Position;
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private View view;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -60,7 +63,7 @@ public class TodoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_todo_list, container, false);
+        view = inflater.inflate(R.layout.fragment_todo_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -76,6 +79,15 @@ public class TodoFragment extends Fragment {
         return view;
     }
 
+    public void updateFragView (int position){
+        List<ToDo> items = new ArrayList<>();
+        items.add(DummyToDos.ITEMS.get(position));
+
+        if(view != null && view instanceof RecyclerView){
+            RecyclerView rView = (RecyclerView) view;
+            rView.setAdapter(new MyTodoRecyclerViewAdapter(items, mListener));
+        }
+    }
 
     // Called when a fragment is first attached to its context. onCreate(Bundle) will be called after this.
     @Override
@@ -108,6 +120,6 @@ public class TodoFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(ToDo item);
+        void onListFragmentInteraction(int position);
     }
 }
