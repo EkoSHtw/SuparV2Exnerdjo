@@ -65,17 +65,23 @@ public class TodoFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_todo_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
+
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.todolist);
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.ITEMS, mListener));
-        }
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onListFragmentInteraction(-1);
+            }
+        });
+
         return view;
     }
 

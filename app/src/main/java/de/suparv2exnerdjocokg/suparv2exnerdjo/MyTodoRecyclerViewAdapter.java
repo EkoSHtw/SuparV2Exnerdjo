@@ -21,6 +21,8 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
 
     private final List<ToDo> mValues;
     private final TodoFragment.OnListFragmentInteractionListener mListener;
+    private View oldSelection = null;
+
 
     public MyTodoRecyclerViewAdapter(List<ToDo> items, TodoFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
@@ -47,11 +49,19 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
+                    clearSelection();
+                    oldSelection = holder.mView;
                     mListener.onListFragmentInteraction(position);
-                    holder.mView.setBackgroundColor(holder.mView.getContext().getResources().getColor(R.color.colorAccent));
+                    holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorAccent));
                 }
             }
         });
+    }
+
+    public void clearSelection() {
+        if(oldSelection != null) {
+            oldSelection.setBackgroundColor(oldSelection.getResources().getColor(android.R.color.transparent));
+        }
     }
 
     @Override
