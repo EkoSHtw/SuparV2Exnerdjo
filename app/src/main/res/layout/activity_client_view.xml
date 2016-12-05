@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
     android:id="@+id/activity_client_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity">
 
     <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.MenuFragment"
@@ -17,4 +17,4 @@
         android:id="@+id/logBook"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
-</RelativeLayout>
+</LinearLayout>

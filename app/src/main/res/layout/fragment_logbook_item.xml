@@ -9,48 +9,43 @@
         android:id="@+id/frag_logB_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1.5"
-        android:text="11.01.1111" />
+        android:layout_weight="1.5" />
 
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5px"
-        android:layout_marginRight="5px"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@android:color/darker_gray" />
 
     <TextView
         android:id="@+id/frag_logB_tag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="Something_Done" />
+        android:layout_weight="2" />
 
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5px"
-        android:layout_marginRight="5px"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@android:color/darker_gray" />
 
     <TextView
         android:id="@+id/frag_logB_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:text="ive done this and it seems like it worked because the client was very happy afterwards so not for the future, it might be a good idea to repeat this stuff" />
-
+        android:layout_weight="10" />
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5px"
-        android:layout_marginRight="5px"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@android:color/darker_gray" />
 
     <TextView
         android:id="@+id/frag_logB_carer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="me no name" />
+        android:layout_weight="1" />
 </LinearLayout>

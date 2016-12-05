@@ -38,13 +38,11 @@ public class Note {
         return content;
     }
 
-//    public String getContent(Context context) {
-//        return context.getString(getContent());
-//    }
-
-
     public void setContent(String content) {
         this.content = content;
     }
 
+    public String getTag() {
+        return tag;
+    }
 }

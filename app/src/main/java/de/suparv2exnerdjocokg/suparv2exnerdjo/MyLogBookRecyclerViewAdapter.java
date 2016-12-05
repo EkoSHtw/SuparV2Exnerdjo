@@ -44,8 +44,9 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
     public void onBindViewHolder(final LogBookItemHolder holder, int position) {
         Note note = mValues.get(position);
         holder.date.setText(note.getTimestamp().toString());
-        holder.tag.setText(note.getContent());
+        holder.tag.setText(note.getTag());
         holder.carer.setText(note.getCarer().getName());
+        holder.content.setText(note.getContent());
 
 //        holder.mView.setOnClickListener(new View.OnClickListener() {
 //            @Override
