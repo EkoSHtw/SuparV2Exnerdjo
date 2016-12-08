@@ -74,7 +74,7 @@ public class LogBookFragment extends Fragment {
 //            recyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(this.getContext(),this.notes));
 //        }
 
-        editText = (EditText) view.findViewById(R.id.logbook_search_bar);
+//        editText = (EditText) view.findViewById(R.id.logbook_search_bar);
 //        editText.setText("lalalla");
         return view;
     }

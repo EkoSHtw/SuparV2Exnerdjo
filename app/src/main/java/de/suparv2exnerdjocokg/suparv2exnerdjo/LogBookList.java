@@ -34,8 +34,8 @@ public class LogBookList extends Fragment {
         prepareList();
         final MyLogBookRecyclerViewAdapter adapter = new MyLogBookRecyclerViewAdapter(notes);
 
-        final EditText inputSearch = (EditText) container.findViewById(R.id.logbook_search_bar);
 //        inputSearch = (EditText) container.findViewById(R.id.logbook_search_bar);
+        EditText inputSearch = (EditText) getActivity().findViewById(R.id.logbook_search_bar);
         inputSearch.addTextChangedListener(new TextWatcher() {
 
             @Override
