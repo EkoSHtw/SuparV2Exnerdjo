@@ -22,7 +22,7 @@ public class LogBookList extends Fragment {
 
     private ArrayList<Note> notes;
     private RecyclerView mRecyclerView;
-    private EditText inputSearch;
+//    private EditText inputSearch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,7 +33,9 @@ public class LogBookList extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         prepareList();
         final MyLogBookRecyclerViewAdapter adapter = new MyLogBookRecyclerViewAdapter(notes);
-        inputSearch = (EditText) inputSearch.findViewById(R.id.logbook_search_bar);
+
+        final EditText inputSearch = (EditText) container.findViewById(R.id.logbook_search_bar);
+//        inputSearch = (EditText) container.findViewById(R.id.logbook_search_bar);
         inputSearch.addTextChangedListener(new TextWatcher() {
 
             @Override

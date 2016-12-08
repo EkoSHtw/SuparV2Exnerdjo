@@ -75,7 +75,7 @@ public class LogBookFragment extends Fragment {
 //        }
 
         editText = (EditText) view.findViewById(R.id.logbook_search_bar);
-        editText.setText("lalalla");
+//        editText.setText("lalalla");
         return view;
     }
 

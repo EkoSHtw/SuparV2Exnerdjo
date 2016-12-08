@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@android:color/holo_purple">
 
@@ -20,7 +20,7 @@
 
     <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookList"
         android:id="@+id/logbook_list"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_logbook_list"/>
 
