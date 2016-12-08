@@ -2,14 +2,10 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import java.sql.Timestamp;
-import java.util.ArrayList;
+import android.widget.EditText;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyContent.DummyItem;
 
@@ -21,8 +17,8 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyContent.DummyItem;
  */
 public class LogBookFragment extends Fragment {
 
-    private ArrayList<Note> notes;
-    private RecyclerView mRecyclerView;
+    private EditText editText;
+
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -56,31 +52,16 @@ public class LogBookFragment extends Fragment {
 //        }
     }
 
-    private void prepareList() {
-        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", new Carer("Olaf"),
-                new Timestamp(1L));
-        Note second = new Note("Eine Aufgabe", "Das ist in eine ganz lange und nötige Beschreibung, die ich nicht so wollte, aber mal zum Testen brauche.", new Carer("not Olaf")
-                , new Timestamp(3L));
-        Note third = new Note("Keks", "Ich bin ein Keks",
-                new Carer("Keksi"), new Timestamp(2L));
+    //Das ist in eine ganz lange und nötige Beschreibung, die ich nicht so wollte, aber mal zum Testen brauche.
 
-        notes = new ArrayList<>();
-        notes.add(first);
-        notes.add(second);
-        notes.add(third);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_logbook_list, container, false);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        prepareList();
-        mRecyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(getContext(), notes));
-
+//        Log.println(Log.INFO,"m", "HALLO");
+//        View searchBar = inflater.inflate(R.layout.logbook_searchbar,container,false);
+        View view = inflater.inflate(R.layout.fragment_logbook, container, false);
         // Set the adapter
 //        if (view instanceof RecyclerView) {
 //            Context context = view.getContext();
@@ -92,6 +73,9 @@ public class LogBookFragment extends Fragment {
 //            }
 //            recyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(this.getContext(),this.notes));
 //        }
+
+        editText = (EditText) view.findViewById(R.id.logbook_search_bar);
+        editText.setText("lalalla");
         return view;
     }
 
