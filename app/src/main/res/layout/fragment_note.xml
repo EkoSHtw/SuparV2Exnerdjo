@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:textSize="11dp"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/content"
         android:layout_alignParentLeft="true"
+        android:textSize="11dp"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
@@ -33,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/content"
         android:layout_alignParentRight="true"
+        android:textSize="11dp"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <View
