@@ -36,6 +36,7 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
 
     public MyLogBookRecyclerViewAdapter(List<Note> notes) {
         initializeList(notes);
+        mFilter = new ItemFilter();
     }
 
     public MyLogBookRecyclerViewAdapter(Context context, List<Note> values) {
@@ -92,12 +93,15 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
 
     @Override
     public Filter getFilter() {
-        return new ItemFilter();
+        return this.mFilter;
     }
 
     private class ItemFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
+
+//            Log.println(Log.INFO, "m", "Hi ich bin der Filter");
+
             String filterString = constraint.toString().toLowerCase();
 
             FilterResults results = new FilterResults();
@@ -110,7 +114,7 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
             String filterableString;
             Note filterNote;
             for (int i = 0; i < count; i++) {
-                filterNote =list.get(i);
+                filterNote = list.get(i);
                 filterableString = filterNote.getTag();
                 if (filterableString.toLowerCase().contains(filterString)) {
                     nlist.add(filterNote);
