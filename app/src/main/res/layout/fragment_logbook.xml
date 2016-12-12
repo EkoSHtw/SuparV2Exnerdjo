@@ -39,12 +39,26 @@
     </LinearLayout>
 
 
-    <fragment
+    <!--<fragment-->
+        <!--android:id="@+id/list"-->
+        <!--class="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookList"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--tools:layout="@layout/fragment_logbook_list" />-->
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/list"
-        class="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookList"
+        android:name="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@layout/fragment_logbook_list" />
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_orange_light"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment"
+        tools:listitem="@layout/fragment_logbook_item"
+        android:divider="@android:color/darker_gray"
+        />
 
 
 </LinearLayout>
