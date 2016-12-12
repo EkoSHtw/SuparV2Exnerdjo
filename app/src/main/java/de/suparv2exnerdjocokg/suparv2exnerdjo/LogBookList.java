@@ -116,7 +116,6 @@ public class LogBookList extends Fragment {
                             nlist.add(filterNote);
                         }
                     }
-
 //                    adapter.setFilteredData(nlist);
 //                    adapter.notifyDataSetChanged();
 
