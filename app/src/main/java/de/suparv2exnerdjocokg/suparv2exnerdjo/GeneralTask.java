@@ -10,11 +10,13 @@ public class GeneralTask {
     private int name;
     private int description;
     private int tag;
+    private boolean isDone;
 
     public GeneralTask(int name, int description, int tag) {
         this.name = name;
         this.description = description;
         this.tag = tag;
+        this.isDone = false;
     }
 
     public int getName() {
@@ -44,4 +46,12 @@ public class GeneralTask {
     public String getTag(Context context) {return context.getString(getTag());}
 
     public void setTag(int tag) {this.tag = tag;}
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
 }

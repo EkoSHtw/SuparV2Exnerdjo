@@ -2,6 +2,8 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.dummy;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +36,21 @@ public class DummyToDos {
         // Add some sample items.
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.ganzwaschung, R.string.ganzwaschungDescription, R.string.ganzwaschung)));
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.teilwaschung, R.string.teilwaschungDescription, R.string.teilwaschung)));
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.nahr, R.string.nahrDescription, R.string.nahr)));
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.hNahr, R.string.hNahrDesc, R.string.hNahr)));
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.lagBet, R.string.lagBetDesc, R.string.lagBet)));ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.ganzwaschung, R.string.ganzwaschungDescription, R.string.ganzwaschung)));
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.teilwaschung, R.string.teilwaschungDescription, R.string.teilwaschung)));
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.nahr, R.string.nahrDescription, R.string.nahr)));
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.hNahr, R.string.hNahrDesc, R.string.hNahr)));
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.lagBet, R.string.lagBetDesc, R.string.lagBet)));
+        sortTime();
+    }
+
+    public void sortAlphabet(){
+    }
+
+    public static void sortTime(){
+        Collections.sort(ITEMS);
     }
 
 }

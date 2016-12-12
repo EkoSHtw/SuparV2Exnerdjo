@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
+
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 /**
 
@@ -42,6 +46,10 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         holder.mNameView.setText(mValues.get(position).getTask().getName());
+        if(holder.mItem.getTask().isDone()){
+            holder.mCheckBox.setChecked(true);
+            holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
+        }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +61,17 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                     oldSelection = holder.mView;
                     mListener.onListFragmentInteraction(position);
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorAccent));
+                }
+            }
+        });
+        holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                holder.mItem.getTask().setDone(isChecked);
+                if(isChecked) {
+                    holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
+                }else{
+                    holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.white));
                 }
             }
         });
@@ -72,14 +91,14 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mNameView;
-        public final ImageView mContentView;
+        public final CheckBox mCheckBox;
         public ToDo mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mNameView = (TextView) view.findViewById(R.id.name);
-            mContentView = (ImageView) view.findViewById(R.id.content);
+            mCheckBox = (CheckBox) view.findViewById(R.id.checkBox);
         }
 
         @Override

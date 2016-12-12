@@ -3,7 +3,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class ToDo {
+public class ToDo implements Comparable{
 
   private Timestamp timestamp;
 
@@ -28,5 +28,19 @@ public class ToDo {
 
   public void setTask(GeneralTask task) {
     this.task = task;
+  }
+
+  @Override
+  public int compareTo(Object o) {
+      ToDo t = (ToDo)o;
+
+      long l2 = this.getTimestamp().getTime();
+      long l1 = t.getTimestamp().getTime();
+      if (l2 > l1)
+          return 1;
+      else if (l1 > l2)
+          return -1;
+      else
+          return 0;
   }
 }
