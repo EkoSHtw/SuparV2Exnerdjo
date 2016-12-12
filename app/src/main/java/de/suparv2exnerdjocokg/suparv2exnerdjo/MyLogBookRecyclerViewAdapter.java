@@ -2,11 +2,15 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment.OnListFragmentInteractionListener;
@@ -17,9 +21,11 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyContent.DummyItem;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBookRecyclerViewAdapter.LogBookItemHolder> {
+public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBookRecyclerViewAdapter.LogBookItemHolder> implements Filterable {
 
-    private final List<Note> mValues;
+    private List<Note> mValues;
+    private List<Note> filteredData;
+    private Filter mFilter;
 //    private final OnListFragmentInteractionListener mListener;
 
     Context context;
@@ -30,13 +36,19 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
 //    }
 
     public MyLogBookRecyclerViewAdapter(List<Note> notes) {
-        this.mValues = notes;
+        initializeList(notes);
+        mFilter = new ItemFilter();
     }
 
     public MyLogBookRecyclerViewAdapter(Context context, List<Note> values) {
         super();
         this.context = context;
+        initializeList(values);
+    }
+
+    private void initializeList(List<Note> values) {
         this.mValues = values;
+        this.filteredData = values;
     }
 
 
@@ -71,6 +83,7 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
 //        return new View(context);
 //    }
 
+
     @Override
     public int getItemCount() {
         return mValues.size();
@@ -78,6 +91,53 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
 
     public Note getItem(int pos) {
         return this.mValues.get(pos);
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (this.mFilter == null) {
+            this.mFilter = new ItemFilter();
+        }
+        return this.mFilter;
+    }
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            Log.println(Log.INFO, "m", "Hi ich bin der Filter");
+
+            String filterString = constraint.toString().toLowerCase();
+
+            FilterResults results = new FilterResults();
+
+            final List<Note> list = mValues;
+
+            int count = list.size();
+            final ArrayList<Note> nlist = new ArrayList<Note>(count);
+
+            String filterableString;
+            Note filterNote;
+            for (int i = 0; i < count; i++) {
+                filterNote = list.get(i);
+                filterableString = filterNote.getTag();
+                if (filterableString.toLowerCase().contains(filterString)) {
+                    nlist.add(filterNote);
+                }
+            }
+
+            results.values = nlist;
+            results.count = nlist.size();
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredData = (ArrayList<Note>) results.values;
+            notifyDataSetChanged();
+        }
     }
 
     public class LogBookItemHolder extends RecyclerView.ViewHolder {

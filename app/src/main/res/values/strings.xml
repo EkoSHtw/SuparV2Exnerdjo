@@ -48,4 +48,9 @@
     <string name="infodump">Schwerhörig.
     Trinkt gerne Tee. Redet gerne über Formel 1.</string>
     <string name="concerns">test</string>
+
+
+
+    <!-- Logbook search bar -->
+    <string name ="action_search">search bar filler</string>
 </resources>

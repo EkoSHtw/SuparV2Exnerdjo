@@ -9,12 +9,14 @@
 
     <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.MenuFragment"
         android:id="@+id/menu"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"/>
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"/>
 
-    <fragment
-        class="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment"
+    <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment"
         android:id="@+id/logBook"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.8"
+        tools:layout="@layout/fragment_logbook"/>
 </LinearLayout>
