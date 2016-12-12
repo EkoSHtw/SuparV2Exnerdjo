@@ -26,8 +26,6 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link NotesFromYesterdayFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link NotesFromYesterdayFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -79,12 +77,16 @@ public class NotesFromYesterdayFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(getYesterday()));
+            try {
+                recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(getYesterday()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return view;
     }
 
-    private List<Notiz> getYesterday() {
+    private List<Notiz> getYesterday() throws ParseException {
         List<Notiz> list = new ArrayList<>();
         for(int i = 0; i < DummyNotes.ITEMS.size(); i++){
             if(equalsWithYesterday(DummyNotes.ITEMS.get(i).getTimestamp())){
@@ -94,13 +96,13 @@ public class NotesFromYesterdayFragment extends Fragment {
         return list;
     }
 
-    public boolean equalsWithYesterday(Timestamp st){
+    public boolean equalsWithYesterday(Timestamp st) throws ParseException {
+        Date date = new Date(st.getTime());
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd"); // Time part has discarded
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);
         Date yesterday = dateFormat.parse(dateFormat.format(cal.getTime())); // get yesterday's Date without time part
-        Date srcDate = new Date(String.valueOf(st));
-        Date srcDateWithoutTime =dateFormat.parse(dateFormat.format(srcDate));
+        Date srcDateWithoutTime =dateFormat.parse(dateFormat.format(date));
         return yesterday.equals(srcDateWithoutTime ); // checks src date equals yesterday.
     }
 
