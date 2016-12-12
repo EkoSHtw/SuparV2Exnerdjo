@@ -25,12 +25,14 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
 
     private final List<ToDo> mValues;
     private final TodoFragment.OnListFragmentInteractionListener mListener;
+    private final TodoFragment.OnInfoClickedInteractionListener infoListener;
     private View oldSelection = null;
 
 
-    public MyTodoRecyclerViewAdapter(List<ToDo> items, TodoFragment.OnListFragmentInteractionListener listener) {
+    public MyTodoRecyclerViewAdapter(List<ToDo> items, TodoFragment.OnListFragmentInteractionListener listener, TodoFragment.OnInfoClickedInteractionListener newInfoListener) {
         mValues = items;
         mListener = listener;
+        infoListener = newInfoListener;
     }
 
 
@@ -60,6 +62,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                     clearSelection();
                     oldSelection = holder.mView;
                     mListener.onListFragmentInteraction(position);
+                    holder.mInfo.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorAccent));
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorAccent));
                 }
             }
@@ -75,11 +78,20 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 }
             }
         });
+        holder.mInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(null!=infoListener) {
+                    infoListener.onInfoClickedListener(position);
+                }
+            }
+        });
     }
 
     public void clearSelection() {
         if(oldSelection != null) {
             oldSelection.setBackgroundColor(oldSelection.getResources().getColor(android.R.color.transparent));
+            oldSelection.findViewById(R.id.info).setBackgroundColor(oldSelection.getResources().getColor(android.R.color.transparent));
         }
     }
 
@@ -92,6 +104,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         public final View mView;
         public final TextView mNameView;
         public final CheckBox mCheckBox;
+        public final ImageButton mInfo;
         public ToDo mItem;
 
         public ViewHolder(View view) {
@@ -99,6 +112,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             mView = view;
             mNameView = (TextView) view.findViewById(R.id.name);
             mCheckBox = (CheckBox) view.findViewById(R.id.checkBox);
+            mInfo = (ImageButton) view.findViewById(R.id.info);
         }
 
         @Override

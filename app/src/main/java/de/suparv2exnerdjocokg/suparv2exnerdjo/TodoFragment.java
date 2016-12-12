@@ -30,6 +30,7 @@ public class TodoFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private OnInfoClickedInteractionListener infoListener;
     private View view;
 
     /**
@@ -73,7 +74,7 @@ public class TodoFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.ITEMS, mListener));
+            recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.ITEMS, mListener, infoListener));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +92,7 @@ public class TodoFragment extends Fragment {
 
         if(view != null && view instanceof RecyclerView){
             RecyclerView rView = (RecyclerView) view;
-            rView.setAdapter(new MyTodoRecyclerViewAdapter(items, mListener));
+            rView.setAdapter(new MyTodoRecyclerViewAdapter(items, mListener, infoListener));
         }
     }
 
@@ -101,9 +102,10 @@ public class TodoFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
+            infoListener = (OnInfoClickedInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+                    + " must implement OnListFragmentInteractionListener and OnInfoClickedInteractionListener");
         }
     }
 
@@ -112,6 +114,7 @@ public class TodoFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        infoListener = null;
     }
 
     /**
@@ -127,5 +130,8 @@ public class TodoFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(int position);
+    }
+    public interface OnInfoClickedInteractionListener{
+        void onInfoClickedListener(int position);
     }
 }

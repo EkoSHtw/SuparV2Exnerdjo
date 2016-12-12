@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-public class ClientViewActivity extends AppCompatActivity implements TodoFragment.OnListFragmentInteractionListener {
+public class ClientViewActivity extends AppCompatActivity implements TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,5 +49,10 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
 
             trans.commit();
         }
+    }
+
+    @Override
+    public void onInfoClickedListener(int position) {
+
     }
 }

@@ -8,14 +8,15 @@
     tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.ToDoNotes">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Feste Notizen"
         android:layout_marginTop="10dp"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="20dp"
+        android:textSize="15dp"
+        android:gravity="center"
         />
-    <!-- TODO: Update blank fragment layout -->
+
     <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.FixedNotesFragment"
         android:id="@+id/fixedNotes"
         android:layout_width="match_parent"
@@ -29,11 +30,14 @@
         android:background="@color/colorAccent"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Notizen von Gestern"
         android:layout_marginTop="10dp"
-        android:textAppearance="?attr/textAppearanceListItem"/>
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="15dp"
+        android:gravity="center"
+        />
 
     <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.NotesFromYesterdayFragment"
         android:id="@+id/olderNotes"
