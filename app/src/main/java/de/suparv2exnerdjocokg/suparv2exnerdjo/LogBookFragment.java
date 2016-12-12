@@ -5,7 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyContent.DummyItem;
 
@@ -15,7 +18,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyContent.DummyItem;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class LogBookFragment extends Fragment {
+public class LogBookFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     private EditText editText;
 
@@ -48,7 +51,25 @@ public class LogBookFragment extends Fragment {
 
 //        editText = (EditText) view.findViewById(R.id.logbook_search_bar);
 //        editText.setText("lalalla");
+
+        Spinner spinner = (Spinner) view.findViewById(R.id.search_bar_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.search_bar_choices, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
         return view;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
 

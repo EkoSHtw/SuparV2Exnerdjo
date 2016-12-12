@@ -15,6 +15,9 @@ import android.widget.LinearLayout;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
+
+import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.list;
 
 /**
  * Created by v2 on 05.12.2016.
@@ -32,7 +35,7 @@ public class LogBookList extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = (RecyclerView) inflater.inflate(R.layout.fragment_logbook_list, container, false);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.list);
+        mRecyclerView = (RecyclerView) view.findViewById(list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         prepareList();
 
@@ -68,17 +71,17 @@ public class LogBookList extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         View myActivityView = (LinearLayout) getActivity().findViewById(R.id.logBook);
-        if (myActivityView == null) {
-            Log.println(Log.INFO, "m", "view ist gleich null");
-        } else {
-            Log.println(Log.INFO, "m", "view ist odch nicht null");
-        }
-
-        if (inputSearch == null) {
-            Log.println(Log.INFO, "m", "search ist gleich null");
-        } else {
-            Log.println(Log.INFO, "m", "search ist odch nicht null");
-        }
+//        if (myActivityView == null) {
+//            Log.println(Log.INFO, "m", "view ist gleich null");
+//        } else {
+//            Log.println(Log.INFO, "m", "view ist odch nicht null");
+//        }
+//
+//        if (inputSearch == null) {
+//            Log.println(Log.INFO, "m", "search ist gleich null");
+//        } else {
+//            Log.println(Log.INFO, "m", "search ist odch nicht null");
+//        }
 
         adapter = new MyLogBookRecyclerViewAdapter(notes);
         inputSearch = (EditText) myActivityView.findViewById(R.id.logbook_search_bar);
@@ -88,7 +91,37 @@ public class LogBookList extends Fragment {
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-                adapter.getFilter().filter(cs);
+//                adapter.getFilter().filter(cs);
+                String filterString = cs.toString().toLowerCase();
+
+//                Filter.FilterResults results = new Filter.FilterResults();
+                if (filterString.equals("")) {
+//                    adapter.setFilteredData(notes);
+//                    adapter.notifyDataSetChanged();
+                    mRecyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(notes));
+
+
+                } else {
+                    final List<Note> list = notes;
+
+                    int count = list.size();
+                    final ArrayList<Note> nlist = new ArrayList<Note>(count);
+
+                    String filterableString;
+                    Note filterNote;
+                    for (int i = 0; i < count; i++) {
+                        filterNote = list.get(i);
+                        filterableString = filterNote.getTag();
+                        if (filterableString.toLowerCase().contains(filterString)) {
+                            nlist.add(filterNote);
+                        }
+                    }
+
+//                    adapter.setFilteredData(nlist);
+//                    adapter.notifyDataSetChanged();
+
+                    mRecyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(nlist));
+                }
             }
 
             @Override
