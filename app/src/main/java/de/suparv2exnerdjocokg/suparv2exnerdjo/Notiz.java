@@ -27,7 +27,7 @@ public class Notiz {
     this.carer = carer;
   }
 
-  public Date getTimestamp() {
+  public Timestamp getTimestamp() {
     return timestamp;
   }
 

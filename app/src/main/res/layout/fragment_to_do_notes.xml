@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:text="Notizen von Gestern"/>
 
-    <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.FixedNotesFragment"
+    <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.NotesFromYesterdayFragment"
         android:id="@+id/olderNotes"
         android:layout_width="match_parent"
         android:layout_height="1dp"

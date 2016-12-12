@@ -1,7 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class ToDo implements Comparable{
 
