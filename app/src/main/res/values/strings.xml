@@ -39,7 +39,7 @@
     <string name="clientlastname">Stein</string>
     <string name="clientAddress">Rotsteinweg 21A</string>
     <string name="postalcCode">1457 Berlin</string>
-    <string name="clientBirthdate">14.04.1958</string>
+    <string name="clientBirthdate">"14.04.1958"</string>
     <string name="careLevel">2</string>
     <string name="fam1">Arnold Stein</string>
     <string name="fam2">Helene Stein</string>
@@ -48,4 +48,16 @@
     <string name="infodump">Schwerhörig.
     Trinkt gerne Tee. Redet gerne über Formel 1.</string>
     <string name="concerns">test</string>
+    
+    
+    <!-- Wound Documentation-->
+    <string name="wounddate">Datum</string>
+    <string name="woundphase">Wundphase</string>
+    <string name="woundsizel">Wunddlänge</string>
+    <string name="woundsizew">Wundbraite</string>
+    <string name="woundsized">Wundtiefe</string>
+    <string name="wounddescription">Wundbeschreibung</string>
+    <string name="woundkindfrequency">Art und Häufigkeit der Wundversorgung</string>
+    <string name="hdz">Hdz</string>
+    <string name="addRow">Zeile hinzufügen</string>
 </resources>

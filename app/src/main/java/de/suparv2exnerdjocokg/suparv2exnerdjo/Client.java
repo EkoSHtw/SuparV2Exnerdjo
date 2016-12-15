@@ -3,7 +3,9 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 import android.content.Context;
 import android.provider.ContactsContract;
 import android.content.res.Resources;
+import android.support.v4.app.Fragment;
 
+import java.io.Serializable;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.AbstractList;
@@ -11,7 +13,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
-public class Client {
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
+
+public class Client implements Serializable {
+  private static final long serialVersionUID = -2163051469151804394L;
+  private int id;
   private String firstName;
 
   private String lastName;
@@ -32,29 +38,42 @@ public class Client {
 
   private ArrayList<PhoneNumber> phoneNumber;
 
-  public Client(Context context){
-    this.firstName = context.getString(R.string.clientfirstname);
-    this.lastName = context.getString(R.string.clientlastname);
+  public ArrayList<Fragment> getDocumentation() {
+    return documentation;
+  }
 
-    String dateString = context.getString(R.string.clientBirthdate);
+  public void addDocumentation(Fragment documentation) {
+    this.documentation.add(documentation);
+  }
+
+  private ArrayList<Fragment> documentation;
+
+  public Client(int id, String firstName,String lastName, ArrayList<Fragment> f, String dateString, ArrayList<ClientMedicine> medicineList,
+                ArrayList<Service> erbrachteLeistung, ArrayList<ToDo> toDoList, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.id = id;
+
+    this.documentation = f;
     String dateFormat = "dd/mm/yyyy";
     this.birthDate = stringToDate(dateString, dateFormat);
-    this.medicineList =null;
-    this.erbrachteLeistung = null;
-    this.toDoList = null;
-    this.concerns= "test";
-    this.carelevel = 2;
-    this.adress = context.getString(R.string.clientAddress);
+    this.medicineList = new ArrayList<ClientMedicine>();
+    this.medicineList = medicineList;
+    this.erbrachteLeistung = new ArrayList<Service>();
+    this.erbrachteLeistung = erbrachteLeistung;
+    this.toDoList = new ArrayList<ToDo>();
+    this.toDoList = toDoList;
+    this.concerns= infodump;
+    this.carelevel = carelevel;
+    this.adress = adress;
 
-    PhoneNumber num1 = new PhoneNumber(context.getString(R.string.fam1),
+  /*  PhoneNumber num1 = new PhoneNumber(context.getString(R.string.fam1),
             (context.getString(R.string.telephonenumber)));
 
     PhoneNumber num2 = new PhoneNumber(context.getString(R.string.fam2),
-           (context.getString(R.string.telephonenumber2)));
+           (context.getString(R.string.telephonenumber2))); */
     phoneNumber = new ArrayList<>();
-    this.phoneNumber.add(num1);
-    this.phoneNumber.add(num2);
-
+    this.phoneNumber = phoneNumber;
   }
   public int getCarelevel() {
     return carelevel;
@@ -88,7 +107,7 @@ public class Client {
     return phoneNumber;
   }
 
-  public void setPhoneNumber(PhoneNumber phoneNumber){this.phoneNumber.add(phoneNumber);}
+  public void addPhoneNumber(PhoneNumber phoneNumber){this.phoneNumber.add(phoneNumber);}
 
   public String getFirstName() {
     return firstName;
@@ -142,7 +161,7 @@ public class Client {
     return medicineList;
   }
 
-  public void setMedicineList(ClientMedicine medicine) {
+  public void addMedicineList(ClientMedicine medicine) {
     medicineList.add(medicine);
   }
 /*
