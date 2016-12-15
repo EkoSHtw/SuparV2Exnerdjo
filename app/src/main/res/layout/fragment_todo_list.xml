@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +9,7 @@
     android:paddingTop="10dp">
 
     <TextView
+        android:id="@id/headline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Deine Aufgaben für heute:"
@@ -28,13 +29,7 @@
         android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager"
         tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.TodoFragment"
-        tools:listitem="@layout/fragment_todo" />
+        tools:listitem="@layout/fragment_todo"
+        android:layout_below="@id/headline"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:visibility="visible"
-        />
-
-</LinearLayout>
+</RelativeLayout>

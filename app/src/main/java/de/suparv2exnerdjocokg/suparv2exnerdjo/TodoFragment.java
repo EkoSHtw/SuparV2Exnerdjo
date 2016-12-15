@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
@@ -86,15 +87,6 @@ public class TodoFragment extends Fragment {
         return view;
     }
 
-    public void updateFragView (int position){
-        List<ToDo> items = new ArrayList<>();
-        items.add(DummyToDos.ITEMS.get(position));
-
-        if(view != null && view instanceof RecyclerView){
-            RecyclerView rView = (RecyclerView) view;
-            rView.setAdapter(new MyTodoRecyclerViewAdapter(items, mListener, infoListener));
-        }
-    }
 
     // Called when a fragment is first attached to its context. onCreate(Bundle) will be called after this.
     @Override
