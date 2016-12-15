@@ -22,7 +22,7 @@
                 android:id="@+id/logbook_search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="type here" />
+                android:hint="@string/search_bar" />
         </FrameLayout>
 
         <FrameLayout
@@ -33,7 +33,7 @@
             <Spinner
                 android:id="@+id/search_bar_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></Spinner>
+                android:layout_height="match_parent"/>
         </FrameLayout>
 
 

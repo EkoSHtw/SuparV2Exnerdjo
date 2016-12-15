@@ -52,5 +52,5 @@
 
 
     <!-- Logbook search bar -->
-    <string name ="action_search">search bar filler</string>
+    <string name ="search_bar">search bar filler</string>
 </resources>

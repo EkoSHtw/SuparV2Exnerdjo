@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,12 +136,12 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+        Log.println(Log.INFO,"m",parent.getItemAtPosition(position).getClass().toString());
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        Log.println(Log.INFO,",", "WHAAUU");
     }
 
 
