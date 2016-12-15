@@ -36,7 +36,9 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     private ArrayList<Note> notes;
     private RecyclerView mRecyclerView;
     private EditText inputSearch;
-    MyLogBookRecyclerViewAdapter recyclerViewAdapter;
+    private MyLogBookRecyclerViewAdapter recyclerViewAdapter;
+
+    private int currentSpinnerSelection;
 
 
 //    private OnListFragmentInteractionListener mListener;
@@ -73,6 +75,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(this);
 
 
 //        View view = (RecyclerView) inflater.inflate(R.layout.fragment_logbook_list, container, false);
@@ -107,7 +110,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
                     Note filterNote;
                     for (int i = 0; i < count; i++) {
                         filterNote = list.get(i);
-                        filterableString = filterNote.getTag();
+                        filterableString = filterNote.getInfoFromPosition(currentSpinnerSelection);
                         if (filterableString.toLowerCase().contains(filterString)) {
                             nlist.add(filterNote);
                         }
@@ -136,12 +139,17 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Log.println(Log.INFO,"m",parent.getItemAtPosition(position).getClass().toString());
+//        Log.println(Log.INFO,"m","Hi my name is");
+//        Log.println(Log.INFO,"m",parent.getItemAtPosition(position).getClass().toString());
+        this.currentSpinnerSelection = position;
+        Log.println(Log.INFO, "m", parent.getItemAtPosition(position).toString());
+        Log.println(Log.INFO, "m", "" + position);
+
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        Log.println(Log.INFO,",", "WHAAUU");
+        Log.println(Log.INFO, ",", "WHAAUU");
     }
 
 

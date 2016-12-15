@@ -50,7 +50,7 @@
     <string name="concerns">test</string>
 
 
-
     <!-- Logbook search bar -->
-    <string name ="search_bar">search bar filler</string>
+    <string name="search_bar">search bar filler</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

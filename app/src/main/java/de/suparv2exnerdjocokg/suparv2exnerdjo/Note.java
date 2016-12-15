@@ -16,7 +16,18 @@ public class Note {
         this.timestamp = timestamp;
     }
 
-    ;
+    public String getInfoFromPosition(int position){
+        if(position==0){
+            return tag;
+        }else if (position==1){
+            return timestamp.toString();
+        }else if (position==2){
+            return content;
+        }else if(position==3){
+            return carer.getName();
+        }
+            return "";
+    }
 
     public Carer getCarer() {
         return carer;
