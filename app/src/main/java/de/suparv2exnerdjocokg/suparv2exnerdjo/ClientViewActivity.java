@@ -8,9 +8,12 @@ import android.util.Log;
 
 public class ClientViewActivity extends AppCompatActivity implements TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
 
+    private Client client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_client_view);
     }
 
@@ -36,8 +39,7 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
                 trans.commit();
             }
         }else{
-            ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.todo);
-            newFrag = new ClientView();
+            ClientView newFrag = new ClientView();
             Bundle args = new Bundle();
             args.putInt(ClientView.ARG_Position, position);
             newFrag.setArguments(args);
@@ -53,6 +55,21 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
 
     @Override
     public void onInfoClickedListener(int position) {
+        ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.todo);
+        if (newFrag != null) {
+            newFrag.updateClientViewInfo(position);
+        } else {
+            newFrag = new ClientView();
+            Bundle args = new Bundle();
+            args.putInt(ClientView.ARG_Position, position);
+            newFrag.setArguments(args);
 
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+            trans.replace(R.id.todo, newFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
+        }
     }
 }

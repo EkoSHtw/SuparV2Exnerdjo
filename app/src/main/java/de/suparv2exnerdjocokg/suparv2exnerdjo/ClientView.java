@@ -83,6 +83,25 @@ public class ClientView extends Fragment {
         }
     }
 
+    public void updateClientViewInfo(int position){
+        ToDoNotes tFrag = (ToDoNotes)  getChildFragmentManager().findFragmentById(R.id.todoNotes);
+        if(tFrag!=null) {
+            tFrag.updateFragViewInfo(position);
+        }else{
+            tFrag = new ToDoNotes();
+            Bundle args = new Bundle();
+            args.putInt(ClientView.ARG_Position, position);
+            tFrag.setArguments(args);
+
+            FragmentTransaction trans = getChildFragmentManager().beginTransaction();
+
+            trans.replace(R.id.todoNotes, tFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
+        }
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

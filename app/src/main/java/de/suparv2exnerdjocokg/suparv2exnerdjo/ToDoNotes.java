@@ -1,7 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -41,13 +40,26 @@ public class ToDoNotes extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_to_do_notes, container, false);
+
+        View view =inflater.inflate(R.layout.fragment_to_do_notes, container, false);
+        if (view.findViewById(R.id.fixedNotes) != null) {
+
+            // Create a new Fragment to be placed in the activity layout
+            FixedNotesFragment firstFragment = new FixedNotesFragment();
+
+            // Add the fragment to the 'fragment_container' FrameLayout
+            getChildFragmentManager().beginTransaction()
+                    .add(R.id.fixedNotes, firstFragment).commit();
+        }
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -72,6 +84,21 @@ public class ToDoNotes extends Fragment {
 
             trans.commit();
         }
+    }
+
+    public void updateFragViewInfo(int position){
+
+        ShowInfo tFrag = new ShowInfo();
+        Bundle args = new Bundle();
+        args.putInt("position", position);
+        tFrag.setArguments(args);
+
+        FragmentTransaction trans = getChildFragmentManager().beginTransaction();
+
+        trans.replace(R.id.fixedNotes, tFrag);
+        trans.addToBackStack(null);
+
+        trans.commit();
     }
 
     @Override
