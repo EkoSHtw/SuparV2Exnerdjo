@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,36 +90,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
 //                adapter.getFilter().filter(cs);
-                String filterString = cs.toString().toLowerCase();
-
-//                Filter.FilterResults results = new Filter.FilterResults();
-                if (filterString.equals("")) {
-//                    adapter.setFilteredData(notes);
-//                    adapter.notifyDataSetChanged();
-                    mRecyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(notes));
-
-
-                } else {
-                    final List<Note> list = notes;
-
-                    int count = list.size();
-                    final ArrayList<Note> nlist = new ArrayList<Note>(count);
-
-                    String filterableString;
-                    Note filterNote;
-                    for (int i = 0; i < count; i++) {
-                        filterNote = list.get(i);
-                        filterableString = filterNote.getInfoFromPosition(currentSpinnerSelection);
-                        if (filterableString.toLowerCase().contains(filterString)) {
-                            nlist.add(filterNote);
-                        }
-                    }
-
-//                    adapter.setFilteredData(nlist);
-//                    adapter.notifyDataSetChanged();
-
-                    mRecyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(nlist));
-                }
+                filterList(cs);
             }
 
             @Override
@@ -137,19 +107,48 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
         return view;
     }
 
+    private void filterList(CharSequence cs) {
+        String filterString = cs.toString().toLowerCase();
+
+//                Filter.FilterResults results = new Filter.FilterResults();
+        if (filterString.equals("")) {
+//                    adapter.setFilteredData(notes);
+//                    adapter.notifyDataSetChanged();
+            mRecyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(notes));
+
+
+        } else {
+            final List<Note> list = notes;
+
+            int count = list.size();
+            final ArrayList<Note> nlist = new ArrayList<Note>(count);
+
+            String filterableString;
+            Note filterNote;
+            for (int i = 0; i < count; i++) {
+                filterNote = list.get(i);
+                filterableString = filterNote.getInfoFromPosition(currentSpinnerSelection);
+                if (filterableString.toLowerCase().contains(filterString)) {
+                    nlist.add(filterNote);
+                }
+            }
+
+//                    adapter.setFilteredData(nlist);
+//                    adapter.notifyDataSetChanged();
+
+            mRecyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(nlist));
+        }
+    }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        Log.println(Log.INFO,"m","Hi my name is");
-//        Log.println(Log.INFO,"m",parent.getItemAtPosition(position).getClass().toString());
         this.currentSpinnerSelection = position;
-        Log.println(Log.INFO, "m", parent.getItemAtPosition(position).toString());
-        Log.println(Log.INFO, "m", "" + position);
-
+        filterList(this.inputSearch.getText());
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        Log.println(Log.INFO, ",", "WHAAUU");
+//        Log.println(Log.INFO, ",", "WHAAUU");
     }
 
 
