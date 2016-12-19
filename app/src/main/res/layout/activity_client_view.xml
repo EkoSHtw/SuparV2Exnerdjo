@@ -20,13 +20,11 @@
             tools:layout="@layout/fragment_menu" />
 
         <FrameLayout
-            android:id="@+id/todo"
+            android:id="@+id/fragment_container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
             tools:layout="@layout/fragment_client_view" />
-
-
 
     </LinearLayout>
 
@@ -38,7 +36,7 @@
         android:layout_margin="24dp"
         android:src="@drawable/ic_control_point_white_24dp"
         app:fabSize="normal"
-        app:layout_anchor="@id/todo"
+        app:layout_anchor="@id/fragment_container"
         app:layout_anchorGravity="bottom|right|end" /><!--16 dp für handys, 24 für tablets-->
     />
 

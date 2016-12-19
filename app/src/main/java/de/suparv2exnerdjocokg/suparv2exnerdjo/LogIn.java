@@ -36,8 +36,7 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(v.getContext(), ServiceCatalog.class);
-                startActivity(intent);
+
             }
         });
     }

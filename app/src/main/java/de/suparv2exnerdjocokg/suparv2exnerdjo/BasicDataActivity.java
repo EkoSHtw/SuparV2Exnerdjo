@@ -37,7 +37,7 @@ public class BasicDataActivity extends FragmentActivity{
         phoneNumber.add(num2);
         String a = "" + phoneNumber.size();
         Log.println(Log.INFO, "test",a);
-        this.c = new Client(0,R.drawable.monkey,getString(R.string.clientfirstname), getString(R.string.clientlastname),
+        this.c = new Client(0,R.drawable.woman_image,getString(R.string.clientfirstname), getString(R.string.clientlastname),
                 wdf, getString(R.string.clientBirthdate ),null,null, null, getString(R.string.infodump),
                 Integer.parseInt(getString(R.string.careLevel)), getString(R.string.clientAddress), phoneNumber );
 

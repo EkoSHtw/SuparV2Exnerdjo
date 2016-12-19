@@ -1,17 +1,14 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
-import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.util.Log;
 
 public class ClientViewActivity extends AppCompatActivity implements TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
 
@@ -32,9 +29,9 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
             MenuFragment firstFragment = new MenuFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.menu, firstFragment).commit();
         }
-        if (findViewById(R.id.todo)!=null){
+        if (findViewById(R.id.fragment_container)!=null){
             ClientView secondFragment = new ClientView();
-            getSupportFragmentManager().beginTransaction().add(R.id.todo, secondFragment).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, secondFragment).commit();
         }
 
         container = new FrameLayout(this);
@@ -69,7 +66,7 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
     @Override
     public void onListFragmentInteraction(int position) {
         if(position != -1) {
-            ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.todo);
+            ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             if (newFrag != null) {
                 newFrag.updateClientView(position);
             } else {
@@ -80,13 +77,13 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
 
                 FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
 
-                trans.replace(R.id.todo, newFrag);
+                trans.replace(R.id.fragment_container, newFrag);
                 trans.addToBackStack(null);
 
                 trans.commit();
             }
         }else{
-            ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.todo);
+            ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             newFrag = new ClientView();
             Bundle args = new Bundle();
             args.putInt(ClientView.ARG_Position, position);
@@ -94,7 +91,7 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
 
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
 
-            trans.replace(R.id.todo, newFrag);
+            trans.replace(R.id.fragment_container, newFrag);
             trans.addToBackStack(null);
 
             trans.commit();
@@ -103,7 +100,7 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
 
     @Override
     public void onInfoClickedListener(int position) {
-        ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.todo);
+        ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (newFrag != null) {
             newFrag.updateClientViewInfo(position);
         } else {
@@ -114,7 +111,7 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
 
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
 
-            trans.replace(R.id.todo, newFrag);
+            trans.replace(R.id.fragment_container, newFrag);
             trans.addToBackStack(null);
 
             trans.commit();

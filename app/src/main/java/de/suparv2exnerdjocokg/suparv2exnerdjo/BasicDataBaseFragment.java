@@ -79,7 +79,7 @@ public class BasicDataBaseFragment extends Fragment {
            this.c = c;
 
        img = (ImageView) getView().findViewById(R.id.image);
-       img.setImageResource(R.drawable.monkey);
+       img.setImageResource(R.drawable.woman_image);
        name = (TextView) getView().findViewById(R.id.clientname);
        name.setText(c.getFirstName() + " " + c.getLastName());
        adress = (TextView) getView().findViewById(R.id.adress);
