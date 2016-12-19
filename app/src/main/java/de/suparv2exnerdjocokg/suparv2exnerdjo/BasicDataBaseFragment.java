@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.document_list;
-import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.documents;
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.string.client;
 
 /**
