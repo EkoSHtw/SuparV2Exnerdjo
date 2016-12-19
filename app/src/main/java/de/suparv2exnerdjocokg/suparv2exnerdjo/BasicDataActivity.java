@@ -1,26 +1,16 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
-import android.graphics.Path;
-import android.os.Environment;
-import android.support.annotation.DrawableRes;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Adapter;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
-
-import static android.R.attr.path;
-import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.gebdat;
 
 
 public class BasicDataActivity extends AppCompatActivity{
@@ -44,7 +34,7 @@ public class BasicDataActivity extends AppCompatActivity{
         setContentView(R.layout.activity_basic_data);
 
         img = (ImageView) findViewById(R.id.image);
-        img.setImageResource(R.drawable.monkey);
+//        img.setImageResource(R.drawable.monkey);
         name = (TextView) findViewById(R.id.clientname);
         name.setText(R.string.clientfirstname + " " + R.string.clientlastname);
         adress = (TextView) findViewById(R.id.adress);
