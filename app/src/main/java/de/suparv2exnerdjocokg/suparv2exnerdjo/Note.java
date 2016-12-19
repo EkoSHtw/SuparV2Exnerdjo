@@ -16,6 +16,13 @@ public class Note {
         this.timestamp = timestamp;
     }
 
+//    public Note(String tag, String content, Carer carer, Timestamp timestamp) {
+//        this.tag = tag;
+//        this.carer = carer;
+//        this.content = content;
+//        this.timestamp = timestamp;
+//    }
+
     public String getInfoFromPosition(int position){
         if(position==0){
             return tag;
