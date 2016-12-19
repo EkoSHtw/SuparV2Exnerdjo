@@ -1,6 +1,7 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +20,14 @@ public class PhonenumberListAdapter extends BaseAdapter{
 
     private final ArrayList<PhoneNumber> numbers;
     private final LayoutInflater inflator;
+    private static final String CLIENTKEY = "client_key";
 
-    public PhonenumberListAdapter(Context context){
+    public PhonenumberListAdapter(Context context, Bundle bundle){
 
         inflator = LayoutInflater.from(context);
 
         this.numbers = new ArrayList<>();
-        Client number = new Client(context);
+        int i = bundle.getInt(CLIENTKEY,0);
 
         for(int index = 0; index<number.getPhoneNumberlenght(); index++){
             numbers.add(number.getPhoneNumber().get(index));
@@ -65,7 +67,6 @@ public class PhonenumberListAdapter extends BaseAdapter{
         }
 
         Context context = parent.getContext();
-        Client c = new Client(context);
         c.getPhoneNumber().get(position);
         PhoneNumber number = c.getPhoneNumber().get(position);;
         holder.name.setText(number.getName());

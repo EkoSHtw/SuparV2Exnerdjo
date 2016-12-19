@@ -92,4 +92,16 @@
     <!-- Logbook search bar -->
     <string name="search_bar">search bar filler</string>
     <string name="title_activity_main2">Main2Activity</string>
+
+
+    <!-- Wound Documentation-->
+    <string name="wounddate">Datum</string>
+    <string name="woundphase">Wundphase</string>
+    <string name="woundsizel">Wunddlänge</string>
+    <string name="woundsizew">Wundbraite</string>
+    <string name="woundsized">Wundtiefe</string>
+    <string name="wounddescription">Wundbeschreibung</string>
+    <string name="woundkindfrequency">Art und Häufigkeit der Wundversorgung</string>
+    <string name="hdz">Hdz</string>
+    <string name="addRow">Zeile hinzufügen</string>
 </resources>
