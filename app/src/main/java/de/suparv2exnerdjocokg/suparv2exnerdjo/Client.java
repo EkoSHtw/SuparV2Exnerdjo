@@ -1,30 +1,25 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
-import android.content.Context;
-import android.provider.ContactsContract;
-import android.content.res.Resources;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
-
-import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 
 public class Client implements Serializable {
   private static final long serialVersionUID = -2163051469151804394L;
   private int id;
+  private int imagePath;
   private String firstName;
-
+  private Fragment frag;
   private String lastName;
 
   private String adress;
 
-  private Date birthDate;
+  private String birthDate;
 
   private int carelevel;
 
@@ -42,21 +37,28 @@ public class Client implements Serializable {
     return documentation;
   }
 
+
+
   public void addDocumentation(Fragment documentation) {
     this.documentation.add(documentation);
   }
 
   private ArrayList<Fragment> documentation;
 
-  public Client(int id, String firstName,String lastName, ArrayList<Fragment> f, String dateString, ArrayList<ClientMedicine> medicineList,
+  public int getImagePath() {
+    return imagePath;
+  }
+
+  public Client(int id, int ImagePath, String firstName, String lastName, Fragment f, String dateString, ArrayList<ClientMedicine> medicineList,
                 ArrayList<Service> erbrachteLeistung, ArrayList<ToDo> toDoList, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber){
     this.firstName = firstName;
     this.lastName = lastName;
     this.id = id;
 
-    this.documentation = f;
+    this.frag = f;
     String dateFormat = "dd/mm/yyyy";
-    this.birthDate = stringToDate(dateString, dateFormat);
+   // this.birthDate = stringToDate(dateString, dateFormat);
+    this.birthDate = dateString;
     this.medicineList = new ArrayList<ClientMedicine>();
     this.medicineList = medicineList;
     this.erbrachteLeistung = new ArrayList<Service>();
@@ -67,13 +69,16 @@ public class Client implements Serializable {
     this.carelevel = carelevel;
     this.adress = adress;
 
+
   /*  PhoneNumber num1 = new PhoneNumber(context.getString(R.string.fam1),
             (context.getString(R.string.telephonenumber)));
 
     PhoneNumber num2 = new PhoneNumber(context.getString(R.string.fam2),
            (context.getString(R.string.telephonenumber2))); */
-    phoneNumber = new ArrayList<>();
+    this.phoneNumber = new ArrayList<>();
     this.phoneNumber = phoneNumber;
+    String a = "" + phoneNumber.size();
+    Log.println(Log.INFO, "test",a);
   }
   public int getCarelevel() {
     return carelevel;
@@ -125,11 +130,11 @@ public class Client implements Serializable {
     this.lastName = lastName;
   }
 
-  public Date getBirthDate() {
+  public String getBirthDate() {
     return birthDate;
   }
 
-  public void setBirthDate(Date birthDate) {
+  public void setBirthDate(String birthDate) {
     this.birthDate = birthDate;
   }
 

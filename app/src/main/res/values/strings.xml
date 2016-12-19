@@ -48,8 +48,8 @@
     <string name="infodump">Schwerhörig.
     Trinkt gerne Tee. Redet gerne über Formel 1.</string>
     <string name="concerns">test</string>
-    
-    
+
+
     <!-- Wound Documentation-->
     <string name="wounddate">Datum</string>
     <string name="woundphase">Wundphase</string>
@@ -60,4 +60,6 @@
     <string name="woundkindfrequency">Art und Häufigkeit der Wundversorgung</string>
     <string name="hdz">Hdz</string>
     <string name="addRow">Zeile hinzufügen</string>
+    <string name="saveContent">Speichern</string>
+    <string name="wounddocname">Wunddokumentation</string>
 </resources>
