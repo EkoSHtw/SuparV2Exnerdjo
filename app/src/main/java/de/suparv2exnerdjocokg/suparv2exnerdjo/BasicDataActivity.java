@@ -8,6 +8,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 
 
 public class BasicDataActivity extends FragmentActivity{
@@ -22,24 +23,8 @@ public class BasicDataActivity extends FragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ArrayList<Fragment> frag =new ArrayList<>();
-        WoundDocumentationFragment wdf = new WoundDocumentationFragment();
 
-        ArrayList<ClientMedicine> medicineList= new ArrayList<ClientMedicine>();
-        medicineList = null;
-        PhoneNumber num1 = new PhoneNumber(getString(R.string.fam1),
-                (getString(R.string.telephonenumber)));
-
-        PhoneNumber num2 = new PhoneNumber(getString(R.string.fam2),
-                (getString(R.string.telephonenumber2)));
-        ArrayList<PhoneNumber>phoneNumber = new ArrayList<>();
-        phoneNumber.add(num1);
-        phoneNumber.add(num2);
-        String a = "" + phoneNumber.size();
-        Log.println(Log.INFO, "test",a);
-        this.c = new Client(0,R.drawable.woman_image,getString(R.string.clientfirstname), getString(R.string.clientlastname),
-                wdf, getString(R.string.clientBirthdate ),null,null, null, getString(R.string.infodump),
-                Integer.parseInt(getString(R.string.careLevel)), getString(R.string.clientAddress), phoneNumber );
+        c = DummyClients.ITEMS.get(0);
 
         setContentView(R.layout.activity_basic_data);
 

@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +19,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyContent.DummyItem;
 
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.list;
 
@@ -196,6 +196,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Uri uri);
     }
 }

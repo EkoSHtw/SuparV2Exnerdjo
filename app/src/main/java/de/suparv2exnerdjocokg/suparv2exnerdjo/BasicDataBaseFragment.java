@@ -19,6 +19,8 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
+
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.document_list;
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.documents;
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.string.client;
@@ -51,6 +53,42 @@ public class BasicDataBaseFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_basic_data_base, container, false);
 
+        if (savedInstanceState == null) {
+            Client c = DummyClients.ITEMS.get(0);
+            this.c = c;
+            if(c!=null) {
+                img = (ImageView) rootView.findViewById(R.id.image);
+                img.setImageResource(R.drawable.woman_image);
+                name = (TextView) rootView.findViewById(R.id.clientname);
+                name.setText(c.getFirstName() + " " + c.getLastName());
+                adress = (TextView) rootView.findViewById(R.id.adress);
+                adress.setText("Adresse: " + c.getAdress());
+                gebdate = (TextView) rootView.findViewById(R.id.gebdat);
+                gebdate.setText(c.getBirthDate().toString());
+                carelevel = (TextView) rootView.findViewById(R.id.care_level);
+                int a = c.getCarelevel();
+                carelevel.setText("Pflegestufe: " + a);
+                infodump = (TextView) rootView.findViewById(R.id.info);
+                infodump.setText(c.getConcerns());
+                numbers = (ListView) rootView.findViewById(R.id.telnumbers);
+
+                String b = "" + c.getPhoneNumberlenght();
+                adapter = new PhonenumberListAdapter(rootView.getContext(), c);
+                numbers.setAdapter(adapter);
+                ArrayList<String> s = getLFile();
+                documents = (ListView) rootView.findViewById(document_list);
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(rootView.getContext(),
+                        android.R.layout.simple_list_item_1,
+                        s);
+                documents.setAdapter(arrayAdapter);
+
+                Log.println(Log.INFO, "text", "useless log");
+            }else{
+                Log.println(Log.INFO, "text", "C ist null");
+            }
+        }  else{
+            Log.println(Log.INFO, "text", "args ist null");
+        }
 
         return rootView;
     }
@@ -58,6 +96,7 @@ public class BasicDataBaseFragment extends Fragment {
     public ArrayList<String> getLFile() {
         Field[] fields = R.raw.class.getFields();
         ArrayList<String> s = new ArrayList<>();
+        Log.println(Log.INFO, "Länge", ""+fields.length);
         for (int count = 0; count < fields.length; count++) {
             try {
 
@@ -69,48 +108,7 @@ public class BasicDataBaseFragment extends Fragment {
         return s;
     }
 
-   @Override
-    public void onActivityCreated(Bundle bundle) {
-       super.onActivityCreated(bundle);
-       Log.println(Log.INFO, "test","1");
-       Bundle args = getArguments();
-       if (args != null) {
-           Client c = (Client) args.getSerializable(CLIENTKEY);
-           this.c = c;
 
-       img = (ImageView) getView().findViewById(R.id.image);
-       img.setImageResource(R.drawable.woman_image);
-       name = (TextView) getView().findViewById(R.id.clientname);
-       name.setText(c.getFirstName() + " " + c.getLastName());
-       adress = (TextView) getView().findViewById(R.id.adress);
-       adress.setText("Adresse: " + c.getAdress());
-       gebdate = (TextView) getView().findViewById(R.id.gebdat);
-       gebdate.setText(c.getBirthDate().toString());
-       carelevel = (TextView) getView().findViewById(R.id.care_level);
-       int a = c.getCarelevel();
-       carelevel.setText("Pflegestufe: " + a);
-       infodump = (TextView) getView().findViewById(R.id.info);
-       infodump.setText(c.getConcerns());
-       numbers = (ListView) getView().findViewById(R.id.telnumbers);
-
-           String b = "" + c.getPhoneNumberlenght();
-           Log.println(Log.INFO, "länge",b);
-       adapter = new PhonenumberListAdapter(getView().getContext(), c);
-       numbers.setAdapter(adapter);
-
-          if(c.getPhoneNumberlenght() >0) {
-              Log.println(Log.INFO, "test", "!!!!!!!!!!!!!!!!!!isddfff");
-          }
-       ArrayList<String> s = getLFile();
-       documents = (ListView) getView().findViewById(document_list);
-       ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getView().getContext(),
-               android.R.layout.simple_list_item_1,
-               s);
-       documents.setAdapter(arrayAdapter);
-        }  else{
-           Log.println(Log.INFO, "text", "!!!Fehler!!!");
-       }
-   }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

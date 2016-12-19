@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment.OnListFragmentInteractionListener;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyContent.DummyItem;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
