@@ -15,18 +15,18 @@
         <FrameLayout
             android:layout_weight="0.8"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/holo_purple">
+            android:layout_height="match_parent">
 
             <EditText
                 android:id="@+id/logbook_search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/search_bar" />
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textSize="15dp"
+                android:hint="Suchen..." />
         </FrameLayout>
 
         <FrameLayout
-            android:background="@android:color/holo_green_light"
             android:layout_weight="0.2"
             android:layout_width="0dp"
             android:layout_height="match_parent">
@@ -47,7 +47,6 @@
         android:name="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_orange_light"
         app:layoutManager="LinearLayoutManager"
         tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment"
         tools:listitem="@layout/fragment_logbook_item"
