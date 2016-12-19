@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,11 @@ public class BasicDataBaseFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String CLIENTKEY = "client_key";
+
     private String mParam1;
     private String mParam2;
+    private Client c;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_basic_data_base, container, false);
@@ -67,33 +71,45 @@ public class BasicDataBaseFragment extends Fragment {
 
    @Override
     public void onActivityCreated(Bundle bundle) {
+       super.onActivityCreated(bundle);
+       Log.println(Log.INFO, "test","1");
        Bundle args = getArguments();
-       Client c = (Client) args.getSerializable(ARG_PARAM1);
+       if (args != null) {
+           Client c = (Client) args.getSerializable(CLIENTKEY);
+           this.c = c;
+
        img = (ImageView) getView().findViewById(R.id.image);
        img.setImageResource(R.drawable.monkey);
-       name = (TextView)  getView().findViewById(R.id.clientname);
-       name.setText(R.string.clientfirstname + " " + R.string.clientlastname);
-       adress = (TextView)  getView().findViewById(R.id.adress);
-       adress.setText("Adresse: " + R.string.clientAddress);
+       name = (TextView) getView().findViewById(R.id.clientname);
+       name.setText(c.getFirstName() + " " + c.getLastName());
+       adress = (TextView) getView().findViewById(R.id.adress);
+       adress.setText("Adresse: " + c.getAdress());
        gebdate = (TextView) getView().findViewById(R.id.gebdat);
-       gebdate.setText(R.string.clientBirthdate);
+       gebdate.setText(c.getBirthDate().toString());
        carelevel = (TextView) getView().findViewById(R.id.care_level);
-       carelevel.setText("Pflegestufe: " + 2);
+       int a = c.getCarelevel();
+       carelevel.setText("Pflegestufe: " + a);
        infodump = (TextView) getView().findViewById(R.id.info);
-       infodump.setText(R.string.concerns);
+       infodump.setText(c.getConcerns());
        numbers = (ListView) getView().findViewById(R.id.telnumbers);
 
-       adapter = new PhonenumberListAdapter(getView().getContext(), bundle);
+           String b = "" + c.getPhoneNumberlenght();
+           Log.println(Log.INFO, "länge",b);
+       adapter = new PhonenumberListAdapter(getView().getContext(), c);
        numbers.setAdapter(adapter);
 
-
-       super.onActivityCreated(bundle);
+          if(c.getPhoneNumberlenght() >0) {
+              Log.println(Log.INFO, "test", "!!!!!!!!!!!!!!!!!!isddfff");
+          }
        ArrayList<String> s = getLFile();
        documents = (ListView) getView().findViewById(document_list);
        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getView().getContext(),
                android.R.layout.simple_list_item_1,
-               s );
+               s);
        documents.setAdapter(arrayAdapter);
+        }  else{
+           Log.println(Log.INFO, "text", "!!!Fehler!!!");
+       }
    }
 
     @Override
@@ -103,6 +119,7 @@ public class BasicDataBaseFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
 
