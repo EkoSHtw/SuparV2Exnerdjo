@@ -62,7 +62,6 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                     clearSelection();
                     oldSelection = holder.mView;
                     mListener.onListFragmentInteraction(position);
-                    holder.mInfo.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorAccent));
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorAccent));
                 }
             }
@@ -74,13 +73,16 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 if(isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
                 }else{
-                    holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.white));
+                    holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.transparent));
                 }
             }
         });
         holder.mInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clearSelection();
+                oldSelection = holder.mView;
+                holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorAccent));
                 if(null!=infoListener) {
                     infoListener.onInfoClickedListener(position);
                 }
