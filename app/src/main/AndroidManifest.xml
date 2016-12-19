@@ -31,12 +31,6 @@
             android:name=".MainActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".ServiceCatalog"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".ServiceDetail"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".LogIn"
             android:screenOrientation="landscape" />
     </application>

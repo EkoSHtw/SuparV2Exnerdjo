@@ -12,20 +12,20 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <fragment
+        <FrameLayout
             android:id="@+id/menu"
-            class="de.suparv2exnerdjocokg.suparv2exnerdjo.MenuFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2" />
+            android:layout_weight="0.2"
+            tools:layout="@layout/fragment_menu" />
 
-        <fragment
-            android:id="@+id/logBook"
-            class="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment"
+        <FrameLayout
+            android:id="@+id/todo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
-            tools:layout="@layout/fragment_logbook" />
+            tools:layout="@layout/fragment_client_view" />
+
 
 
     </LinearLayout>

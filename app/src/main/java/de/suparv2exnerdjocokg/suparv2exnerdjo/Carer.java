@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Carer implements Actor {
 
-
-  private String name ;
+  private String name;
+  private ArrayList<Client> clientList;
 
   public Carer(String name){
     this.name = name;
@@ -14,7 +14,9 @@ public class Carer implements Actor {
     return name;
   }
 
-  private ArrayList<Client> clientList;
+  public void setName(String name) {
+    this.name = name;
+  }
 
   public ArrayList<Client> getClientList() {
     return clientList;
