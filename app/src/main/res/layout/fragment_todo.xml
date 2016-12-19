@@ -27,7 +27,7 @@
         android:layout_toLeftOf="@id/checkBox"
         app:srcCompat="@android:drawable/ic_menu_info_details"
         android:layout_alignParentTop="true"
-        android:background="@color/white"/>
+        android:background="@color/transparent"/>
 
 
 

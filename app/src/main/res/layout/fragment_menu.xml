@@ -3,36 +3,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.MenuFragment"
-    android:background="@color/colorAccent">
+    android:background="@color/colorAccent"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="10dp">
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/client_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/client" />
+        android:text="@string/client"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        />
     <TextView
         android:id="@+id/basic_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/basic_data"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
         android:layout_below="@id/client_view"/>
     <TextView
         android:id="@+id/calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/calendar"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
         android:layout_below="@id/basic_data"/>
     <TextView
         android:id="@+id/vital_values"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/vital_value"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
         android:layout_below="@id/calendar"/>
     <Button
         android:id="@+id/checkout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/logout"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textColor="@color/colorAccent"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

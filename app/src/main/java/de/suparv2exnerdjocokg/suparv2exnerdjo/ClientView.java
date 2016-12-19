@@ -59,8 +59,18 @@ public class ClientView extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_client_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_client_view, container, false);
+
+        if (view.findViewById(R.id.todos)!=null){
+            TodoFragment firstFragment = new TodoFragment();
+            getChildFragmentManager().beginTransaction().add(R.id.todos, firstFragment).commit();
+        }
+        if (view.findViewById(R.id.todoNotes)!=null){
+            ToDoNotes secondFragment = new ToDoNotes();
+            getChildFragmentManager().beginTransaction().add(R.id.todoNotes, secondFragment).commit();
+        }
+
+        return view;
     }
 
 

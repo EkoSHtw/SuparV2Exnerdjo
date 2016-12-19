@@ -30,6 +30,9 @@ public class FixedNotesFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private View view;
+    private static final String ARG_POSITION = "position";
+    private int position = -1;
+    private List<Notiz> items;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -54,6 +57,7 @@ public class FixedNotesFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            position = getArguments().getInt(ARG_POSITION);
         }
     }
 
@@ -61,6 +65,19 @@ public class FixedNotesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fixed_notes_list, container, false);
+
+        if(position == -1){
+            items = DummyNotes.ITEMS;
+        }else{
+            items = new ArrayList<>();
+            for(int i = 0; i < DummyNotes.ITEMS.size(); i++) {
+                String note = DummyNotes.ITEMS.get(i).getTag();
+                String todo = view.getContext().getString(DummyToDos.ITEMS.get(position).getTask().getName());
+                if(note.equals(todo)){
+                    items.add(DummyNotes.ITEMS.get(i));
+                }
+            }
+        }
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -71,7 +88,7 @@ public class FixedNotesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(DummyNotes.ITEMS));
+            recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(items));
         }
         return view;
     }

@@ -39,7 +39,7 @@
         android:gravity="center"
         />
 
-    <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.NotesFromYesterdayFragment"
+    <FrameLayout
         android:id="@+id/olderNotes"
         android:layout_width="match_parent"
         android:layout_height="1dp"

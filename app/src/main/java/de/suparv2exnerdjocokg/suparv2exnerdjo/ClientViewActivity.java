@@ -15,13 +15,21 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_client_view);
+
+        if (findViewById(R.id.menu)!=null){
+            MenuFragment firstFragment = new MenuFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.menu, firstFragment).commit();
+        }
+        if (findViewById(R.id.todo)!=null){
+            ClientView secondFragment = new ClientView();
+            getSupportFragmentManager().beginTransaction().add(R.id.todo, secondFragment).commit();
+        }
     }
 
 
     @Override
     public void onListFragmentInteraction(int position) {
         if(position != -1) {
-            Log.i("", "List clicked");
             ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.todo);
             if (newFrag != null) {
                 newFrag.updateClientView(position);
@@ -39,7 +47,8 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
                 trans.commit();
             }
         }else{
-            ClientView newFrag = new ClientView();
+            ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.todo);
+            newFrag = new ClientView();
             Bundle args = new Bundle();
             args.putInt(ClientView.ARG_Position, position);
             newFrag.setArguments(args);

@@ -48,17 +48,19 @@ public class ToDoNotes extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view =inflater.inflate(R.layout.fragment_to_do_notes, container, false);
+        View view = inflater.inflate(R.layout.fragment_to_do_notes, container, false);
         if (view.findViewById(R.id.fixedNotes) != null) {
-
             // Create a new Fragment to be placed in the activity layout
             FixedNotesFragment firstFragment = new FixedNotesFragment();
-
             // Add the fragment to the 'fragment_container' FrameLayout
             getChildFragmentManager().beginTransaction()
                     .add(R.id.fixedNotes, firstFragment).commit();
         }
 
+        if (view.findViewById(R.id.olderNotes)!=null){
+            NotesFromYesterdayFragment secondFragment = new NotesFromYesterdayFragment();
+            getChildFragmentManager().beginTransaction().add(R.id.olderNotes, secondFragment).commit();
+        }
         return view;
     }
 
@@ -68,13 +70,13 @@ public class ToDoNotes extends Fragment {
     }
 
     public void updateFragView(int position){
-        FixedNotesFragment fnFrag = (FixedNotesFragment) getChildFragmentManager().findFragmentById(R.id.fixedNotes);
-        if(fnFrag != null){
+        if(getChildFragmentManager().findFragmentById(R.id.fixedNotes) instanceof FixedNotesFragment){
+            FixedNotesFragment fnFrag = (FixedNotesFragment) getChildFragmentManager().findFragmentById(R.id.fixedNotes);
             fnFrag.updateFragView(position);
-        }else{
-            fnFrag = new FixedNotesFragment();
+        }else if(getChildFragmentManager().findFragmentById(R.id.fixedNotes) instanceof ShowInfo){
+            FixedNotesFragment fnFrag = new FixedNotesFragment();
             Bundle args = new Bundle();
-            args.putInt(ClientView.ARG_Position, position);
+            args.putInt("position", position);
             fnFrag.setArguments(args);
 
             FragmentTransaction trans = getChildFragmentManager().beginTransaction();

@@ -7,14 +7,14 @@
     android:orientation="horizontal"
     tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity">
 
-    <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.MenuFragment"
+    <FrameLayout
         android:id="@+id/menu"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.2"
         tools:layout="@layout/fragment_menu" />
 
-    <fragment class="de.suparv2exnerdjocokg.suparv2exnerdjo.ClientView"
+    <FrameLayout
         android:id="@+id/todo"
         android:layout_width="0dp"
         android:layout_height="match_parent"
