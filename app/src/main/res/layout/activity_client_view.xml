@@ -38,7 +38,7 @@
         android:layout_margin="24dp"
         android:src="@drawable/ic_control_point_white_24dp"
         app:fabSize="normal"
-        app:layout_anchor="@id/logBook"
+        app:layout_anchor="@id/todo"
         app:layout_anchorGravity="bottom|right|end" /><!--16 dp für handys, 24 für tablets-->
     />
 

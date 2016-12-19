@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import java.sql.Timestamp;
@@ -70,7 +71,7 @@ public class LogBookList extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        View myActivityView = (LinearLayout) getActivity().findViewById(R.id.logBook);
+        View myActivityView = (FrameLayout) getActivity().findViewById(R.id.todo);
 //        if (myActivityView == null) {
 //            Log.println(Log.INFO, "m", "view ist gleich null");
 //        } else {
