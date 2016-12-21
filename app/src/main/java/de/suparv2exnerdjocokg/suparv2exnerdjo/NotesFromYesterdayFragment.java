@@ -1,7 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -86,8 +85,8 @@ public class NotesFromYesterdayFragment extends Fragment {
         return view;
     }
 
-    private List<Notiz> getYesterday() throws ParseException {
-        List<Notiz> list = new ArrayList<>();
+    private List<Note> getYesterday() throws ParseException {
+        List<Note> list = new ArrayList<>();
         for(int i = 0; i < DummyNotes.ITEMS.size(); i++){
             if(equalsWithYesterday(DummyNotes.ITEMS.get(i).getTimestamp())){
                 list.add(DummyNotes.ITEMS.get(i));
@@ -107,7 +106,7 @@ public class NotesFromYesterdayFragment extends Fragment {
     }
 
     public void updateFragView(int position){
-        List<Notiz> items = new ArrayList<>();
+        List<Note> items = new ArrayList<>();
         for(int i = 0; i < DummyNotes.ITEMS.size(); i++) {
             String note = DummyNotes.ITEMS.get(i).getTag();
             String todo = view.getContext().getString(DummyToDos.ITEMS.get(position).getTask().getName());

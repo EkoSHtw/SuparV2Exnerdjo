@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Notiz> mValues;
+    private final List<Note> mValues;
 
-    public MyNoteRecyclerViewAdapter(List<Notiz> items) {
+    public MyNoteRecyclerViewAdapter(List<Note> items) {
         mValues = items;
     }
 
@@ -50,7 +50,7 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
         public final TextView mContentView;
         public final TextView mCarerView;
         public final TextView mTimestampView;
-        public Notiz mItem;
+        public Note mItem;
 
         public ViewHolder(View view) {
             super(view);

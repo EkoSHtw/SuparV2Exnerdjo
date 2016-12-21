@@ -1,7 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,7 +31,7 @@ public class FixedNotesFragment extends Fragment {
     private View view;
     private static final String ARG_POSITION = "position";
     private int position = -1;
-    private List<Notiz> items;
+    private List<Note> items;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -94,7 +93,7 @@ public class FixedNotesFragment extends Fragment {
     }
 
     public void updateFragView(int position){
-        List<Notiz> items = new ArrayList<>();
+        List<Note> items = new ArrayList<>();
         for(int i = 0; i < DummyNotes.ITEMS.size(); i++) {
             String note = DummyNotes.ITEMS.get(i).getTag();
             String todo = view.getContext().getString(DummyToDos.ITEMS.get(position).getTask().getName());
