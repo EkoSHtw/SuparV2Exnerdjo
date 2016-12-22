@@ -1,10 +1,13 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -14,6 +17,12 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 public class TestActivity extends AppCompatActivity {
@@ -22,28 +31,29 @@ public class TestActivity extends AppCompatActivity {
     private TableGenerator mTable;
     private Button addRow;
     private Button saveIt;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
+
+    private OutputStream fops;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_document_wound);
 
+
         showTable();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
     private void showTable() {
         mTable = new TableGenerator(getApplicationContext());
         layMain = (ScrollView) findViewById(R.id.table);
 
-        String[] firstRow = {getString(R.string.wounddate),getString(R.string.woundphase), getString(R.string.woundsizel),
+        String[] firstRow = {getString(R.string.wounddate), getString(R.string.woundphase), getString(R.string.woundsizel),
                 getString(R.string.woundsizew),
                 getString(R.string.woundsized), getString(R.string.woundsized),
                 getString(R.string.wounddescription),
@@ -51,7 +61,7 @@ public class TestActivity extends AppCompatActivity {
                 getString(R.string.hdz)};
 
         mTable.addHead(firstRow);
-        for (int j=0; j < 20; j++) {
+        for (int j = 0; j < 1; j++) {
             mTable.addRow();
         }
 
@@ -59,62 +69,50 @@ public class TestActivity extends AppCompatActivity {
         layMain.removeAllViews();
         layMain.addView(mTable.getTable());
 
-        addRow= (Button) findViewById(R.id.addRowB);
+        addRow = (Button) findViewById(R.id.addRowB);
         addRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mTable.addRow();
             }
         });
-       /* saveIt = (Button) findViewById(R.id.saveStuff);
+
+
+        saveIt = (Button) findViewById(R.id.saveStuff);
         saveIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               for()
+                String fileName = "Wounddocumentation";
+                try {
 
-                TableRow t = (TableRow) v;
-                TextView firstTextView = (TextView) t.getChildAt(0);
-                TextView secondTextView = (TextView) t.getChildAt(1);
-                String firstText = firstTextView.getText().toString();
-                String secondText = secondTextView.getText().toString();
+                    FileOutputStream fops = openFileOutput(fileName, Context.MODE_PRIVATE);
+                    Log.println(Log.INFO, "test", "Klappts???");
+                    for (int i = 0; i < mTable.getIdCount(); i++) {
+                        View view = mTable.getTable().getChildAt(i);
+                        if (view instanceof TableRowExpand) {
+                            TableRowExpand t = (TableRowExpand) view;
+                            String textLine = ""+ i;
+
+                            for (int j = 0; j <= t.getChildCount(); j++) {
+                                EditText firstTextView = (EditText) t.getChildAt(j);
+                                //if(firstTextView == null) break;
+                                textLine += " " + "\"" + firstTextView.getText().toString() + "\"";
+                                Log.println(Log.INFO, "test", "Klappts???");
+                            }
+                            textLine += "\n";
+                            fops.write(textLine.getBytes());
+
+                        }
+                    }
+                    fops.flush();
+                    fops.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-        });*/
-    }
 
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("Test Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-        client.disconnect();
+            ;
+        });
     }
 
 }

@@ -1,17 +1,23 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Documents;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ScrollView;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.FileOutputStream;
+
 import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.TableGenerator;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.TableRowExpand;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 /**
@@ -32,15 +38,11 @@ public class WoundDocumentationFragment extends Fragment {
     public WoundDocumentationFragment(){}
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_document_wound, container, false);
+        View view= inflater.inflate(R.layout.fragment_document_wound, container, false);
+        showTable();
+        return  view;
     }
 
-    @Override
-    public void onActivityCreated(Bundle bundle){
-        super.onActivityCreated(bundle);
-        showTable();
-        client = new GoogleApiClient.Builder(getView().getContext()).addApi(AppIndex.API).build();
-    }
     public String getName() {
         return name;
     }
@@ -72,11 +74,42 @@ public class WoundDocumentationFragment extends Fragment {
                 mTable.addRow();
             }
         });
+        saveIt = (Button) getView().findViewById(R.id.saveStuff);
         saveIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTable.addRow();
+                String fileName = "Wounddocumentation";
+                try {
+
+                    FileOutputStream fops = getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
+                    for (int i = 0; i < mTable.getIdCount(); i++) {
+                        View view = mTable.getTable().getChildAt(i);
+                        if (view instanceof TableRowExpand) {
+                            TableRowExpand t = (TableRowExpand) view;
+                            String textLine = ""+ i;
+
+                            for (int j = 0; j <= t.getChildCount(); j++) {
+                                EditText firstTextView = (EditText) t.getChildAt(j);
+                                //if(firstTextView == null) break;
+                                textLine += " " + "\"" + firstTextView.getText().toString() + "\"";
+                                Log.println(Log.INFO, "test", "Klappts???");
+                            }
+                            textLine += "\n";
+                            fops.write(textLine.getBytes());
+
+                        }
+                    }
+                    fops.flush();
+                    fops.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
+            ;
         });
     }
+
+
+
 }

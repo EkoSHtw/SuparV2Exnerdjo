@@ -25,6 +25,11 @@ public class TableGenerator {
     private TableRow.LayoutParams colParams = new TableRow.LayoutParams();
     private int headLenght;
 
+    public int getIdCount() {
+        return idCount;
+    }
+
+    private int idCount = 0;
     public TableGenerator(Context context) {
         mContext = context;
         mTable = new TableLayout(context);
@@ -42,10 +47,11 @@ public class TableGenerator {
     }
 
     public void addRow() {
-        TableRow tr = new TableRow(mContext);
+        TableRowExpand tr = new TableRowExpand(mContext);
+        tr.setId(idCount);
+
         tr.setBackgroundColor(mContext.getResources().getColor(
                 R.color.table_background));
-        headLenght= headLenght;
         tr.setLayoutParams(rowParams);
 
         for (int iCol = 0; iCol < headLenght; iCol++) {
@@ -54,6 +60,7 @@ public class TableGenerator {
             tvCol.setPadding(3, 3, 3, 3);
             tvCol.setTextColor(mContext.getResources().getColor(
                     R.color.black));
+            tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
@@ -61,6 +68,7 @@ public class TableGenerator {
         }
 
         mTable.addView(tr);
+        idCount++;
     }
 
     public void getRows(){
