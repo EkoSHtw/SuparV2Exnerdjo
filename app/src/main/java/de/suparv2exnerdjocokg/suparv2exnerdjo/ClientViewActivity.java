@@ -10,7 +10,9 @@ import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-public class ClientViewActivity extends AppCompatActivity implements TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
+
+public class ClientViewActivity extends AppCompatActivity implements MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
 
     private Client client;
 
@@ -115,6 +117,45 @@ public class ClientViewActivity extends AppCompatActivity implements TodoFragmen
             trans.addToBackStack(null);
 
             trans.commit();
+        }
+    }
+
+    @Override
+    public void onMenuFragmentInteraction(int position) {
+        switch(position) {
+            case 0:
+                ClientView clientFragment = new ClientView();
+
+                    FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+                    trans.replace(R.id.fragment_container, clientFragment);
+                    trans.addToBackStack(null);
+
+                    trans.commit();
+                break;
+            case 1:
+                BasicDataBaseFragment basicFragment = new BasicDataBaseFragment();
+
+                trans = getSupportFragmentManager().beginTransaction();
+
+                trans.replace(R.id.fragment_container, basicFragment);
+                trans.addToBackStack(null);
+
+                trans.commit();
+                break;
+            case 2:
+                LogBookFragment logFragment = new LogBookFragment();
+
+                trans = getSupportFragmentManager().beginTransaction();
+
+                    trans.replace(R.id.fragment_container, logFragment);
+                    trans.addToBackStack(null);
+
+                    trans.commit();
+                break;
+            case 3:
+
+                break;
         }
     }
 }

@@ -49,13 +49,12 @@ public class Client implements Serializable {
     return imagePath;
   }
 
-  public Client(int id, int ImagePath, String firstName, String lastName, Fragment f, String dateString, ArrayList<ClientMedicine> medicineList,
+  public Client(int id, int ImagePath, String firstName, String lastName, String dateString, ArrayList<ClientMedicine> medicineList,
                 ArrayList<Service> erbrachteLeistung, ArrayList<ToDo> toDoList, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber){
     this.firstName = firstName;
     this.lastName = lastName;
     this.id = id;
 
-    this.frag = f;
     String dateFormat = "dd/mm/yyyy";
    // this.birthDate = stringToDate(dateString, dateFormat);
     this.birthDate = dateString;

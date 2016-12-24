@@ -14,8 +14,8 @@
         android:layout_height="wrap_content"
         android:text="Deine Aufgaben für heute:"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:layout_marginBottom="15dp"
         android:textSize="15dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
         />
 

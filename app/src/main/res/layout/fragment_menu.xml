@@ -12,7 +12,7 @@
         android:id="@+id/client_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/client"
+        android:text="Aufgaben"
         android:layout_marginTop="15dp"
         android:textColor="@color/white"
         android:textSize="20dp"
@@ -27,10 +27,10 @@
         android:textSize="20dp"
         android:layout_below="@id/client_view"/>
     <TextView
-        android:id="@+id/calendar"
+        android:id="@+id/log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/calendar"
+        android:text="Logbuch"
         android:layout_marginTop="15dp"
         android:textColor="@color/white"
         android:textSize="20dp"
@@ -43,7 +43,7 @@
         android:layout_marginTop="15dp"
         android:textColor="@color/white"
         android:textSize="20dp"
-        android:layout_below="@id/calendar"/>
+        android:layout_below="@id/log"/>
     <Button
         android:id="@+id/checkout"
         android:layout_width="match_parent"

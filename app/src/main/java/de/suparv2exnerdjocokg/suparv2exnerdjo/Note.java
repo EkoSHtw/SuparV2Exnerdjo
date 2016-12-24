@@ -4,17 +4,17 @@ import java.sql.Timestamp;
 
 public class Note {
 
-    private String tag;
-    private String content;
-    private Timestamp timestamp;
-    private Carer carer;
+  private String tag;
+  private String content;
+  private Timestamp timestamp;
+  private Carer carer;
 
-    public Note(String tag, String content, Carer carer, Timestamp timestamp) {
-        this.tag = tag;
-        this.content = content;
-        this.carer = carer;
-        this.timestamp = timestamp;
-    }
+  public Note(String tag, String content, Carer carer, Timestamp timestamp) {
+    this.tag = tag;
+    this.content = content;
+    this.carer = carer;
+    this.timestamp = timestamp;
+  }
 
 //    public Note(String tag, String content, Carer carer, Timestamp timestamp) {
 //        this.tag = tag;
@@ -23,44 +23,44 @@ public class Note {
 //        this.timestamp = timestamp;
 //    }
 
-    public String getInfoFromPosition(int position){
-        if(position==0){
-            return tag;
-        }else if (position==1){
-            return timestamp.toString();
-        }else if (position==2){
-            return content;
-        }else if(position==3){
-            return carer.getName();
-        }
-            return "";
+  public String getInfoFromPosition(int position){
+    if(position==0){
+      return tag;
+    }else if (position==1){
+      return timestamp.toString();
+    }else if (position==2){
+      return content;
+    }else if(position==3){
+      return carer.getName();
     }
+    return "";
+  }
 
-    public Carer getCarer() {
-        return carer;
-    }
+  public Carer getCarer() {
+    return carer;
+  }
 
-    public void setCarer(Carer carer) {
-        this.carer = carer;
-    }
+  public void setCarer(Carer carer) {
+    this.carer = carer;
+  }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
+  public Timestamp getTimestamp() {
+    return timestamp;
+  }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }
+  public void setTimestamp(Timestamp timestamp) {
+    this.timestamp = timestamp;
+  }
 
-    public String getContent() {
-        return content;
-    }
+  public String getContent() {
+    return content;
+  }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+  public void setContent(String content) {
+    this.content = content;
+  }
 
-    public String getTag() {
-        return tag;
-    }
+  public String getTag() {
+    return tag;
+  }
 }

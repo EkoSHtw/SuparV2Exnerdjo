@@ -78,7 +78,7 @@
     <string name="clientlastname">Stein</string>
     <string name="clientAddress">Rotsteinweg 21A</string>
     <string name="postalcCode">1457 Berlin</string>
-    <string name="clientBirthdate">"14.04.1958"</string>
+    <string name="clientBirthdate">14.04.1958</string>
     <string name="careLevel">2</string>
     <string name="fam1">Arnold Stein</string>
     <string name="fam2">Helene Stein</string>

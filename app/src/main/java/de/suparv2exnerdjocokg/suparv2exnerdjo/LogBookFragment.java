@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,10 +15,11 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyContent.DummyItem;
+
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.list;
@@ -32,7 +34,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
 //    private EditText editText;
 
-    private List<Note> notes;
+    private ArrayList<Note> notes;
     private RecyclerView mRecyclerView;
     private EditText inputSearch;
     private MyLogBookRecyclerViewAdapter recyclerViewAdapter;
@@ -50,8 +52,23 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+//        Log.println(Log.INFO,"m", "HALLO");
+//        View searchBar = inflater.inflate(R.layout.logbook_searchbar,container,false);
         View view = inflater.inflate(R.layout.fragment_logbook, container, false);
         // Set the adapter
+//        if (view instanceof RecyclerView) {
+//            Context context = view.getContext();
+//            RecyclerView recyclerView = (RecyclerView) view;
+//            if (mColumnCount <= 1) {
+//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            } else {
+//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+//            }
+//            recyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(this.getContext(),this.notes));
+//        }
+
+//        editText = (EditText) view.findViewById(R.id.logbook_search_bar);
+//        editText.setText("lalalla");
 
         Spinner spinner = (Spinner) view.findViewById(R.id.search_bar_spinner);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(getContext(),
@@ -62,6 +79,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
         spinner.setOnItemSelectedListener(this);
 
 
+//        View view = (RecyclerView) inflater.inflate(R.layout.fragment_logbook_list, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         prepareList();
@@ -72,6 +90,8 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                // When user changed the Text
+//                adapter.getFilter().filter(cs);
                 filterList(cs);
             }
 
@@ -91,6 +111,8 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
     private void filterList(CharSequence cs) {
         String filterString = cs.toString().toLowerCase();
+
+//                Filter.FilterResults results = new Filter.FilterResults();
         if (filterString.equals("")) {
 //                    adapter.setFilteredData(notes);
 //                    adapter.notifyDataSetChanged();
@@ -150,18 +172,19 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 //    }
 
     private void prepareList() {
-//        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", new Carer("Olaf"),
-//                new Timestamp(1L));
-//        Note second = new Note("Eine Aufgabe", "Ich habe dem Clienten die Zähne geputzt", new Carer("not Olaf")
-//                , new Timestamp(3L));
-//        Note third = new Note("Keks", "Ich habe dem Clienten die Zähne geputzt",
-//                new Carer("Keksi"), new Timestamp(2L));
-//
-//        notes = new ArrayList<>();
-//        notes.add(first);
-//        notes.add(second);
-//        notes.add(third);
-        notes = DummyNotes.ITEMS;
+
+        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", new Carer("Olaf"),
+                new Timestamp(1L));
+        Note second = new Note("Eine Aufgabe", "Ich habe dem Clienten die Zähne geputzt", new Carer("not Olaf")
+                , new Timestamp(3L));
+        Note third = new Note("Keks", "Ich habe dem Clienten die Zähne geputzt",
+                new Carer("Keksi"), new Timestamp(2L));
+
+        //notes = new ArrayList<>();
+        notes = (ArrayList) DummyNotes.ITEMS;
+        notes.add(first);
+        notes.add(second);
+        notes.add(third);
     }
 
 
@@ -177,6 +200,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Uri uri);
     }
 }

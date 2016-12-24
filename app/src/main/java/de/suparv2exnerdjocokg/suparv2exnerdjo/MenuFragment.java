@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +30,11 @@ public class MenuFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private TextView todo;
+    private TextView basicData;
+    private TextView log;
+    private TextView vital;
+    private OnMenuFragmentInteractionListener mListener;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -64,10 +70,58 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        View v = inflater.inflate(R.layout.fragment_menu, container, false);
+
+        todo = (TextView) v.findViewById(R.id.client_view);
+        basicData = (TextView) v.findViewById(R.id.basic_data);
+        log = (TextView) v.findViewById(R.id.log);
+        vital = (TextView) v.findViewById(R.id.vital_values);
+
+        todo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onMenuFragmentInteraction(0);
+            }
+        });
+        basicData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onMenuFragmentInteraction(1);
+            }
+        });
+        log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onMenuFragmentInteraction(2);
+            }
+        });
+        vital.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onMenuFragmentInteraction(3);
+            }
+        });
+
+        return v;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof TodoFragment.OnListFragmentInteractionListener) {
+            mListener = (MenuFragment.OnMenuFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnListFragmentInteractionListener and OnInfoClickedInteractionListener");
+        }
+    }
+
+    //Called when the fragment is no longer attached to its activity. This is called after onDestroy(), except in the cases where the fragment instance is retained across Activity re-creation (see setRetainInstance(boolean)), in which case it is called after onStop().
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -79,8 +133,8 @@ public class MenuFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnMenuFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onMenuFragmentInteraction(int position);
     }
 }
