@@ -15,10 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
@@ -172,19 +170,9 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 //    }
 
     private void prepareList() {
-
-        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", new Carer("Olaf"),
-                new Timestamp(1L));
-        Note second = new Note("Eine Aufgabe", "Ich habe dem Clienten die Zähne geputzt", new Carer("not Olaf")
-                , new Timestamp(3L));
-        Note third = new Note("Keks", "Ich habe dem Clienten die Zähne geputzt",
-                new Carer("Keksi"), new Timestamp(2L));
-
         //notes = new ArrayList<>();
         notes = (ArrayList) DummyNotes.ITEMS;
-        notes.add(first);
-        notes.add(second);
-        notes.add(third);
+
     }
 
 

@@ -3,6 +3,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.dummy;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,20 @@ public class DummyNotes {
         ITEMS.add(new Note("Wunden", "Wunde XY eitert stark", new Carer("Timmy"), new Timestamp(getYesterday())));
         ITEMS.add(new Note("Stimmung", "Sehr schlechte Laune", new Carer("Timmy"), new Timestamp(getYesterday())));
         ITEMS.add(new Note("Medikamenteneinnahme", "Problemlos", new Carer("Timmy"), new Timestamp(getYesterday())));
+        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", new Carer("Olaf"),
+                new Timestamp(1L));
+        Note second = new Note("Eine Aufgabe", "Ich habe dem Clienten die Zähne geputzt", new Carer("not Olaf")
+                , new Timestamp(3L));
+        Note third = new Note("Keks", "Ich habe dem Clienten die Zähne geputzt",
+                new Carer("Keksi"), new Timestamp(2L));
+        ITEMS.add(first);
+        ITEMS.add(second);
+        ITEMS.add(third);
+
+
+//        ITEMS.sort();
+//        Collections.sort(ITEMS);
+        Collections.sort(ITEMS, Collections.reverseOrder());
     }
 
     public static long getYesterday() {
