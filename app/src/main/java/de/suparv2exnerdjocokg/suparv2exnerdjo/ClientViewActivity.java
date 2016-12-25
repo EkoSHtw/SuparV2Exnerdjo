@@ -1,31 +1,42 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.view.Gravity;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
+import java.sql.Timestamp;
+
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 public class ClientViewActivity extends AppCompatActivity implements MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
 
     private Client client;
 
     private FloatingActionButton fab;
-    private PopupWindow popupWindow;
+//    private PopupWindow popupWindow;
     private TextView popUpMessage;
     private FrameLayout container;
     private boolean clicked = true;
+    Context context;
+    Activity activity = this;
+
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_view);
+
+        context = this;
+
+//        setContentView(R.layout.dialog_add_note);
 
         if (findViewById(R.id.menu)!=null){
             MenuFragment firstFragment = new MenuFragment();
@@ -37,30 +48,38 @@ public class ClientViewActivity extends AppCompatActivity implements MenuFragmen
         }
 
         container = new FrameLayout(this);
-        popupWindow = new PopupWindow(this);
+//        popupWindow = new PopupWindow(this);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (clicked) {
-                    clicked = false;
-                    popupWindow.showAtLocation(findViewById(R.id.activity_client_view), Gravity.CENTER, 10, 10);
-                    popupWindow.update(50, 50, 320, 90);
-                } else {
-                    clicked = true;
-                    popupWindow.dismiss();
-                }
+//                if (clicked) {
+//                    clicked = false;
+////                    popupWindow.showAtLocation(findViewById(R.id.activity_client_view), Gravity.CENTER, 10, 10);
+////                    popupWindow.update(50, 50, 320, 90);
+//                    if(builder==null){
+//                        builder = new AlertDialog.Builder(context);
+//                        builder.setView(R.layout.dialog_add_note);
+//                        builder.show();
+//                    }
+//
+//                } else {
+//                    clicked = true;
+////                    popupWindow.dismiss();
+//                }
+                DialogAddNote dialogAddNote = new DialogAddNote(activity);
+                dialogAddNote.show();
             }
         });
 
-        popUpMessage = new TextView(this);
-        popUpMessage.setText("Hi, ich bin das Popup");
-
-        container.addView(popUpMessage);
-
-        popupWindow.setContentView(container);
+//        popUpMessage = new TextView(this);
+//        popUpMessage.setText("Hi, ich bin das Popup");
+//
+//        container.addView(popUpMessage);
+//
+//        popupWindow.setContentView(container);
 
     }
 
@@ -157,5 +176,13 @@ public class ClientViewActivity extends AppCompatActivity implements MenuFragmen
 
                 break;
         }
+    }
+
+    public void addNote(String content){
+//        EditText editText = (EditText)findViewById(R.id.dialog_input_text);
+//        String content = editText.getText().toString();
+        DummyNotes.ITEMS.add(new Note("Der Tag", content, new Carer("John"),new Timestamp(System.currentTimeMillis())));
+        //update fragments
+        // buggy, neue notizen nicht in reihenfolge
     }
 }

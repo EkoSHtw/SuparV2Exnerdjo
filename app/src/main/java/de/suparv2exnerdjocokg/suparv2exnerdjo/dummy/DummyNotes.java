@@ -54,7 +54,8 @@ public class DummyNotes {
 
 //        ITEMS.sort();
 //        Collections.sort(ITEMS);
-        Collections.sort(ITEMS, Collections.reverseOrder());
+        Collections.sort(ITEMS);// oder sort und dann Collections.reverse()
+
     }
 
     public static long getYesterday() {
