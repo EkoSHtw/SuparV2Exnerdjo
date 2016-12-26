@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:orientation="vertical"
+    tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.ToDoNotes">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Feste Notizen"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="15dp"
+        android:gravity="center"
+        />
+
+    <FrameLayout
+        android:id="@+id/fixedNotes"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_fixed_notes_list" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorAccent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notizen von Gestern"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="15dp"
+        android:gravity="center"
+        />
+
+    <FrameLayout
+        android:id="@+id/olderNotes"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_notes_from_yesterday" />
+
+</LinearLayout>

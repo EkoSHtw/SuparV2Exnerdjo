@@ -2,18 +2,19 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 import android.content.Context;
 
 
-public class Medicine extends Task {
+public class Medicine {
 
+  private int name;
+  private int description;
   private int usage;
-
   private int ingredients;
-
   private int manufacturer;
-
   private int sideeffects;
 
     public Medicine(int name, int description, int usage, int ingredients, int manufacturer, int sideeffects){
-        super(name, description);
+
+        this.name = name;
+        this.description = description;
         this.usage = usage;
         this.ingredients = ingredients;
         this.manufacturer = manufacturer;

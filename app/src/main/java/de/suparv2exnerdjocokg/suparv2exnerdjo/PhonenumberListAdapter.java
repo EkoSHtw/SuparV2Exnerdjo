@@ -1,6 +1,13 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.util.Log;
+import android.util.LogPrinter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +26,21 @@ public class PhonenumberListAdapter extends BaseAdapter{
 
     private final ArrayList<PhoneNumber> numbers;
     private final LayoutInflater inflator;
+    private static final String CLIENTKEY = "client_key";
+    private Client c;
 
-    public PhonenumberListAdapter(Context context){
 
+    public PhonenumberListAdapter(Context context, Client number){
+        Log.println(Log.INFO, "test","2");
         inflator = LayoutInflater.from(context);
 
         this.numbers = new ArrayList<>();
-        Client number = new Client(context);
 
-        for(int index = 0; index<number.getPhoneNumberlenght(); index++){
-            numbers.add(number.getPhoneNumber().get(index));
+        this.c = number;
+        for(int index = 0; index<c.getPhoneNumberlenght(); index++){
+            numbers.add(c.getPhoneNumber().get(index));
+
+
         }
     }
 
@@ -65,9 +77,8 @@ public class PhonenumberListAdapter extends BaseAdapter{
         }
 
         Context context = parent.getContext();
-        Client c = new Client(context);
         c.getPhoneNumber().get(position);
-        PhoneNumber number = c.getPhoneNumber().get(position);;
+        PhoneNumber number = c.getPhoneNumber().get(position);
         holder.name.setText(number.getName());
 
         holder.phoneNum.setText(number.getNumber());

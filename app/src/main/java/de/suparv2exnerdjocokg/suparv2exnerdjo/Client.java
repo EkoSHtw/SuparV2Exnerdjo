@@ -1,24 +1,25 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
-import android.content.Context;
-import android.provider.ContactsContract;
-import android.content.res.Resources;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 
+import java.io.Serializable;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Vector;
 
-public class Client {
+public class Client implements Serializable {
+  private static final long serialVersionUID = -2163051469151804394L;
+  private int id;
+  private int imagePath;
   private String firstName;
-
+  private Fragment frag;
   private String lastName;
 
   private String adress;
 
-  private Date birthDate;
+  private String birthDate;
 
   private int carelevel;
 
@@ -32,29 +33,51 @@ public class Client {
 
   private ArrayList<PhoneNumber> phoneNumber;
 
-  public Client(Context context){
-    this.firstName = context.getString(R.string.clientfirstname);
-    this.lastName = context.getString(R.string.clientlastname);
+  public ArrayList<Fragment> getDocumentation() {
+    return documentation;
+  }
 
-    String dateString = context.getString(R.string.clientBirthdate);
+
+
+  public void addDocumentation(Fragment documentation) {
+    this.documentation.add(documentation);
+  }
+
+  private ArrayList<Fragment> documentation;
+
+  public int getImagePath() {
+    return imagePath;
+  }
+
+  public Client(int id, int ImagePath, String firstName, String lastName, String dateString, ArrayList<ClientMedicine> medicineList,
+                ArrayList<Service> erbrachteLeistung, ArrayList<ToDo> toDoList, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.id = id;
+
     String dateFormat = "dd/mm/yyyy";
-    this.birthDate = stringToDate(dateString, dateFormat);
-    this.medicineList =null;
-    this.erbrachteLeistung = null;
-    this.toDoList = null;
-    this.concerns= "test";
-    this.carelevel = 2;
-    this.adress = context.getString(R.string.clientAddress);
+   // this.birthDate = stringToDate(dateString, dateFormat);
+    this.birthDate = dateString;
+    this.medicineList = new ArrayList<ClientMedicine>();
+    this.medicineList = medicineList;
+    this.erbrachteLeistung = new ArrayList<Service>();
+    this.erbrachteLeistung = erbrachteLeistung;
+    this.toDoList = new ArrayList<ToDo>();
+    this.toDoList = toDoList;
+    this.concerns= infodump;
+    this.carelevel = carelevel;
+    this.adress = adress;
 
-    PhoneNumber num1 = new PhoneNumber(context.getString(R.string.fam1),
+
+  /*  PhoneNumber num1 = new PhoneNumber(context.getString(R.string.fam1),
             (context.getString(R.string.telephonenumber)));
 
     PhoneNumber num2 = new PhoneNumber(context.getString(R.string.fam2),
-           (context.getString(R.string.telephonenumber2)));
-    phoneNumber = new ArrayList<>();
-    this.phoneNumber.add(num1);
-    this.phoneNumber.add(num2);
-
+           (context.getString(R.string.telephonenumber2))); */
+    this.phoneNumber = new ArrayList<>();
+    this.phoneNumber = phoneNumber;
+    String a = "" + phoneNumber.size();
+    Log.println(Log.INFO, "test",a);
   }
   public int getCarelevel() {
     return carelevel;
@@ -88,7 +111,7 @@ public class Client {
     return phoneNumber;
   }
 
-  public void setPhoneNumber(PhoneNumber phoneNumber){this.phoneNumber.add(phoneNumber);}
+  public void addPhoneNumber(PhoneNumber phoneNumber){this.phoneNumber.add(phoneNumber);}
 
   public String getFirstName() {
     return firstName;
@@ -106,11 +129,11 @@ public class Client {
     this.lastName = lastName;
   }
 
-  public Date getBirthDate() {
+  public String getBirthDate() {
     return birthDate;
   }
 
-  public void setBirthDate(Date birthDate) {
+  public void setBirthDate(String birthDate) {
     this.birthDate = birthDate;
   }
 
@@ -142,7 +165,7 @@ public class Client {
     return medicineList;
   }
 
-  public void setMedicineList(ClientMedicine medicine) {
+  public void addMedicineList(ClientMedicine medicine) {
     medicineList.add(medicine);
   }
 /*

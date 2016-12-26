@@ -2,6 +2,11 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="black">#000</color>
+    <color name="colorAccent">#bd418ae4</color>
+    <color name="grey">#bdb7b7b7</color>
+    <color name="white">#bdffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="table_background">#999999</color>
+    <color name="row_background">#ffffff</color>
 </resources>

@@ -6,14 +6,16 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BasicDataActivity"
+        <activity
+            android:name=".ClientViewActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,17 +25,11 @@
         </activity>
 
         <uses-permission android:name="android.permission.READ_CONTACTS" />
-        <uses-permission android:name="android.permission.Call_Number"/>
-        <activity android:name=".MainActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".ServiceCatalog"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".ServiceDetail"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".LogIn"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".ClientViewActivity"
-            android:screenOrientation="landscape"></activity>
+        <uses-permission android:name="android.permission.Call_Number" />
+
+        <activity
+            android:name=".LogIn"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

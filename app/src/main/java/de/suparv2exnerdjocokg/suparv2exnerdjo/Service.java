@@ -2,19 +2,15 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.content.Context;
 
-import java.util.Vector;
-
-public class Service extends Task {
+public class Service extends GeneralTask {
 
   private int content;
-
   private int complexNumber;
-
   private float cost;
 
-  public Service (int name, int description, int content, int complexNumber, float cost){
+  public Service (int name, int description, int tag, int content, int complexNumber, float cost){
 
-      super(name, description);
+      super(name, description, tag);
       this.content = content;
       this.complexNumber = complexNumber;
       this.cost = cost;
