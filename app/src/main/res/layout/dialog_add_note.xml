@@ -11,21 +11,37 @@
         android:layout_height="wrap_content"
         android:text="@string/dialog_add_note_title" />
 
-
     <TextView
         android:id="@+id/dialog_add_note_carer_name"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toLeftOf="@id/dialog_add_note_title"
-        android:layout_toStartOf="@id/dialog_add_note_title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="asdf"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/carer_name_fill"/>
+
+    <TextView
+        android:id="@+id/dialog_textview_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/dialog_add_note_title"
+        android:text="@string/tag"/>
+
+    <EditText
+        android:id="@+id/dialog_input_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_textview_tag"
+        android:layout_toRightOf="@id/dialog_textview_tag"
+        android:hint="@string/input_tags"/>
 
     <EditText
         android:id="@+id/dialog_input_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_input_tag"
+        android:hint="@string/note_comment"/>
 
     <Button
         android:id="@+id/dialog_button_positive"

@@ -42,9 +42,9 @@ public class DialogAddNote extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dialog_button_positive:
-                EditText editText = (EditText) findViewById(R.id.dialog_input_text);
-
-                activity.addNote(editText.getText().toString().trim());
+                EditText input = (EditText) findViewById(R.id.dialog_input_text);
+                EditText tag = (EditText) findViewById(R.id.dialog_input_tag) ;
+                activity.addNote(input.getText().toString().trim(), tag.getText().toString().trim());
                 dismissDialog();
                 break;
             case R.id.dialog_button_negative:
