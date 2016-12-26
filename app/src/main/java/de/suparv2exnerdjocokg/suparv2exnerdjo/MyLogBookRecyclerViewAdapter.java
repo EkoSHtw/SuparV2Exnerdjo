@@ -152,7 +152,5 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
             content = (TextView) view.findViewById(R.id.frag_logB_content);
             carer = (TextView) view.findViewById(R.id.frag_logB_carer);
         }
-
-
     }
 }

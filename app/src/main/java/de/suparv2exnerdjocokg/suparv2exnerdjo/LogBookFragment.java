@@ -147,9 +147,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-//        Log.println(Log.INFO, ",", "WHAAUU");
-    }
+    public void onNothingSelected(AdapterView<?> parent) { }
 
 
 //    @Override
@@ -171,8 +169,9 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
     private void prepareList() {
         //notes = new ArrayList<>();
+//        notes = (ArrayList) DummyNotes.ITEMS;
         notes = (ArrayList) DummyNotes.ITEMS;
-
+//        Collections.reverse(notes);
     }
 
 
