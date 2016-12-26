@@ -147,9 +147,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-//        Log.println(Log.INFO, ",", "WHAAUU");
-    }
+    public void onNothingSelected(AdapterView<?> parent) { }
 
 
 //    @Override
