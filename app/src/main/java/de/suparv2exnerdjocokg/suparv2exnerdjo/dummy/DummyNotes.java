@@ -63,4 +63,8 @@ public class DummyNotes {
         yesterday.add(Calendar.DATE, -1);
         return yesterday.getTime().getTime();
     }
+
+    public static void sortList(){
+        Collections.sort(ITEMS,Collections.<Note>reverseOrder());
+    }
 }
