@@ -73,7 +73,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
             }
         });
         mRecyclerView.setAdapter(recyclerViewAdapter);
-        
+
         return view;
     }
 
