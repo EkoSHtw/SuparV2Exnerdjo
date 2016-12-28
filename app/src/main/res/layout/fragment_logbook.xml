@@ -4,6 +4,9 @@
     android:id="@id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="10dp"
     android:orientation="vertical">
 
 
@@ -21,9 +24,9 @@
                 android:id="@+id/logbook_search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textAppearance="?attr/textAppearanceListItem"
-                android:textSize="15dp"
+                style="@style/AppTextNormal"
                 android:hint="Suchen..." />
+
         </FrameLayout>
 
         <FrameLayout
@@ -33,7 +36,9 @@
             <Spinner
                 android:id="@+id/search_bar_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                style="@style/AppTextSmall"
+                />
         </FrameLayout>
 
 
