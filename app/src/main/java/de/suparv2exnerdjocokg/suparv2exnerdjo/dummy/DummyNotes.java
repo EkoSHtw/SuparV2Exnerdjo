@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Carer;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.Note;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -40,6 +40,15 @@ public class DummyNotes {
         ITEMS.add(new Note("Wunden", "Wunde XY eitert stark", new Carer("Timmy"), new Timestamp(getYesterday())));
         ITEMS.add(new Note("Stimmung", "Sehr schlechte Laune", new Carer("Timmy"), new Timestamp(getYesterday())));
         ITEMS.add(new Note("Medikamenteneinnahme", "Problemlos", new Carer("Timmy"), new Timestamp(getYesterday())));
+        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", new Carer("Olaf"),
+                new Timestamp(1L));
+        Note second = new Note("Eine Aufgabe", "Ich habe dem Clienten die Zähne geputzt", new Carer("not Olaf")
+                , new Timestamp(3L));
+        Note third = new Note("Keks", "Ich habe dem Clienten die Zähne geputzt",
+                new Carer("Keksi"), new Timestamp(2L));
+        ITEMS.add(first);
+        ITEMS.add(second);
+        ITEMS.add(third);
     }
 
     public static long getYesterday() {

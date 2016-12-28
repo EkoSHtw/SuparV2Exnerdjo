@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.ClientView">
+    tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView">
 
     <FrameLayout
         android:id="@+id/todos"

@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="LinearLayoutManager"
-        tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.TodoFragment"
+        tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment"
         tools:listitem="@layout/fragment_todo"
         android:layout_below="@id/headline"/>
 

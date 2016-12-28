@@ -1,4 +1,4 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 
 import java.util.List;
+
+import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 /**
  *

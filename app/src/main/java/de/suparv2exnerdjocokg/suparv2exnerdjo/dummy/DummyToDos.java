@@ -3,15 +3,13 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.dummy;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.ToDo;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
 
 /**
  * Helper class for providing sample content for user interfaces created by

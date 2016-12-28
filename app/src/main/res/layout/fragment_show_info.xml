@@ -6,7 +6,7 @@
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:paddingTop="10dp"
-    tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.ShowInfo">
+    tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ShowInfo">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

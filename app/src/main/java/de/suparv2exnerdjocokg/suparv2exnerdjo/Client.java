@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
+
 public class Client implements Serializable {
   private static final long serialVersionUID = -2163051469151804394L;
   private int id;

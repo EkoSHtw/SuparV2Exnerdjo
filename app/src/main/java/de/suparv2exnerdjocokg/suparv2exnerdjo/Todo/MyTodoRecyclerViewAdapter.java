@@ -1,21 +1,24 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
-import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import java.util.HashMap;
+import java.sql.Timestamp;
 import java.util.List;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Carer;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 /**
 
@@ -47,6 +50,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
+        final GeneralTask currentTask = holder.mItem.getTask();
         holder.mNameView.setText(mValues.get(position).getTask().getName());
         if(holder.mItem.getTask().isDone()){
             holder.mCheckBox.setChecked(true);
@@ -72,8 +76,20 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 holder.mItem.getTask().setDone(isChecked);
                 if(isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
+                    DummyNotes.ITEMS.add(new Note(currentTask.getTag(holder.mView.getContext()), ""+currentTask.getName(holder.mView.getContext())+" durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis())));
                 }else{
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.transparent));
+                    for(int i = 0; i < DummyNotes.ITEMS.size(); i++){
+                        if(DummyNotes.ITEMS.get(i).getTag().toLowerCase().contains(currentTask.getTag(holder.mView.getContext()).toLowerCase())){
+                            long timestamp = holder.mItem.getTimestamp().getDay();
+                            long secondTimestamp = DummyNotes.ITEMS.get(i).getTimestamp().getDay();
+
+                            if(timestamp==secondTimestamp){
+                                DummyNotes.ITEMS.remove(i);
+                            }
+                        }
+                    }
+
                 }
             }
         });

@@ -10,7 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 
 public class ClientViewActivity extends AppCompatActivity implements MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
 

@@ -14,9 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment.OnListFragmentInteractionListener;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */

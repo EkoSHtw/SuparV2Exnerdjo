@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.FixedNotesFragment"
+    tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.FixedNotesFragment"
     tools:listitem="@layout/fragment_note" />
