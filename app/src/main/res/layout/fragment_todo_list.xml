@@ -3,10 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:paddingTop="10dp">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/left"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:paddingTop="10dp"
+        android:background="@drawable/round_corner">
 
     <TextView
         android:id="@+id/headline"
@@ -27,9 +33,13 @@
         android:name="de.suparv2exnerdjocokg.suparv2exnerdjo.TodoFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
         tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment"
         tools:listitem="@layout/fragment_todo"
         android:layout_below="@id/headline"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

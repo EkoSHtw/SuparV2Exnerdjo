@@ -30,6 +30,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     private final TodoFragment.OnListFragmentInteractionListener mListener;
     private final TodoFragment.OnInfoClickedInteractionListener infoListener;
     private View oldSelection = null;
+    private ImageButton oldInfoSelection;
 
 
     public MyTodoRecyclerViewAdapter(List<ToDo> items, TodoFragment.OnListFragmentInteractionListener listener, TodoFragment.OnInfoClickedInteractionListener newInfoListener) {
@@ -52,6 +53,8 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.mItem = mValues.get(position);
         final GeneralTask currentTask = holder.mItem.getTask();
         holder.mNameView.setText(mValues.get(position).getTask().getName());
+        holder.mInfo.setColorFilter(holder.mView.getResources().getColor(R.color.colorPrimaryDark));
+
         if(holder.mItem.getTask().isDone()){
             holder.mCheckBox.setChecked(true);
             holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorPrimaryLight));
@@ -98,14 +101,21 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.mInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearSelection();
+                clearInfoSelection();
                 oldSelection = holder.mView;
+                oldInfoSelection = holder.mInfo;
                 holder.mInfo.setColorFilter(holder.mView.getResources().getColor(R.color.colorAccent));
                 if(null!=infoListener) {
                     infoListener.onInfoClickedListener(position);
                 }
             }
         });
+    }
+
+    public void clearInfoSelection(){
+        if(oldInfoSelection != null){
+            oldInfoSelection.setColorFilter(oldSelection.getResources().getColor(R.color.colorPrimaryDark));
+        }
     }
 
     public void clearSelection() {

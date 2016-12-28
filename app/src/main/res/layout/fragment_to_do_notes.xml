@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDoNotes">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@drawable/round_corner"
+        >
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,11 +31,23 @@
         android:layout_weight="1"
         tools:layout="@layout/fragment_fixed_notes_list" />
 
+        <!--
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="10dp"
         android:background="@color/colorAccent"/>
+        -->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/round_corner"
+        >
 
     <TextView
         android:layout_width="match_parent"
@@ -44,5 +64,6 @@
         android:layout_height="1dp"
         android:layout_weight="1"
         tools:layout="@layout/fragment_notes_from_yesterday" />
+    </LinearLayout>
 
 </LinearLayout>
