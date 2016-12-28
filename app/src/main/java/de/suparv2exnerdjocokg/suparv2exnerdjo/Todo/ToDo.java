@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 
-public class ToDo implements Comparable{
+public class ToDo{
 
   private Timestamp timestamp;
 
@@ -31,17 +31,5 @@ public class ToDo implements Comparable{
     this.task = task;
   }
 
-  @Override
-  public int compareTo(Object o) {
-      ToDo t = (ToDo)o;
 
-      long l2 = this.getTimestamp().getTime();
-      long l1 = t.getTimestamp().getTime();
-      if (l2 > l1)
-          return 1;
-      else if (l1 > l2)
-          return -1;
-      else
-          return 0;
-  }
 }

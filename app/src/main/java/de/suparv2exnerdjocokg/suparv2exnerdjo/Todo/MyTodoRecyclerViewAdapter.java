@@ -74,6 +74,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 holder.mItem.getTask().setDone(isChecked);
+                mListener.onListFragmentInteraction(-2);
                 if(isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
                     DummyNotes.ITEMS.add(new Note(currentTask.getTag(holder.mView.getContext()), ""+currentTask.getName(holder.mView.getContext())+" durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis())));

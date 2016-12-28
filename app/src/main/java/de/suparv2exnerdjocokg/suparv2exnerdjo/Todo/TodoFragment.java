@@ -84,6 +84,16 @@ public class TodoFragment extends Fragment {
         return view;
     }
 
+    public void updateList(){
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.todolist);
+        if (mColumnCount <= 1) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(getView().getContext()));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(getView().getContext(), mColumnCount));
+        }
+        DummyToDos.sortAlphabet(view.getContext());
+        recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.ITEMS, mListener, infoListener));
+    }
 
     // Called when a fragment is first attached to its context. onCreate(Bundle) will be called after this.
     @Override

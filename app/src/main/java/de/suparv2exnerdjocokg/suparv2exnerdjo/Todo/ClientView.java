@@ -76,21 +76,40 @@ public class ClientView extends Fragment {
 
 
     public void updateClientView(int position){
-        ToDoNotes tFrag = (ToDoNotes)  getChildFragmentManager().findFragmentById(R.id.todoNotes);
-        if(tFrag!=null) {
-            tFrag.updateFragView(position);
+        if(position!=-2) {
+            ToDoNotes tFrag = (ToDoNotes) getChildFragmentManager().findFragmentById(R.id.todoNotes);
+            if (tFrag != null) {
+                tFrag.updateFragView(position);
+            } else {
+                tFrag = new ToDoNotes();
+                Bundle args = new Bundle();
+                args.putInt(ClientView.ARG_Position, position);
+                tFrag.setArguments(args);
+
+                FragmentTransaction trans = getChildFragmentManager().beginTransaction();
+
+                trans.replace(R.id.todoNotes, tFrag);
+                trans.addToBackStack(null);
+
+                trans.commit();
+            }
         }else{
-            tFrag = new ToDoNotes();
-            Bundle args = new Bundle();
-            args.putInt(ClientView.ARG_Position, position);
-            tFrag.setArguments(args);
+            TodoFragment todoFrag = (TodoFragment) getChildFragmentManager().findFragmentById(R.id.todos);
+            if (todoFrag != null) {
+                todoFrag.updateList();
+            } else {
+                todoFrag = new TodoFragment();
+                Bundle args = new Bundle();
+                args.putInt(ClientView.ARG_Position, position);
+                todoFrag.setArguments(args);
 
-            FragmentTransaction trans = getChildFragmentManager().beginTransaction();
+                FragmentTransaction trans = getChildFragmentManager().beginTransaction();
 
-            trans.replace(R.id.todoNotes, tFrag);
-            trans.addToBackStack(null);
+                trans.replace(R.id.todos, todoFrag);
+                trans.addToBackStack(null);
 
-            trans.commit();
+                trans.commit();
+            }
         }
     }
 

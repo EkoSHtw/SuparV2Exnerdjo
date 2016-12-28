@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Display;
 
 import java.io.File;
@@ -55,12 +56,7 @@ public class DummyToDos {
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<ToDo> ITEMS = new ArrayList<ToDo>();
-
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
-    public static final Map<Integer, ToDo> ITEM_MAP = new HashMap<>();
+    public static List<ToDo> ITEMS = new ArrayList<ToDo>();
 
 
     static {
@@ -69,12 +65,12 @@ public class DummyToDos {
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.teilwaschung, R.string.teilwaschungDescription, R.string.teilwaschung)));
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.nahr, R.string.nahrDescription, R.string.nahr)));
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.hNahr, R.string.hNahrDesc, R.string.hNahr)));
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.lagBet, R.string.lagBetDesc, R.string.lagBet)));ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.ganzwaschung, R.string.ganzwaschungDescription, R.string.ganzwaschung)));
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.lagBet, R.string.lagBetDesc, R.string.lagBet)));
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.ganzwaschung, R.string.ganzwaschungDescription, R.string.ganzwaschung)));
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.teilwaschung, R.string.teilwaschungDescription, R.string.teilwaschung)));
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.nahr, R.string.nahrDescription, R.string.nahr)));
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.hNahr, R.string.hNahrDesc, R.string.hNahr)));
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.lagBet, R.string.lagBetDesc, R.string.lagBet)));
-        sortTime();
     }
 
     public static void sortAlphabet(final Context c){
@@ -84,6 +80,17 @@ public class DummyToDos {
                 return first.getTask().getName(c).compareTo(second.getTask().getName(c));
             }
         });
+        List<ToDo> done = new ArrayList<>();
+        for(int i = 0; i < ITEMS.size(); i++){
+            if(ITEMS.get(i).getTask().isDone()){
+                done.add(ITEMS.get(i));
+                ITEMS.remove(i);
+                i = i-1;
+            }
+        }
+        for(int i = 0; i < done.size(); i++){
+            ITEMS.add(done.get(i));
+        }
     }
 
     public static void sortTime(){
