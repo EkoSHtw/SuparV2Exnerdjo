@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -55,6 +56,30 @@ public class TableGenerator {
         tr.setLayoutParams(rowParams);
 
         for (int iCol = 0; iCol < headLenght; iCol++) {
+            if(iCol == headLenght-1){
+                final PictureButton pb = new PictureButton(mContext);
+                pb.setGravity(Gravity.CENTER | Gravity.CENTER);
+                pb.setPadding(3, 3, 3, 3);
+                pb.setTextColor(mContext.getResources().getColor(
+                        R.color.black));
+                pb.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                pb.setMaxHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+                pb.setLayoutParams(colParams);
+                pb.setBackgroundColor(mContext.getResources().getColor(
+                        R.color.row_background));
+                pb.setHint(R.string.addPicture);
+
+
+                pb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (pb.ispicAdded()== false){
+
+                        }
+                    }
+                });
+                tr.addView(pb);
+            }
             EditText tvCol = new EditText(mContext);
             tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);

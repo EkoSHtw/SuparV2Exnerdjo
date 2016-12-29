@@ -1,5 +1,7 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,9 +12,12 @@ import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.io.File;
+
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 
-public class ClientViewActivity extends AppCompatActivity implements MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
+public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
 
     private Client client;
 
@@ -156,6 +161,27 @@ public class ClientViewActivity extends AppCompatActivity implements MenuFragmen
             case 3:
 
                 break;
+        }
+    }
+
+    public void onDocumentSelected(File position) {
+        // The user selected the headline of an article from the HeadlinesFragment
+        // Do something here to display that article
+        if(position.getName() == "Wunddokumentation") {
+            WoundDocumentationFragment wFrag = new WoundDocumentationFragment();
+
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+            trans.replace(R.id.fragment_container, wFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
+        }
+    }
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, 1);
         }
     }
 }

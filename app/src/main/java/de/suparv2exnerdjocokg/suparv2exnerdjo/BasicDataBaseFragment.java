@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -48,6 +50,8 @@ public class BasicDataBaseFragment extends Fragment {
     private String mParam2;
     private Client c;
 
+    private OnDocumentSelectedListener mCallback;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_basic_data_base, container, false);
@@ -71,22 +75,32 @@ public class BasicDataBaseFragment extends Fragment {
                 infodump.setText(c.getConcerns());
                 numbers = (ListView) rootView.findViewById(R.id.telnumbers);
 
-                String b = "" + c.getPhoneNumberlenght();
                 adapter = new PhonenumberListAdapter(rootView.getContext(), c);
                 numbers.setAdapter(adapter);
                 ArrayList<String> s = getLFile();
+                File f = new File("Wunddokumentation");
+                ArrayList<File> docs = new ArrayList<File>();
+                docs.add(f);
+                c.setDocumentation(docs);
                 documents = (ListView) rootView.findViewById(document_list);
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(rootView.getContext(),
+                ArrayAdapter<File> arrayAdapter = new ArrayAdapter<File>(rootView.getContext(),
                         android.R.layout.simple_list_item_1,
-                        s);
+                        c.getDocumentation());
                 documents.setAdapter(arrayAdapter);
+                documents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        File p = (File) parent.getItemAtPosition(position);
 
-                Log.println(Log.INFO, "text", "useless log");
+                        Log.println(Log.INFO, "File", ""+p.getName());
+                        mCallback.onDocumentSelected(p);
+                    }
+                });
+
             }else{
-                Log.println(Log.INFO, "text", "C ist null");
+
             }
         }  else{
-            Log.println(Log.INFO, "text", "args ist null");
         }
 
         return rootView;
@@ -105,6 +119,24 @@ public class BasicDataBaseFragment extends Fragment {
             }
         }
         return s;
+    }
+
+    public interface OnDocumentSelectedListener {
+        public void onDocumentSelected(File position);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnDocumentSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
     }
 
 
