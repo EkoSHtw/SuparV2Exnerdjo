@@ -10,15 +10,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:textSize="11dp"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        style="@style/AppTextVerySmall"
+        />
 
     <TextView
         android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/time"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        style="@style/AppTextNormal"
+        />
 
     <TextView
         android:id="@+id/tag"
@@ -26,8 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/content"
         android:layout_alignParentLeft="true"
-        android:textSize="11dp"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        style="@style/AppTextVerySmall"
+        />
 
     <TextView
         android:id="@+id/carer"
@@ -35,8 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/content"
         android:layout_alignParentRight="true"
-        android:textSize="11dp"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        style="@style/AppTextVerySmall"
+        />
 
     <View
         android:layout_width="match_parent"

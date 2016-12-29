@@ -33,6 +33,7 @@ public class MenuFragment extends Fragment {
     private TextView log;
     private TextView vital;
     private TextView medicine;
+    private TextView oldSelection;
     private OnMenuFragmentInteractionListener mListener;
 
     public MenuFragment() {
@@ -72,6 +73,8 @@ public class MenuFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_menu, container, false);
 
         todo = (TextView) v.findViewById(R.id.client_view);
+        todo.setTextColor(getResources().getColor(R.color.colorAccent));
+        oldSelection = todo;
         basicData = (TextView) v.findViewById(R.id.basic_data);
         log = (TextView) v.findViewById(R.id.log);
         vital = (TextView) v.findViewById(R.id.vital_values);
@@ -81,35 +84,61 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mListener.onMenuFragmentInteraction(0);
+
+                clearSelection();
+                oldSelection = todo;
+                todo.setTextColor(getResources().getColor(R.color.colorAccent));
             }
         });
         basicData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onMenuFragmentInteraction(1);
+
+                clearSelection();
+                oldSelection = basicData;
+                basicData.setTextColor(getResources().getColor(R.color.colorAccent));
             }
         });
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onMenuFragmentInteraction(2);
+
+                clearSelection();
+                oldSelection = log;
+                log.setTextColor(getResources().getColor(R.color.colorAccent));
             }
         });
         vital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onMenuFragmentInteraction(3);
+
+                clearSelection();
+                oldSelection = vital;
+                vital.setTextColor(getResources().getColor(R.color.colorAccent));
             }
         });
         medicine.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 mListener.onMenuFragmentInteraction(4);
+
+                clearSelection();
+                oldSelection = vital;
+                medicine.setTextColor(getResources().getColor(R.color.colorAccent));
             }
         });
 
 
         return v;
+    }
+
+    public void clearSelection() {
+        if(oldSelection != null) {
+            oldSelection.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
     }
 
     @Override

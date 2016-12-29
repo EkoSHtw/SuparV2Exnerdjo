@@ -26,8 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="15dp" />
+            style="@style/AppTextNormal"
+            />
 
         <TextView
             android:id="@+id/adress"
@@ -36,8 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="15dp" />
+            style="@style/AppTextNormal"
+            />
 
         <TextView
             android:id="@+id/gebdat"
@@ -45,8 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="15dp"/>
+            style="@style/AppTextNormal"
+            />
 
 
         <TextView
@@ -55,15 +55,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="15dp" />
+            style="@style/AppTextNormal"
+            />
 
         <ListView
             android:id="@+id/telnumbers"
             android:layout_below="@+id/care_level"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            />
 
         <TextView
             android:id="@+id/info"
@@ -71,8 +72,8 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textAppearance="?attr/textAppearanceListItem"
-            android:textSize="15dp" />
+            style="@style/AppTextNormal"
+            />
         </LinearLayout>
 
 

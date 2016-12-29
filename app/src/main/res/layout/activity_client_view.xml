@@ -16,14 +16,14 @@
             android:id="@+id/menu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.15"
             tools:layout="@layout/fragment_menu" />
 
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.8"
+            android:layout_weight="0.85"
             tools:layout="@layout/fragment_client_view" />
 
     </LinearLayout>

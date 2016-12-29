@@ -13,6 +13,6 @@
         android:id="@+id/infoText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textAppearance="?attr/textAppearanceListItem"/>
+        style="@style/AppTextNormal"/>
 
 </FrameLayout>

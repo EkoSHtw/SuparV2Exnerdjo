@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
     android:orientation="vertical"
     tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDoNotes">
 
@@ -12,9 +12,8 @@
         android:layout_height="wrap_content"
         android:text="Feste Notizen"
         android:layout_marginTop="10dp"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="15dp"
         android:gravity="center"
+        style="@style/AppTextSmall"
         />
 
     <FrameLayout
@@ -26,7 +25,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/colorAccent"/>
 
     <TextView
@@ -34,9 +34,8 @@
         android:layout_height="wrap_content"
         android:text="Notizen von Gestern"
         android:layout_marginTop="10dp"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="15dp"
         android:gravity="center"
+        style="@style/AppTextSmall"
         />
 
     <FrameLayout

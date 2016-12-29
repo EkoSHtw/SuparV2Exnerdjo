@@ -54,7 +54,8 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.mNameView.setText(mValues.get(position).getTask().getName());
         if(holder.mItem.getTask().isDone()){
             holder.mCheckBox.setChecked(true);
-            holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
+            holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorPrimaryLight));
+            holder.mInfo.clearColorFilter();
         }
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +67,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                     clearSelection();
                     oldSelection = holder.mView;
                     mListener.onListFragmentInteraction(position);
-                    holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorAccent));
+                    holder.mNameView.setTextColor(holder.mView.getResources().getColor(R.color.colorAccent));
                 }
             }
         });
@@ -99,7 +100,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             public void onClick(View v) {
                 clearSelection();
                 oldSelection = holder.mView;
-                holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorAccent));
+                holder.mInfo.setColorFilter(holder.mView.getResources().getColor(R.color.colorAccent));
                 if(null!=infoListener) {
                     infoListener.onInfoClickedListener(position);
                 }
@@ -109,7 +110,8 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
 
     public void clearSelection() {
         if(oldSelection != null) {
-            oldSelection.setBackgroundColor(oldSelection.getResources().getColor(android.R.color.transparent));
+            TextView name = (TextView) oldSelection.findViewById(R.id.name);
+            name.setTextColor(oldSelection.getResources().getColor(R.color.colorPrimaryDark));
             oldSelection.findViewById(R.id.info).setBackgroundColor(oldSelection.getResources().getColor(android.R.color.transparent));
         }
     }
