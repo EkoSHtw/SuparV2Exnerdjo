@@ -32,6 +32,7 @@ public class MenuFragment extends Fragment {
     private TextView basicData;
     private TextView log;
     private TextView vital;
+    private TextView medicine;
     private OnMenuFragmentInteractionListener mListener;
 
     public MenuFragment() {
@@ -74,6 +75,7 @@ public class MenuFragment extends Fragment {
         basicData = (TextView) v.findViewById(R.id.basic_data);
         log = (TextView) v.findViewById(R.id.log);
         vital = (TextView) v.findViewById(R.id.vital_values);
+        medicine = (TextView) v.findViewById(R.id.medication);
 
         todo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +101,13 @@ public class MenuFragment extends Fragment {
                 mListener.onMenuFragmentInteraction(3);
             }
         });
+        medicine.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mListener.onMenuFragmentInteraction(4);
+            }
+        });
+
 
         return v;
     }

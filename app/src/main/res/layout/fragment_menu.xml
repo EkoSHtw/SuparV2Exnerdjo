@@ -44,6 +44,15 @@
         android:textColor="@color/white"
         android:textSize="20dp"
         android:layout_below="@id/log"/>
+    <TextView
+        android:id="@+id/medication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medikation"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:layout_below="@id/vital_values"/>
     <Button
         android:id="@+id/checkout"
         android:layout_width="match_parent"
