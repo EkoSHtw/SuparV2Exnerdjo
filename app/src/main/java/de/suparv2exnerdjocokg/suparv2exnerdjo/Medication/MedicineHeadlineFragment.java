@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyMedicine;
@@ -21,20 +22,31 @@ import java.util.List;
  * <p/>
  * interface.
  */
-public class MedicineListFragment extends Fragment {
+public class MedicineHeadlineFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private List<Medicine> medicineList;
+
+    private TextView substance;
+    private TextView tradeName;
+    private TextView intensity;
+    private TextView form;
+    private TextView morning;
+    private TextView noon;
+    private TextView afternoon;
+    private TextView night;
+    private TextView unit;
+    private TextView information;
+    private TextView reason;
     //private OnListFragmentInteractionListener mListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public MedicineListFragment() {
+    public MedicineHeadlineFragment() {
 
     }
 
@@ -48,54 +60,61 @@ public class MedicineListFragment extends Fragment {
         return fragment;
     }
 
-    public static MedicineListFragment newInstance(String medication){
-        MedicineListFragment fragment = new MedicineListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, 1);
-        args.putString("category", medication);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-            if(getArguments().get("category")!=null){
-                String medicine = getArguments().getString("category");
-                if(medicine.contains("prediscribed")){
-                    medicineList = DummyMedicine.ITEMS_PRESCRIBED;
-                }else if(medicine.contains("temporary")){
-                    medicineList = DummyMedicine.ITEMS_TEMPORARY;
-                }else if(medicine.contains("self")){
-                    medicineList = DummyMedicine.ITEMS_SELF_ORDERED;
-                }else if(medicine.contains("demand")){
-                    medicineList = DummyMedicine.ITEMS_SELF_ORDERED;
-                }
-            }
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_medicinelist_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_medication, container, false);
 
+        TextView[] array = new TextView[11];
 
+        array[0] = substance = (TextView) view.findViewById(R.id.substance);
+        array[1] = tradeName = (TextView) view.findViewById(R.id.trade_name);
+        array[2] = intensity = (TextView) view.findViewById(R.id.intensity);
+        array[3] = form = (TextView) view.findViewById(R.id.form);
+        array[4] = morning = (TextView) view.findViewById(R.id.morning);
+        array[5] = noon = (TextView) view.findViewById(R.id.noon);
+        array[6] = afternoon = (TextView) view.findViewById(R.id.afternoon);
+        array[7] = night = (TextView) view.findViewById(R.id.night);
+        array[8] = unit = (TextView) view.findViewById(R.id.unit);
+        array[9] = information = (TextView) view.findViewById(R.id.information);
+        array[10] = reason = (TextView) view.findViewById(R.id.reason);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyMedicineListRecyclerViewAdapter(medicineList));
-        }
+        substance.setText("Wirkstoff");
+        substance.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+        tradeName.setText("Handelsname");
+        tradeName.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+        intensity.setText("Stärke");
+        intensity.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+        form.setText("Form");
+        form.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+        morning.setText("Morgens");
+        morning.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+        morning.setTextSize(10);
+        noon.setText("Mittags");
+        noon.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+        noon.setTextSize(10);
+        afternoon.setText("Abends");
+        afternoon.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+        afternoon.setTextSize(10);
+        night.setText("Zur Nacht");
+        night.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+        night.setTextSize(10);
+        unit.setText("Einheit");
+        unit.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+        information.setText("Hinweise");
+        information.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+        reason.setText("Grund");
+        reason.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
+
         return view;
     }
 

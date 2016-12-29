@@ -62,6 +62,10 @@ public class MedicineOverview extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_medicine_overview, container, false);
 
+        if(view.findViewById(R.id.headline)!=null){
+            MedicineHeadlineFragment mFrag = new MedicineHeadlineFragment();
+            getChildFragmentManager().beginTransaction().add(R.id.headline, mFrag).commit();
+        }
         if(view.findViewById(R.id.prediscribed_medication)!=null){
             MedicineListFragment mFrag = MedicineListFragment.newInstance("prediscribed");
             getChildFragmentManager().beginTransaction().add(R.id.prediscribed_medication, mFrag).commit();

@@ -12,9 +12,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.2"
         android:text="Wirkstoff"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
     <TextView
@@ -23,9 +21,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.2"
         android:text="Handelsname"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
     <TextView
@@ -34,9 +30,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.1"
         android:text="Stärke"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
     <TextView
@@ -45,9 +39,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.1"
         android:text="Form"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
     <TextView
@@ -56,9 +48,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.05"
         android:text="Morgens"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
     <TextView
@@ -67,9 +57,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.05"
         android:text="Mittags"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
     <TextView
@@ -78,9 +66,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.05"
         android:text="Nachmittags"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
     <TextView
@@ -89,9 +75,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.05"
         android:text="Abends"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
     <TextView
@@ -100,9 +84,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.1"
         android:text="Einheit"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
     <TextView
@@ -111,9 +93,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.2"
         android:text="Hinweise"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
     <TextView
@@ -122,9 +102,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.2"
         android:text="Grund"
-        android:background="@drawable/border"
-        android:textAlignment="center"
-        android:elegantTextHeight="true"
+        style="@style/AppTextTable"
         />
 
 </LinearLayout>
