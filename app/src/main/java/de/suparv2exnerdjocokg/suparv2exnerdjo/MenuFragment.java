@@ -126,7 +126,7 @@ public class MenuFragment extends Fragment {
                 mListener.onMenuFragmentInteraction(4);
 
                 clearSelection();
-                oldSelection = vital;
+                oldSelection = medicine;
                 medicine.setTextColor(getResources().getColor(R.color.colorAccent));
             }
         });
