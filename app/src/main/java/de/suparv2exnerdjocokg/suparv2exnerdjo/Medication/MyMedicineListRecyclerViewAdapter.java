@@ -1,9 +1,11 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Medication;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
@@ -42,6 +44,7 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         holder.tradeName.setText(holder.mItem.getTradeName());
         holder.intensity.setText(holder.mItem.getIntensity());
         holder.form.setText(holder.mItem.getForm());
+
         holder.morning.setText(""+holder.mItem.getMornings());
         holder.noon.setText(""+holder.mItem.getNoon());
         holder.afternoon.setText(""+holder.mItem.getAfternoon());
@@ -49,11 +52,11 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         holder.unit.setText(holder.mItem.getUnit());
         holder.information.setText(holder.mItem.getInformatio());
         holder.reason.setText(holder.mItem.getReason());
-
+/*
         if(position % 2 == 0){
             holder.mView.setBackgroundColor(view.getResources().getColor(R.color.colorPrimaryLight));
         }
-
+*/
         /*
         if(position == (medicine.size()-1)){
             holder.lastStroke.setBackgroundColor(view.getContext().getResources().getColor(R.color.transparent));
@@ -89,6 +92,7 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         public final TextView unit;
         public final TextView information;
         public final TextView reason;
+        public final FrameLayout frame;
         //public final View lastStroke;
         public Medicine mItem;
 
@@ -106,6 +110,7 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
             unit = (TextView) view.findViewById(R.id.unit);
             information = (TextView) view.findViewById(R.id.information);
             reason = (TextView) view.findViewById(R.id.reason);
+            frame = (FrameLayout) view.findViewById(R.id.timeContainer);
             //lastStroke = (View) view.findViewById(R.id.lastStroke);
         }
     }

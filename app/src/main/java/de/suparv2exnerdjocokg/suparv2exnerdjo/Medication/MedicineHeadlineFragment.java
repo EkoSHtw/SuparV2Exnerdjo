@@ -97,7 +97,7 @@ public class MedicineHeadlineFragment extends Fragment {
         afternoon.setText("Abends");;
         afternoon.setTextSize(8);
         night.setText("Zur Nacht");
-        night.setTextSize(10);
+        night.setTextSize(8);
         unit.setText("Einheit");
         information.setText("Hinweise");
         reason.setText("Grund");
