@@ -74,46 +74,33 @@ public class MedicineHeadlineFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_medication, container, false);
 
-        TextView[] array = new TextView[11];
-
-        array[0] = substance = (TextView) view.findViewById(R.id.substance);
-        array[1] = tradeName = (TextView) view.findViewById(R.id.trade_name);
-        array[2] = intensity = (TextView) view.findViewById(R.id.intensity);
-        array[3] = form = (TextView) view.findViewById(R.id.form);
-        array[4] = morning = (TextView) view.findViewById(R.id.morning);
-        array[5] = noon = (TextView) view.findViewById(R.id.noon);
-        array[6] = afternoon = (TextView) view.findViewById(R.id.afternoon);
-        array[7] = night = (TextView) view.findViewById(R.id.night);
-        array[8] = unit = (TextView) view.findViewById(R.id.unit);
-        array[9] = information = (TextView) view.findViewById(R.id.information);
-        array[10] = reason = (TextView) view.findViewById(R.id.reason);
+        substance = (TextView) view.findViewById(R.id.substance);
+        tradeName = (TextView) view.findViewById(R.id.trade_name);
+        intensity = (TextView) view.findViewById(R.id.intensity);
+        form = (TextView) view.findViewById(R.id.form);
+        morning = (TextView) view.findViewById(R.id.morning);
+        noon = (TextView) view.findViewById(R.id.noon);
+        afternoon = (TextView) view.findViewById(R.id.afternoon);
+        night = (TextView) view.findViewById(R.id.night);
+        unit = (TextView) view.findViewById(R.id.unit);
+        information = (TextView) view.findViewById(R.id.information);
+        reason = (TextView) view.findViewById(R.id.reason);
 
         substance.setText("Wirkstoff");
-        substance.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
         tradeName.setText("Handelsname");
-        tradeName.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
         intensity.setText("Stärke");
-        intensity.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
         form.setText("Form");
-        form.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
         morning.setText("Morgens");
-        morning.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
-        morning.setTextSize(10);
+        morning.setTextSize(8);
         noon.setText("Mittags");
-        noon.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
-        noon.setTextSize(10);
-        afternoon.setText("Abends");
-        afternoon.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
-        afternoon.setTextSize(10);
+        noon.setTextSize(8);
+        afternoon.setText("Abends");;
+        afternoon.setTextSize(8);
         night.setText("Zur Nacht");
-        night.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
         night.setTextSize(10);
         unit.setText("Einheit");
-        unit.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
         information.setText("Hinweise");
-        information.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
         reason.setText("Grund");
-        reason.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
 
         return view;
     }

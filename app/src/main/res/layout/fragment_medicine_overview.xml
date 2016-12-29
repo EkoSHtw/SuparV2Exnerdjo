@@ -6,89 +6,72 @@
 
     <FrameLayout
         android:id="@+id/headline"
+        android:background="@color/colorPrimaryLight"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </FrameLayout>
 
-<ScrollView
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent">
-<LinearLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:paddingTop="10dp"
-    android:orientation="vertical"
-    tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview">
-
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <ScrollView
         android:layout_height="wrap_content"
-        android:text="Verordnete Medikation"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        style="@style/AppTextNormal"
-        />
+        android:layout_width="match_parent">
 
-    <FrameLayout
-        android:id="@+id/prediscribed_medication"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:orientation="vertical"
+            tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview">
 
-    </FrameLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="zeitlich befristete Medikation"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        style="@style/AppTextNormal"
-        />
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Verordnete Medikation"
+                style="@style/AppTextHeadline" />
 
-    <FrameLayout
-        android:id="@+id/temporary_medicine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <FrameLayout
+                android:id="@+id/prediscribed_medication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    </FrameLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="zeitlich befristete Medikation"
+                style="@style/AppTextHeadline" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Selbstmediaktion"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        style="@style/AppTextNormal"
-        />
+            <FrameLayout
+                android:id="@+id/temporary_medicine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <FrameLayout
-        android:id="@+id/self_medication"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selbstmediaktion"
+                style="@style/AppTextHeadline" />
 
-    </FrameLayout>
+            <FrameLayout
+                android:id="@+id/self_medication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Selbstmediaktion nach Bedarf"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        style="@style/AppTextNormal"
-        />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selbstmediaktion nach Bedarf"
+                style="@style/AppTextHeadline" />
 
-    <FrameLayout
-        android:id="@+id/self_medication_demand"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-    </FrameLayout>
+            <FrameLayout
+                android:id="@+id/self_medication_demand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-</LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

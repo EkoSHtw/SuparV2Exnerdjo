@@ -21,6 +21,7 @@ import java.util.List;
 public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMedicineListRecyclerViewAdapter.ViewHolder> {
 
     private final List<Medicine> medicine;
+    View view;
     //private final MedicineListFragment.OnListFragmentInteractionListener mListener;
 
     public MyMedicineListRecyclerViewAdapter(List<Medicine> items) {
@@ -30,7 +31,7 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_medication, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_medication, parent, false);
         return new ViewHolder(view);
     }
 
@@ -48,6 +49,15 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         holder.unit.setText(holder.mItem.getUnit());
         holder.information.setText(holder.mItem.getInformatio());
         holder.reason.setText(holder.mItem.getReason());
+
+        if(position % 2 == 0){
+            holder.mView.setBackgroundColor(view.getResources().getColor(R.color.colorPrimaryLight));
+        }
+
+        /*
+        if(position == (medicine.size()-1)){
+            holder.lastStroke.setBackgroundColor(view.getContext().getResources().getColor(R.color.transparent));
+        }*/
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +89,7 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
         public final TextView unit;
         public final TextView information;
         public final TextView reason;
+        //public final View lastStroke;
         public Medicine mItem;
 
         public ViewHolder(View view) {
@@ -95,6 +106,7 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
             unit = (TextView) view.findViewById(R.id.unit);
             information = (TextView) view.findViewById(R.id.information);
             reason = (TextView) view.findViewById(R.id.reason);
+            //lastStroke = (View) view.findViewById(R.id.lastStroke);
         }
     }
 }
