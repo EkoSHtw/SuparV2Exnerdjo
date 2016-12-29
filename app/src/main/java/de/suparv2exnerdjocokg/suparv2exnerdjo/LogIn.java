@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
+
 public class LogIn extends AppCompatActivity {
 
     TextView description;
@@ -35,8 +37,8 @@ public class LogIn extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
-
+                Intent intent = new Intent(v.getContext(), Route.class);
+                startActivity(intent);
             }
         });
     }

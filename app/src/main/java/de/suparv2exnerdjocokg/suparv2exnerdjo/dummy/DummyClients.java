@@ -20,10 +20,12 @@ public class DummyClients {
 
     static {
         ITEMS.add(createDummyClient());
+        ArrayList<PhoneNumber> phoneNumbers = new ArrayList<>();
+        phoneNumbers.add(new PhoneNumber("Holger", "01786857658"));
+        ITEMS.add(new Client(1, R.drawable.woman_image, "Emma", "Liese", "11.01.1960", null, null, null, "Munter, fröhlich", 3, "Heinestraße 8, 16845 Obermauern", phoneNumbers));
     }
 
     private static Client createDummyClient() {
-
         List<ClientMedicine> medicineList = new ArrayList<ClientMedicine>();
         medicineList=null;
         PhoneNumber num1 = new PhoneNumber("Arnold Stein","015123456");

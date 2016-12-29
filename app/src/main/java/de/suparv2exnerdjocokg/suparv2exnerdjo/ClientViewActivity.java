@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 
 public class ClientViewActivity extends AppCompatActivity implements MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
 
@@ -28,6 +30,9 @@ public class ClientViewActivity extends AppCompatActivity implements MenuFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_view);
+
+        Intent intent = getIntent();
+        client = (Client) DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
 
         if (findViewById(R.id.menu)!=null){
             MenuFragment firstFragment = new MenuFragment();
