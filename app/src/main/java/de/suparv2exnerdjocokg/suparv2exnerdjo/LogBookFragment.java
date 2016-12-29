@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +71,11 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 //        editText = (EditText) view.findViewById(R.id.logbook_search_bar);
 //        editText.setText("lalalla");
 
+        if(view.findViewById(R.id.header)!=null){
+            LogBookHeadline lHead = new LogBookHeadline();
+            getChildFragmentManager().beginTransaction().add(R.id.header, lHead).commit();
+        }
+
         Spinner spinner = (Spinner) view.findViewById(R.id.search_bar_spinner);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.search_bar_choices, android.R.layout.simple_spinner_item);
@@ -78,6 +83,8 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(this);
+
+
 
 
 //        View view = (RecyclerView) inflater.inflate(R.layout.fragment_logbook_list, container, false);
