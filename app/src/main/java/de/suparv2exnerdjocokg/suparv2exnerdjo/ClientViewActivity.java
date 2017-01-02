@@ -178,6 +178,9 @@ public class ClientViewActivity extends AppCompatActivity implements MenuFragmen
                 trans.commit();
 
                 break;
+            case 5:
+                Intent logOut = new Intent(this, LogIn.class);
+                startActivity(logOut);
         }
     }
 }

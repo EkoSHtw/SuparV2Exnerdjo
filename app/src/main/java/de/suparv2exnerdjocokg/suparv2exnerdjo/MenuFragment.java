@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class MenuFragment extends Fragment {
     private TextView vital;
     private TextView medicine;
     private TextView oldSelection;
+    private Button logOut;
     private OnMenuFragmentInteractionListener mListener;
 
     public MenuFragment() {
@@ -87,6 +89,7 @@ public class MenuFragment extends Fragment {
         log = (TextView) v.findViewById(R.id.log);
         vital = (TextView) v.findViewById(R.id.vital_values);
         medicine = (TextView) v.findViewById(R.id.medication);
+        logOut = (Button) v.findViewById(R.id.checkout);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +153,13 @@ public class MenuFragment extends Fragment {
                 clearSelection();
                 oldSelection = medicine;
                 medicine.setTextColor(getResources().getColor(R.color.colorAccent));
+            }
+        });
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onMenuFragmentInteraction(5);
             }
         });
 
