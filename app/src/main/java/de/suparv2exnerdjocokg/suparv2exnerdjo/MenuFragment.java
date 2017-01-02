@@ -30,6 +30,7 @@ public class MenuFragment extends Fragment {
     private String mParam2;
 
     private ImageButton back;
+    private TextView name;
     private TextView todo;
     private TextView basicData;
     private TextView log;
@@ -74,8 +75,11 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        back = (ImageButton) v.findViewById(R.id.backToClients);
+        back = (ImageButton) v.findViewById(R.id.back_to_clients);
         back.setColorFilter(getResources().getColor(R.color.colorAccent));
+        name = (TextView) v.findViewById(R.id.client_name);
+        ClientViewActivity baseActivitiy = (ClientViewActivity) getActivity();
+        name.setText(baseActivitiy.client.getFirstName()+" "+baseActivitiy.client.getLastName());
         todo = (TextView) v.findViewById(R.id.client_view);
         todo.setTextColor(getResources().getColor(R.color.colorAccent));
         oldSelection = todo;
@@ -85,6 +89,13 @@ public class MenuFragment extends Fragment {
         medicine = (TextView) v.findViewById(R.id.medication);
 
         back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onMenuFragmentInteraction(-1);
+            }
+        });
+
+        name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onMenuFragmentInteraction(-1);

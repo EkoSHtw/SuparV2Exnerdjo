@@ -19,7 +19,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 
 public class ClientViewActivity extends AppCompatActivity implements MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
 
-    private Client client;
+    public Client client;
 
     private FloatingActionButton fab;
     private PopupWindow popupWindow;

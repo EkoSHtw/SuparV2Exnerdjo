@@ -11,7 +11,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ImageButton
-        android:id="@+id/backToClients"
+        android:id="@+id/back_to_clients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
@@ -20,50 +20,50 @@
         />
 
     <TextView
+        android:id="@+id/client_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/back_to_clients"
+        style="@style/AppTextMenu"
+        android:layout_marginTop="0dp"
+        />
+
+
+    <TextView
         android:id="@+id/client_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aufgaben"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/backToClients"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
+        android:layout_below="@id/back_to_clients"
+        style="@style/AppTextMenu"
         />
     <TextView
         android:id="@+id/basic_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/basic_data"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
+        style="@style/AppTextMenu"
         android:layout_below="@id/client_view"/>
     <TextView
         android:id="@+id/log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logbuch"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
+        style="@style/AppTextMenu"
         android:layout_below="@id/basic_data"/>
     <TextView
         android:id="@+id/vital_values"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/vital_value"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
+        style="@style/AppTextMenu"
         android:layout_below="@id/log"/>
     <TextView
         android:id="@+id/medication"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Medikation"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
+        style="@style/AppTextMenu"
         android:layout_below="@id/vital_values"/>
     <Button
         android:id="@+id/checkout"
