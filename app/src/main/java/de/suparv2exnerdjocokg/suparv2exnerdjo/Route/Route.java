@@ -1,8 +1,11 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Route;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
@@ -26,5 +29,13 @@ public class Route extends AppCompatActivity implements ClientListFragment.OnLis
         Intent intent = new Intent(this, ClientViewActivity.class);
         intent.putExtra("CLIENT", position);
         startActivity(intent);
+    }
+
+    @Override
+    public void onRouteInteraction(String address){
+        Uri mapsLink = Uri.parse("google.navigation:q="+address);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, mapsLink);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 }

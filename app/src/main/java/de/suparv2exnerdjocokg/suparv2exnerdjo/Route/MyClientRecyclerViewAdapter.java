@@ -1,5 +1,7 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Route;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +60,8 @@ public class MyClientRecyclerViewAdapter extends RecyclerView.Adapter<MyClientRe
         holder.mName.setText(holder.mClient.getFirstName()+" "+holder.mClient.getLastName());
         holder.mAddress.setText(holder.mClient.getAdress());
         holder.mImage.setImageDrawable(holder.mView.getResources().getDrawable(holder.mClient.getImagePath()));
+        holder.routeButton.setColorFilter(holder.mView.getResources().getColor(R.color.colorPrimary));
+        holder.arrow.setColorFilter(holder.mView.getResources().getColor(R.color.colorPrimary));
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +74,7 @@ public class MyClientRecyclerViewAdapter extends RecyclerView.Adapter<MyClientRe
         holder.routeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Link to Google
+                mListener.onRouteInteraction(holder.mClient.getAdress());
             }
         });
     }
@@ -86,7 +90,7 @@ public class MyClientRecyclerViewAdapter extends RecyclerView.Adapter<MyClientRe
         public final TextView mName;
         public final TextView mAddress;
         public final ImageButton routeButton;
-        public final ImageView arrow;
+        public final ImageButton arrow;
         public Client mClient;
 
         public ViewHolder(View view) {
@@ -96,7 +100,7 @@ public class MyClientRecyclerViewAdapter extends RecyclerView.Adapter<MyClientRe
             mName = (TextView) view.findViewById(R.id.name);
             mAddress = (TextView) view.findViewById(R.id.address);
             routeButton = (ImageButton) view.findViewById(R.id.routeButton);
-            arrow = (ImageView) view.findViewById(R.id.arrow);
+            arrow = (ImageButton) view.findViewById(R.id.arrow);
         }
     }
 }

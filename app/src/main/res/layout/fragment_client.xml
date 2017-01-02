@@ -2,46 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
+    android:background="@color/colorPrimaryLight"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp">
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_weight="0.2"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        style="@style/AppTextClientList"
         />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/AppTextHeadline"
         android:layout_weight="0.2"
+        style="@style/AppTextClientList"
+        android:textSize="20dp"
+        android:textStyle="bold"
         />
 
     <TextView
         android:id="@+id/address"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/AppTextNormal"
+        style="@style/AppTextClientList"
         android:layout_weight="0.2"
+        android:textSize="16dp"
         />
 
     <ImageButton
         android:id="@+id/routeButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/ic_dialog_map"
+        android:background="@color/transparent"
         android:layout_weight="0.2"
+        style="@style/AppTextClientList"
         />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/arrow"
-        app:srcCompat="@android:drawable/ic_menu_send"
+        app:srcCompat="@drawable/arrow"
+        android:background="@color/transparent"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_weight="0.2"
+        style="@style/AppTextClientList"
         />
+
 
 </LinearLayout>
