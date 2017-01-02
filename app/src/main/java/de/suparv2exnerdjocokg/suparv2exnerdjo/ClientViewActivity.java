@@ -12,6 +12,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
@@ -130,6 +131,10 @@ public class ClientViewActivity extends AppCompatActivity implements MenuFragmen
     @Override
     public void onMenuFragmentInteraction(int position) {
         switch(position) {
+            case -1:
+                Intent route = new Intent(this, Route.class);
+                startActivity(route);
+                break;
             case 0:
                 ClientView clientFragment = new ClientView();
 

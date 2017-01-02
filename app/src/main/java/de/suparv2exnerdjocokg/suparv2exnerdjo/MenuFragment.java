@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
@@ -28,6 +29,7 @@ public class MenuFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private ImageButton back;
     private TextView todo;
     private TextView basicData;
     private TextView log;
@@ -72,6 +74,8 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_menu, container, false);
 
+        back = (ImageButton) v.findViewById(R.id.backToClients);
+        back.setColorFilter(getResources().getColor(R.color.colorAccent));
         todo = (TextView) v.findViewById(R.id.client_view);
         todo.setTextColor(getResources().getColor(R.color.colorAccent));
         oldSelection = todo;
@@ -79,6 +83,13 @@ public class MenuFragment extends Fragment {
         log = (TextView) v.findViewById(R.id.log);
         vital = (TextView) v.findViewById(R.id.vital_values);
         medicine = (TextView) v.findViewById(R.id.medication);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onMenuFragmentInteraction(-1);
+            }
+        });
 
         todo.setOnClickListener(new View.OnClickListener() {
             @Override
