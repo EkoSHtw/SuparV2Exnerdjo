@@ -8,12 +8,14 @@ public class PhoneNumber {
 
     private String name;
     private String number;
+    private String relation;
 
 
 
-    public PhoneNumber(String name, String number){
+    public PhoneNumber(String name, String number, String relation){
         this.name= name;
         this.number = number;
+        this.relation = relation;
 
     }
     public String getName() {
@@ -32,4 +34,11 @@ public class PhoneNumber {
         this.number = number;
     }
 
+    public String getRelation() {
+        return relation;
+    }
+
+    public void setRelation(String relation) {
+        this.relation = relation;
+    }
 }

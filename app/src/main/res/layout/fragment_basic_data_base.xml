@@ -13,79 +13,178 @@
         android:orientation="vertical"
         android:layout_weight="0.5">
 
+            <TextView
+                android:id="@+id/clientname"
+                android:layout_toRightOf="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                style="@style/AppTextHeadline"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="10dp"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/clientname"
-            android:layout_toRightOf="@+id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            style="@style/AppTextNormal"
-            />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:text="Adresse: "
+                    style="@style/AppTextHeadline"
+                    />
 
-        <TextView
-            android:id="@+id/adress"
-            android:layout_below="@+id/clientname"
-            android:layout_toRightOf="@+id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            style="@style/AppTextNormal"
-            />
+                <TextView
+                    android:id="@+id/adress"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTextBasicData"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:text="Geburtsdatum: "
+                    style="@style/AppTextHeadline"
+                    />
 
         <TextView
             android:id="@+id/gebdat"
-            android:layout_below="@+id/image"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            style="@style/AppTextNormal"
+            android:layout_marginLeft="10dp"
+            style="@style/AppTextBasicData"
             />
 
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:text="Pflegestufe: "
+                    style="@style/AppTextHeadline"
+                    />
 
         <TextView
             android:id="@+id/care_level"
-            android:layout_below="@+id/gebdat"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            style="@style/AppTextNormal"
+            android:layout_marginLeft="10dp"
+            style="@style/AppTextBasicData"
             />
 
-        <ListView
-            android:id="@+id/telnumbers"
-            android:layout_below="@+id/care_level"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            />
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:text="Telefonnummern:"
+                style="@style/AppTextHeadline"
+                android:paddingBottom="20dp"
+                />
+
+            <ListView
+                android:id="@+id/telnumbers"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                />
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:text="Weitere Infos:"
+                style="@style/AppTextHeadline"
+                />
 
         <TextView
             android:id="@+id/info"
-            android:layout_below="@+id/telnumbers"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            style="@style/AppTextNormal"
+            style="@style/AppTextBasicData"
             />
+
+                </LinearLayout>
         </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/document_headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dokumente"
+            style="@style/AppTextMenu"
+            android:textColor="@color/colorAccent"
+            />
 
         <ListView
-            android:layout_weight="0.5"
             android:layout_gravity="end"
             android:id="@+id/document_list"
             android:layout_below="@+id/care_level"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="50dp"
+            />
+
+    </LinearLayout>
+
+
 
 
 

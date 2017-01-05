@@ -126,6 +126,7 @@ public class TableGenerator {
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
+            tvCol.setTextAppearance(tvCol.getContext(), R.style.AppTextNormal);
             tr.addView(tvCol);
         }
 

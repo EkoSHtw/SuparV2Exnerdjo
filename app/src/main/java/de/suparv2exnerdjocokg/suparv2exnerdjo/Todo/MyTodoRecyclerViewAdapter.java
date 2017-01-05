@@ -30,6 +30,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     private final TodoFragment.OnListFragmentInteractionListener mListener;
     private final TodoFragment.OnInfoClickedInteractionListener infoListener;
     private View oldSelection = null;
+    private ImageButton oldInfoSelection = null;
 
 
     public MyTodoRecyclerViewAdapter(List<ToDo> items, TodoFragment.OnListFragmentInteractionListener listener, TodoFragment.OnInfoClickedInteractionListener newInfoListener) {
@@ -98,8 +99,8 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.mInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearSelection();
-                oldSelection = holder.mView;
+                clearInfoSelection();
+                oldInfoSelection = holder.mInfo;
                 holder.mInfo.setColorFilter(holder.mView.getResources().getColor(R.color.colorAccent));
                 if(null!=infoListener) {
                     infoListener.onInfoClickedListener(position);
@@ -113,6 +114,13 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             TextView name = (TextView) oldSelection.findViewById(R.id.name);
             name.setTextColor(oldSelection.getResources().getColor(R.color.colorPrimaryDark));
             oldSelection.findViewById(R.id.info).setBackgroundColor(oldSelection.getResources().getColor(android.R.color.transparent));
+        }
+    }
+
+    public void clearInfoSelection() {
+        if(oldInfoSelection != null){
+            ImageButton image = oldInfoSelection;
+            image.clearColorFilter();
         }
     }
 

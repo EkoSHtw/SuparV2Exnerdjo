@@ -1,10 +1,14 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +30,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragme
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
-public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener {
+public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
     public Client client;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -210,5 +214,17 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
         DummyNotes.sortList();
         //update fragments
         // buggy, neue notizen nicht in reihenfolge
+    }
+
+    @Override
+    public void onClickCall(String number) {
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:"+number));
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        startActivity(callIntent);
     }
 }
