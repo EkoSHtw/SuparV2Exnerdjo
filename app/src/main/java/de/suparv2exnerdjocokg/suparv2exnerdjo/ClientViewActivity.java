@@ -28,7 +28,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener {
 
-    private Client client;
+    public Client client;
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
 

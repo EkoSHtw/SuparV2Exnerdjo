@@ -27,9 +27,7 @@
         <uses-permission android:name="android.permission.READ_CONTACTS" />
         <uses-permission android:name="android.permission.Call_Number" />
 
-        <activity
-            android:name=".LogIn"
-            android:screenOrientation="landscape" />
+
         <activity android:name=".DocumentTools.CallCamera"></activity>
         <activity
             android:name=".ClientViewActivity"
