@@ -3,6 +3,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.dummy;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -49,11 +50,20 @@ public class DummyNotes {
         ITEMS.add(first);
         ITEMS.add(second);
         ITEMS.add(third);
+
+//        ITEMS.sort();
+//        Collections.sort(ITEMS);
+        Collections.sort(ITEMS,Collections.<Note>reverseOrder());// oder sort und dann Collections.reverse()
+
     }
 
     public static long getYesterday() {
         GregorianCalendar yesterday = new GregorianCalendar();
         yesterday.add(Calendar.DATE, -1);
         return yesterday.getTime().getTime();
+    }
+
+    public static void sortList(){
+        Collections.sort(ITEMS,Collections.<Note>reverseOrder());
     }
 }

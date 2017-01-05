@@ -1,6 +1,5 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,15 +24,9 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.list;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
+
 public class LogBookFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-//    private EditText editText;
 
     private ArrayList<Note> notes;
     private RecyclerView mRecyclerView;
@@ -45,31 +38,11 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
 //    private OnListFragmentInteractionListener mListener;
 
-
-    //Das ist in eine ganz lange und nötige Beschreibung, die ich nicht so wollte, aber mal zum Testen brauche.
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        Log.println(Log.INFO,"m", "HALLO");
-//        View searchBar = inflater.inflate(R.layout.logbook_searchbar,container,false);
         View view = inflater.inflate(R.layout.fragment_logbook, container, false);
-        // Set the adapter
-//        if (view instanceof RecyclerView) {
-//            Context context = view.getContext();
-//            RecyclerView recyclerView = (RecyclerView) view;
-//            if (mColumnCount <= 1) {
-//                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//            } else {
-//                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-//            }
-//            recyclerView.setAdapter(new MyLogBookRecyclerViewAdapter(this.getContext(),this.notes));
-//        }
-
-//        editText = (EditText) view.findViewById(R.id.logbook_search_bar);
-//        editText.setText("lalalla");
 
         if(view.findViewById(R.id.header)!=null){
             LogBookHeadline lHead = new LogBookHeadline();
@@ -112,7 +85,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
             }
         });
         mRecyclerView.setAdapter(recyclerViewAdapter);
-
 
         return view;
     }
@@ -157,49 +129,15 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-//        Log.println(Log.INFO, ",", "WHAAUU");
-    }
-
-
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnListFragmentInteractionListener) {
-//            mListener = (OnListFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnListFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
+    public void onNothingSelected(AdapterView<?> parent) { }
 
     private void prepareList() {
 
 
 
         //notes = new ArrayList<>();
+//        notes = (ArrayList) DummyNotes.ITEMS;
         notes = (ArrayList) DummyNotes.ITEMS;
-    }
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(Uri uri);
+//        Collections.reverse(notes);
     }
 }
