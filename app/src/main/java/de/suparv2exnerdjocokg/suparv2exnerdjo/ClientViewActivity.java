@@ -20,6 +20,8 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener{
 
     private Client client;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
 
     private FloatingActionButton fab;
     private PopupWindow popupWindow;
@@ -178,5 +180,10 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
             trans.commit();
         }
     }
-
+    public void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
 }

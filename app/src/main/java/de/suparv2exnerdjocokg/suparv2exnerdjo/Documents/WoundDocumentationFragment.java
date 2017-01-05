@@ -124,7 +124,7 @@ public class WoundDocumentationFragment extends Fragment {
                 mTable.addRow();
             }
         });
-        /*
+/*
         for (int i = 0; i < mTable.getIdCount(); i++) {
             View view = mTable.getTable().getChildAt(i);
             if (view instanceof TableRowExpand) {
@@ -141,8 +141,7 @@ public class WoundDocumentationFragment extends Fragment {
                     }
                 });
             }
-        }
-*/
+        }*/
             saveIt = (Button) view.findViewById(R.id.saveStuff);
             saveIt.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -65,7 +65,7 @@ public class TableGenerator {
         tr.setLayoutParams(rowParams);
 
         for (int iCol = 0; iCol < headLenght; iCol++) {
-           /* if(iCol == headLenght-1){
+            if(iCol == headLenght-1){
                 final PictureButton pb = new PictureButton(mContext);
                 pb.setGravity(Gravity.CENTER | Gravity.CENTER);
                 pb.setPadding(3, 3, 3, 3);
@@ -88,7 +88,7 @@ public class TableGenerator {
                     }
                 });
                 tr.addView(pb);
-            }*/
+            }else {
             EditText tvCol = new EditText(mContext);
             tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
@@ -99,6 +99,7 @@ public class TableGenerator {
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
             tr.addView(tvCol);
+        }
         }
 
         mTable.addView(tr);
