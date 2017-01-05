@@ -3,6 +3,10 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Intent;
+import android.provider.MediaStore;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
@@ -16,12 +20,17 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
+import java.io.File;
+
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
-public class ClientViewActivity extends AppCompatActivity implements MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener {
+public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener {
 
-    public Client client;
+    private Client client;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
 
     private FloatingActionButton fab;
     private Context context;
@@ -170,6 +179,27 @@ public class ClientViewActivity extends AppCompatActivity implements MenuFragmen
             case 5:
                 Intent logOut = new Intent(this, LogIn.class);
                 startActivity(logOut);
+        }
+    }
+
+    public void onDocumentSelected(File position) {
+        // The user selected the headline of an article from the HeadlinesFragment
+        // Do something here to display that article
+        if(position.getName() == "Wunddokumentation") {
+            WoundDocumentationFragment wFrag = new WoundDocumentationFragment();
+
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+            trans.replace(R.id.fragment_container, wFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
+        }
+    }
+    public void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
 

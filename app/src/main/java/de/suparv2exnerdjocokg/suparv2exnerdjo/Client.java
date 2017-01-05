@@ -3,6 +3,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import java.io.File;
 import java.io.Serializable;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -34,18 +35,23 @@ public class Client implements Serializable {
   private ArrayList<ToDo> toDoList;
 
   private ArrayList<PhoneNumber> phoneNumber;
+  private ArrayList<File> documentation;
 
-  public ArrayList<Fragment> getDocumentation() {
+  public ArrayList<File> getDocumentation() {
     return documentation;
   }
 
 
+  public void setDocumentation(ArrayList<File> f){
+    this.documentation = f;
+  }
 
-  public void addDocumentation(Fragment documentation) {
+
+  public void addDocumentation(File documentation) {
     this.documentation.add(documentation);
   }
 
-  private ArrayList<Fragment> documentation;
+
 
   public int getImagePath() {
     return imagePath;
@@ -81,6 +87,17 @@ public class Client implements Serializable {
     this.phoneNumber = phoneNumber;
     String a = "" + phoneNumber.size();
     Log.println(Log.INFO, "test",a);
+  }
+
+
+  public int docsListLenghts(){
+    int count =0;
+
+    for (File e : documentation
+         ) {
+      count++;
+    }
+    return count;
   }
   public int getCarelevel() {
     return carelevel;
