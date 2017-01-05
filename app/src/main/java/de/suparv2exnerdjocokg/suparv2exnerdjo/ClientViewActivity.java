@@ -2,6 +2,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
@@ -10,12 +11,13 @@ import android.view.View;
 
 import java.sql.Timestamp;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 public class ClientViewActivity extends AppCompatActivity implements MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener {
 
@@ -117,7 +119,6 @@ public class ClientViewActivity extends AppCompatActivity implements MenuFragmen
 
     @Override
     public void onMenuFragmentInteraction(int position) {
-        switch (position) {
         switch(position) {
             case -1:
                 Intent route = new Intent(this, Route.class);
