@@ -17,7 +17,6 @@ public class DialogAddNote extends Dialog implements View.OnClickListener {
     private Button confirm;
     private Button cancel;
 
-    private Dialog dialog;
 
 
     public DialogAddNote(Activity activity) {

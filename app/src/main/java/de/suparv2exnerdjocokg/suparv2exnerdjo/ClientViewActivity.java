@@ -44,8 +44,10 @@ public class ClientViewActivity extends AppCompatActivity implements MenuFragmen
 
             @Override
             public void onClick(View v) {
-                DialogAddNote dialogAddNote = new DialogAddNote(activity);
-                dialogAddNote.show();
+                DialogAddNewNoteOrTask dialogAddNewNoteOrTask = new DialogAddNewNoteOrTask(activity);
+                dialogAddNewNoteOrTask.show();
+//                DialogAddNote dialogAddNote = new DialogAddNote(activity);
+//                dialogAddNote.show();
             }
         });
     }
