@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.view.Gravity;
@@ -18,6 +20,9 @@ import android.widget.TextView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
+import static android.app.Activity.RESULT_OK;
+import static de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton.REQUEST_IMAGE_CAPTURE;
+
 /**
  * Created by Eko on 08.12.2016.
  */
@@ -28,6 +33,7 @@ public class TableGenerator {
     private FrameLayout mFrame;
     private TableLayout.LayoutParams rowParams = new TableLayout.LayoutParams();
     private TableRow.LayoutParams colParams = new TableRow.LayoutParams();
+    private CallCameraListener camCall;
 
     public int getHeadLenght() {
         return headLenght;
@@ -81,10 +87,13 @@ public class TableGenerator {
                 pb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        Intent intent = new Intent(mContext,CallCamera.class)
-                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
+                        if(pb.getPicPath() == null)
+                        camCall.dispatchTakePictureIntent();
+                        else{
+                            Intent intent = new Intent(mContext,
+                                    ImageActivity.class);
+                            mContext.startActivity(intent);
+                        }
                     }
                 });
                 tr.addView(pb);
@@ -148,5 +157,11 @@ public class TableGenerator {
     public TableLayout getTable() {
         return mTable;
     }
+    public interface CallCameraListener{
+        public void dispatchTakePictureIntent();
+    }
+
 
 }
+
+

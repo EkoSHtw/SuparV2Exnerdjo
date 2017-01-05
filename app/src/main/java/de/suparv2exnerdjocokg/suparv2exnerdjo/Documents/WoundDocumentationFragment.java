@@ -42,6 +42,8 @@ public class WoundDocumentationFragment extends Fragment {
     private Button saveIt;
     private View view;
     private Client c;
+    private File overwrite;
+
 
 
 
@@ -56,6 +58,7 @@ public class WoundDocumentationFragment extends Fragment {
         docs.add(f);
         c.setDocumentation(docs);
         showTable();
+
         return  view;
     }
 
@@ -73,6 +76,8 @@ public class WoundDocumentationFragment extends Fragment {
         mTable.addHead(firstRow);
         for (int i =0; i < c.docsListLenghts(); i++){
             if(c.getDocumentation().get(i).getName() == getString(R.string.wounddocname)){
+
+                this.overwrite =  c.getDocumentation().get(i);
                 String ret = "";
                 int rowCount =1;
                 int fillCount = 0;
@@ -89,9 +94,15 @@ public class WoundDocumentationFragment extends Fragment {
                                     View view = mTable.getTable().getChildAt(rowCount);
                                     if (view instanceof TableRowExpand) {
                                         TableRowExpand t = (TableRowExpand) view;
-                                        EditText firstTextView = (EditText) t.getChildAt(fillCount);
                                         String s = receiveString.replace("/", "");
-                                        firstTextView.setText(s);
+                                        if (fillCount == mTable.getHeadLenght()) {
+                                            PictureButton pb = (PictureButton) t.getChildAt(fillCount);
+                                            pb.setPicPath(s);
+                                        }else {
+                                            EditText firstTextView = (EditText) t.getChildAt(fillCount);
+                                            firstTextView.setText(s);
+                                        }
+
                                     if (fillCount == mTable.getHeadLenght()) {
                                         mTable.addRow();
                                         fillCount =0;
@@ -146,11 +157,9 @@ public class WoundDocumentationFragment extends Fragment {
             saveIt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    String fileName = "Wounddokumentation";
                     try {
 
-                        FileOutputStream fops = getContext().openFileOutput(fileName, Context.MODE_PRIVATE);
+                        FileOutputStream fops = new FileOutputStream(overwrite);
                         for (int i = 1; i < mTable.getIdCount(); i++) {
                             View view = mTable.getTable().getChildAt(i);
                             if (view instanceof TableRowExpand) {
@@ -158,9 +167,13 @@ public class WoundDocumentationFragment extends Fragment {
                                 String textLine = "" + i;
 
                                 for (int j = 0; j <= t.getChildCount(); j++) {
-                                    EditText firstTextView = (EditText) t.getChildAt(j);
+                                    if(j == mTable.getHeadLenght()){
+                                        PictureButton pButton = (PictureButton) t.getChildAt(j);
+                                        textLine += " "  + pButton.getPicPath() + "/" + "\n";
+                                    }
+                                    EditText text= (EditText) t.getChildAt(j);
                                     //if(firstTextView == null) break;
-                                    textLine += " "  + firstTextView.getText().toString() + "/" + "\n";
+                                    textLine += " "  + text.getText().toString() + "/" + "\n";
 
                                 }
                                 fops.write(textLine.getBytes());

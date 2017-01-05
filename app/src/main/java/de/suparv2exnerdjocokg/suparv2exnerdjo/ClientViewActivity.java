@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.view.View;
 
 import java.sql.Timestamp;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.ImageActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
@@ -25,6 +28,8 @@ import java.io.File;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
+
+import static de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton.REQUEST_IMAGE_CAPTURE;
 
 public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener {
 
@@ -198,10 +203,33 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
     }
     public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            startActivityForResult(takePictureIntent, 1);
         }
     }
+
+    public void showImage(String s){
+        Intent intent = new Intent (this, ImageActivity.class);
+        intent.putExtra(s,0);
+        startActivity(intent);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Image imageBitmap = (Image) extras.get("data");
+            Bundle bundle = new Bundle();
+            String myMessage = "Stackoverflow is cool!";
+            bundle.putString("message", myMessage );
+            WoundDocumentationFragment fragInfo = new WoundDocumentationFragment();
+            fragInfo.setArguments(bundle);
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+            trans.commit();
+
+        }
+    }
+
 
     public void addNote(String content, String tag) {
 //        EditText editText = (EditText)findViewById(R.id.dialog_input_text);
@@ -211,4 +239,6 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
         //update fragments
         // buggy, neue notizen nicht in reihenfolge
     }
+
+
 }

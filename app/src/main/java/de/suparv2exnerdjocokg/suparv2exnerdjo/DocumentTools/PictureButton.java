@@ -17,11 +17,8 @@ public class PictureButton extends Button {
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
-    private boolean addedpicAdded = false;
+
     private File image;
-
-
-
     private String picPath;
     private Context context;
 
@@ -29,13 +26,7 @@ public class PictureButton extends Button {
         super(context);
         this.context = context;
     }
-    public boolean isPicAdded() {
-        return addedpicAdded;
-    }
 
-    public void setpicAdded(boolean addedpicAdded) {
-        this.addedpicAdded = addedpicAdded;
-    }
     public File getImage() {
         return image;
     }
@@ -44,12 +35,29 @@ public class PictureButton extends Button {
         this.image = image;
         this.picPath = image.getPath();
     }
+
     public String getPicPath() {
         return picPath;
     }
 
     public void setPicPath(String picPath) {
         this.picPath = picPath;
+    }
+
+    public void openButten(){
+        if (picPath == null){
+            Intent intent = new Intent(context,CallCamera.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(context,ImageActivity.class)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setAction(picPath);
+
+            intent.putExtra("PICTURE_ID", picPath);
+            context.startActivity(intent);
+        }
     }
 
 }

@@ -21,7 +21,6 @@ public class CallCamera extends AppCompatActivity {
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, 1);
         }
-
     }
 
 }
