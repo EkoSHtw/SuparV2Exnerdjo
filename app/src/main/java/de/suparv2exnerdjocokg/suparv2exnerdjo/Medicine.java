@@ -23,19 +23,19 @@ public class Medicine {
 
   public int getUsage() {
     return usage;
-  };
+  }
 
-  public String getUsage(Context context){return context.getString(getUsage());};
+  public String getUsage(Context context){return context.getString(getUsage());}
 
   public void setUsage(int usage) {
     this.usage = usage;
-  };
+  }
 
   public int getSideeffects() {
     return sideeffects;
-  };
+  }
 
-    public String getSideeffects(Context context){return context.getString(getSideeffects());};
+  public String getSideeffects(Context context){return context.getString(getSideeffects());}
 
   public void setSideeffects(int sideeffects) {
     this.sideeffects = sideeffects;
@@ -45,7 +45,7 @@ public class Medicine {
     return manufacturer;
   }
 
-    public String getManufacturer(Context context){return context.getString(getManufacturer());};
+    public String getManufacturer(Context context){return context.getString(getManufacturer());}
 
   public void setManufactorint(int manufacturer) {this.manufacturer = manufacturer;}
 
@@ -53,7 +53,7 @@ public class Medicine {
     return ingredients;
   }
 
-    public String getIngredients(Context context){return context.getString(getIngredients());};
+    public String getIngredients(Context context){return context.getString(getIngredients());}
 
   public void setIngredients(int ingredients) {
     this.ingredients = ingredients;

@@ -174,7 +174,6 @@ public class WoundDocumentationFragment extends Fragment {
                     }
                 }
 
-                ;
             });
         }
 

@@ -43,7 +43,7 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
         setContentView(R.layout.activity_client_view);
 
         Intent intent = getIntent();
-        client = (Client) DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
+        client = DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
 
         context = this;
 

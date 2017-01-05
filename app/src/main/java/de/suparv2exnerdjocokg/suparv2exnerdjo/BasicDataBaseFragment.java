@@ -122,7 +122,7 @@ public class BasicDataBaseFragment extends Fragment {
     }
 
     public interface OnDocumentSelectedListener {
-        public void onDocumentSelected(File position);
+        void onDocumentSelected(File position);
     }
 
     @Override
