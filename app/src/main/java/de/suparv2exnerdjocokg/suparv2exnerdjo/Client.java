@@ -85,6 +85,17 @@ public class Client implements Serializable {
     String a = "" + phoneNumber.size();
     Log.println(Log.INFO, "test",a);
   }
+
+
+  public int docsListLenghts(){
+    int count =0;
+
+    for (File e : documentation
+         ) {
+      count++;
+    }
+    return count;
+  }
   public int getCarelevel() {
     return carelevel;
   }

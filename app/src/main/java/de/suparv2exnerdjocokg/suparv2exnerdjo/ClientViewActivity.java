@@ -178,10 +178,5 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
             trans.commit();
         }
     }
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, 1);
-        }
-    }
+
 }

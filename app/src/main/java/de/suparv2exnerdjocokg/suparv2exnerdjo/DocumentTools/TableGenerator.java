@@ -1,8 +1,11 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 /**
@@ -24,6 +28,11 @@ public class TableGenerator {
     private FrameLayout mFrame;
     private TableLayout.LayoutParams rowParams = new TableLayout.LayoutParams();
     private TableRow.LayoutParams colParams = new TableRow.LayoutParams();
+
+    public int getHeadLenght() {
+        return headLenght;
+    }
+
     private int headLenght;
 
     public int getIdCount() {
@@ -56,7 +65,7 @@ public class TableGenerator {
         tr.setLayoutParams(rowParams);
 
         for (int iCol = 0; iCol < headLenght; iCol++) {
-            if(iCol == headLenght-1){
+           /* if(iCol == headLenght-1){
                 final PictureButton pb = new PictureButton(mContext);
                 pb.setGravity(Gravity.CENTER | Gravity.CENTER);
                 pb.setPadding(3, 3, 3, 3);
@@ -69,17 +78,17 @@ public class TableGenerator {
                         R.color.row_background));
                 pb.setHint(R.string.addPicture);
 
-
                 pb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (pb.ispicAdded()== false){
 
-                        }
+                        Intent intent = new Intent(mContext,CallCamera.class)
+                                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);
                     }
                 });
                 tr.addView(pb);
-            }
+            }*/
             EditText tvCol = new EditText(mContext);
             tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
@@ -138,33 +147,5 @@ public class TableGenerator {
     public TableLayout getTable() {
         return mTable;
     }
+
 }
-/*public class MainActivity extends Activity {
-    private ScrollView layMain;
-    private TableGenerator mTable;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_main);
-
-        showTable();
-    }
-
-    private void showTable() {
-        mTable = new TableGenerator(getApplicationContext());
-        layMain = (ScrollView)findViewById(R.id.table);
-
-        String[] firstRow = {"col1", "col2", "col3", "col4"};
-        String[] secondRow = {"11", "12", "13", "14"};
-        String[] thridRow = {"2a", "2b", "2c", "2d"};
-
-        mTable.addRow(firstRow);
-        mTable.addRow(secondRow);
-        mTable.addRow(thridRow);
-
-        layMain.removeAllViews();
-        layMain.addView(mTable.getTable());
-    }
-}*/
-
