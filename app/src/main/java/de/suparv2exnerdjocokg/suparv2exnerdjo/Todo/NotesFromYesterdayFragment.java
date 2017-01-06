@@ -110,7 +110,7 @@ public class NotesFromYesterdayFragment extends Fragment {
         List<Note> items = new ArrayList<>();
         for(int i = 0; i < DummyNotes.ITEMS.size(); i++) {
             String note = DummyNotes.ITEMS.get(i).getTag();
-            String todo = view.getContext().getString(DummyToDos.ITEMS.get(position).getTask().getName());
+            String todo = DummyToDos.ITEMS.get(position).getTask().getName();
             if(note.equals(todo)){
                 items.add(DummyNotes.ITEMS.get(i));
             }

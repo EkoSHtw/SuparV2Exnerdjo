@@ -17,6 +17,7 @@
         android:layout_marginBottom="15dp"
         android:gravity="center"
         style="@style/AppTextSmall"
+        android:textColor="@color/colorAccent"
         />
 
     <android.support.v7.widget.RecyclerView

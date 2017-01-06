@@ -61,23 +61,26 @@ public class DummyToDos {
 
     static {
         // Add some sample items.
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.ganzwaschung, R.string.ganzwaschungDescription, R.string.ganzwaschung)));
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.teilwaschung, R.string.teilwaschungDescription, R.string.teilwaschung)));
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.nahr, R.string.nahrDescription, R.string.nahr)));
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.hNahr, R.string.hNahrDesc, R.string.hNahr)));
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.lagBet, R.string.lagBetDesc, R.string.lagBet)));
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.ganzwaschung, R.string.ganzwaschungDescription, R.string.ganzwaschung)));
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.teilwaschung, R.string.teilwaschungDescription, R.string.teilwaschung)));
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.nahr, R.string.nahrDescription, R.string.nahr)));
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.hNahr, R.string.hNahrDesc, R.string.hNahr)));
-        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask(R.string.lagBet, R.string.lagBetDesc, R.string.lagBet)));
+        String[] ganzWD = {"Waschen, Duschen, Baden","Mund-, Zahn- und Lippenpflege","Rasieren","Hautpflege","Haarpflege (Kämmen, ggf. Waschen)","Nagelpflege","An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken","Vorbereiten/Aufräumen des Pflegebereiches"};
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ganzwaschung", ganzWD, "Ganzwaschung")));
+        String[] teilWD = {"Teilwaschung (z.B. Intimbereich)","Mund-, Zahn- und Lippenpflege","Rasieren","Hautpflege","Haarpflege (Kämmen, ggf. Waschen)","Nagelpflege","An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken","Vorbereiten/Aufräumen des Pflegebereiches"};
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Teilwaschung", teilWD, "Teilwaschung")));
+        String[] selbstNahrD = {"Mundgerechtes Vorbereiten der Nahrung (auch angelieferte Warmspeisen)","Lagern und Vorbereiten des Pflegebedürftigen","Entsorgen der benötigten Materialien","Säubern des Arbeitsbereiches","Kenntnisvermittlung (keine Ernährungsberatung) über richtige Ernährung (z.B. Diabetiker) ausreichende Flüssigkeitszufuhr incl. Beratung über Esshilfe"};
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Selbstständige Nahrungsaufnahme", selbstNahrD, "Selbstständige Nahrungsaufnahme")));
+        String[] hilfeNahrD = {"Mundgerechtes Vorbereiten der Nahrung (auch angelieferte Warmspeisen)","Lagern und Vorbereiten des Pflegebedürftigen","Darreichen der Nahrung","Entsorgen der benötigten Materialien","Säubern des Arbeitsbereiches (spülen)","Versorgung des Pflegebedürftigen (Hygiene im Zusammenhang mit der Nahrungsaufnahme)","Kenntnisvermittlung (keine Ernährungsberatung) über richtige Ernährung (z.B. Diabetiker) ausreichende Flüssigkeitszufuhr incl. Beratung über Esshilfe"};
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Hilfe bei der Nahrungsaufnahme", hilfeNahrD, "Hilfe bei der Nahrungsaufnahme")));
+        String[] lagBetD = {"Richten des Bettes","Wechseln der Bettwäsche","Körper- und situationsgerechtes Lagern","Vermittlung von Lagerungstechniken ggf. Einsatz von Lagerungshilfen"};
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Lagern/Betten", lagBetD, "Lagern/Betten")));
+        String[] ausD = {"Utensilien bereitstellen, anreichen","Zur Toilette führen","Unterstützung u. allgem. Hilfestellung (Urin, Stuhl, Schweiß, Sputum, Erbrochenes)","Überwachung der Ausscheidung","Entsorgen, Reinigen des Gerätes und des Bettes","Katheterpflege (insb. Wechseln von Urinbeuteln), Stomaversorgung bei Anus praeter (Wechsel u. Entleerung des Stomabeutels)","Empfehlung zum Kontinenztraining/Inkontinenzversorgung","Nachbereiten des Pflegebedürftigen ggf. Intimpflege"};
+        ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ausscheidungen", ausD, "Ausscheidungen")));
+
     }
 
-    public static void sortAlphabet(final Context c){
+    public static void sortAlphabet(){
         Collections.sort(ITEMS, new Comparator<ToDo>() {
             @Override
             public int compare(ToDo first, ToDo second){
-                return first.getTask().getName(c).compareTo(second.getTask().getName(c));
+                return first.getTask().getName().compareTo(second.getTask().getName());
             }
         });
         List<ToDo> done = new ArrayList<>();

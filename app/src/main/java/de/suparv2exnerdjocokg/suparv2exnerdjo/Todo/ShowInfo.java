@@ -3,10 +3,15 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Dimension;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
@@ -64,8 +69,37 @@ public class ShowInfo extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_info, container, false);
 
-        TextView info = (TextView) view.findViewById(R.id.infoText);
-        info.setText(DummyToDos.ITEMS.get(position).getTask().getDescription());
+        TextView info = (TextView) view.findViewById(R.id.info_headline);
+        info.setText(DummyToDos.ITEMS.get(position).getTask().getName());
+        LinearLayout layout = (LinearLayout) view.findViewById(R.id.show_info);
+
+
+        for(int i = 0; i < DummyToDos.ITEMS.get(position).getTask().getDescription().length; i++){
+            LinearLayout bigLayout = new LinearLayout(view.getContext());
+            LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            lparams.setMargins(0,0,0,5);
+            bigLayout.setLayoutParams(lparams);
+            bigLayout.setOrientation(LinearLayout.HORIZONTAL);
+            layout.addView(bigLayout);
+
+            TextView number = new TextView(view.getContext());
+            LayoutParams lparams2 = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+            lparams2.setMargins(0,0,10,0);
+            number.setLayoutParams(lparams2);
+            number.setText(i+1+".");
+            number.setTextAppearance(view.getContext(), R.style.AppTextHeadline);
+            number.setTextSize(16);
+            bigLayout.addView(number);
+
+
+
+            TextView newT = new TextView(view.getContext());
+            newT.setLayoutParams(lparams2);
+            newT.setText(DummyToDos.ITEMS.get(position).getTask().getDescription()[i]);
+            newT.setTextAppearance(view.getContext(), R.style.AppTextNormal);
+            newT.setGravity(Gravity.CENTER_VERTICAL);
+            bigLayout.addView(newT);
+        }
 
         return view;
     }

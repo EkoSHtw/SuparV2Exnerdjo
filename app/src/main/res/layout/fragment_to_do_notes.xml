@@ -8,12 +8,14 @@
     tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDoNotes">
 
     <TextView
+        android:id="@+id/fixed_notes_headline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Feste Notizen"
         android:layout_marginTop="10dp"
         android:gravity="center"
         style="@style/AppTextSmall"
+        android:textColor="@color/colorAccent"
         />
 
     <FrameLayout
@@ -36,6 +38,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         style="@style/AppTextSmall"
+        android:textColor="@color/colorAccent"
         />
 
     <FrameLayout

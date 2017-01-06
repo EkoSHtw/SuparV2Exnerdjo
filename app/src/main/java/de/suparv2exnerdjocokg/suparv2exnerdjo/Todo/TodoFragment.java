@@ -65,7 +65,7 @@ public class TodoFragment extends Fragment {
 
 
         Context context = view.getContext();
-        DummyToDos.sortAlphabet(context);
+        DummyToDos.sortAlphabet();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.todolist);
         if (mColumnCount <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -91,7 +91,7 @@ public class TodoFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(getView().getContext(), mColumnCount));
         }
-        DummyToDos.sortAlphabet(view.getContext());
+        DummyToDos.sortAlphabet();
         recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.ITEMS, mListener, infoListener));
     }
 

@@ -7,45 +7,35 @@ import java.util.Vector;
 
 public class GeneralTask {
 
-    private int name;
-    private int description;
-    private int tag;
+    private String name;
+    private String[] description;
+    private String tag;
     private boolean isDone;
 
-    public GeneralTask(int name, int description, int tag) {
+    public GeneralTask(String name, String[] description, String tag) {
         this.name = name;
         this.description = description;
         this.tag = tag;
         this.isDone = false;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public String getName(Context context) {
-        return context.getString(getName());
-    }
-
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public int getDescription() {
+    public String[] getDescription() {
         return description;
     }
 
-    public String getDescription(Context context) {
-        return context.getString(getDescription());
-    }
+    public void setDescription(String[] description) {this.description = description;}
 
-    public void setDescription(int description) {this.description = description;}
+    public String getTag() {return tag;}
 
-    public int getTag() {return tag;}
-
-    public String getTag(Context context) {return context.getString(getTag());}
-
-    public void setTag(int tag) {this.tag = tag;}
+    public void setTag(String tag) {this.tag = tag;}
 
     public boolean isDone() {
         return isDone;

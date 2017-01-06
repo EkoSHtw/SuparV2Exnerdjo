@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
@@ -91,6 +92,9 @@ public class ToDoNotes extends Fragment {
     }
 
     public void updateFragViewInfo(int position){
+
+        TextView header =(TextView) getView().findViewById(R.id.fixed_notes_headline);
+        header.setText("Beschreibung");
 
         ShowInfo tFrag = new ShowInfo();
         Bundle args = new Bundle();

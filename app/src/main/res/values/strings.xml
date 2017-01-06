@@ -21,49 +21,6 @@
     <string name="emptyString"></string>
     <string name="serviceHeadline">Leistungskatalog</string>
 
-    <string name="ganzwaschung">Ganzwaschung</string>
-    <string name="ganzwaschungDescription">1. Waschen, Duschen, Baden\n
-        2. Mund-, Zahn- und Lippenpflege\n
-        3. Rasieren\n
-        4. Hautpflege\n
-        5. Haarpflege (Kämmen, ggf. Waschen)\n
-        6. Nagelpflege\n
-        7. An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken\n
-        8. Vorbereiten/Aufräumen des Pflegebereiches</string>
-    <string name="teilwaschung">Teilwaschung</string>
-    <string name="teilwaschungDescription">1. Teilwaschung (z.B. Intimbereich)\n
-        2. Mund-, Zahn- und Lippenpflege\n
-        3. Rasieren\n4. Hautpflege\n
-        5 .Haarpflege (Kämmen, ggf. Waschen)\n
-        6. Nagelpflege\n
-        7. An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken\n
-        8. Vorbereiten/Aufräumen des Pflegebereiches</string>
-    <string name="ausscheidungen">Ausscheidungen</string>
-    <string name="ausscheidungenDescription">1.Utensilien bereitstellen, anreichen\n
-        2.zur Toilette führen\n
-        3. Unterstützung u. allgem. Hilfestellung (Urin, Stuhl, Schweiß, Sputum, Erbrochenes)\n
-        4. Überwachung der Ausscheidung\n5. Entsorgen, Reinigen des Gerätes und des Bettes\n
-        6. Katheterpflege (insb. Wechseln von Urinbeuteln), Stomaversorgung bei Anus praeter (Wechsel u. Entleerung des Stomabeutels)\n
-        7.Empfehlung zum Kontinenztraining/Inkontinenzversorgung\n8. Nachbereiten des Pflegebedürftigen ggf. Intimpflege</string>
-    <string name="nahr">Selbstständige Nahrungsaufnahme</string>
-    <string name="nahrDescription">1. Mundgerechtes Vorbereiten der Nahrung (auch angelieferte Warmspeisen)\n
-        2. Lagern und Vorbereiten des Pflegebedürftigen\n
-        3. Entsorgen der benötigten Materialien\n
-        4. Säubern des Arbeitsbereiches\n
-        5. Kenntnisvermittlung (keine Ernährungsberatung) über richtige Ernährung (z.B. Diabetiker) ausreichende Flüssigkeitszufuhr incl. Beratung über Esshilfe</string>
-    <string name="hNahr">Hilfe bei der Nahrungsaufnahme</string>
-    <string name="hNahrDesc">1. Mundgerechtes Vorbereiten der Nahrung (auch angelieferte Warmspeisen)\n
-        2. Lagern und Vorbereiten des Pflegebedürftigen\n
-        3. Darreichen der Nahrung\n
-        4. Entsorgen der benötigten Materialien\n
-        5. Säubern des Arbeitsbereiches (spülen)\n
-        6. Versorgung des Pflegebedürftigen (Hygiene im Zusammenhang mit der Nahrungsaufnahme)\n
-        7. Kenntnisvermittlung (keine Ernährungsberatung) über richtige Ernährung (z.B. Diabetiker) ausreichende Flüssigkeitszufuhr incl. Beratung über Esshilfe</string>
-    <string name="lagBet">Lagern/Betten</string>
-    <string name="lagBetDesc">1.Richten des Bettes\n
-        2. Wechseln der Bettwäsche\n
-        3.  Körper- und situationsgerechtes Lagern\n
-        4.  Vermittlung von Lagerungstechniken ggf. Einsatz von Lagerungshilfen</string>
 
     <!-- Menu-->
     <string name="hello_blank_fragment">Hello blank fragment</string>

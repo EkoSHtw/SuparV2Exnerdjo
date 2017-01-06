@@ -66,6 +66,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     clearSelection();
+                    clearInfoSelection();
                     oldSelection = holder.mView;
                     mListener.onListFragmentInteraction(position);
                     holder.mNameView.setTextColor(holder.mView.getResources().getColor(R.color.colorAccent));
@@ -79,11 +80,11 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 mListener.onListFragmentInteraction(-2);
                 if(isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
-                    DummyNotes.ITEMS.add(new Note(currentTask.getTag(holder.mView.getContext()), ""+currentTask.getName(holder.mView.getContext())+" durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis())));
+                    DummyNotes.ITEMS.add(new Note(currentTask.getTag(), ""+currentTask.getName()+" durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis())));
                 }else{
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.transparent));
                     for(int i = 0; i < DummyNotes.ITEMS.size(); i++){
-                        if(DummyNotes.ITEMS.get(i).getTag().toLowerCase().contains(currentTask.getTag(holder.mView.getContext()).toLowerCase())){
+                        if(DummyNotes.ITEMS.get(i).getTag().toLowerCase().contains(currentTask.getTag().toLowerCase())){
                             long timestamp = holder.mItem.getTimestamp().getDay();
                             long secondTimestamp = DummyNotes.ITEMS.get(i).getTimestamp().getDay();
 
@@ -100,6 +101,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             @Override
             public void onClick(View v) {
                 clearInfoSelection();
+                clearSelection();
                 oldInfoSelection = holder.mInfo;
                 holder.mInfo.setColorFilter(holder.mView.getResources().getColor(R.color.colorAccent));
                 if(null!=infoListener) {

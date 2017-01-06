@@ -8,7 +8,7 @@ public class Service extends GeneralTask {
   private int complexNumber;
   private float cost;
 
-  public Service (int name, int description, int tag, int content, int complexNumber, float cost){
+  public Service (String name, String[] description, String tag, int content, int complexNumber, float cost){
 
       super(name, description, tag);
       this.content = content;
