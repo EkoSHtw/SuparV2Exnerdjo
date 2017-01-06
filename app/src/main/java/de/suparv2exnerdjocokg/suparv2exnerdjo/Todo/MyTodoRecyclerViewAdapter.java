@@ -53,6 +53,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.mItem = mValues.get(position);
         final GeneralTask currentTask = holder.mItem.getTask();
         holder.mNameView.setText(mValues.get(position).getTask().getName());
+
         if(holder.mItem.getTask().isDone()){
             holder.mCheckBox.setChecked(true);
             holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorPrimaryLight));
@@ -68,7 +69,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                     clearSelection();
                     clearInfoSelection();
                     oldSelection = holder.mView;
-                    mListener.onListFragmentInteraction(position);
+                    mListener.onListFragmentInteraction(position, holder.mItem.getTask().isDone());
                     holder.mNameView.setTextColor(holder.mView.getResources().getColor(R.color.colorAccent));
                 }
             }
@@ -77,19 +78,19 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 holder.mItem.getTask().setDone(isChecked);
-                mListener.onListFragmentInteraction(-2);
+                mListener.onListFragmentInteraction(-2, true);
                 if(isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
                     DummyNotes.ITEMS.add(new Note(currentTask.getTag(), ""+currentTask.getName()+" durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis())));
                 }else{
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.transparent));
-                    for(int i = 0; i < DummyNotes.ITEMS.size(); i++){
-                        if(DummyNotes.ITEMS.get(i).getTag().toLowerCase().contains(currentTask.getTag().toLowerCase())){
+                    for(int i = 0; i < mValues.size(); i++){
+                        if(mValues.get(i).getTask().getTag().toLowerCase().contains(currentTask.getTag().toLowerCase())){
                             long timestamp = holder.mItem.getTimestamp().getDay();
-                            long secondTimestamp = DummyNotes.ITEMS.get(i).getTimestamp().getDay();
+                            long secondTimestamp = mValues.get(i).getTimestamp().getDay();
 
                             if(timestamp==secondTimestamp){
-                                DummyNotes.ITEMS.remove(i);
+                                mValues.remove(i);
                             }
                         }
                     }
@@ -105,7 +106,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 oldInfoSelection = holder.mInfo;
                 holder.mInfo.setColorFilter(holder.mView.getResources().getColor(R.color.colorAccent));
                 if(null!=infoListener) {
-                    infoListener.onInfoClickedListener(position);
+                    infoListener.onInfoClickedListener(position, holder.mItem.getTask().isDone());
                 }
             }
         });

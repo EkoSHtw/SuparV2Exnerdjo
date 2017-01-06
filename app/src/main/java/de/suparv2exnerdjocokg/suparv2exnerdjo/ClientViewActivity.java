@@ -23,8 +23,10 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 import java.io.File;
+import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
@@ -76,15 +78,17 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
 
 
     @Override
-    public void onListFragmentInteraction(int position) {
+    public void onListFragmentInteraction(int position, boolean done) {
         if (position != -1) {
             ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             if (newFrag != null) {
-                newFrag.updateClientView(position);
+                newFrag.updateClientView(position, done);
             } else {
                 newFrag = new ClientView();
                 Bundle args = new Bundle();
                 args.putInt(ClientView.ARG_Position, position);
+                args.putInt(ClientView.ARG_Position, position);
+                args.putBoolean("done", done);
                 newFrag.setArguments(args);
 
                 FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -98,7 +102,6 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
             ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             newFrag = new ClientView();//??
             Bundle args = new Bundle();
-            args.putInt(ClientView.ARG_Position, position);
             newFrag.setArguments(args);
 
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -111,14 +114,15 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
     }
 
     @Override
-    public void onInfoClickedListener(int position) {
+    public void onInfoClickedListener(int position, boolean done) {
         ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (newFrag != null) {
-            newFrag.updateClientViewInfo(position);
+            newFrag.updateClientViewInfo(position, done);
         } else {
             newFrag = new ClientView();
             Bundle args = new Bundle();
             args.putInt(ClientView.ARG_Position, position);
+            args.putBoolean("done", done);
             newFrag.setArguments(args);
 
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
