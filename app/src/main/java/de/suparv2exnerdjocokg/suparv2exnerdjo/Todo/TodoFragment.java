@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -84,6 +85,15 @@ public class TodoFragment extends Fragment {
             doneHeader.setVisibility(View.INVISIBLE);
         }else{
             doneHeader.setVisibility(View.VISIBLE);
+            RecyclerView recyclerViewDone = (RecyclerView) view.findViewById(R.id.todolist_done);
+            if (mColumnCount <= 1) {
+                recyclerViewDone.setLayoutManager(new LinearLayoutManager(context));
+            } else {
+                recyclerViewDone.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+            }
+            recyclerViewDone.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.getDone(), mListener, infoListener));
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.0f);
+            recyclerView.setLayoutParams(param);
         }
 
         TextView undoneHeader = (TextView) view.findViewById(R.id.undone_headline);
@@ -94,13 +104,6 @@ public class TodoFragment extends Fragment {
             undoneHeader.setVisibility(View.VISIBLE);
         }
 
-        RecyclerView recyclerViewDone = (RecyclerView) view.findViewById(R.id.todolist_done);
-        if (mColumnCount <= 1) {
-            recyclerViewDone.setLayoutManager(new LinearLayoutManager(context));
-        } else {
-            recyclerViewDone.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-        }
-        recyclerViewDone.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.getDone(), mListener, infoListener));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
