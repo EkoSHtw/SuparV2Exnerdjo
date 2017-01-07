@@ -7,13 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.ExpandableListView;
 
-import java.util.ArrayList;
-
-import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 
@@ -41,9 +36,14 @@ public class ClientListFragment extends Fragment{
 //        View searchBar = inflater.inflate(R.layout.logbook_searchbar,container,false);
         View view = inflater.inflate(R.layout.client_list, container, false);
 
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.clientListRecycler);
-        mRecyclerView.setAdapter(new MyClientRecyclerViewAdapter(DummyClients.ITEMS, mListener));
+        ExpandableListView mExpandableListView = (ExpandableListView) view.findViewById(R.id.expandable_client_list);
+        mExpandableListView.setAdapter(new MyClientExpandableListViewAdapter(getContext(), DummyClients.ITEMS, mListener));
+        mExpandableListView.setDivider(getResources().getDrawable(R.drawable.divider_transparent));
 
+        /*
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.clientListRecycler);
+        mRecyclerView.setAdapter(new MyClientExpandableListViewAdapter(DummyClients.ITEMS, mListener));
+        */
 
         return view;
     }

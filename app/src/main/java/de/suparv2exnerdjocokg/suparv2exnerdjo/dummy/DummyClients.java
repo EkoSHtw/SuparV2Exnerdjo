@@ -22,7 +22,7 @@ public class DummyClients {
         ITEMS.add(createDummyClient());
         ArrayList<PhoneNumber> phoneNumbers = new ArrayList<>();
         phoneNumbers.add(new PhoneNumber("Holger", "01786857658", "Sohn"));
-        ITEMS.add(new Client(1, R.drawable.woman_image, "Emma", "Liese", "11.01.1960", null, null, null, "Munter, fröhlich", 3, "Heinestraße 8, 16845 Obermauern", phoneNumbers));
+        ITEMS.add(new Client(1, R.drawable.woman_image, "Emma", "Liese", "11.01.1960", null, null, DummyToDos.ITEMS, "Munter, fröhlich", 3, "Heinestraße 8, 16845 Obermauern", phoneNumbers));
     }
 
     private static Client createDummyClient() {
@@ -33,7 +33,7 @@ public class DummyClients {
         ArrayList<PhoneNumber> phoneNumber = new ArrayList<>();
         phoneNumber.add(num1);
         phoneNumber.add(num2);
-        Client c = new Client(0,R.drawable.woman_image, "Helga","Stein","14.04.1958",null,null,null, "Schwerhörig. Trinkt gerne Tee. Redet gerne über Formel 1.",2,"Rotsteinweg 21A",phoneNumber);
+        Client c = new Client(0,R.drawable.woman_image, "Helga","Stein","14.04.1958",null,null,DummyToDos.ITEMS, "Schwerhörig. Trinkt gerne Tee. Redet gerne über Formel 1.",2,"Rotsteinweg 21A",phoneNumber);
         return c;
     }
 }

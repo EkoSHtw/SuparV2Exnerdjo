@@ -104,12 +104,11 @@ public class ShowInfo extends Fragment {
             bigLayout.addView(number);
 
 
-
             TextView newT = new TextView(view.getContext());
             newT.setLayoutParams(lparams2);
             newT.setText(actualList.get(position).getTask().getDescription()[i]);
             newT.setTextAppearance(view.getContext(), R.style.AppTextNormal);
-            newT.setGravity(Gravity.CENTER_VERTICAL);
+            newT.setGravity(Gravity.BOTTOM);
             bigLayout.addView(newT);
         }
 
