@@ -32,6 +32,7 @@ public class TodoFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private OnInfoClickedInteractionListener infoListener;
     private View view;
+    private static View oldSelection;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -168,6 +169,14 @@ public class TodoFragment extends Fragment {
         super.onDetach();
         mListener = null;
         infoListener = null;
+    }
+
+    public static View getOldSelection(){
+        return oldSelection;
+    }
+
+    public static void setOldSelection(View newSelection){
+        oldSelection = newSelection;
     }
 
     /**

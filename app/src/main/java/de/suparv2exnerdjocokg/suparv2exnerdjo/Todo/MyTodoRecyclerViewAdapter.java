@@ -29,8 +29,6 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     private final List<ToDo> mValues;
     private final TodoFragment.OnListFragmentInteractionListener mListener;
     private final TodoFragment.OnInfoClickedInteractionListener infoListener;
-    private View oldSelection = null;
-    private ImageButton oldInfoSelection = null;
 
 
     public MyTodoRecyclerViewAdapter(List<ToDo> items, TodoFragment.OnListFragmentInteractionListener listener, TodoFragment.OnInfoClickedInteractionListener newInfoListener) {
@@ -67,8 +65,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
                     clearSelection();
-                    clearInfoSelection();
-                    oldSelection = holder.mView;
+                    TodoFragment.setOldSelection(holder.mView);
                     mListener.onListFragmentInteraction(position, holder.mItem.getTask().isDone());
                     holder.mNameView.setTextColor(holder.mView.getResources().getColor(R.color.colorAccent));
                 }
@@ -101,9 +98,8 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.mInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearInfoSelection();
                 clearSelection();
-                oldInfoSelection = holder.mInfo;
+                TodoFragment.setOldSelection(holder.mView);
                 holder.mInfo.setColorFilter(holder.mView.getResources().getColor(R.color.colorAccent));
                 if(null!=infoListener) {
                     infoListener.onInfoClickedListener(position, holder.mItem.getTask().isDone());
@@ -113,19 +109,17 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     }
 
     public void clearSelection() {
-        if(oldSelection != null) {
-            TextView name = (TextView) oldSelection.findViewById(R.id.name);
-            name.setTextColor(oldSelection.getResources().getColor(R.color.colorPrimaryDark));
-            oldSelection.findViewById(R.id.info).setBackgroundColor(oldSelection.getResources().getColor(android.R.color.transparent));
+        if(TodoFragment.getOldSelection() != null) {
+            TextView name = (TextView) TodoFragment.getOldSelection().findViewById(R.id.name);
+            name.setTextColor(TodoFragment.getOldSelection().getResources().getColor(R.color.colorPrimaryDark));
+
+            ImageButton info = (ImageButton) TodoFragment.getOldSelection().findViewById(R.id.info);
+            info.setBackgroundColor(TodoFragment.getOldSelection().getResources().getColor(android.R.color.transparent));
+            info.clearColorFilter();
+
         }
     }
 
-    public void clearInfoSelection() {
-        if(oldInfoSelection != null){
-            ImageButton image = oldInfoSelection;
-            image.clearColorFilter();
-        }
-    }
 
     @Override
     public int getItemCount() {
