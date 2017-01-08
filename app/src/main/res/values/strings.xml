@@ -116,5 +116,6 @@
     <string name="tag">Stichwort</string>
     <string name="input_tags">Geben Sie Stichwörter ein</string>
     <string name="note_comment">Kommentar...</string>
+    <string name="type_here">type_here</string>
 
 </resources>
