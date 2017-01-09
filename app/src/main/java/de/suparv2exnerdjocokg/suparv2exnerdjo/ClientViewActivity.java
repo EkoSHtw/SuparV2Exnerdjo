@@ -259,5 +259,7 @@ public class ClientViewActivity extends AppCompatActivity implements DatePickerD
         Timestamp time = new Timestamp(c.getTimeInMillis() / 1000L);
 
         DummyToDos.ITEMS.get(position).setTimestamp(time);
+
+        this.recreate();
     }
 }
