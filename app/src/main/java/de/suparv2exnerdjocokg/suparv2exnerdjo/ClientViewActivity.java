@@ -68,8 +68,8 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
 
             @Override
             public void onClick(View v) {
-                DialogAddNote dialogAddNote = new DialogAddNote(activity);
-                dialogAddNote.show();
+                DialogAddNewNoteOrTask dialogAddNewNoteOrTask = new DialogAddNewNoteOrTask(activity);
+                dialogAddNewNoteOrTask.show();
             }
         });
     }
