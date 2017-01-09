@@ -7,20 +7,21 @@
 
     <View
         android:layout_width="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.15"
         android:layout_height="match_parent"/>
 
     <View
         android:layout_width="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.1"
         android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/todo"
         android:layout_width="0dp"
-        android:layout_weight="0.4"
+        android:layout_weight="0.55"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
         style="@style/AppTextNormal"/>
 
 

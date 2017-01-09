@@ -9,14 +9,14 @@
     <TextView
         android:id="@+id/timeRoute"
         android:layout_width="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.15"
         style="@style/AppTextClientList"/>
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="0dp"
+        android:layout_weight="0.1"
         android:layout_height="100dp"
-        android:layout_weight="0.2"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         style="@style/AppTextClientList"
@@ -24,8 +24,9 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.35"
         android:orientation="vertical"
+        android:layout_marginLeft="20dp"
         android:layout_height="match_parent">
 
         <TextView
