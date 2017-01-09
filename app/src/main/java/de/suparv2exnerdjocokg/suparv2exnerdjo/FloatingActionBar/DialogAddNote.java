@@ -1,4 +1,4 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 /**
  * Created by V2 on 25.12.2016.
@@ -44,14 +47,18 @@ public class DialogAddNote extends Dialog implements View.OnClickListener {
                 EditText input = (EditText) findViewById(R.id.dialog_input_text);
                 EditText tag = (EditText) findViewById(R.id.dialog_input_tag) ;
                 activity.addNote(input.getText().toString().trim(), tag.getText().toString().trim());
-                dismissDialog();
+                dismissDialog(true);
                 break;
             case R.id.dialog_button_negative:
-                dismissDialog();
+                dismissDialog(false);
         }
     }
 
-    private void dismissDialog() {
+    private void dismissDialog(boolean added) {
+        if (!added) {
+            DialogAddNewNoteOrTask dialogAddNewNoteOrTask = new DialogAddNewNoteOrTask(activity);
+            dialogAddNewNoteOrTask.show();
+        }
         dismiss();
     }
 }

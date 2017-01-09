@@ -1,8 +1,7 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 
 /**
@@ -103,7 +103,6 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            Log.println(Log.INFO, "m", "Hi ich bin der Filter");
 
             String filterString = constraint.toString().toLowerCase();
 

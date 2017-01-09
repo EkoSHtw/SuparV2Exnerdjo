@@ -1,10 +1,12 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 /**
  * Created by v2 on 05.01.2017.
@@ -23,7 +25,6 @@ public class DialogAddNewNoteOrTask extends Dialog implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_add_new_note_todo);
-
 
         TextView note = (TextView) findViewById(R.id.dialog_add_note);
         note.setOnClickListener(this);

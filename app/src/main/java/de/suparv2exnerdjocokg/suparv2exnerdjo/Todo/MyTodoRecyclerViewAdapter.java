@@ -1,7 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Carer;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 

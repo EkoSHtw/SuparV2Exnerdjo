@@ -1,4 +1,4 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
@@ -12,6 +12,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 /**
  * Created by v2 on 05.01.2017.
@@ -51,14 +54,14 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
 //                DummyToDos.ITEMS.add(toDo);
                 //was soll damit dann passieren
 
-                dismiss();
+                dismissThis(true);
             }
         });
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismissThis();
+                dismissThis(false);
             }
         });
 
@@ -76,7 +79,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         this.year = year;
-        this.month = month+1;
+        this.month = month + 1;
         this.day = day;
 
 //        String myFormat = "dd/MM/yy"; //In which you need put here
@@ -87,7 +90,12 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
         timePicker.setText("" + day + "." + month + "." + year);
     }
 
-    public void dismissThis() {
+    public void dismissThis(boolean added) {
+
+        if (!added) {
+            DialogAddNewNoteOrTask dialogAddNewNoteOrTask = new DialogAddNewNoteOrTask(getActivity());
+            dialogAddNewNoteOrTask.show();
+        }
         dismiss();
     }
 

@@ -1,4 +1,4 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook;
 
 import android.support.v4.app.Fragment;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 /**
  * Created by dsfd on 29.12.2016.

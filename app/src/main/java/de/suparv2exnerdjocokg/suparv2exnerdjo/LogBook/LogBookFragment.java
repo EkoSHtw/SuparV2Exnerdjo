@@ -1,4 +1,4 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
@@ -34,9 +34,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     private MyLogBookRecyclerViewAdapter recyclerViewAdapter;
 
     private int currentSpinnerSelection;
-
-
-//    private OnListFragmentInteractionListener mListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
