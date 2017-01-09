@@ -8,7 +8,8 @@
     <TextView
         android:id="@+id/dialog_add_todo_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="dia add title" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -43,15 +44,29 @@
         android:layout_height="wrap_content"
         android:hint="@string/type_here" />
 
+    <!--<fragment-->
+        <!--android:id="@+id/frag_date_picker"-->
+        <!--class="de.suparv2exnerdjocokg.suparv2exnerdjo.FragmentDatePicker"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <TextView
+        android:id="@+id/time_picker"
+        android:hint="click here"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/dialog_todo_button_confirm"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"/>
 
     <Button
         android:id="@+id/dialog_todo_button_cancel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"/>
 
 
 </LinearLayout>

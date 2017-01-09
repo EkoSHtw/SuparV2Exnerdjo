@@ -17,7 +17,7 @@
         android:text="neue notiz"/>
 
     <TextView
-        android:id="@+id/dialog_add_task"
+        android:id="@+id/dialog_add_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="neue aufgabe"/>

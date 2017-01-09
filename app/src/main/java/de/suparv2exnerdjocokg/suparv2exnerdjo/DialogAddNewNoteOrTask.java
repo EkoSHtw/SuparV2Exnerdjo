@@ -27,7 +27,7 @@ public class DialogAddNewNoteOrTask extends Dialog implements View.OnClickListen
 
         TextView note = (TextView) findViewById(R.id.dialog_add_note);
         note.setOnClickListener(this);
-        TextView task = (TextView) findViewById(R.id.dialog_add_note);
+        TextView task = (TextView) findViewById(R.id.dialog_add_todo);
         task.setOnClickListener(this);
     }
 
@@ -45,7 +45,10 @@ public class DialogAddNewNoteOrTask extends Dialog implements View.OnClickListen
                 dialogAddNote.show();
                 dismissThis();
                 break;
-            case R.id.dialog_add_task:
+            case R.id.dialog_add_todo:
+                DialogAddToDo dialogAddToDo = new DialogAddToDo();
+//                dialogAddToDo.show();
+                dialogAddToDo.show(activity.getFragmentManager(),"Add todo");
                 dismissThis();
         }
     }

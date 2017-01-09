@@ -10,6 +10,9 @@ import android.view.View;
 
 import java.sql.Timestamp;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 public class ClientViewActivity extends AppCompatActivity implements MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener {
