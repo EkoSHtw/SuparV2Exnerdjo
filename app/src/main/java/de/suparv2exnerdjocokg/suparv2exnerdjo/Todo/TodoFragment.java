@@ -129,6 +129,7 @@ public class TodoFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(int position);
+        void onDatePickerInteraction (int position);
     }
     public interface OnInfoClickedInteractionListener{
         void onInfoClickedListener(int position);
