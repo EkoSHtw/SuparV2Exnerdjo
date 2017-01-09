@@ -34,6 +34,7 @@ public class TodoFragment extends Fragment {
     private OnInfoClickedInteractionListener infoListener;
     private View view;
     private static View oldSelection;
+    private Context context;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -69,7 +70,13 @@ public class TodoFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_todo_list, container, false);
 
 
-        Context context = view.getContext();
+        context = view.getContext();
+        createView();
+
+        return view;
+    }
+
+    private void createView() {
         DummyToDos.sortAlphabet();
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.todolist);
@@ -105,46 +112,10 @@ public class TodoFragment extends Fragment {
             undoneHeader.setTextAppearance(getContext(), R.style.AppTextSmall);
             undoneHeader.setTextColor(getResources().getColor(R.color.colorAccent));
         }
-
-        return view;
     }
 
     public void updateList(){
-        DummyToDos.sortAlphabet();
-
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.todolist);
-        if (mColumnCount <= 1) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(getView().getContext()));
-        } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(getView().getContext(), mColumnCount));
-        }
-        recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.getUndone(), mListener, infoListener));
-
-        RecyclerView recyclerViewDone = (RecyclerView) view.findViewById(R.id.todolist_done);
-        if (mColumnCount <= 1) {
-            recyclerViewDone.setLayoutManager(new LinearLayoutManager(getView().getContext()));
-        } else {
-            recyclerViewDone.setLayoutManager(new GridLayoutManager(getView().getContext(), mColumnCount));
-        }
-        recyclerViewDone.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.getDone(), mListener, infoListener));
-
-        TextView doneHeader = (TextView) view.findViewById(R.id.done_headline);
-        if(DummyToDos.getDone().size()==0){
-            doneHeader.setVisibility(View.INVISIBLE);
-        }else{
-            doneHeader.setVisibility(View.VISIBLE);
-        }
-
-        TextView undoneHeader = (TextView) view.findViewById(R.id.undone_headline);
-        if(DummyToDos.getUndone().size()==0){
-            undoneHeader.setText("Sehr gut. Alle Aufgaben für heute sind erledigt.");
-            undoneHeader.setTextSize(16);
-        }else{
-            undoneHeader.setVisibility(View.VISIBLE);
-            undoneHeader.setText("Deine Aufgaben für heute:");
-            undoneHeader.setTextAppearance(getContext(), R.style.AppTextSmall);
-            undoneHeader.setTextColor(getResources().getColor(R.color.colorAccent));
-        }
+        createView();
     }
 
     // Called when a fragment is first attached to its context. onCreate(Bundle) will be called after this.
