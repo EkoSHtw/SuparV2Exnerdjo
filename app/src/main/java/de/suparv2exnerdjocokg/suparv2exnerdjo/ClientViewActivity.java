@@ -29,6 +29,7 @@ import java.io.File;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
+import layout.VitalFragment;
 
 public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
@@ -168,7 +169,14 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
                 trans.commit();
                 break;
             case 3:
+                VitalFragment vF = new VitalFragment();
 
+                trans = getSupportFragmentManager().beginTransaction();
+
+                trans.replace(R.id.fragment_container, vF);
+                trans.addToBackStack(null);
+
+                trans.commit();
                 break;
             case 4:
                 MedicineOverview medicineFrag = new MedicineOverview();
