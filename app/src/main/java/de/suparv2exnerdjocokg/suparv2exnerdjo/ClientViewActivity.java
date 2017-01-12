@@ -100,8 +100,7 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
                 trans.commit();
             }
         } else {
-            ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            newFrag = new ClientView();//??
+            ClientView newFrag = new ClientView();
             Bundle args = new Bundle();
             newFrag.setArguments(args);
 

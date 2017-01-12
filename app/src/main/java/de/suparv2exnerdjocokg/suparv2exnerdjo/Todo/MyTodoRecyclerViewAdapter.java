@@ -62,10 +62,14 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    clearSelection();
-                    TodoFragment.setOldSelection(holder.mView);
-                    mListener.onListFragmentInteraction(position, holder.mItem.getTask().isDone());
-                    holder.mNameView.setTextColor(holder.mView.getResources().getColor(R.color.colorAccent));
+                    if(TodoFragment.getOldSelection() == holder.mView){
+                        mListener.onListFragmentInteraction(-1, true);
+                    }else {
+                        clearSelection();
+                        TodoFragment.setOldSelection(holder.mView);
+                        mListener.onListFragmentInteraction(position, holder.mItem.getTask().isDone());
+                        holder.mNameView.setTextColor(holder.mView.getResources().getColor(R.color.colorAccent));
+                    }
                 }
             }
         });
