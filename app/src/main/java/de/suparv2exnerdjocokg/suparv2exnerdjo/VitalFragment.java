@@ -93,19 +93,19 @@ public class VitalFragment extends Fragment {
         final GraphView graph = (GraphView) view.findViewById(R.id.graph);
 
         Calendar calendar = Calendar.getInstance();
-        d0 = calendar.getTime();
-        calendar.add(Calendar.DATE, -1);
-        d1 = calendar.getTime();
-        calendar.add(Calendar.DATE, -1);
-        d2 = calendar.getTime();
-        calendar.add(Calendar.DATE, -1);
-        d3 = calendar.getTime();
-        calendar.add(Calendar.DATE, -1);
-        d4 = calendar.getTime();
+        d6 = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
         d5 = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
-        d6 = calendar.getTime();
+        d4 = calendar.getTime();
+        calendar.add(Calendar.DATE, -1);
+        d3 = calendar.getTime();
+        calendar.add(Calendar.DATE, -1);
+        d2 = calendar.getTime();
+        calendar.add(Calendar.DATE, -1);
+        d1 = calendar.getTime();
+        calendar.add(Calendar.DATE, -1);
+        d0 = calendar.getTime();
 
         final TextView bloodPressure = (TextView) view.findViewById(R.id.blood_pressure);
         bloodPressure.setText("Blutdruck");
@@ -228,6 +228,7 @@ public class VitalFragment extends Fragment {
         });
         morning.setTitle("Morgens");
         morning.setColor(Color.argb(255, 104, 125, 56));
+        morning.setDrawDataPoints(true);
         LineGraphSeries<DataPoint> noon = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(d0, 100),
                 new DataPoint(d1, 104),
@@ -239,6 +240,7 @@ public class VitalFragment extends Fragment {
         });
         noon.setTitle("Mittags");
         noon.setColor(Color.argb(255, 80, 159, 90));
+        noon.setDrawDataPoints(true);
         LineGraphSeries<DataPoint> afternoon = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(d0, 97),
                 new DataPoint(d1, 142),
@@ -250,6 +252,7 @@ public class VitalFragment extends Fragment {
         });
         afternoon.setTitle("Abends");
         afternoon.setColor(Color.argb(255, 140, 159, 56));
+        afternoon.setDrawDataPoints(true);
         LineGraphSeries<DataPoint> night = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(d0, 99),
                 new DataPoint(d1, 119),
@@ -261,6 +264,7 @@ public class VitalFragment extends Fragment {
         });
         night.setTitle("Nachts");
         night.setColor(Color.argb(255, 104, 159, 56));
+        night.setDrawDataPoints(true);
         graph.addSeries(morning);
         graph.addSeries(noon);
         graph.addSeries(afternoon);
@@ -286,6 +290,7 @@ public class VitalFragment extends Fragment {
         });
         temp.setTitle("Körpertemperatur");
         temp.setColor(Color.argb(255, 104, 159, 56));
+        temp.setDrawDataPoints(true);
         graph.addSeries(temp);
 
         graph.getViewport().setMinY(30);
