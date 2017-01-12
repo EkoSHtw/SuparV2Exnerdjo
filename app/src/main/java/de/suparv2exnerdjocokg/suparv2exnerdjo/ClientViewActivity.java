@@ -258,8 +258,24 @@ public class ClientViewActivity extends AppCompatActivity implements DatePickerD
 
         Timestamp time = new Timestamp(c.getTimeInMillis() / 1000L);
 
-        DummyToDos.ITEMS.get(position).setTimestamp(time);
+        DummyToDos.ITEMS.remove(position);
+        //DummyToDos.ITEMS.get(position).setTimestamp(time);
 
-        this.recreate();
+        ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (newFrag != null) {
+            newFrag.updateClientView(position);
+        } else {
+            newFrag = new ClientView();
+            Bundle args = new Bundle();
+            args.putInt(ClientView.ARG_Position, position);
+            newFrag.setArguments(args);
+
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+            trans.replace(R.id.fragment_container, newFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
+        }
     }
 }
