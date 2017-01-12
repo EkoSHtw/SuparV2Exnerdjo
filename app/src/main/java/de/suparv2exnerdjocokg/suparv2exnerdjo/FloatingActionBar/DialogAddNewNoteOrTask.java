@@ -51,6 +51,7 @@ public class DialogAddNewNoteOrTask extends Dialog implements View.OnClickListen
 //                dialogAddToDo.show();
                 dialogAddToDo.show(activity.getFragmentManager(),"Add todo");
                 dismissThis();
+                break;
         }
     }
 }

@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
@@ -25,7 +24,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
     private int year;
     private int month;
     private int day;
-    private TextView timePicker;
+    private DatePicker datePicker;
 
 
     @Nullable
@@ -49,6 +48,11 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
                 EditText tagEdittext = (EditText) view.findViewById(R.id.dialog_add_todo_tag);
                 String tag = tagEdittext.getText().toString();
 
+
+
+
+
+
                 GeneralTask generalTask = new GeneralTask(name, new String[]{description}, tag);
 //                ToDo toDo = new ToDo(new Timestamp(year, month, day, 0, 0, 0, 0), generalTask);
 //                DummyToDos.ITEMS.add(toDo);
@@ -65,12 +69,12 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
             }
         });
 
-        timePicker = (TextView) view.findViewById(R.id.time_picker);
-        timePicker.setOnClickListener(new View.OnClickListener() {
+        datePicker = (DatePicker) view.findViewById(R.id.date_picker);
+        datePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment timePicker = new FragmentDatePicker();
-                timePicker.show(getFragmentManager(), "Date Picker");
+                DialogFragment datePickerFragment = new FragmentDatePicker();
+                datePickerFragment.show(getFragmentManager(), "Date Picker");
             }
         });
 
@@ -86,8 +90,8 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
 //        Locale current = getResources().getConfiguration().locale;
 //        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, current);
 
-//        timePicker.setText(sdf.toString());
-        timePicker.setText("" + day + "." + month + "." + year);
+//        datePicker.setText(sdf.toString());
+//        datePicker.setText("" + day + "." + month + "." + year);
     }
 
     public void dismissThis(boolean added) {
