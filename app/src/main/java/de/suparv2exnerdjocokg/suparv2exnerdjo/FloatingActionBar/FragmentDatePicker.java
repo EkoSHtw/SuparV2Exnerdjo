@@ -16,6 +16,7 @@ public class FragmentDatePicker extends DialogFragment {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
+//        c.getTime().af
 
         // Create a new instance of DatePickerDialog and return it
         return new DatePickerDialog(getActivity(), (DialogAddToDo) getFragmentManager().findFragmentByTag("Add todo"), year, month, day);

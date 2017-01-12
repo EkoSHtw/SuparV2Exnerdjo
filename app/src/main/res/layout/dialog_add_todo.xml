@@ -50,11 +50,17 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content" />-->
 
-    <TextView
-        android:id="@+id/time_picker"
-        android:hint="click here"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <!--<TextView-->
+        <!--android:id="@+id/time_picker"-->
+        <!--android:hint="click here"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <DatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></DatePicker>
+
 
     <Button
         android:id="@+id/dialog_todo_button_confirm"
