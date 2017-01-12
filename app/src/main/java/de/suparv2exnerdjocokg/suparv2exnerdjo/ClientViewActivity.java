@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -136,7 +137,7 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
 
     @Override
     public void onMenuFragmentInteraction(int position) {
-        switch(position) {
+        switch (position) {
             case -1:
                 Intent route = new Intent(this, Route.class);
                 startActivity(route);
@@ -200,7 +201,7 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
     public void onDocumentSelected(File position) {
         // The user selected the headline of an article from the HeadlinesFragment
         // Do something here to display that article
-        if(position.getName() == "Wunddokumentation") {
+        if (position.getName() == "Wunddokumentation") {
             WoundDocumentationFragment wFrag = new WoundDocumentationFragment();
 
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -211,6 +212,7 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
             trans.commit();
         }
     }
+
     public void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -225,12 +227,17 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
         DummyNotes.sortList();
         //update fragments
         // buggy, neue notizen nicht in reihenfolge
+
+        Fragment newFrag = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (newFrag instanceof LogBookFragment) {
+            ((LogBookFragment) newFrag).update();
+        }
     }
 
     @Override
     public void onClickCall(String number) {
         Intent callIntent = new Intent(Intent.ACTION_DIAL);
-        callIntent.setData(Uri.parse("tel:"+number));
+        callIntent.setData(Uri.parse("tel:" + number));
 
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
