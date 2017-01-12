@@ -1,6 +1,7 @@
-package layout;
+package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,18 +9,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
-import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -124,7 +125,6 @@ public class VitalFragment extends Fragment {
             }
         });
 
-
         final TextView bloodSugar  = (TextView) view.findViewById(R.id.blood_sugar);
         bloodSugar.setText("Blutzucker");
 
@@ -152,8 +152,22 @@ public class VitalFragment extends Fragment {
             }
         });
 
+        ImageButton plus = (ImageButton) view.findViewById(R.id.plus_button);
+        plus.setColorFilter(R.color.colorAccent);
+
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DialogAddVitalValue(context);
+            }
+        });
+
         graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
         graph.getGridLabelRenderer().setNumHorizontalLabels(7);
+
+        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+        graph.getLegendRenderer().setBackgroundColor(Color.argb(0,0,0,0));
 
         graph.getViewport().setMinX(d0.getTime());
         graph.getViewport().setMaxX(d6.getTime());
@@ -175,7 +189,7 @@ public class VitalFragment extends Fragment {
                 new DataPoint(d6, 78)
         });
         diastolicB.setTitle("Diastolischer Blutdruck");
-        diastolicB.setColor(R.color.colorAccent);
+        diastolicB.setColor(Color.argb(255, 104, 159, 56));
         diastolicB.setDrawDataPoints(true);
         diastolicB.setBackgroundColor(R.color.transparent);
         diastolicB.setDrawBackground(false);
@@ -189,12 +203,16 @@ public class VitalFragment extends Fragment {
                 new DataPoint(d6, 116)
         });
         systolicB.setTitle("Systolischer Blutdruck");
-        systolicB.setColor(R.color.colorAccent);
+        systolicB.setColor(Color.argb(255, 104, 125, 56));
         systolicB.setDrawDataPoints(true);
         systolicB.setBackgroundColor(R.color.colorAccent);
         systolicB.setDrawBackground(false);
         graph.addSeries(systolicB);
         graph.addSeries(diastolicB);
+
+        graph.getViewport().setMinY(70);
+        graph.getViewport().setMaxY(150);
+        graph.getViewport().setYAxisBoundsManual(true);
     }
 
     private void setBloodSugarTable(GraphView graph){
@@ -208,6 +226,8 @@ public class VitalFragment extends Fragment {
                 new DataPoint(d5, 103),
                 new DataPoint(d6, 95)
         });
+        morning.setTitle("Morgens");
+        morning.setColor(Color.argb(255, 104, 125, 56));
         LineGraphSeries<DataPoint> noon = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(d0, 100),
                 new DataPoint(d1, 104),
@@ -217,6 +237,8 @@ public class VitalFragment extends Fragment {
                 new DataPoint(d5, 125),
                 new DataPoint(d6, 98)
         });
+        noon.setTitle("Mittags");
+        noon.setColor(Color.argb(255, 80, 159, 90));
         LineGraphSeries<DataPoint> afternoon = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(d0, 97),
                 new DataPoint(d1, 142),
@@ -226,6 +248,8 @@ public class VitalFragment extends Fragment {
                 new DataPoint(d5, 130),
                 new DataPoint(d6, 120)
         });
+        afternoon.setTitle("Abends");
+        afternoon.setColor(Color.argb(255, 140, 159, 56));
         LineGraphSeries<DataPoint> night = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(d0, 99),
                 new DataPoint(d1, 119),
@@ -235,10 +259,16 @@ public class VitalFragment extends Fragment {
                 new DataPoint(d5, 111),
                 new DataPoint(d6, 130)
         });
+        night.setTitle("Nachts");
+        night.setColor(Color.argb(255, 104, 159, 56));
         graph.addSeries(morning);
         graph.addSeries(noon);
         graph.addSeries(afternoon);
         graph.addSeries(night);
+
+        graph.getViewport().setMinY(60);
+        graph.getViewport().setMaxY(200);
+        graph.getViewport().setYAxisBoundsManual(true);
     }
 
     private void setTempTable(GraphView graph){
@@ -254,7 +284,13 @@ public class VitalFragment extends Fragment {
                 new DataPoint(d6, 36)
 
         });
+        temp.setTitle("Körpertemperatur");
+        temp.setColor(Color.argb(255, 104, 159, 56));
         graph.addSeries(temp);
+
+        graph.getViewport().setMinY(30);
+        graph.getViewport().setMaxY(50);
+        graph.getViewport().setYAxisBoundsManual(true);
     }
 
     private void clearSelection(){
