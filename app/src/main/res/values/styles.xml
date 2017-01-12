@@ -47,6 +47,7 @@
     <style name="AppTextClientList" parent="@style/AppTextNormal">
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center</item>
+        <item name="android:textSize">16dp</item>
     </style>
 
     <style name="AppTextMenu" parent="@android:style/TextAppearance.DeviceDefault">

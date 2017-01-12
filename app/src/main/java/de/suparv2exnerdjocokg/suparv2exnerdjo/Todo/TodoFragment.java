@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
@@ -29,6 +32,7 @@ public class TodoFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private OnInfoClickedInteractionListener infoListener;
     private View view;
+    private static View oldSelection;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -72,12 +76,36 @@ public class TodoFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.ITEMS, mListener, infoListener));
+        recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.getUndone(), mListener, infoListener));
+
+
+        TextView doneHeader = (TextView) view.findViewById(R.id.done_headline);
+        if(DummyToDos.getDone().size()==0){
+            doneHeader.setVisibility(View.INVISIBLE);
+        }else{
+            doneHeader.setVisibility(View.VISIBLE);
+        }
+
+        TextView undoneHeader = (TextView) view.findViewById(R.id.undone_headline);
+        if(DummyToDos.getUndone().size()==0){
+            undoneHeader.setText("Sehr gut. Alle Aufgaben für heute sind erledigt.");
+            undoneHeader.setTextSize(16);
+        }else{
+            undoneHeader.setVisibility(View.VISIBLE);
+        }
+
+        RecyclerView recyclerViewDone = (RecyclerView) view.findViewById(R.id.todolist_done);
+        if (mColumnCount <= 1) {
+            recyclerViewDone.setLayoutManager(new LinearLayoutManager(context));
+        } else {
+            recyclerViewDone.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        }
+        recyclerViewDone.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.getDone(), mListener, infoListener));
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onListFragmentInteraction(-1);
+                mListener.onListFragmentInteraction(-1, true);
             }
         });
 
@@ -85,14 +113,41 @@ public class TodoFragment extends Fragment {
     }
 
     public void updateList(){
+        DummyToDos.sortAlphabet();
+
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.todolist);
         if (mColumnCount <= 1) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getView().getContext()));
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(getView().getContext(), mColumnCount));
         }
-        DummyToDos.sortAlphabet();
-        recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.ITEMS, mListener, infoListener));
+        recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.getUndone(), mListener, infoListener));
+
+        RecyclerView recyclerViewDone = (RecyclerView) view.findViewById(R.id.todolist_done);
+        if (mColumnCount <= 1) {
+            recyclerViewDone.setLayoutManager(new LinearLayoutManager(getView().getContext()));
+        } else {
+            recyclerViewDone.setLayoutManager(new GridLayoutManager(getView().getContext(), mColumnCount));
+        }
+        recyclerViewDone.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.getDone(), mListener, infoListener));
+
+        TextView doneHeader = (TextView) view.findViewById(R.id.done_headline);
+        if(DummyToDos.getDone().size()==0){
+            doneHeader.setVisibility(View.INVISIBLE);
+        }else{
+            doneHeader.setVisibility(View.VISIBLE);
+        }
+
+        TextView undoneHeader = (TextView) view.findViewById(R.id.undone_headline);
+        if(DummyToDos.getUndone().size()==0){
+            undoneHeader.setText("Sehr gut. Alle Aufgaben für heute sind erledigt.");
+            undoneHeader.setTextSize(16);
+        }else{
+            undoneHeader.setVisibility(View.VISIBLE);
+            undoneHeader.setText("Deine Aufgaben für heute:");
+            undoneHeader.setTextAppearance(getContext(), R.style.AppTextSmall);
+            undoneHeader.setTextColor(getResources().getColor(R.color.colorAccent));
+        }
     }
 
     // Called when a fragment is first attached to its context. onCreate(Bundle) will be called after this.
@@ -116,6 +171,14 @@ public class TodoFragment extends Fragment {
         infoListener = null;
     }
 
+    public static View getOldSelection(){
+        return oldSelection;
+    }
+
+    public static void setOldSelection(View newSelection){
+        oldSelection = newSelection;
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -128,9 +191,9 @@ public class TodoFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(int position);
+        void onListFragmentInteraction(int position, boolean done);
     }
     public interface OnInfoClickedInteractionListener{
-        void onInfoClickedListener(int position);
+        void onInfoClickedListener(int position, boolean done);
     }
 }
