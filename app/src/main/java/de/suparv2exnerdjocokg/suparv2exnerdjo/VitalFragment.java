@@ -158,7 +158,8 @@ public class VitalFragment extends Fragment {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DialogAddVitalValue(context);
+                DialogAddVitalValue dialog = new DialogAddVitalValue(context);
+                dialog.show();
             }
         });
 

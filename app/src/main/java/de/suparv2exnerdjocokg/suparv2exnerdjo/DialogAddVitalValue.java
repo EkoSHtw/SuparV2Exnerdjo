@@ -3,6 +3,9 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -21,7 +24,16 @@ public class DialogAddVitalValue extends Dialog {
         setContentView(R.layout.dialgog_add_vital_value);
 
 
-        TextView note = (TextView) findViewById(R.id.edit);
+        final EditText note = (EditText) findViewById(R.id.edit);
+
+        Button confirm = (Button) findViewById(R.id.confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String text = note.getText().toString();
+                dismiss();
+            }
+        });
 
     }
 }
