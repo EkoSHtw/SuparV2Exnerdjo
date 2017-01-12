@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import java.util.List;
+
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
@@ -33,7 +35,7 @@ public class ShowInfo extends Fragment {
 
     // TODO: Rename and change types of parameters
     private int position;
-    private String mParam2;
+    private boolean done;
 
 
     public ShowInfo() {
@@ -61,6 +63,9 @@ public class ShowInfo extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             position = getArguments().getInt(ARG_Position);
+            if(getArguments().getBoolean("done")){
+                done = getArguments().getBoolean("done");
+            }
         }
     }
 
@@ -69,12 +74,19 @@ public class ShowInfo extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_info, container, false);
 
+        List<ToDo> actualList;
+        if(done){
+            actualList = DummyToDos.getDone();
+        }else{
+            actualList = DummyToDos.getUndone();
+        }
+
         TextView info = (TextView) view.findViewById(R.id.info_headline);
-        info.setText(DummyToDos.ITEMS.get(position).getTask().getName());
+        info.setText(actualList.get(position).getTask().getName());
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.show_info);
 
 
-        for(int i = 0; i < DummyToDos.ITEMS.get(position).getTask().getDescription().length; i++){
+        for(int i = 0; i < actualList.get(position).getTask().getDescription().length; i++){
             LinearLayout bigLayout = new LinearLayout(view.getContext());
             LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             lparams.setMargins(0,0,0,5);
@@ -92,12 +104,11 @@ public class ShowInfo extends Fragment {
             bigLayout.addView(number);
 
 
-
             TextView newT = new TextView(view.getContext());
             newT.setLayoutParams(lparams2);
-            newT.setText(DummyToDos.ITEMS.get(position).getTask().getDescription()[i]);
+            newT.setText(actualList.get(position).getTask().getDescription()[i]);
             newT.setTextAppearance(view.getContext(), R.style.AppTextNormal);
-            newT.setGravity(Gravity.CENTER_VERTICAL);
+            newT.setGravity(Gravity.BOTTOM);
             bigLayout.addView(newT);
         }
 

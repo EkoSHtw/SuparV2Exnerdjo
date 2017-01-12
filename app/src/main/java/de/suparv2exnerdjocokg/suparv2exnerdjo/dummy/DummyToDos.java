@@ -96,6 +96,26 @@ public class DummyToDos {
         }
     }
 
+    public static List<ToDo> getDone(){
+        List<ToDo> done = new ArrayList<>();
+        for(int i = 0; i < ITEMS.size(); i++){
+            if(ITEMS.get(i).getTask().isDone()){
+                done.add(ITEMS.get(i));
+            }
+        }
+        return done;
+    }
+
+    public static List<ToDo> getUndone(){
+        List<ToDo> undone = new ArrayList<>();
+        for(int i = 0; i < ITEMS.size(); i++){
+            if(!ITEMS.get(i).getTask().isDone()){
+                undone.add(ITEMS.get(i));
+            }
+        }
+        return undone;
+    }
+
     public static void sortTime(){
         Collections.sort(ITEMS, new Comparator<ToDo>() {
             @Override

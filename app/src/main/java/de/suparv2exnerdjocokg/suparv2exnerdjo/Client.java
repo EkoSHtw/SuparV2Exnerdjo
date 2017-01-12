@@ -9,6 +9,7 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
 
@@ -32,7 +33,7 @@ public class Client implements Serializable {
 
   private String concerns;
 
-  private ArrayList<ToDo> toDoList;
+  private List<ToDo> toDoList;
 
   private ArrayList<PhoneNumber> phoneNumber;
   private ArrayList<File> documentation;
@@ -58,7 +59,7 @@ public class Client implements Serializable {
   }
 
   public Client(int id, int imagePath, String firstName, String lastName, String dateString, ArrayList<ClientMedicine> medicineList,
-                ArrayList<Service> erbrachteLeistung, ArrayList<ToDo> toDoList, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber){
+                ArrayList<Service> erbrachteLeistung, List<ToDo> toDoList, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber){
     this.firstName = firstName;
     this.lastName = lastName;
     this.id = id;
@@ -67,11 +68,8 @@ public class Client implements Serializable {
     String dateFormat = "dd/mm/yyyy";
    // this.birthDate = stringToDate(dateString, dateFormat);
     this.birthDate = dateString;
-    this.medicineList = new ArrayList<ClientMedicine>();
     this.medicineList = medicineList;
-    this.erbrachteLeistung = new ArrayList<Service>();
     this.erbrachteLeistung = erbrachteLeistung;
-    this.toDoList = new ArrayList<ToDo>();
     this.toDoList = toDoList;
     this.concerns= infodump;
     this.carelevel = carelevel;
@@ -157,11 +155,11 @@ public class Client implements Serializable {
     this.birthDate = birthDate;
   }
 
-  public ArrayList<ToDo> getToDoList() {
+  public List<ToDo> getToDoList() {
     return toDoList;
   }
 
-  public void setToDoList(ArrayList<ToDo> toDoList) {
+  public void setToDoList(List<ToDo> toDoList) {
     this.toDoList = toDoList;
   }
 
