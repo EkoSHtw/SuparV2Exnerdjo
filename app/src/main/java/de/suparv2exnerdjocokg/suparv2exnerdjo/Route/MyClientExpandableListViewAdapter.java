@@ -101,7 +101,7 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
 
         final Client client = mClients.get(groupPosition);
 
-        TextView time = (TextView) convertView.findViewById(R.id.timeRoute);
+        TextView time = (TextView) convertView.findViewById(R.id.time_route);
         int count = mClients.size();
         double timePerClient = 8.0/count;
         double start = groupPosition*timePerClient+8;
@@ -117,7 +117,7 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         ImageView image = (ImageView) convertView.findViewById(R.id.image);
         image.setImageDrawable(convertView.getResources().getDrawable(client.getImagePath()));
 
-        ImageButton routeButton = (ImageButton) convertView.findViewById(R.id.routeButton);
+        ImageButton routeButton = (ImageButton) convertView.findViewById(R.id.route_button);
         routeButton.setColorFilter(convertView.getResources().getColor(R.color.colorPrimary));
 
         ImageButton arrow = (ImageButton) convertView.findViewById(R.id.arrow);
@@ -139,10 +139,16 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         });
         routeButton.setFocusable(false);
 
+        TextView taskStatus = (TextView) convertView.findViewById(R.id.task_status);
+        int taskAmount = DummyToDos.ITEMS.size();
+        int tasksDone = DummyToDos.getDone().size();
+
+        taskStatus.setText(tasksDone+"/"+taskAmount);
+
         ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar1);
 
         Date currentTime = new Date();
-        int hour = currentTime.getHours() - (int)start-4;
+        int hour = currentTime.getHours() - (int)start-5;
         Log.i("", "Stunde: "+hour);
         int minute = currentTime.getMinutes();
         Log.i("", "Minute: "+minute);
