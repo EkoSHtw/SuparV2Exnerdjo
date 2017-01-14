@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
@@ -22,6 +23,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.list;
+import static de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes.ITEMS;
 
 
 public class LogBookFragment extends Fragment implements AdapterView.OnItemSelectedListener {
@@ -74,8 +76,8 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
             public void afterTextChanged(Editable arg0) {
             }
         });
-        mRecyclerView.setAdapter(recyclerViewAdapter);
-
+//        mRecyclerView.setAdapter(recyclerViewAdapter);
+        update();
         return view;
     }
 
@@ -117,12 +119,14 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     private void prepareList() {
-        notes = (ArrayList) DummyNotes.ITEMS;
+        notes = (ArrayList) ITEMS;
     }
 
     public void update() {
 //        notes = ((ClientViewActivity)getActivity()).client.
-        notes = (ArrayList) DummyNotes.ITEMS;
+        Collections.copy(this.notes, DummyNotes.ITEMS);
+//        Collections.sort(notes);
+        Collections.sort(ITEMS,Collections.<Note>reverseOrder());
         recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
         mRecyclerView.setAdapter(recyclerViewAdapter);
     }
