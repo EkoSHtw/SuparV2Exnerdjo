@@ -2,6 +2,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.Route;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,12 +14,14 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.FrameLayout.LayoutParams;
 
 import org.w3c.dom.Text;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,6 +35,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 /**
  * Created by dsfd on 29.12.2016.
@@ -100,7 +104,9 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         TextView time = (TextView) convertView.findViewById(R.id.timeRoute);
         int count = mClients.size();
         double timePerClient = 8.0/count;
-        time.setText((int)(groupPosition*timePerClient+8)+":00 Uhr\n - \n"+(int)((groupPosition*timePerClient)+timePerClient+8)+":00 Uhr");
+        double start = groupPosition*timePerClient+8;
+        double end = ((groupPosition*timePerClient)+timePerClient+8);
+        time.setText((int)start +":00 Uhr\n - \n"+(int)end+":00 Uhr");
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
         name.setText(client.getFirstName()+" "+client.getLastName());
@@ -132,6 +138,33 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
             }
         });
         routeButton.setFocusable(false);
+
+        ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar1);
+
+        Date currentTime = new Date();
+        int hour = currentTime.getHours() - (int)start-4;
+        Log.i("", "Stunde: "+hour);
+        int minute = currentTime.getMinutes();
+        Log.i("", "Minute: "+minute);
+
+        double max = timePerClient;
+        double progress = hour+((double)minute/60);
+
+
+        progressBar.setMax((int)(timePerClient*100));
+        Log.i("", "Max: "+timePerClient);
+
+        progressBar.setProgress((int)(progress*100));
+        Log.i("", "Progress: "+progress);
+
+        if(progress >= max){
+            progressBar.setVisibility(View.INVISIBLE);
+            if(DummyToDos.getUndone().size() == 0) {
+                convertView.setBackgroundColor(Color.argb(100, 104, 159, 56));
+            }else{
+                convertView.setBackgroundColor(Color.argb(100, 159, 56, 56));
+            }
+        }
 
         return convertView;
     }

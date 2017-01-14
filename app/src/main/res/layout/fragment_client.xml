@@ -6,6 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/progressbar_vertical"
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        />
+
     <TextView
         android:id="@+id/timeRoute"
         android:layout_width="0dp"
