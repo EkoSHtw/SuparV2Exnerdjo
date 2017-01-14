@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -186,6 +187,13 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         TextView tView = (TextView) convertView.findViewById(R.id.todo);
         ToDo todo = (ToDo) getChild(groupPosition, childPosition);
         tView.setText(todo.getTask().getName());
+
+        ImageView taskDone = (ImageView) convertView.findViewById(R.id.check_box_task);
+        if(todo.getTask().isDone()){
+            taskDone.setImageResource(android.R.drawable.checkbox_on_background);
+        }else{
+            taskDone.setImageResource(android.R.drawable.checkbox_off_background);
+        }
 
         return convertView;
     }
