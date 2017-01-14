@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import de.suparv2exnerdjocokg.suparv2exnerdjo.VitalFragment.OnFragmentInteractionListener;
 
 /**
  * Created by dsfd on 12.01.2017.
@@ -14,8 +17,13 @@ import android.widget.TextView;
 
 public class DialogAddVitalValue extends Dialog {
 
-    public DialogAddVitalValue(Context context) {
+    OnFragmentInteractionListener mListener;
+    int id;
+
+    public DialogAddVitalValue(Context context, OnFragmentInteractionListener listener, int id) {
         super(context);
+        mListener = listener;
+        this.id = id;
     }
 
     @Override
@@ -24,13 +32,29 @@ public class DialogAddVitalValue extends Dialog {
         setContentView(R.layout.dialgog_add_vital_value);
 
 
-        final EditText note = (EditText) findViewById(R.id.edit);
+        final NumberPicker note = (NumberPicker) findViewById(R.id.edit);
+        switch (id){
+            case R.id.temp:
+                note.setMinValue(34);
+                note.setMaxValue(42);
+                break;
+            case R.id.blood_pressure:
+                note.setMinValue(70);
+                note.setMaxValue(120);
+                break;
+            case R.id.blood_sugar:
+                note.setMinValue(90);
+                note.setMaxValue(210);
+                break;
+        }
+        note.setWrapSelectorWheel(true);
 
         Button confirm = (Button) findViewById(R.id.confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = note.getText().toString();
+                int text = note.getValue();
+                mListener.newValueAdded(text, id);
                 dismiss();
             }
         });

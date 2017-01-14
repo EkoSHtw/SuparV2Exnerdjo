@@ -21,6 +21,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +40,8 @@ public class VitalFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private OnFragmentInteractionListener mListener;
+    private View view;
     private Context context;
     private TextView oldSelection;
     private Date d0;
@@ -87,7 +90,7 @@ public class VitalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_vital, container, false);
+        view = inflater.inflate(R.layout.fragment_vital, container, false);
         context = view.getContext();
 
         final GraphView graph = (GraphView) view.findViewById(R.id.graph);
@@ -112,7 +115,7 @@ public class VitalFragment extends Fragment {
 
         oldSelection = bloodPressure;
         bloodPressure.setTextAppearance(context, R.style.AppTextHeadline);
-        setBloodPressureTable(graph);
+        setBloodPressureTable(graph, -1);
 
         bloodPressure.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +124,7 @@ public class VitalFragment extends Fragment {
                 oldSelection = bloodPressure;
                 Log.i("", "click detected");
                 bloodPressure.setTextAppearance(context, R.style.AppTextHeadline);
-                setBloodPressureTable(graph);
+                setBloodPressureTable(graph, -1);
             }
         });
 
@@ -133,7 +136,7 @@ public class VitalFragment extends Fragment {
             public void onClick(View v) {
                 clearSelection();
                 oldSelection = bloodSugar;
-                setBloodSugarTable(graph);
+                setBloodSugarTable(graph, -1);
                 bloodSugar.setTextAppearance(context, R.style.AppTextHeadline);
             }
         });
@@ -147,7 +150,7 @@ public class VitalFragment extends Fragment {
             public void onClick(View v) {
                 clearSelection();
                 oldSelection = temp;
-                setTempTable(graph);
+                setTempTable(graph, -1);
                 temp.setTextAppearance(context, R.style.AppTextHeadline);
             }
         });
@@ -158,7 +161,7 @@ public class VitalFragment extends Fragment {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogAddVitalValue dialog = new DialogAddVitalValue(context);
+                DialogAddVitalValue dialog = new DialogAddVitalValue(context, mListener, oldSelection.getId());
                 dialog.show();
             }
         });
@@ -178,125 +181,136 @@ public class VitalFragment extends Fragment {
         return view;
     }
 
-    private void setBloodPressureTable(GraphView graph) {
-        graph.removeAllSeries();
-        LineGraphSeries<DataPoint> diastolicB = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(d0, 79),
-                new DataPoint(d1, 81),
-                new DataPoint(d2, 82),
-                new DataPoint(d3, 78),
-                new DataPoint(d4, 79),
-                new DataPoint(d5, 77),
-                new DataPoint(d6, 78)
-        });
-        diastolicB.setTitle("Diastolischer Blutdruck");
-        diastolicB.setColor(Color.argb(255, 104, 159, 56));
-        diastolicB.setDrawDataPoints(true);
-        diastolicB.setBackgroundColor(R.color.transparent);
-        diastolicB.setDrawBackground(false);
-        LineGraphSeries<DataPoint> systolicB = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(d0, 119),
-                new DataPoint(d1, 122),
-                new DataPoint(d2, 120),
-                new DataPoint(d3, 119),
-                new DataPoint(d4, 119),
-                new DataPoint(d5, 115),
-                new DataPoint(d6, 116)
-        });
-        systolicB.setTitle("Systolischer Blutdruck");
-        systolicB.setColor(Color.argb(255, 104, 125, 56));
-        systolicB.setDrawDataPoints(true);
-        systolicB.setBackgroundColor(R.color.colorAccent);
-        systolicB.setDrawBackground(false);
-        graph.addSeries(systolicB);
-        graph.addSeries(diastolicB);
+    private void setBloodPressureTable(GraphView graph, int newValue) {
+        if (newValue == -1) {
+            graph.removeAllSeries();
+            LineGraphSeries<DataPoint> diastolicB = new LineGraphSeries<>(new DataPoint[]{
+                    new DataPoint(d0, 79),
+                    new DataPoint(d1, 81),
+                    new DataPoint(d2, 82),
+                    new DataPoint(d3, 78),
+                    new DataPoint(d4, 79),
+                    new DataPoint(d5, 77),
+                    new DataPoint(d6, 78)
+            });
+            diastolicB.setTitle("Diastolischer Blutdruck");
+            diastolicB.setColor(Color.argb(255, 104, 159, 56));
+            diastolicB.setDrawDataPoints(true);
+            diastolicB.setBackgroundColor(R.color.transparent);
+            diastolicB.setDrawBackground(false);
+            LineGraphSeries<DataPoint> systolicB = new LineGraphSeries<>(new DataPoint[]{
+                    new DataPoint(d0, 119),
+                    new DataPoint(d1, 122),
+                    new DataPoint(d2, 120),
+                    new DataPoint(d3, 119),
+                    new DataPoint(d4, 119),
+                    new DataPoint(d5, 115),
+                    new DataPoint(d6, 116)
+            });
+            systolicB.setTitle("Systolischer Blutdruck");
+            systolicB.setColor(Color.argb(255, 104, 125, 56));
+            systolicB.setDrawDataPoints(true);
+            systolicB.setBackgroundColor(R.color.colorAccent);
+            systolicB.setDrawBackground(false);
+            graph.addSeries(systolicB);
+            graph.addSeries(diastolicB);
 
-        graph.getViewport().setMinY(70);
-        graph.getViewport().setMaxY(150);
-        graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMinY(70);
+            graph.getViewport().setMaxY(150);
+            graph.getViewport().setYAxisBoundsManual(true);
+        }else{
+            List series = graph.getSeries();
+            LineGraphSeries diastolicB = (LineGraphSeries) series.get(0);
+            LineGraphSeries systolicB = (LineGraphSeries) series.get(1);
+
+        }
     }
 
-    private void setBloodSugarTable(GraphView graph){
-        graph.removeAllSeries();
-        LineGraphSeries<DataPoint> morning = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(d0, 106),
-                new DataPoint(d1, 136),
-                new DataPoint(d2, 110),
-                new DataPoint(d3, 114),
-                new DataPoint(d4, 94),
-                new DataPoint(d5, 103),
-                new DataPoint(d6, 95)
-        });
-        morning.setTitle("Morgens");
-        morning.setColor(Color.argb(255, 104, 125, 56));
-        morning.setDrawDataPoints(true);
-        LineGraphSeries<DataPoint> noon = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(d0, 100),
-                new DataPoint(d1, 104),
-                new DataPoint(d2, 68),
-                new DataPoint(d3, 110),
-                new DataPoint(d4, 83),
-                new DataPoint(d5, 125),
-                new DataPoint(d6, 98)
-        });
-        noon.setTitle("Mittags");
-        noon.setColor(Color.argb(255, 80, 159, 90));
-        noon.setDrawDataPoints(true);
-        LineGraphSeries<DataPoint> afternoon = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(d0, 97),
-                new DataPoint(d1, 142),
-                new DataPoint(d2, 81),
-                new DataPoint(d3, 91),
-                new DataPoint(d4, 78),
-                new DataPoint(d5, 130),
-                new DataPoint(d6, 120)
-        });
-        afternoon.setTitle("Abends");
-        afternoon.setColor(Color.argb(255, 140, 159, 56));
-        afternoon.setDrawDataPoints(true);
-        LineGraphSeries<DataPoint> night = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(d0, 99),
-                new DataPoint(d1, 119),
-                new DataPoint(d2, 86),
-                new DataPoint(d3, 167),
-                new DataPoint(d4, 98),
-                new DataPoint(d5, 111),
-                new DataPoint(d6, 130)
-        });
-        night.setTitle("Nachts");
-        night.setColor(Color.argb(255, 104, 159, 56));
-        night.setDrawDataPoints(true);
-        graph.addSeries(morning);
-        graph.addSeries(noon);
-        graph.addSeries(afternoon);
-        graph.addSeries(night);
+    private void setBloodSugarTable(GraphView graph, int newValue){
+        if (newValue == -1) {
+            graph.removeAllSeries();
+            LineGraphSeries<DataPoint> morning = new LineGraphSeries<>(new DataPoint[]{
+                    new DataPoint(d0, 106),
+                    new DataPoint(d1, 136),
+                    new DataPoint(d2, 110),
+                    new DataPoint(d3, 114),
+                    new DataPoint(d4, 94),
+                    new DataPoint(d5, 103),
+                    new DataPoint(d6, 95)
+            });
+            morning.setTitle("Morgens");
+            morning.setColor(Color.argb(255, 104, 125, 56));
+            morning.setDrawDataPoints(true);
+            LineGraphSeries<DataPoint> noon = new LineGraphSeries<>(new DataPoint[]{
+                    new DataPoint(d0, 100),
+                    new DataPoint(d1, 104),
+                    new DataPoint(d2, 68),
+                    new DataPoint(d3, 110),
+                    new DataPoint(d4, 83),
+                    new DataPoint(d5, 125),
+                    new DataPoint(d6, 98)
+            });
+            noon.setTitle("Mittags");
+            noon.setColor(Color.argb(255, 80, 159, 90));
+            noon.setDrawDataPoints(true);
+            LineGraphSeries<DataPoint> afternoon = new LineGraphSeries<>(new DataPoint[]{
+                    new DataPoint(d0, 97),
+                    new DataPoint(d1, 142),
+                    new DataPoint(d2, 81),
+                    new DataPoint(d3, 91),
+                    new DataPoint(d4, 78),
+                    new DataPoint(d5, 130),
+                    new DataPoint(d6, 120)
+            });
+            afternoon.setTitle("Abends");
+            afternoon.setColor(Color.argb(255, 140, 159, 56));
+            afternoon.setDrawDataPoints(true);
+            LineGraphSeries<DataPoint> night = new LineGraphSeries<>(new DataPoint[]{
+                    new DataPoint(d0, 99),
+                    new DataPoint(d1, 119),
+                    new DataPoint(d2, 86),
+                    new DataPoint(d3, 167),
+                    new DataPoint(d4, 98),
+                    new DataPoint(d5, 111),
+                    new DataPoint(d6, 130)
+            });
+            night.setTitle("Nachts");
+            night.setColor(Color.argb(255, 104, 159, 56));
+            night.setDrawDataPoints(true);
+            graph.addSeries(morning);
+            graph.addSeries(noon);
+            graph.addSeries(afternoon);
+            graph.addSeries(night);
 
-        graph.getViewport().setMinY(60);
-        graph.getViewport().setMaxY(200);
-        graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMinY(60);
+            graph.getViewport().setMaxY(200);
+            graph.getViewport().setYAxisBoundsManual(true);
+        }
     }
 
-    private void setTempTable(GraphView graph){
-        graph.removeAllSeries();
-        LineGraphSeries<DataPoint> temp = new LineGraphSeries<>(new DataPoint[] {
+    private void setTempTable(GraphView graph, int newValue){
+        if (newValue == -1) {
+            graph.removeAllSeries();
+            LineGraphSeries<DataPoint> temp = new LineGraphSeries<>(new DataPoint[]{
 
-                new DataPoint(d0,36.5),
-                new DataPoint(d1,36.25),
-                new DataPoint(d2, 37.5),
-                new DataPoint(d3, 36.7),
-                new DataPoint(d4, 35.8),
-                new DataPoint(d5, 36.5),
-                new DataPoint(d6, 36)
+                    new DataPoint(d0, 36.5),
+                    new DataPoint(d1, 36.25),
+                    new DataPoint(d2, 37.5),
+                    new DataPoint(d3, 36.7),
+                    new DataPoint(d4, 35.8),
+                    new DataPoint(d5, 36.5),
+                    new DataPoint(d6, 36)
 
-        });
-        temp.setTitle("Körpertemperatur");
-        temp.setColor(Color.argb(255, 104, 159, 56));
-        temp.setDrawDataPoints(true);
-        graph.addSeries(temp);
+            });
+            temp.setTitle("Körpertemperatur");
+            temp.setColor(Color.argb(255, 104, 159, 56));
+            temp.setDrawDataPoints(true);
+            graph.addSeries(temp);
 
-        graph.getViewport().setMinY(30);
-        graph.getViewport().setMaxY(50);
-        graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMinY(34);
+            graph.getViewport().setMaxY(42);
+            graph.getViewport().setYAxisBoundsManual(true);
+        }
     }
 
     private void clearSelection(){
@@ -305,31 +319,40 @@ public class VitalFragment extends Fragment {
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        /*if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }*/
+    public void addValue(int value, int id){
+        final GraphView graph = (GraphView) view.findViewById(R.id.graph);
+
+        switch (id){
+            case R.id.temp:
+                setTempTable(graph, value);
+                break;
+            case R.id.blood_pressure:
+                setTempTable(graph, value);
+                break;
+            case R.id.blood_sugar:
+                setTempTable(graph, value);
+                break;
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-       /* if (context instanceof OnFragmentInteractionListener) {
+        if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
-        }*/
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        //mListener = null;
+        mListener = null;
     }
 
-    /**
+    /*
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
@@ -338,9 +361,9 @@ public class VitalFragment extends Fragment {
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
-
+    */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }*/
+        void newValueAdded(int value, int id);
+    }
 }

@@ -33,7 +33,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragme
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
-public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
+public class ClientViewActivity extends AppCompatActivity implements VitalFragment.OnFragmentInteractionListener ,BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
     public Client client;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -237,5 +237,26 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
             return;
         }
         startActivity(callIntent);
+    }
+
+    @Override
+    public void newValueAdded(int value, int id) {
+        VitalFragment newFrag = (VitalFragment) getSupportFragmentManager().findFragmentById(R.id.vital_values);
+        if (newFrag != null) {
+            newFrag.addValue(value, id);
+        } else {
+            newFrag = new VitalFragment();
+            Bundle args = new Bundle();
+            //args.putInt(ClientView.ARG_Position, position);
+            //args.putBoolean("done", done);
+            newFrag.setArguments(args);
+
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+            trans.replace(R.id.vital_values, newFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
+        }
     }
 }
