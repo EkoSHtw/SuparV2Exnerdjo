@@ -17,7 +17,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Carer;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.FragmentDatePicker;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
@@ -32,9 +31,11 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     private final List<ToDo> mValues;
     private final TodoFragment.OnListFragmentInteractionListener mListener;
     private final TodoFragment.OnInfoClickedInteractionListener infoListener;
+    TodoFragment fragment;
 
 
-    public MyTodoRecyclerViewAdapter(List<ToDo> items, TodoFragment.OnListFragmentInteractionListener listener, TodoFragment.OnInfoClickedInteractionListener newInfoListener) {
+    public MyTodoRecyclerViewAdapter(TodoFragment fragment, List<ToDo> items, TodoFragment.OnListFragmentInteractionListener listener, TodoFragment.OnInfoClickedInteractionListener newInfoListener) {
+        this.fragment = fragment;
         mValues = items;
         mListener = listener;
         infoListener = newInfoListener;
@@ -54,13 +55,24 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.mItem = mValues.get(position);
         final GeneralTask currentTask = holder.mItem.getTask();
         holder.mNameView.setText(mValues.get(position).getTask().getName());
-        holder.shiftTask.setColorFilter(holder.mView.getResources().getColor(R.color.grey));
 
-        if(holder.mItem.getTask().isDone()){
+        if(currentTask.isDone()){
             holder.mCheckBox.setChecked(true);
             //holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorPrimaryLight));
             holder.mInfo.clearColorFilter();
+            if(currentTask.getDaysShiftet() > 0){
+                holder.shiftTask.setVisibility(View.INVISIBLE);
+                if(currentTask.getDaysShiftet() > 1) {
+                    holder.shiftet.setText("um " + currentTask.getDaysShiftet() + " Tage verschoben");
+                }else{
+                    holder.shiftet.setText("um " + currentTask.getDaysShiftet() + " Tag verschoben");
+                }
+            }
+        }else{
+            holder.shiftTask.setColorFilter(holder.mView.getResources().getColor(R.color.grey));
+            holder.shiftet.setVisibility(View.INVISIBLE);
         }
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +111,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                             }
                         }
                     }
+                    currentTask.setShiftet(0);
 
                 }
             }
@@ -119,7 +132,8 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.shiftTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onDatePickerInteraction(position);
+                mListener.onDatePickerInteraction(fragment, currentTask);
+
             }
         });
     }
@@ -145,6 +159,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mNameView;
+        public final TextView shiftet;
         public final ImageButton shiftTask;
         public final ImageButton mInfo;
         public final CheckBox mCheckBox;
@@ -154,6 +169,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             super(view);
             mView = view;
             mNameView = (TextView) view.findViewById(R.id.name);
+            shiftet = (TextView) view.findViewById(R.id.shiftet);
             shiftTask = (ImageButton) view.findViewById(R.id.shift_task);
             mInfo = (ImageButton) view.findViewById(R.id.info);
             mCheckBox = (CheckBox) view.findViewById(R.id.checkBox);

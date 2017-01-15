@@ -37,7 +37,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
-public class ClientViewActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
+public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
     public Client client;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -116,7 +116,6 @@ public class ClientViewActivity extends AppCompatActivity implements DatePickerD
             trans.commit();
         }
     }
-
 
 
     @Override
@@ -246,23 +245,8 @@ public class ClientViewActivity extends AppCompatActivity implements DatePickerD
     }
 
     @Override
-    public void onDatePickerInteraction(int position) {
-        DialogShiftTask dialogShiftTask = new DialogShiftTask(this, position);
+    public void onDatePickerInteraction(TodoFragment frag, GeneralTask task) {
+        DialogShiftTask dialogShiftTask = new DialogShiftTask(frag, this, task);
         dialogShiftTask.show();
-    }
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        c.set(Calendar.HOUR, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-
-        Timestamp time = new Timestamp(c.getTimeInMillis() / 1000L);
     }
 }

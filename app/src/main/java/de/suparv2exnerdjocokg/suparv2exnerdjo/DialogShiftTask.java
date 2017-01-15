@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 /**
@@ -19,14 +20,16 @@ public class DialogShiftTask extends Dialog implements View.OnClickListener {
     private ClientViewActivity activity;
     private Button confirm;
     private Button cancel;
-    private int position;
+    private GeneralTask task;
+    private TodoFragment frag;
 
 
 
-    public DialogShiftTask(Activity activity, int position) {
+    public DialogShiftTask(TodoFragment frag, Activity activity, GeneralTask task) {
         super(activity);
         this.activity = (ClientViewActivity) activity;
-        this.position = position;
+        this.task = task;
+        this.frag = frag;
     }
 
     @Override
@@ -50,8 +53,11 @@ public class DialogShiftTask extends Dialog implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.select_shift:
                 NumberPicker input = (NumberPicker) findViewById(R.id.number_picker);
-                DummyToDos.ITEMS.remove(position);
+                int inputValue = input.getValue();
+                task.setDone(true);
+                task.setShiftet(inputValue);
 
+                frag.updateList();
                 dismissDialog();
                 break;
             case R.id.cancel:
