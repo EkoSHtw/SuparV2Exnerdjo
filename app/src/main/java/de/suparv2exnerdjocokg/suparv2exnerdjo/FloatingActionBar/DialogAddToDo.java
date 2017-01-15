@@ -12,8 +12,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import java.sql.Timestamp;
+
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 /**
  * Created by v2 on 05.01.2017.
@@ -39,8 +43,8 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText nameEditText = (EditText) view.findViewById(R.id.dialog_add_todo_name);
-                String name = nameEditText.getText().toString();
+//                EditText nameEditText = (EditText) view.findViewById(R.id.dialog_add_todo_name);
+//                String name = nameEditText.getText().toString();
 
                 EditText descriptionEditText = (EditText) view.findViewById(R.id.dialog_add_todo_description);
                 String description = descriptionEditText.getText().toString();
@@ -48,14 +52,14 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
                 EditText tagEdittext = (EditText) view.findViewById(R.id.dialog_add_todo_tag);
                 String tag = tagEdittext.getText().toString();
 
+                DatePicker datePicker = (DatePicker) view.findViewById(R.id.date_picker);
+               int day = datePicker.getDayOfMonth();
+                int month = datePicker.getMonth()+1;
+                int year = datePicker.getYear();
 
-
-
-
-
-                GeneralTask generalTask = new GeneralTask(name, new String[]{description}, tag);
-//                ToDo toDo = new ToDo(new Timestamp(year, month, day, 0, 0, 0, 0), generalTask);
-//                DummyToDos.ITEMS.add(toDo);
+                GeneralTask generalTask = new GeneralTask(tag, new String[]{description, ""+day+" "+ month+" "+ year}, tag);
+                ToDo toDo = new ToDo(new Timestamp(year, month, day, 0, 0, 0, 0), generalTask);
+                DummyToDos.ITEMS.add(toDo);
                 //was soll damit dann passieren
 
                 dismissThis(true);
