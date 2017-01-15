@@ -1,5 +1,8 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
+import android.app.Activity;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +17,11 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Carer;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.FragmentDatePicker;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 /**
 
@@ -49,6 +54,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.mItem = mValues.get(position);
         final GeneralTask currentTask = holder.mItem.getTask();
         holder.mNameView.setText(mValues.get(position).getTask().getName());
+        holder.shiftTask.setColorFilter(holder.mView.getResources().getColor(R.color.grey));
 
         if(holder.mItem.getTask().isDone()){
             holder.mCheckBox.setChecked(true);
@@ -97,6 +103,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 }
             }
         });
+
         holder.mInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +113,13 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 if(null!=infoListener) {
                     infoListener.onInfoClickedListener(position, holder.mItem.getTask().isDone());
                 }
+            }
+        });
+
+        holder.shiftTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onDatePickerInteraction(position);
             }
         });
     }
@@ -131,16 +145,18 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mNameView;
-        public final CheckBox mCheckBox;
+        public final ImageButton shiftTask;
         public final ImageButton mInfo;
+        public final CheckBox mCheckBox;
         public ToDo mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mNameView = (TextView) view.findViewById(R.id.name);
-            mCheckBox = (CheckBox) view.findViewById(R.id.checkBox);
+            shiftTask = (ImageButton) view.findViewById(R.id.shift_task);
             mInfo = (ImageButton) view.findViewById(R.id.info);
+            mCheckBox = (CheckBox) view.findViewById(R.id.checkBox);
         }
 
         @Override
