@@ -149,7 +149,7 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar1);
 
         Date currentTime = new Date();
-        int hour = currentTime.getHours() - (int)start-5;
+        int hour = currentTime.getHours() - (int)start;
         Log.i("", "Stunde: "+hour);
         int minute = currentTime.getMinutes();
         Log.i("", "Minute: "+minute);
