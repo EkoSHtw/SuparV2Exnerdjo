@@ -25,6 +25,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/tag" />
+
+    <AutoCompleteTextView
+        android:id="@+id/dialog_add_todo_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/type_here" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/description" />
 
     <EditText
@@ -33,16 +44,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/type_here" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tag" />
 
-    <EditText
-        android:id="@+id/dialog_add_todo_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/type_here" />
+
+
 
     <!--<fragment-->
         <!--android:id="@+id/frag_date_picker"-->
