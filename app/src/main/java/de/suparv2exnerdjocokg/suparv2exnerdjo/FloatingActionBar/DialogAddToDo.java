@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,9 +30,6 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 public class DialogAddToDo extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-    private int year;
-    private int month;
-    private int day;
     private DatePicker datePicker;
 
 
@@ -48,10 +44,13 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
         final AutoCompleteTextView tagEdittext = (AutoCompleteTextView) view.findViewById(R.id.dialog_add_todo_tag);
 
         String[] tags = getTags();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),R.layout.auto_complete_item,tags);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.auto_complete_item, tags);
 
         tagEdittext.setThreshold(1);
         tagEdittext.setAdapter(adapter);
+        datePicker = (DatePicker) view.findViewById(R.id.date_picker);
+        datePicker.setMinDate(System.currentTimeMillis() - 1000);
+
 
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,29 +63,36 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
 
                 String tag = tagEdittext.getText().toString().trim();
 
-                DatePicker datePicker = (DatePicker) view.findViewById(R.id.date_picker);
-                int day = datePicker.getDayOfMonth();
-                int month = datePicker.getMonth() + 1;
-                int year = datePicker.getYear();
+
+                if ("".equals(description) || "".equals(tag)) {
+
+                    if ("".equals(description)) {
+                        setHint(descriptionEditText);
+                    }
+                    if ("".equals(tag)) {
+                        setHint(tagEdittext);
+                    }
+
+                } else {
+
+                    int day = datePicker.getDayOfMonth();
+                    int month = datePicker.getMonth();
+                    int year = datePicker.getYear();
 
 
-                final Calendar c = Calendar.getInstance();
-                int thisYear = c.get(Calendar.YEAR);
-                int thisMonth = c.get(Calendar.MONTH);
-                int today = c.get(Calendar.DAY_OF_MONTH);
+                    GeneralTask generalTask = new GeneralTask(tag, new String[]{description, "" + day + " " + month + " " + year}, tag);
+                    ToDo toDo = new ToDo(new Timestamp(year, month, day, 0, 0, 0, 0), generalTask);
+                    DummyToDos.ITEMS.add(toDo);
+                    dismissThis(true);
+                }
 
                 /**
                  * https://www.tutorialspoint.com/android/android_auto_complete.htm
                  *http://stackoverflow.com/questions/20989809/text-view-with-suggestion-list
                  */
 
-
-                GeneralTask generalTask = new GeneralTask(tag, new String[]{description, "" + day + " " + month + " " + year}, tag);
-                ToDo toDo = new ToDo(new Timestamp(year, month, day, 0, 0, 0, 0), generalTask);
-                DummyToDos.ITEMS.add(toDo);
                 //was soll damit dann passieren
-
-                dismissThis(true);
+//                dismissThis(true);
             }
         });
 
@@ -109,6 +115,12 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
         return view;
     }
 
+    private void setHint(EditText editText) {
+        editText.setText("");
+        editText.setHint(R.string.text_not_set);
+        editText.setHintTextColor(getActivity().getResources().getColor(R.color.text_not_set_color));
+    }
+
     private String[] getTags() {
         Set<String> tags = new HashSet<>();
 //        DummyToDos.ITEMS
@@ -118,13 +130,10 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
             tags.add(toDo.getTask().getTag());
         }
 
-        return  tags.toArray(new String[tags.size()]);
+        return tags.toArray(new String[tags.size()]);
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        this.year = year;
-        this.month = month + 1;
-        this.day = day;
 
 //        String myFormat = "dd/MM/yy"; //In which you need put here
 //        Locale current = getResources().getConfiguration().locale;
