@@ -2,6 +2,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.dummy;
 
 import android.util.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class DummyClients {
         phoneNumber.add(num1);
         phoneNumber.add(num2);
         Client c = new Client(0,R.drawable.woman_image, "Helga","Stein","14.04.1958",null,null,null, "Schwerhörig. Trinkt gerne Tee. Redet gerne über Formel 1.",2,"Rotsteinweg 21A",phoneNumber);
+
         return c;
     }
 }

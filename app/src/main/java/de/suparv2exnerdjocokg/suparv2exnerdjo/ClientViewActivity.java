@@ -6,40 +6,53 @@ import android.content.Intent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.ImageActivity;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.ImageDisplayFragment;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription1;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription2;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription3;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.MoblilisationBeddingFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
-import static de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton.REQUEST_IMAGE_CAPTURE;
 
 public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener {
 
-    public Client client;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
 
+
+    public Client client;
 
     private FloatingActionButton fab;
-    private Context context;
     private Activity activity = this;
+    private Image takenPicture;
+    private File imPic;
 
 
     @Override
@@ -49,8 +62,19 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
 
         Intent intent = getIntent();
         client = (Client) DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
+        File f = new File(getFilesDir(), getString(R.string.wounddocname));
+        File f1 = new File(getFilesDir(),getString(R.string.mobdocname));
+        File f2 = new File(getFilesDir(),getString(R.string.doctorialprescription1));
+        File f3 = new File(getFilesDir(),getString(R.string.doctorialprescription2));
+        File f4 = new File(getFilesDir(),getString(R.string.doctorialprescription3));
+        ArrayList<File> b = new ArrayList<>();
+        b.add(f);
+        b.add(f1);
+        b.add(f2);
+        b.add(f3);
+        b.add(f4);
+        client.setDocumentation(b);
 
-        context = this;
 
 //        setContentView(R.layout.dialog_add_note);
 
@@ -187,47 +211,73 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
         }
     }
 
+    public Client getClient() {
+        return client;
+    }
+
     public void onDocumentSelected(File position) {
         // The user selected the headline of an article from the HeadlinesFragment
         // Do something here to display that article
-        if(position.getName() == "Wunddokumentation") {
-            WoundDocumentationFragment wFrag = new WoundDocumentationFragment();
+        Fragment wFrag = new Fragment();
+        String name = position.getName();
 
-            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+        ArrayList<String> doclist= new ArrayList<>();
+        doclist.add(getString(R.string.wounddocname));
+        doclist.add(getString(R.string.mobdocname));
+        doclist.add(getString(R.string.doctorialprescription1));
+        doclist.add(getString(R.string.doctorialprescription2));
+        doclist.add(getString(R.string.doctorialprescription3));
 
-            trans.replace(R.id.fragment_container, wFrag);
-            trans.addToBackStack(null);
-
-            trans.commit();
+        ArrayList<Fragment> fragList = new ArrayList<>();
+        fragList.add(new WoundDocumentationFragment());
+        fragList.add(new MoblilisationBeddingFragment());
+        fragList.add(new DoctorialPrescription1());
+        fragList.add(new DoctorialPrescription2());
+        fragList.add(new DoctorialPrescription3());
+        Log.println(Log.INFO, "2", "Kommt Durch");
+        Log.println(Log.INFO, "2", name);
+        for(int i =0; i < doclist.size(); i ++){
+            if (name == doclist.get(i)){
+                wFrag = fragList.get(i);
+                break;
+            }
         }
-    }
-    public void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+        trans.replace(R.id.fragment_container, wFrag);
+        trans.addToBackStack(null);
 
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, 1);
-        }
+        trans.commit();
     }
+
+
+
+    String mCurrentPhotoPath;
+
+
 
     public void showImage(String s){
         Intent intent = new Intent (this, ImageActivity.class);
         intent.putExtra(s,0);
         startActivity(intent);
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Image imageBitmap = (Image) extras.get("data");
-            Bundle bundle = new Bundle();
-            String myMessage = "Stackoverflow is cool!";
-            bundle.putString("message", myMessage );
-            WoundDocumentationFragment fragInfo = new WoundDocumentationFragment();
-            fragInfo.setArguments(bundle);
-            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
-            trans.commit();
 
-        }
+
+
+    public Image getTakenPicture(){
+        return this.takenPicture;
+    }
+
+    public void setPicture(String path){
+        ImageDisplayFragment f = new ImageDisplayFragment();
+        Bundle args = new Bundle();
+        args.putString("path", path);
+        f.setArguments(args);
+        FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+        trans.replace(R.id.fragment_container, f);
+        trans.addToBackStack(null);
+
+        trans.commit();
     }
 
 

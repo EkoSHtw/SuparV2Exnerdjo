@@ -87,6 +87,14 @@
     <string name="infodump">Schwerhörig.
     Trinkt gerne Tee. Redet gerne über Formel 1.</string>
     <string name="concerns">test</string>
+    <string name="clientmartial_status">ledig</string>
+    <string name="clientcitizenship">Deutsch</string>
+    <string name="clientlivingcon">lebt allein</string>
+    <string name="healthinsurance">Techniker Krankenkasse</string>
+    <string name="insurancenumber">5492854</string>
+    <string name="clientdoctor">Gert Witter</string>
+    <string name="clientdoctelnumber">82483037</string>
+    
 
 
     <!-- Logbook search bar -->
@@ -105,7 +113,27 @@
     <string name="hdz">Hdz</string>
     <string name="addRow">Zeile hinzufügen</string>
     <string name="saveContent">Speichern</string>
+
     <string name="wounddocname">Wunddokumentation</string>
+    <string name="mobdocname">Mobilisations Lagerungsplan</string>
+    <string name="mobdate">Datum</string>
+    <string name="mobdestination">Mobilisierungsziel</string>
+    <string name="mobMeasures">Mobilisierungsmaßnahmen</string>
+    <string name="mobcharacteristics">Besonderheiten</string>;
+    <string name="mobtime">Uhrpunkt</string>
+
+    <string name="doctorialprescription1">Ärztlich Verordnung 1 Verbandswechsel etc.</string>
+    <string name="doctorialprescription2">Ärztlich Verordnung 2 Injektion Infusion</string>
+    <string name="doctorialprescription3">Ärztlich Verordnung 3 Sonderkost parenterale Ernährung</string>
+    <string name="doctpre1hdz">Hdz. Pflege</string>
+    <string name="doctorname">Arztname</string>
+    <string name="doctorialmeasure">ärztlich verordnete Maßnahme</string>
+    <string name="frequency">Häufigkeit</string>
+    <string name="dochdz">Hdz. Arzt</string>
+    <string name="endon">abgesetzt am</string>
+    <string name="injec_infu">Injektion/Infusion</string>
+    <string name="specialdiet">Verabreichung von Sondenkost / enterale Ernährung </string>
+
     <string name="addPicture">hinzufügen</string>
     <string name="picture">Bild</string>
 

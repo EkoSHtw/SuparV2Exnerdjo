@@ -2,8 +2,14 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.Documents;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.TableLayout;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -19,9 +26,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
@@ -31,11 +40,13 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.TableRowExpand;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by Eko on 12.12.2016.
  */
 
-public class WoundDocumentationFragment extends Fragment {
+public class WoundDocumentationFragment extends Fragment{
     private ScrollView layMain;
     private TableGenerator mTable;
     private Button addRow;
@@ -43,7 +54,11 @@ public class WoundDocumentationFragment extends Fragment {
     private View view;
     private Client c;
     private File overwrite;
+    private int index;
 
+    private String mCurrentPhotoPath;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_TAKE_PHOTO = 0;
 
 
 
@@ -52,18 +67,28 @@ public class WoundDocumentationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view= inflater.inflate(R.layout.fragment_document_wound, container, false);
-        this.c = DummyClients.ITEMS.get(0);
-        File f = new File(getString(R.string.wounddocname));
-        ArrayList<File> docs = new ArrayList<File>();
-        docs.add(f);
-        c.setDocumentation(docs);
+        this.c = ((ClientViewActivity)getActivity()).getClient();
         showTable();
 
         return  view;
     }
 
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+           /* Bundle extras = data.getExtras();
+            Image image = (Image) extras.get("data");
+            File  im = (File) extras.get("data");
+            this.takenPicture = image;*/
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+        }
+    }
+
     private void showTable() {
-        mTable = new TableGenerator(view.getContext());
+        mTable = new TableGenerator(getActivity());
         layMain = (ScrollView) view.findViewById(R.id.table);
 
         String[] firstRow = {view.getContext().getString(R.string.wounddate), view.getContext().getString(R.string.woundphase),
@@ -76,17 +101,19 @@ public class WoundDocumentationFragment extends Fragment {
         mTable.addHead(firstRow);
         for (int i =0; i < c.docsListLenghts(); i++){
             if(c.getDocumentation().get(i).getName() == getString(R.string.wounddocname)){
+                this.index = i;
 
                 this.overwrite =  c.getDocumentation().get(i);
+
                 String ret = "";
                 int rowCount =1;
                 int fillCount = 0;
-                mTable.addRow();
+                mTable.addwRow();
                 try {
-                    InputStream inputStream = getContext().openFileInput("config.txt");
+                    FileInputStream in = getContext().openFileInput(c.getDocumentation().get(i).getName());
 
-                    if ( inputStream != null ) {
-                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    if ( in != null ) {
+                        InputStreamReader inputStreamReader = new InputStreamReader(in);
                         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                         String receiveString = "";
 
@@ -97,22 +124,26 @@ public class WoundDocumentationFragment extends Fragment {
                                         String s = receiveString.replace("/", "");
                                         if (fillCount == mTable.getHeadLenght()) {
                                             PictureButton pb = (PictureButton) t.getChildAt(fillCount);
-                                            pb.setPicPath(s);
+
                                         }else {
                                             EditText firstTextView = (EditText) t.getChildAt(fillCount);
                                             firstTextView.setText(s);
                                         }
 
                                     if (fillCount == mTable.getHeadLenght()) {
-                                        mTable.addRow();
+                                        mTable.addwRow();
                                         fillCount =0;
                                         rowCount++;
                                     }
                                 }
 
-                                inputStream.close();
+                                in.close();
                             }
 
+                    }else{
+                        for (int j = 0; j < 2; j++) {
+                            mTable.addwRow();
+                        }
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -121,9 +152,7 @@ public class WoundDocumentationFragment extends Fragment {
         }
 
 
-        for (int j = 0; j < 2; j++) {
-            mTable.addRow();
-        }
+
 
         layMain.removeAllViews();
         layMain.addView(mTable.getTable());
@@ -132,27 +161,10 @@ public class WoundDocumentationFragment extends Fragment {
         addRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTable.addRow();
+                mTable.addwRow();
             }
         });
-/*
-        for (int i = 0; i < mTable.getIdCount(); i++) {
-            View view = mTable.getTable().getChildAt(i);
-            if (view instanceof TableRowExpand) {
-                TableRowExpand t = (TableRowExpand) view;
 
-                final PictureButton pb = (PictureButton) t.getChildAt(t.getChildCount());
-                pb.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        if (pb.isPicAdded() == false) {
-                            ((ClientViewActivity) getActivity()).dispatchTakePictureIntent();
-                        }
-                    }
-                });
-            }
-        }*/
             saveIt = (Button) view.findViewById(R.id.saveStuff);
             saveIt.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -182,6 +194,7 @@ public class WoundDocumentationFragment extends Fragment {
                         }
                         fops.flush();
                         fops.close();
+                        c.getDocumentation().set(index, overwrite);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

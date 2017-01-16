@@ -2,11 +2,13 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
 
 import java.io.File;
+import java.net.URI;
 
 /**
  * Created by Eko on 29.12.2016.
@@ -18,7 +20,7 @@ public class PictureButton extends Button {
 
 
 
-    private File image;
+    private Image image;
     private String picPath;
     private Context context;
 
@@ -27,16 +29,19 @@ public class PictureButton extends Button {
         this.context = context;
     }
 
-    public File getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(File image) {
+    public void setImage(Image image) {
         this.image = image;
-        this.picPath = image.getPath();
     }
 
-    public String getPicPath() {
+    public String getImagePath() {
+        return image.toString();
+    }
+
+    public String getPicPath(){
         return picPath;
     }
 
@@ -44,20 +49,9 @@ public class PictureButton extends Button {
         this.picPath = picPath;
     }
 
-    public void openButten(){
-        if (picPath == null){
-            Intent intent = new Intent(context,CallCamera.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        }
-        else{
-            Intent intent = new Intent(context,ImageActivity.class)
-                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setAction(picPath);
 
-            intent.putExtra("PICTURE_ID", picPath);
-            context.startActivity(intent);
-        }
-    }
+   public void getPicture(){
+
+   }
 
 }
