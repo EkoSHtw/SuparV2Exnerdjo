@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -31,6 +32,7 @@ public class DialogAddVitalValue extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialgog_add_vital_value);
 
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         final NumberPicker note = (NumberPicker) findViewById(R.id.edit);
         switch (id){
@@ -40,11 +42,11 @@ public class DialogAddVitalValue extends Dialog {
                 break;
             case R.id.blood_pressure:
                 note.setMinValue(70);
-                note.setMaxValue(120);
+                note.setMaxValue(160);
                 break;
             case R.id.blood_sugar:
-                note.setMinValue(90);
-                note.setMaxValue(210);
+                note.setMinValue(60);
+                note.setMaxValue(200);
                 break;
         }
         note.setWrapSelectorWheel(true);
