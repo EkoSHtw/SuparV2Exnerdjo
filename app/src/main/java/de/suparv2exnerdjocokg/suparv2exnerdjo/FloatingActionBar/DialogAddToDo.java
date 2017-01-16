@@ -13,8 +13,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,7 +32,9 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 public class DialogAddToDo extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
+
     private DatePicker datePicker;
+    private NumberPicker numberPicker;
 
 
     @Nullable
@@ -50,6 +54,33 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
         tagEdittext.setAdapter(adapter);
         datePicker = (DatePicker) view.findViewById(R.id.date_picker);
         datePicker.setMinDate(System.currentTimeMillis() - 1000);
+
+        Calendar calender = Calendar.getInstance();
+
+        calender.add(Calendar.DATE, 30);
+
+        datePicker.setMaxDate(calender.getTime().getTime());
+        datePicker.setOnClickListener(null);
+        numberPicker = (NumberPicker) view.findViewById(R.id.dialog_number_picker);
+        numberPicker.setMinValue(0);
+        numberPicker.setMaxValue(2);
+
+        String[] values = getActivity().getResources().getStringArray(R.array.weekdays);
+        numberPicker.setDisplayedValues(values);
+
+        Button switcher = (Button) view.findViewById(R.id.switch_picker);
+        switcher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (datePicker.getVisibility() == View.GONE) {
+                    datePicker.setVisibility(View.VISIBLE);
+                    numberPicker.setVisibility(View.GONE);
+                } else {
+                    datePicker.setVisibility(View.GONE);
+                    numberPicker.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
 
         confirm.setOnClickListener(new View.OnClickListener() {
@@ -75,14 +106,15 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
 
                 } else {
 
-                    int day = datePicker.getDayOfMonth();
-                    int month = datePicker.getMonth();
-                    int year = datePicker.getYear();
+                    int datePickerDayOfMonth = datePicker.getDayOfMonth();
+                    int datePickerMonth = datePicker.getMonth();
+                    int datePickerYear = datePicker.getYear();
 
-
-                    GeneralTask generalTask = new GeneralTask(tag, new String[]{description, "" + day + " " + month + " " + year}, tag);
-                    ToDo toDo = new ToDo(new Timestamp(year, month, day, 0, 0, 0, 0), generalTask);
-                    DummyToDos.ITEMS.add(toDo);
+                    if (dateIsToday(datePickerDayOfMonth, datePickerMonth)) {
+                        GeneralTask generalTask = new GeneralTask(tag, new String[]{description, "" + datePickerDayOfMonth + " " + datePickerMonth + " " + datePickerYear}, tag);
+                        ToDo toDo = new ToDo(new Timestamp(datePickerYear, datePickerMonth, datePickerDayOfMonth, 0, 0, 0, 0), generalTask);
+                        DummyToDos.ITEMS.add(toDo);
+                    }
                     dismissThis(true);
                 }
 
@@ -113,6 +145,14 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
         });
 
         return view;
+    }
+
+    private boolean dateIsToday(int datePickerDayOfMonth, int datePickerMonth) {
+
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH);
+        return (day == datePickerDayOfMonth) && (month == datePickerMonth);
     }
 
     private void setHint(EditText editText) {
