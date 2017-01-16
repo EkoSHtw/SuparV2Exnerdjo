@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
@@ -85,7 +86,7 @@ public class TodoFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.getUndone(), mListener, infoListener));
+        recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(this, DummyToDos.getUndone(), mListener, infoListener));
 
 
         RecyclerView recyclerViewDone = (RecyclerView) view.findViewById(R.id.todolist_done);
@@ -94,27 +95,58 @@ public class TodoFragment extends Fragment {
         } else {
             recyclerViewDone.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerViewDone.setAdapter(new MyTodoRecyclerViewAdapter(DummyToDos.getDone(), mListener, infoListener));
+        recyclerViewDone.setAdapter(new MyTodoRecyclerViewAdapter(this, DummyToDos.getDone(), mListener, infoListener));
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+        recyclerViewDone.setLayoutParams(layoutParams);
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 0f);
+        recyclerView.setLayoutParams(layoutParams2);
 
         TextView doneHeader = (TextView) view.findViewById(R.id.done_headline);
-        if(DummyToDos.getDone().size()==0){
-            doneHeader.setVisibility(View.INVISIBLE);
-        }else{
+        if (DummyToDos.getDone().size() == 0) {
+
+            doneHeader.setVisibility(View.GONE);
+            recyclerViewDone.setVisibility(View.GONE);
+
+            LinearLayout.LayoutParams layoutParams3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0,0f);
+            recyclerViewDone.setLayoutParams(layoutParams3);
+            LinearLayout.LayoutParams layoutParams4 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0,1f);
+            recyclerView.setLayoutParams(layoutParams4);
+
+        } else {
             doneHeader.setVisibility(View.VISIBLE);
+            recyclerViewDone.setVisibility(View.VISIBLE);
         }
 
         TextView undoneHeader = (TextView) view.findViewById(R.id.undone_headline);
-        if(DummyToDos.getUndone().size()==0){
+        if (DummyToDos.getUndone().size() == 0) {
+            recyclerView.setVisibility(View.GONE);
+
             undoneHeader.setText("Sehr gut. Alle Aufgaben für heute sind erledigt.");
             undoneHeader.setTextSize(16);
-        }else{
+            undoneHeader.setPadding(0,30,0,0);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
             undoneHeader.setVisibility(View.VISIBLE);
+            undoneHeader.setText("Deine Aufgaben für heute:");
             undoneHeader.setTextAppearance(getContext(), R.style.AppTextSmall);
             undoneHeader.setTextColor(getResources().getColor(R.color.colorAccent));
+            undoneHeader.setPadding(0,0,0,0);
         }
+/*
+        if (DummyToDos.getUndone().size() > DummyToDos.getDone().size()) {
+            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+            recyclerView.setLayoutParams(layoutParams2);
+        } else {
+            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
+            recyclerView.setLayoutParams(layoutParams2);
+        }*/
+
+        recyclerView.requestLayout();
+        recyclerViewDone.requestLayout();
     }
 
-    public void updateList(){
+    public void updateList() {
         createView();
     }
 
@@ -139,11 +171,11 @@ public class TodoFragment extends Fragment {
         infoListener = null;
     }
 
-    public static View getOldSelection(){
+    public static View getOldSelection() {
         return oldSelection;
     }
 
-    public static void setOldSelection(View newSelection){
+    public static void setOldSelection(View newSelection) {
         oldSelection = newSelection;
     }
 
@@ -160,8 +192,11 @@ public class TodoFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(int position, boolean done);
+
+        void onDatePickerInteraction(TodoFragment frag, GeneralTask task);
     }
-    public interface OnInfoClickedInteractionListener{
+
+    public interface OnInfoClickedInteractionListener {
         void onInfoClickedListener(int position, boolean done);
     }
 }

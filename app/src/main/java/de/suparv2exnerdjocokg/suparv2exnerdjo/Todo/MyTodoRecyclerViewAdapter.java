@@ -1,5 +1,8 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
+import android.app.Activity;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +30,11 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     private final List<ToDo> mValues;
     private final TodoFragment.OnListFragmentInteractionListener mListener;
     private final TodoFragment.OnInfoClickedInteractionListener infoListener;
+    TodoFragment fragment;
 
 
-    public MyTodoRecyclerViewAdapter(List<ToDo> items, TodoFragment.OnListFragmentInteractionListener listener, TodoFragment.OnInfoClickedInteractionListener newInfoListener) {
+    public MyTodoRecyclerViewAdapter(TodoFragment fragment, List<ToDo> items, TodoFragment.OnListFragmentInteractionListener listener, TodoFragment.OnInfoClickedInteractionListener newInfoListener) {
+        this.fragment = fragment;
         mValues = items;
         mListener = listener;
         infoListener = newInfoListener;
@@ -50,11 +55,23 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         final GeneralTask currentTask = holder.mItem.getTask();
         holder.mNameView.setText(mValues.get(position).getTask().getName());
 
-        if(holder.mItem.getTask().isDone()){
+        if(currentTask.isDone()){
             holder.mCheckBox.setChecked(true);
             //holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorPrimaryLight));
             holder.mInfo.clearColorFilter();
+            if(currentTask.getDaysShiftet() > 0){
+                holder.shiftTask.setVisibility(View.INVISIBLE);
+                if(currentTask.getDaysShiftet() > 1) {
+                    holder.shiftet.setText("um " + currentTask.getDaysShiftet() + " Tage verschoben");
+                }else{
+                    holder.shiftet.setText("um " + currentTask.getDaysShiftet() + " Tag verschoben");
+                }
+            }
+        }else{
+            holder.shiftTask.setColorFilter(holder.mView.getResources().getColor(R.color.grey));
+            holder.shiftet.setVisibility(View.INVISIBLE);
         }
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,10 +110,12 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                             }
                         }
                     }
+                    currentTask.setShiftet(0);
 
                 }
             }
         });
+
         holder.mInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +125,14 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 if(null!=infoListener) {
                     infoListener.onInfoClickedListener(position, holder.mItem.getTask().isDone());
                 }
+            }
+        });
+
+        holder.shiftTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onDatePickerInteraction(fragment, currentTask);
+
             }
         });
     }
@@ -131,16 +158,20 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mNameView;
-        public final CheckBox mCheckBox;
+        public final TextView shiftet;
+        public final ImageButton shiftTask;
         public final ImageButton mInfo;
+        public final CheckBox mCheckBox;
         public ToDo mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mNameView = (TextView) view.findViewById(R.id.name);
-            mCheckBox = (CheckBox) view.findViewById(R.id.checkBox);
+            shiftet = (TextView) view.findViewById(R.id.shiftet);
+            shiftTask = (ImageButton) view.findViewById(R.id.shift_task);
             mInfo = (ImageButton) view.findViewById(R.id.info);
+            mCheckBox = (CheckBox) view.findViewById(R.id.checkBox);
         }
 
         @Override

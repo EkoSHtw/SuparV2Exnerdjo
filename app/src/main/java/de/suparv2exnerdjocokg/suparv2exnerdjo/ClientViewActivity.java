@@ -2,6 +2,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,10 +11,13 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 
 import java.io.File;
 import java.sql.Timestamp;
@@ -27,12 +31,12 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
-import java.io.File;
+import java.util.Calendar;
 import java.util.List;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
@@ -89,7 +93,6 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
                 newFrag = new ClientView();
                 Bundle args = new Bundle();
                 args.putInt(ClientView.ARG_Position, position);
-                args.putInt(ClientView.ARG_Position, position);
                 args.putBoolean("done", done);
                 newFrag.setArguments(args);
 
@@ -113,6 +116,7 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
             trans.commit();
         }
     }
+
 
     @Override
     public void onInfoClickedListener(int position, boolean done) {
@@ -244,5 +248,11 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
             return;
         }
         startActivity(callIntent);
+    }
+
+    @Override
+    public void onDatePickerInteraction(TodoFragment frag, GeneralTask task) {
+        DialogShiftTask dialogShiftTask = new DialogShiftTask(frag, this, task);
+        dialogShiftTask.show();
     }
 }

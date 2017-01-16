@@ -22,14 +22,32 @@
 
     <ImageButton
         android:id="@+id/info"
-        android:text="i"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_toLeftOf="@id/checkBox"
         app:srcCompat="@android:drawable/ic_menu_info_details"
         android:layout_alignParentTop="true"
-        android:background="@color/transparent"/>
+        android:background="@color/transparent"
+        />
 
+    <ImageButton
+        android:id="@+id/shift_task"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:layout_toLeftOf="@id/info"
+        app:srcCompat="@drawable/arrow"
+        />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        style="@style/AppTextNormal"
+        android:textColor="@color/colorAccentRed"
+        android:textStyle="italic"
+        android:gravity="center_vertical"
+        android:id="@+id/shiftet"
+        android:layout_toLeftOf="@id/shift_task"
+        />
 
 </RelativeLayout>
