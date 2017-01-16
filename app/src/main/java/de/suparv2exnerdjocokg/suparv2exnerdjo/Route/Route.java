@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.Date;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
@@ -25,7 +29,7 @@ public class Route extends AppCompatActivity implements ClientListFragment.OnLis
             getSupportFragmentManager().beginTransaction().add(R.id.client_list, lF).commit();
         }
 
-            }
+    }
 
     @Override
     public void onListFragmentInteraction(int position) {
