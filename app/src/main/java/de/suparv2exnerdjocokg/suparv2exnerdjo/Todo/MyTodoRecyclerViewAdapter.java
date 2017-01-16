@@ -59,8 +59,8 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             holder.mCheckBox.setChecked(true);
             //holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorPrimaryLight));
             holder.mInfo.clearColorFilter();
+            holder.shiftTask.setVisibility(View.GONE);
             if(currentTask.getDaysShiftet() > 0){
-                holder.shiftTask.setVisibility(View.INVISIBLE);
                 if(currentTask.getDaysShiftet() > 1) {
                     holder.shiftet.setText("um " + currentTask.getDaysShiftet() + " Tage verschoben");
                 }else{
@@ -69,7 +69,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             }
         }else{
             holder.shiftTask.setColorFilter(holder.mView.getResources().getColor(R.color.grey));
-            holder.shiftet.setVisibility(View.INVISIBLE);
+            holder.shiftet.setVisibility(View.GONE);
         }
 
 
