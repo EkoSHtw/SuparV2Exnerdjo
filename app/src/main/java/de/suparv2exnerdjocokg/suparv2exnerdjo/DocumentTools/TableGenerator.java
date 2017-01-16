@@ -3,15 +3,13 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,22 +21,19 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 import static android.app.Activity.RESULT_OK;
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton.REQUEST_IMAGE_CAPTURE;
 
 /**
  * Created by Eko on 08.12.2016.
  */
 
-public class TableGenerator  {
+public class TableGenerator {
     private final Context mContext;
     private TableLayout mTable;
     private FrameLayout mFrame;
@@ -49,7 +44,6 @@ public class TableGenerator  {
     private Image currentPhoto;
     private static final int REQUEST_TAKE_PHOTO = 1;
     private PictureButton currentButton;
-
 
 
     public int getHeadLenght() {
@@ -63,18 +57,19 @@ public class TableGenerator  {
     }
 
     private int idCount = 0;
-    public TableGenerator(Activity context) {
-        mContext = context.getApplicationContext();
-        act = context;
-        mTable = new TableLayout(context);
-        mFrame = new FrameLayout(context);
+
+    public TableGenerator(Activity activity) {
+        mContext = activity.getApplicationContext();
+        act = activity;
+        mTable = new TableLayout(activity);
+        mFrame = new FrameLayout(activity);
         rowParams.setMargins(0, 0, 0, 1);
         colParams.setMargins(0, 0, 1, 0);
 
         TableLayout.LayoutParams lptable = new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.MATCH_PARENT,
                 TableLayout.LayoutParams.MATCH_PARENT);
-        FrameLayout.LayoutParams frlay= new FrameLayout.LayoutParams(
+        FrameLayout.LayoutParams frlay = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.MATCH_PARENT);
         mTable.setLayoutParams(lptable);
@@ -93,7 +88,7 @@ public class TableGenerator  {
         tr.setLayoutParams(rowParams);
 
         for (int iCol = 0; iCol < headLenght; iCol++) {
-            if(iCol == headLenght-1){
+            if (iCol == headLenght - 1) {
                 final PictureButton pb = new PictureButton(mContext);
                 pb.setGravity(Gravity.CENTER | Gravity.CENTER);
                 pb.setPadding(3, 3, 3, 3);
@@ -105,50 +100,55 @@ public class TableGenerator  {
                 pb.setBackgroundColor(mContext.getResources().getColor(
                         R.color.row_background));
                 pb.setPicPath("");
-               if (pb.getPicPath() != ""){
-                   pb.setText("Bild anzeigen");
-               }else{
+                if (pb.getPicPath() != "") {
+                    pb.setText("Bild anzeigen");
+                } else {
                     pb.setText("Bild hinzufügen");
                 }
 
                 pb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(pb.getPicPath() == ""){
-                        currentButton = pb;
+                        if (pb.getPicPath() == "") {
+                            currentButton = pb;
 
                             // Bild wird aufgenommen
-                       dispatchTakePictureIntent();
+                            dispatchTakePictureIntent();
+                            pb.setText("Bild anzeigen");
 
-                        }
-                        else{
+                        } else {
 
-                            Intent intent = new Intent(mContext,
-                                    ImageActivity.class);
-                            String message = pb.getPicPath();
-                            intent.putExtra(EXTRA_MESSAGE, message);
-                            mContext.startActivity(intent);
+                            showImage(pb);
 
                         }
                     }
                 });
                 tr.addView(pb);
-            }else {
-            EditText tvCol = new EditText(mContext);
-            tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
-            tvCol.setPadding(3, 3, 3, 3);
-            tvCol.setTextColor(mContext.getResources().getColor(
-                    R.color.black));
-            tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-            tvCol.setLayoutParams(colParams);
-            tvCol.setBackgroundColor(mContext.getResources().getColor(
-                    R.color.row_background));
-            tr.addView(tvCol);
-        }
+            } else {
+                EditText tvCol = new EditText(mContext);
+                tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
+                tvCol.setPadding(3, 3, 3, 3);
+                tvCol.setTextColor(mContext.getResources().getColor(
+                        R.color.black));
+                tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                tvCol.setLayoutParams(colParams);
+                tvCol.setBackgroundColor(mContext.getResources().getColor(
+                        R.color.row_background));
+                tr.addView(tvCol);
+            }
         }
 
         mTable.addView(tr);
         idCount++;
+    }
+
+    private void showImage(PictureButton pb) {
+        Intent intent = new Intent(mContext,
+                ImageActivity.class);
+        String message = pb.getPicPath();
+        intent.putExtra("PICTURE_ID", message);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
 
     public void addRow() {
@@ -159,7 +159,7 @@ public class TableGenerator  {
                 R.color.table_background));
         tr.setLayoutParams(rowParams);
         for (int iCol = 0; iCol < headLenght; iCol++) {
-                EditText tvCol = new EditText(mContext);
+            EditText tvCol = new EditText(mContext);
             tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
             tvCol.setTextColor(mContext.getResources().getColor(
@@ -178,7 +178,7 @@ public class TableGenerator  {
         TableRow tr = new TableRow(mContext);
         tr.setBackgroundColor(mContext.getResources().getColor(
                 R.color.table_background));
-        headLenght= data.length;
+        headLenght = data.length;
         tr.setLayoutParams(rowParams);
 
         for (int iCol = 0; iCol < data.length; iCol++) {
@@ -203,8 +203,27 @@ public class TableGenerator  {
     }
 
 
-
     private void dispatchTakePictureIntent() {
+        //TODO
+//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        // Ensure that there's a camera activity to handle the intent
+//        if (takePictureIntent.resolveActivity(act.getPackageManager()) != null) {
+//            // Create the File where the photo should go
+//            File photoFile = null;
+//            try {
+//                photoFile = createImageFile();
+//            } catch (IOException ex) {
+//              ex.printStackTrace();
+//            }
+//            // Continue only if the File was successfully created
+//            if (photoFile != null) {
+//                Uri photoURI = FileProvider.getUriForFile(mContext,
+//                        "de.suparv2exnerdjo.android.fileprovider",
+//                        photoFile);
+//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+//                act.startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+//            }
+//        }
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(act.getPackageManager()) != null) {
@@ -213,23 +232,28 @@ public class TableGenerator  {
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-              ex.printStackTrace();
+                // Error occurred while creating the File
+                ex.printStackTrace();
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
+                Log.println(Log.INFO, "", "HELLO URI !!");
+
                 Uri photoURI = FileProvider.getUriForFile(mContext,
-                        "de.suparv2exnerdjo.android.fileprovider",
+                        "com.example.android.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 act.startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
         }
     }
+
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = act.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        Log.println(Log.INFO, ",", storageDir.toString());
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -239,6 +263,7 @@ public class TableGenerator  {
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
         currentButton.setPicPath(mCurrentPhotoPath);
+        Log.println(Log.INFO, "", "FILE WURDE ERSTELLT !!");
         return image;
     }
 
