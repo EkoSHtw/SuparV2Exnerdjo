@@ -61,14 +61,12 @@ public class VitalFragment extends Fragment {
     private LineGraphSeries<DataPoint> systolicB = new LineGraphSeries<>();
     private int[] systolicValues;
     private LineGraphSeries<DataPoint> temp = new LineGraphSeries<>();
-    private double[] tempValues;
+    private static HashMap<Date, Double> tempValues = new HashMap<>();
     private LineGraphSeries<DataPoint> bloodSugar = new LineGraphSeries<>();
-    //private int[][] bloodSugarValues;
-    //private Date[][] bloodSugarDates;
     private static HashMap<Date, Integer> bloodSugarValues = new HashMap<>();
     private static List<Date> bloodSugarDates = new ArrayList<>();
     private TextView oldSelection;
-    private Date[] dates = new Date[7];
+    private static List<Date> dates = new ArrayList<>();
     private Calendar c;
 
     //private OnFragmentInteractionListener mListener;
@@ -115,21 +113,30 @@ public class VitalFragment extends Fragment {
 
         c = Calendar.getInstance();
 
+        Date[] date = new Date[7];
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -1);
-        dates[6] = calendar.getTime();
+        date[6] = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
-        dates[5] = calendar.getTime();
+        date[5] = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
-        dates[4] = calendar.getTime();
+        date[4] = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
-        dates[3] = calendar.getTime();
+        date[3] = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
-        dates[2] = calendar.getTime();
+        date[2] = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
-        dates[1] = calendar.getTime();
+        date[1] = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
-        dates[0] = calendar.getTime();
+        date[0] = calendar.getTime();
+        dates.add(date[0]);
+        dates.add(date[1]);
+        dates.add(date[2]);
+        dates.add(date[3]);
+        dates.add(date[4]);
+        dates.add(date[5]);
+        dates.add(date[6]);
+
 
         final TextView bloodPressure = (TextView) view.findViewById(R.id.blood_pressure);
         bloodPressure.setText("Blutdruck");
@@ -216,8 +223,8 @@ public class VitalFragment extends Fragment {
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
         graph.getLegendRenderer().setBackgroundColor(Color.argb(0,0,0,0));
 
-        graph.getViewport().setMinX(dates[0].getTime());
-        graph.getViewport().setMaxX(dates[6].getTime());
+        graph.getViewport().setMinX(dates.get(0).getTime());
+        graph.getViewport().setMaxX(dates.get(dates.size()-1).getTime());
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getGridLabelRenderer().setHumanRounding(false);
         graph.onDataChanged(true, true);
@@ -232,13 +239,13 @@ public class VitalFragment extends Fragment {
         }
 
         DataPoint[] diastolicData = new DataPoint[]{
-                new DataPoint(dates[0], diastolicValues[0]),
-                new DataPoint(dates[1], diastolicValues[1]),
-                new DataPoint(dates[2], diastolicValues[2]),
-                new DataPoint(dates[3], diastolicValues[3]),
-                new DataPoint(dates[4], diastolicValues[4]),
-                new DataPoint(dates[5], diastolicValues[5]),
-                new DataPoint(dates[6], diastolicValues[6])
+                new DataPoint(dates.get(0), diastolicValues[0]),
+                new DataPoint(dates.get(1), diastolicValues[1]),
+                new DataPoint(dates.get(2), diastolicValues[2]),
+                new DataPoint(dates.get(3), diastolicValues[3]),
+                new DataPoint(dates.get(4), diastolicValues[4]),
+                new DataPoint(dates.get(5), diastolicValues[5]),
+                new DataPoint(dates.get(6), diastolicValues[6])
         };
 
         diastolicB.resetData(diastolicData);
@@ -256,13 +263,13 @@ public class VitalFragment extends Fragment {
         }
 
         DataPoint[] systolicData = new DataPoint[]{
-                new DataPoint(dates[0], systolicValues[0]),
-                new DataPoint(dates[1], systolicValues[1]),
-                new DataPoint(dates[2], systolicValues[2]),
-                new DataPoint(dates[3], systolicValues[3]),
-                new DataPoint(dates[4], systolicValues[4]),
-                new DataPoint(dates[5], systolicValues[5]),
-                new DataPoint(dates[6], systolicValues[6])
+                new DataPoint(dates.get(0), systolicValues[0]),
+                new DataPoint(dates.get(1), systolicValues[1]),
+                new DataPoint(dates.get(2), systolicValues[2]),
+                new DataPoint(dates.get(3), systolicValues[3]),
+                new DataPoint(dates.get(4), systolicValues[4]),
+                new DataPoint(dates.get(5), systolicValues[5]),
+                new DataPoint(dates.get(6), systolicValues[6])
         };
 
         systolicB .resetData(systolicData);
@@ -291,9 +298,9 @@ public class VitalFragment extends Fragment {
 
         if(bloodSugarValues.size() == 0) {
 
-            for (int i = 0; i < dates.length; i++) {
+            for (int i = 0; i < dates.size(); i++) {
                 Calendar calendar = Calendar.getInstance();
-                calendar.setTime(dates[i]);
+                calendar.setTime(dates.get(i));
                 calendar.add(Calendar.HOUR, 9);
                 bloodSugarDates.add(calendar.getTime());
                 calendar.add(Calendar.HOUR, 3);
@@ -323,7 +330,7 @@ public class VitalFragment extends Fragment {
         DataPoint[] bloodSugarData = new DataPoint[bloodSugarValues.size()];
 
         for(int i = 0; i < bloodSugarValues.size(); i++){
-            bloodSugarData[i] = new DataPoint(bloodSugarDates.get(i) ,bloodSugarValues.get(bloodSugarDates.get(i)));
+            bloodSugarData[i] = new DataPoint(bloodSugarDates.get(i), bloodSugarValues.get(bloodSugarDates.get(i)));
         }
 
         bloodSugar.resetData(bloodSugarData);
@@ -351,23 +358,21 @@ public class VitalFragment extends Fragment {
 
     private LineGraphSeries[] setTempTable(){
 
-        if (tempValues == null) {
+        if (tempValues.size() == 0) {
 
-            tempValues = new double[]{36.5, 36.25, 37.5, 36.7, 35.8, 36.5, 36};
+            double[] tempValues1 = new double[]{36.5, 36.25, 37.5, 36.7, 35.8, 36.5, 36};
+
+            for(int i = 0; i < tempValues1.length; i++){
+                tempValues.put(dates.get(i), tempValues1[i]);
+            }
 
         }
 
-            DataPoint[] tempData = new DataPoint[]{
+        DataPoint[] tempData = new DataPoint[tempValues.size()];
 
-                    new DataPoint(dates[0], tempValues[0]),
-                    new DataPoint(dates[1], tempValues[1]),
-                    new DataPoint(dates[2], tempValues[2]),
-                    new DataPoint(dates[3], tempValues[3]),
-                    new DataPoint(dates[4], tempValues[4]),
-                    new DataPoint(dates[5], tempValues[5]),
-                    new DataPoint(dates[6], tempValues[6])
-
-            };
+        for(int i = 0; i < tempValues.size(); i++){
+            tempData[i] = new DataPoint(dates.get(i), tempValues.get(dates.get(i)));
+        }
 
         temp.resetData(tempData);
 
@@ -384,6 +389,8 @@ public class VitalFragment extends Fragment {
         graph.getViewport().setMinY(34);
         graph.getViewport().setMaxY(42);
         graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinX(dates.get(0).getTime());
+        graph.getViewport().setMaxX(dates.get(dates.size()-1).getTime());
 
         graph.getGridLabelRenderer().setVerticalAxisTitle("°C");
         graph.getGridLabelRenderer().setVerticalLabelsVisible(true);
@@ -401,15 +408,10 @@ public class VitalFragment extends Fragment {
         switch (id) {
             case R.id.temp:
 
-                for(int i = 0; i < tempValues.length-1; i++){
-                    dates[i] = dates[i+1];
-                    tempValues[i] = tempValues[i+1];
-                }
-
                 c.add(Calendar.HOUR, 10);
 
-                tempValues[tempValues.length-1] = value;
-                dates[dates.length-1] = c.getTime();
+                dates.add(c.getTime());
+                tempValues.put(dates.get(dates.size()-1), (double)value);
 
                 createGraph(graph, setTempTable());
                 setTempValues(graph);
