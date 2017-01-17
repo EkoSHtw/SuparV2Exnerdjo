@@ -54,17 +54,18 @@ public class VitalFragment extends Fragment {
     private View view;
     private Context context;
     private GraphView graph;
-    private LineGraphSeries<DataPoint> diastolicB;
-    private DataPoint[] diastolicData;
-    private LineGraphSeries<DataPoint> systolicB;
-    private DataPoint[] systolicData;
+    private LineGraphSeries<DataPoint> diastolicB = new LineGraphSeries<>();
+    private int[] diastolicValues;
+    private LineGraphSeries<DataPoint> systolicB = new LineGraphSeries<>();
+    private int[] systolicValues;
     private LineGraphSeries<DataPoint> temp = new LineGraphSeries<>();
-    private static DataPoint[] tempData;
-    private LineGraphSeries<DataPoint> bloodSugar;
-    private DataPoint[] bloodSugarData;
+    private double[] tempValues;
+    private LineGraphSeries<DataPoint> bloodSugar = new LineGraphSeries<>();
+    private int[][] bloodSugarValues;
+    private Date[][] bloodSugarDates;
     private TextView oldSelection;
     private Date[] dates = new Date[7];
-
+    private Calendar c;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -107,6 +108,8 @@ public class VitalFragment extends Fragment {
         context = view.getContext();
 
         graph = (GraphView) view.findViewById(R.id.graph);
+
+        c = Calendar.getInstance();
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -1);
@@ -213,21 +216,28 @@ public class VitalFragment extends Fragment {
         graph.getViewport().setMaxX(dates[6].getTime());
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getGridLabelRenderer().setHumanRounding(false);
+        graph.onDataChanged(true, true);
     }
 
     private LineGraphSeries[] setBloodPressureTable() {
 
-        diastolicData = new DataPoint[]{
-                new DataPoint(dates[0], 79),
-                new DataPoint(dates[1], 81),
-                new DataPoint(dates[2], 82),
-                new DataPoint(dates[3], 78),
-                new DataPoint(dates[4], 79),
-                new DataPoint(dates[5], 77),
-                new DataPoint(dates[6], 78)
+        if(diastolicValues == null){
+
+            diastolicValues = new int[]{79, 81, 82, 78, 79, 77, 78};
+
+        }
+
+        DataPoint[] diastolicData = new DataPoint[]{
+                new DataPoint(dates[0], diastolicValues[0]),
+                new DataPoint(dates[1], diastolicValues[1]),
+                new DataPoint(dates[2], diastolicValues[2]),
+                new DataPoint(dates[3], diastolicValues[3]),
+                new DataPoint(dates[4], diastolicValues[4]),
+                new DataPoint(dates[5], diastolicValues[5]),
+                new DataPoint(dates[6], diastolicValues[6])
         };
 
-        diastolicB = new LineGraphSeries<>(diastolicData);
+        diastolicB.resetData(diastolicData);
 
         diastolicB.setTitle("Diastolischer Blutdruck");
         diastolicB.setColor(Color.argb(255, 104, 159, 56));
@@ -235,17 +245,23 @@ public class VitalFragment extends Fragment {
         diastolicB.setBackgroundColor(R.color.transparent);
         diastolicB.setDrawBackground(false);
 
-        systolicData = new DataPoint[]{
-                new DataPoint(dates[0], 119),
-                new DataPoint(dates[1], 122),
-                new DataPoint(dates[2], 120),
-                new DataPoint(dates[3], 119),
-                new DataPoint(dates[4], 119),
-                new DataPoint(dates[5], 115),
-                new DataPoint(dates[6], 116)
+        if(systolicValues == null){
+
+            systolicValues = new int[]{119, 122, 120, 119, 119, 115, 116};
+
+        }
+
+        DataPoint[] systolicData = new DataPoint[]{
+                new DataPoint(dates[0], systolicValues[0]),
+                new DataPoint(dates[1], systolicValues[1]),
+                new DataPoint(dates[2], systolicValues[2]),
+                new DataPoint(dates[3], systolicValues[3]),
+                new DataPoint(dates[4], systolicValues[4]),
+                new DataPoint(dates[5], systolicValues[5]),
+                new DataPoint(dates[6], systolicValues[6])
         };
 
-        systolicB = new LineGraphSeries<>(systolicData);
+        systolicB .resetData(systolicData);
 
         systolicB.setTitle("Systolischer Blutdruck");
         systolicB.setColor(Color.argb(255, 104, 125, 56));
@@ -269,77 +285,68 @@ public class VitalFragment extends Fragment {
 
     private LineGraphSeries[] setBloodSugarTable() {
 
-        final Date[][] dates1 = new Date[7][4];
+        if(bloodSugarValues == null) {
+
+            bloodSugarValues = new int[][]{
+                    {106, 100, 97, 99},
+                    {136, 104, 142, 119},
+                    {110, 68, 81, 86},
+                    {114, 110, 91, 167},
+                    {94, 83, 78, 98},
+                    {103, 125, 130, 111},
+                    {95, 98, 120, 130},
+            };
+
+            bloodSugarDates = new Date[dates.length][4];
+
+
+        }
 
         for (int i = 0; i < dates.length; i++) {
-
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(dates[i]);
             calendar.add(Calendar.HOUR, 9);
-            dates1[i][0] = calendar.getTime();
+            bloodSugarDates[i][0] = calendar.getTime();
             calendar.add(Calendar.HOUR, 3);
-            dates1[i][1] = calendar.getTime();
+            bloodSugarDates[i][1] = calendar.getTime();
             calendar.add(Calendar.HOUR, 4);
-            dates1[i][2] = calendar.getTime();
+            bloodSugarDates[i][2] = calendar.getTime();
             calendar.add(Calendar.HOUR, 4);
-            dates1[i][3] = calendar.getTime();
+            bloodSugarDates[i][3] = calendar.getTime();
         }
 
-        bloodSugarData = new DataPoint[]{
-                new DataPoint(dates1[0][0], 106),
-                new DataPoint(dates1[0][1], 100),
-                new DataPoint(dates1[0][2], 97),
-                new DataPoint(dates1[0][3], 99),
-                new DataPoint(dates1[1][0], 136),
-                new DataPoint(dates1[1][1], 104),
-                new DataPoint(dates1[1][2], 142),
-                new DataPoint(dates1[1][3], 119),
-                new DataPoint(dates1[2][0], 110),
-                new DataPoint(dates1[2][1], 68),
-                new DataPoint(dates1[2][2], 81),
-                new DataPoint(dates1[2][3], 86),
-                new DataPoint(dates1[3][0], 114),
-                new DataPoint(dates1[3][1], 110),
-                new DataPoint(dates1[3][2], 91),
-                new DataPoint(dates1[3][3], 167),
-                new DataPoint(dates1[4][0], 94),
-                new DataPoint(dates1[4][1], 83),
-                new DataPoint(dates1[4][2], 78),
-                new DataPoint(dates1[4][3], 98),
-                new DataPoint(dates1[5][0], 103),
-                new DataPoint(dates1[5][1], 125),
-                new DataPoint(dates1[5][2], 130),
-                new DataPoint(dates1[5][3], 111),
-                new DataPoint(dates1[6][0], 95),
-                new DataPoint(dates1[6][1], 98),
-                new DataPoint(dates1[6][2], 120),
-                new DataPoint(dates1[6][3], 130)
+        DataPoint[] bloodSugarData = new DataPoint[]{
+                new DataPoint(bloodSugarDates[0][0], bloodSugarValues[0][0]),
+                new DataPoint(bloodSugarDates[0][1], bloodSugarValues[0][1]),
+                new DataPoint(bloodSugarDates[0][2], bloodSugarValues[0][2]),
+                new DataPoint(bloodSugarDates[0][3], bloodSugarValues[0][3]),
+                new DataPoint(bloodSugarDates[1][0], bloodSugarValues[1][0]),
+                new DataPoint(bloodSugarDates[1][1], bloodSugarValues[1][1]),
+                new DataPoint(bloodSugarDates[1][2], bloodSugarValues[1][2]),
+                new DataPoint(bloodSugarDates[1][3], bloodSugarValues[1][3]),
+                new DataPoint(bloodSugarDates[2][0], bloodSugarValues[2][0]),
+                new DataPoint(bloodSugarDates[2][1], bloodSugarValues[2][1]),
+                new DataPoint(bloodSugarDates[2][2], bloodSugarValues[2][2]),
+                new DataPoint(bloodSugarDates[2][3], bloodSugarValues[2][3]),
+                new DataPoint(bloodSugarDates[3][0], bloodSugarValues[3][0]),
+                new DataPoint(bloodSugarDates[3][1], bloodSugarValues[3][1]),
+                new DataPoint(bloodSugarDates[3][2], bloodSugarValues[3][2]),
+                new DataPoint(bloodSugarDates[3][3], bloodSugarValues[3][3]),
+                new DataPoint(bloodSugarDates[4][0], bloodSugarValues[4][0]),
+                new DataPoint(bloodSugarDates[4][1], bloodSugarValues[4][1]),
+                new DataPoint(bloodSugarDates[4][2], bloodSugarValues[4][2]),
+                new DataPoint(bloodSugarDates[4][3], bloodSugarValues[4][3]),
+                new DataPoint(bloodSugarDates[5][0], bloodSugarValues[5][0]),
+                new DataPoint(bloodSugarDates[5][1], bloodSugarValues[5][1]),
+                new DataPoint(bloodSugarDates[5][2], bloodSugarValues[5][2]),
+                new DataPoint(bloodSugarDates[5][3], bloodSugarValues[5][3]),
+                new DataPoint(bloodSugarDates[6][0], bloodSugarValues[6][0]),
+                new DataPoint(bloodSugarDates[6][1], bloodSugarValues[6][1]),
+                new DataPoint(bloodSugarDates[6][2], bloodSugarValues[6][2]),
+                new DataPoint(bloodSugarDates[6][3], bloodSugarValues[6][3])
         };
 
-        bloodSugar = new LineGraphSeries<>(bloodSugarData);
-
-        /*
-        final DataPoint newD = new DataPoint(new Date(), newValue);
-
-        if (newValue != -1) {
-            Runnable mTimer1 = new Runnable() {
-                @Override
-                public void run() {
-
-                    bloodSugar.appendData(newD, true, dates.length * dates.length);
-                }
-            } ;
-            mHandler.postDelayed(mTimer1, 300);
-        }
-
-
-        if (newValue != -1) {
-            bloodSugar.appendData(newD, true, dates.length*dates.length);
-        }
-
-        Log.i("", "X: " + newD.getX() +", Y: "+ newD.getY());
-
-        */
+        bloodSugar.resetData(bloodSugarData);
 
         bloodSugar.setTitle("Blutzucker");
         bloodSugar.setColor(getResources().getColor(R.color.colorAccent));
@@ -361,17 +368,23 @@ public class VitalFragment extends Fragment {
 
     private LineGraphSeries[] setTempTable(){
 
-        tempData = new DataPoint[]{
+        if (tempValues == null) {
 
-                new DataPoint(dates[0], 36.5),
-                new DataPoint(dates[1], 36.25),
-                new DataPoint(dates[2], 37.5),
-                new DataPoint(dates[3], 36.7),
-                new DataPoint(dates[4], 35.8),
-                new DataPoint(dates[5], 36.5),
-                new DataPoint(dates[6], 36)
+            tempValues = new double[]{36.5, 36.25, 37.5, 36.7, 35.8, 36.5, 36};
 
-        };
+        }
+
+            DataPoint[] tempData = new DataPoint[]{
+
+                    new DataPoint(dates[0], tempValues[0]),
+                    new DataPoint(dates[1], tempValues[1]),
+                    new DataPoint(dates[2], tempValues[2]),
+                    new DataPoint(dates[3], tempValues[3]),
+                    new DataPoint(dates[4], tempValues[4]),
+                    new DataPoint(dates[5], tempValues[5]),
+                    new DataPoint(dates[6], tempValues[6])
+
+            };
 
         temp.resetData(tempData);
 
@@ -400,29 +413,50 @@ public class VitalFragment extends Fragment {
         }
     }
 
-    public void addValue(int value, int id){
+    public void addValue(final int value, int id) {
 
-        switch (id){
+        switch (id) {
             case R.id.temp:
 
-                for(int i = 0; i < tempData.length-1; i++){
+                for(int i = 0; i < tempValues.length-1; i++){
                     dates[i] = dates[i+1];
-                    tempData[i] = tempData[i+1];
+                    tempValues[i] = tempValues[i+1];
                 }
 
-                tempData[tempData.length-1] = new DataPoint(new Date(), value);
-                dates[dates.length-1] = new Date();
-                temp.resetData(tempData);
+                c.add(Calendar.HOUR, 10);
 
-                createGraph(graph, new LineGraphSeries[]{temp});
+                tempValues[tempValues.length-1] = value;
+                dates[dates.length-1] = c.getTime();
+
+                createGraph(graph, setTempTable());
                 setTempValues(graph);
+
 
                 break;
             case R.id.blood_pressure:
                 setBloodPressureTable();
                 break;
             case R.id.blood_sugar:
-                setBloodSugarTable();
+
+                Date lastTime = bloodSugarDates[bloodSugarDates.length-1][bloodSugarDates[0].length-1];
+                Date time = c.getTime();
+                if(lastTime.getDate()== time.getDate()){
+                    if(lastTime.getHours() < time.getHours()){
+
+                        for(int i = 0; i < dates.length-1; i++){
+                            dates[i] = dates[i+1];
+                            bloodSugarValues[i] = bloodSugarValues[i+1];
+                        }
+                        dates[dates.length-1] = time;
+                        bloodSugarValues[bloodSugarValues.length-1][0] = value;
+                    }
+                }
+
+
+
+                createGraph(graph, setBloodSugarTable());
+                setBloodSugarValues(graph);
+
                 break;
         }
     }
