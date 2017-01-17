@@ -27,8 +27,10 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.text.DateFormat;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -61,8 +63,10 @@ public class VitalFragment extends Fragment {
     private LineGraphSeries<DataPoint> temp = new LineGraphSeries<>();
     private double[] tempValues;
     private LineGraphSeries<DataPoint> bloodSugar = new LineGraphSeries<>();
-    private int[][] bloodSugarValues;
-    private Date[][] bloodSugarDates;
+    //private int[][] bloodSugarValues;
+    //private Date[][] bloodSugarDates;
+    private static HashMap<Date, Integer> bloodSugarValues = new HashMap<>();
+    private static List<Date> bloodSugarDates = new ArrayList<>();
     private TextView oldSelection;
     private Date[] dates = new Date[7];
     private Calendar c;
@@ -285,66 +289,42 @@ public class VitalFragment extends Fragment {
 
     private LineGraphSeries[] setBloodSugarTable() {
 
-        if(bloodSugarValues == null) {
+        if(bloodSugarValues.size() == 0) {
 
-            bloodSugarValues = new int[][]{
-                    {106, 100, 97, 99},
-                    {136, 104, 142, 119},
-                    {110, 68, 81, 86},
-                    {114, 110, 91, 167},
-                    {94, 83, 78, 98},
-                    {103, 125, 130, 111},
-                    {95, 98, 120, 130},
+            for (int i = 0; i < dates.length; i++) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dates[i]);
+                calendar.add(Calendar.HOUR, 9);
+                bloodSugarDates.add(calendar.getTime());
+                calendar.add(Calendar.HOUR, 3);
+                bloodSugarDates.add(calendar.getTime());
+                calendar.add(Calendar.HOUR, 4);
+                bloodSugarDates.add(calendar.getTime());
+                calendar.add(Calendar.HOUR, 4);
+                bloodSugarDates.add(calendar.getTime());
+            }
+
+            int[] bloodSugarValues1 = new int[]{
+                    106, 100, 97, 99,
+                    136, 104, 142, 119,
+                    110, 68, 81, 86,
+                    114, 110, 91, 167,
+                    94, 83, 78, 98,
+                    103, 125, 130, 111,
+                    95, 98, 120, 130,
             };
 
-            bloodSugarDates = new Date[dates.length][4];
-
+            for(int i = 0; i < bloodSugarValues1.length; i++){
+                bloodSugarValues.put(bloodSugarDates.get(i), bloodSugarValues1[i]);
+            }
 
         }
 
-        for (int i = 0; i < dates.length; i++) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(dates[i]);
-            calendar.add(Calendar.HOUR, 9);
-            bloodSugarDates[i][0] = calendar.getTime();
-            calendar.add(Calendar.HOUR, 3);
-            bloodSugarDates[i][1] = calendar.getTime();
-            calendar.add(Calendar.HOUR, 4);
-            bloodSugarDates[i][2] = calendar.getTime();
-            calendar.add(Calendar.HOUR, 4);
-            bloodSugarDates[i][3] = calendar.getTime();
-        }
+        DataPoint[] bloodSugarData = new DataPoint[bloodSugarValues.size()];
 
-        DataPoint[] bloodSugarData = new DataPoint[]{
-                new DataPoint(bloodSugarDates[0][0], bloodSugarValues[0][0]),
-                new DataPoint(bloodSugarDates[0][1], bloodSugarValues[0][1]),
-                new DataPoint(bloodSugarDates[0][2], bloodSugarValues[0][2]),
-                new DataPoint(bloodSugarDates[0][3], bloodSugarValues[0][3]),
-                new DataPoint(bloodSugarDates[1][0], bloodSugarValues[1][0]),
-                new DataPoint(bloodSugarDates[1][1], bloodSugarValues[1][1]),
-                new DataPoint(bloodSugarDates[1][2], bloodSugarValues[1][2]),
-                new DataPoint(bloodSugarDates[1][3], bloodSugarValues[1][3]),
-                new DataPoint(bloodSugarDates[2][0], bloodSugarValues[2][0]),
-                new DataPoint(bloodSugarDates[2][1], bloodSugarValues[2][1]),
-                new DataPoint(bloodSugarDates[2][2], bloodSugarValues[2][2]),
-                new DataPoint(bloodSugarDates[2][3], bloodSugarValues[2][3]),
-                new DataPoint(bloodSugarDates[3][0], bloodSugarValues[3][0]),
-                new DataPoint(bloodSugarDates[3][1], bloodSugarValues[3][1]),
-                new DataPoint(bloodSugarDates[3][2], bloodSugarValues[3][2]),
-                new DataPoint(bloodSugarDates[3][3], bloodSugarValues[3][3]),
-                new DataPoint(bloodSugarDates[4][0], bloodSugarValues[4][0]),
-                new DataPoint(bloodSugarDates[4][1], bloodSugarValues[4][1]),
-                new DataPoint(bloodSugarDates[4][2], bloodSugarValues[4][2]),
-                new DataPoint(bloodSugarDates[4][3], bloodSugarValues[4][3]),
-                new DataPoint(bloodSugarDates[5][0], bloodSugarValues[5][0]),
-                new DataPoint(bloodSugarDates[5][1], bloodSugarValues[5][1]),
-                new DataPoint(bloodSugarDates[5][2], bloodSugarValues[5][2]),
-                new DataPoint(bloodSugarDates[5][3], bloodSugarValues[5][3]),
-                new DataPoint(bloodSugarDates[6][0], bloodSugarValues[6][0]),
-                new DataPoint(bloodSugarDates[6][1], bloodSugarValues[6][1]),
-                new DataPoint(bloodSugarDates[6][2], bloodSugarValues[6][2]),
-                new DataPoint(bloodSugarDates[6][3], bloodSugarValues[6][3])
-        };
+        for(int i = 0; i < bloodSugarValues.size(); i++){
+            bloodSugarData[i] = new DataPoint(bloodSugarDates.get(i) ,bloodSugarValues.get(bloodSugarDates.get(i)));
+        }
 
         bloodSugar.resetData(bloodSugarData);
 
@@ -356,6 +336,9 @@ public class VitalFragment extends Fragment {
     }
 
     private void setBloodSugarValues(GraphView graph){
+
+        graph.getViewport().setMinX(bloodSugarDates.get(0).getTime());
+        graph.getViewport().setMaxX(bloodSugarDates.get(bloodSugarDates.size()-1).getTime());
 
         graph.getViewport().setMinY(60);
         graph.getViewport().setMaxY(200);
@@ -438,21 +421,19 @@ public class VitalFragment extends Fragment {
                 break;
             case R.id.blood_sugar:
 
-                Date lastTime = bloodSugarDates[bloodSugarDates.length-1][bloodSugarDates[0].length-1];
+                Date lastTime = bloodSugarDates.get(bloodSugarDates.size()-1);
                 Date time = c.getTime();
                 if(lastTime.getDate()== time.getDate()){
                     if(lastTime.getHours() < time.getHours()){
 
-                        for(int i = 0; i < dates.length-1; i++){
-                            dates[i] = dates[i+1];
-                            bloodSugarValues[i] = bloodSugarValues[i+1];
-                        }
-                        dates[dates.length-1] = time;
-                        bloodSugarValues[bloodSugarValues.length-1][0] = value;
+                        bloodSugarDates.add(time);
+                        bloodSugarValues.put(bloodSugarDates.get(bloodSugarDates.size()-1), value);
+                    }else{
+                        c.add(Calendar.HOUR, 10);
+                        bloodSugarDates.add(c.getTime());
+                        bloodSugarValues.put(bloodSugarDates.get(bloodSugarDates.size()-1), value);
                     }
                 }
-
-
 
                 createGraph(graph, setBloodSugarTable());
                 setBloodSugarValues(graph);
