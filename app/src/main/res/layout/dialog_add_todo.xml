@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_add_todo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialog_add_todo_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_new_todo" />
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Name" />-->
+
+    <!--<EditText-->
+    <!--android:id="@+id/dialog_add_todo_name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="@string/type_here" />-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tag" />
+
+    <AutoCompleteTextView
+        android:id="@+id/dialog_add_todo_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/type_here" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/description" />
+
+    <EditText
+        android:id="@+id/dialog_add_todo_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/type_here" />
+
+
+    <!--<fragment-->
+    <!--android:id="@+id/frag_date_picker"-->
+    <!--class="de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar.FragmentDatePicker"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/time_picker"-->
+    <!--android:hint="click here"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
+
+    <NumberPicker
+        android:id="@+id/dialog_number_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></NumberPicker>
+
+    <Button
+        android:id="@+id/switch_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <DatePicker
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:datePickerMode="spinner"
+        android:spinnersShown="false"
+        android:visibility="gone"></DatePicker>
+
+
+    <Button
+        android:id="@+id/dialog_todo_button_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm" />
+
+    <Button
+        android:id="@+id/dialog_todo_button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel" />
+
+
+</LinearLayout>

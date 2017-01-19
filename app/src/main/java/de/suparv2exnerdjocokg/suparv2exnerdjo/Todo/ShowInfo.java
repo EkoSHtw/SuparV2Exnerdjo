@@ -3,11 +3,18 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Dimension;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+
+import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
@@ -28,7 +35,7 @@ public class ShowInfo extends Fragment {
 
     // TODO: Rename and change types of parameters
     private int position;
-    private String mParam2;
+    private boolean done;
 
 
     public ShowInfo() {
@@ -56,6 +63,9 @@ public class ShowInfo extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             position = getArguments().getInt(ARG_Position);
+            if(getArguments().getBoolean("done")){
+                done = getArguments().getBoolean("done");
+            }
         }
     }
 
@@ -64,8 +74,43 @@ public class ShowInfo extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show_info, container, false);
 
-        TextView info = (TextView) view.findViewById(R.id.infoText);
-        info.setText(DummyToDos.ITEMS.get(position).getTask().getDescription());
+        List<ToDo> actualList;
+        if(done){
+            actualList = DummyToDos.getDone();
+        }else{
+            actualList = DummyToDos.getUndone();
+        }
+
+        TextView info = (TextView) view.findViewById(R.id.info_headline);
+        info.setText(actualList.get(position).getTask().getName());
+        LinearLayout layout = (LinearLayout) view.findViewById(R.id.show_info);
+
+
+        for(int i = 0; i < actualList.get(position).getTask().getDescription().length; i++){
+            LinearLayout bigLayout = new LinearLayout(view.getContext());
+            LayoutParams lparams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            lparams.setMargins(0,0,0,5);
+            bigLayout.setLayoutParams(lparams);
+            bigLayout.setOrientation(LinearLayout.HORIZONTAL);
+            layout.addView(bigLayout);
+
+            TextView number = new TextView(view.getContext());
+            LayoutParams lparams2 = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+            lparams2.setMargins(0,0,10,0);
+            number.setLayoutParams(lparams2);
+            number.setText(i+1+".");
+            number.setTextAppearance(view.getContext(), R.style.AppTextHeadline);
+            number.setTextSize(16);
+            bigLayout.addView(number);
+
+
+            TextView newT = new TextView(view.getContext());
+            newT.setLayoutParams(lparams2);
+            newT.setText(actualList.get(position).getTask().getDescription()[i]);
+            newT.setTextAppearance(view.getContext(), R.style.AppTextNormal);
+            newT.setGravity(Gravity.BOTTOM);
+            bigLayout.addView(newT);
+        }
 
         return view;
     }

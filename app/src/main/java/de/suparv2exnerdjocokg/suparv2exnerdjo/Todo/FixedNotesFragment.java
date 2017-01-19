@@ -72,7 +72,7 @@ public class FixedNotesFragment extends Fragment {
             items = new ArrayList<>();
             for(int i = 0; i < DummyNotes.ITEMS.size(); i++) {
                 String note = DummyNotes.ITEMS.get(i).getTag();
-                String todo = view.getContext().getString(DummyToDos.ITEMS.get(position).getTask().getName());
+                String todo = DummyToDos.ITEMS.get(position).getTask().getName();
                 if(note.equals(todo)){
                     items.add(DummyNotes.ITEMS.get(i));
                 }
@@ -93,11 +93,17 @@ public class FixedNotesFragment extends Fragment {
         return view;
     }
 
-    public void updateFragView(int position){
+    public void updateFragView(int position, boolean done){
+        List<ToDo> actualList;
+        if(done){
+            actualList = DummyToDos.getDone();
+        }else{
+            actualList = DummyToDos.getUndone();
+        }
         List<Note> items = new ArrayList<>();
         for(int i = 0; i < DummyNotes.ITEMS.size(); i++) {
             String note = DummyNotes.ITEMS.get(i).getTag();
-            String todo = view.getContext().getString(DummyToDos.ITEMS.get(position).getTask().getName());
+            String todo = actualList.get(position).getTask().getName();
             if(note.equals(todo)){
                 items.add(DummyNotes.ITEMS.get(i));
             }

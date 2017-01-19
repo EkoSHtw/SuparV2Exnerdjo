@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
@@ -71,14 +72,15 @@ public class ToDoNotes extends Fragment {
 
     }
 
-    public void updateFragView(int position){
+    public void updateFragView(int position, boolean done){
         if(getChildFragmentManager().findFragmentById(R.id.fixedNotes) instanceof FixedNotesFragment){
             FixedNotesFragment fnFrag = (FixedNotesFragment) getChildFragmentManager().findFragmentById(R.id.fixedNotes);
-            fnFrag.updateFragView(position);
+            fnFrag.updateFragView(position, done);
         }else if(getChildFragmentManager().findFragmentById(R.id.fixedNotes) instanceof ShowInfo){
             FixedNotesFragment fnFrag = new FixedNotesFragment();
             Bundle args = new Bundle();
             args.putInt("position", position);
+            args.putBoolean("done", done);
             fnFrag.setArguments(args);
 
             FragmentTransaction trans = getChildFragmentManager().beginTransaction();
@@ -90,11 +92,15 @@ public class ToDoNotes extends Fragment {
         }
     }
 
-    public void updateFragViewInfo(int position){
+    public void updateFragViewInfo(int position, boolean done){
+
+        TextView header =(TextView) getView().findViewById(R.id.fixed_notes_headline);
+        header.setText("Beschreibung");
 
         ShowInfo tFrag = new ShowInfo();
         Bundle args = new Bundle();
         args.putInt("position", position);
+        args.putBoolean("done", done);
         tFrag.setArguments(args);
 
         FragmentTransaction trans = getChildFragmentManager().beginTransaction();

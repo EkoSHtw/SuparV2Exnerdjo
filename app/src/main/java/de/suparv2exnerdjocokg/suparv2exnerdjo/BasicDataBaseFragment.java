@@ -56,6 +56,7 @@ public class BasicDataBaseFragment extends Fragment {
     private Client c;
 
     private OnDocumentSelectedListener mCallback;
+    private OnClickCall call;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,17 +71,16 @@ public class BasicDataBaseFragment extends Fragment {
                 name = (TextView) rootView.findViewById(R.id.clientname);
                 name.setText(c.getFirstName() + " " + c.getLastName());
                 adress = (TextView) rootView.findViewById(R.id.adress);
-                adress.setText("Adresse: " + c.getAdress());
+                adress.setText(c.getAdress());
                 gebdate = (TextView) rootView.findViewById(R.id.gebdat);
                 gebdate.setText(c.getBirthDate().toString());
                 carelevel = (TextView) rootView.findViewById(R.id.care_level);
-                int a = c.getCarelevel();
-                carelevel.setText("Pflegestufe: " + a);
+                carelevel.setText(""+c.getCarelevel());
                 infodump = (TextView) rootView.findViewById(R.id.info);
                 infodump.setText(c.getConcerns());
                 numbers = (ListView) rootView.findViewById(R.id.telnumbers);
 
-                adapter = new PhonenumberListAdapter(rootView.getContext(), c);
+                adapter = new PhonenumberListAdapter(rootView.getContext(), c, call);
                 numbers.setAdapter(adapter);
                 File f = new File(getString(R.string.wounddocname));
                 File f1 = new File(getString(R.string.mobdocname));
@@ -97,7 +97,7 @@ public class BasicDataBaseFragment extends Fragment {
 
                 documents = (ListView) rootView.findViewById(document_list);
                 ArrayAdapter<File> arrayAdapter = new ArrayAdapter<File>(rootView.getContext(),
-                        android.R.layout.simple_list_item_1,
+                        R.layout.simple_list_item,
                         c.getDocumentation());
                 documents.setAdapter(arrayAdapter);
                 documents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -153,7 +153,11 @@ public class BasicDataBaseFragment extends Fragment {
 
 
     public interface OnDocumentSelectedListener {
-        public void onDocumentSelected(File position);
+            void onDocumentSelected(File position);
+    }
+
+    public interface OnClickCall{
+        void onClickCall(String number);
     }
 
     @Override
@@ -164,6 +168,7 @@ public class BasicDataBaseFragment extends Fragment {
         // the callback interface. If not, it throws an exception
         try {
             mCallback = (OnDocumentSelectedListener) activity;
+            call = (OnClickCall) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnHeadlineSelectedListener");

@@ -75,11 +75,11 @@ public class ClientView extends Fragment {
     }
 
 
-    public void updateClientView(int position){
+    public void updateClientView(int position, boolean done){
         if(position!=-2) {
             ToDoNotes tFrag = (ToDoNotes) getChildFragmentManager().findFragmentById(R.id.todoNotes);
             if (tFrag != null) {
-                tFrag.updateFragView(position);
+                tFrag.updateFragView(position, done);
             } else {
                 tFrag = new ToDoNotes();
                 Bundle args = new Bundle();
@@ -101,6 +101,7 @@ public class ClientView extends Fragment {
                 todoFrag = new TodoFragment();
                 Bundle args = new Bundle();
                 args.putInt(ClientView.ARG_Position, position);
+                args.putBoolean("done", done);
                 todoFrag.setArguments(args);
 
                 FragmentTransaction trans = getChildFragmentManager().beginTransaction();
@@ -113,14 +114,15 @@ public class ClientView extends Fragment {
         }
     }
 
-    public void updateClientViewInfo(int position){
+    public void updateClientViewInfo(int position, boolean done){
         ToDoNotes tFrag = (ToDoNotes)  getChildFragmentManager().findFragmentById(R.id.todoNotes);
         if(tFrag!=null) {
-            tFrag.updateFragViewInfo(position);
+            tFrag.updateFragViewInfo(position, done);
         }else{
             tFrag = new ToDoNotes();
             Bundle args = new Bundle();
             args.putInt(ClientView.ARG_Position, position);
+            args.putBoolean("done", done);
             tFrag.setArguments(args);
 
             FragmentTransaction trans = getChildFragmentManager().beginTransaction();

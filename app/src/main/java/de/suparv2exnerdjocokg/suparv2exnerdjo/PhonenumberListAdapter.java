@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,10 +28,12 @@ public class PhonenumberListAdapter extends BaseAdapter{
     private final ArrayList<PhoneNumber> numbers;
     private final LayoutInflater inflator;
     private static final String CLIENTKEY = "client_key";
+    private static BasicDataBaseFragment.OnClickCall callListener;
     private Client c;
 
 
-    public PhonenumberListAdapter(Context context, Client number){
+    public PhonenumberListAdapter(Context context, Client number, BasicDataBaseFragment.OnClickCall call){
+        Log.println(Log.INFO, "test","2");
 
         inflator = LayoutInflater.from(context);
 
@@ -42,6 +45,7 @@ public class PhonenumberListAdapter extends BaseAdapter{
 
 
         }
+        callListener = call;
     }
 
     @Override
@@ -71,6 +75,10 @@ public class PhonenumberListAdapter extends BaseAdapter{
 
             holder.phoneNum = (TextView) convertView.findViewById(R.id.phonenumber);
             convertView.setTag(holder);
+
+            holder.relation = (TextView) convertView.findViewById(R.id.relation);
+
+            holder.call = (ImageButton) convertView.findViewById(R.id.call);
         }else{
 
             holder = (PhonenumberListAdapter.ViewHolder) convertView.getTag();
@@ -78,10 +86,18 @@ public class PhonenumberListAdapter extends BaseAdapter{
 
         Context context = parent.getContext();
         c.getPhoneNumber().get(position);
-        PhoneNumber number = c.getPhoneNumber().get(position);
+        final PhoneNumber number = c.getPhoneNumber().get(position);
         holder.name.setText(number.getName());
-
         holder.phoneNum.setText(number.getNumber());
+        holder.relation.setText(number.getRelation());
+
+        holder.call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callListener.onClickCall(number.getNumber());
+            }
+        });
+
         return convertView;
     }
 
@@ -90,5 +106,7 @@ public class PhonenumberListAdapter extends BaseAdapter{
         TextView name;
         //TextView description;
         TextView phoneNum;
+        TextView relation;
+        ImageButton call;
     }
 }

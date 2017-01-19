@@ -1,6 +1,8 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Intent;
@@ -8,6 +10,8 @@ import android.graphics.Bitmap;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,12 +19,19 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 
 import java.io.IOException;
+import java.io.File;
 import java.sql.Timestamp;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.ImageActivity;
@@ -29,25 +40,30 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription1;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription2;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription3;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.MoblilisationBeddingFragment;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar.DialogAddNewNoteOrTask;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.LogBookFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Calendar;
+import java.util.List;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
-
-public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener {
-
-
+public class ClientViewActivity extends AppCompatActivity implements VitalFragment.OnFragmentInteractionListener ,BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
     public Client client;
+
+
 
     private FloatingActionButton fab;
     private Activity activity = this;
@@ -61,7 +77,7 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
         setContentView(R.layout.activity_client_view);
 
         Intent intent = getIntent();
-        client = (Client) DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
+        client = DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
 
         File f = new File(getFilesDir(),getString(R.string.wounddocname)+".txt");
         File f1 = new File(getFilesDir(),getString(R.string.mobdocname)+".txt");
@@ -96,23 +112,24 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
 
             @Override
             public void onClick(View v) {
-                DialogAddNote dialogAddNote = new DialogAddNote(activity);
-                dialogAddNote.show();
+                DialogAddNewNoteOrTask dialogAddNewNoteOrTask = new DialogAddNewNoteOrTask(activity);
+                dialogAddNewNoteOrTask.show();
             }
         });
     }
 
 
     @Override
-    public void onListFragmentInteraction(int position) {
+    public void onListFragmentInteraction(int position, boolean done) {
         if (position != -1) {
             ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             if (newFrag != null) {
-                newFrag.updateClientView(position);
+                newFrag.updateClientView(position, done);
             } else {
                 newFrag = new ClientView();
                 Bundle args = new Bundle();
                 args.putInt(ClientView.ARG_Position, position);
+                args.putBoolean("done", done);
                 newFrag.setArguments(args);
 
                 FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -123,10 +140,8 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
                 trans.commit();
             }
         } else {
-            ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-            newFrag = new ClientView();//??
+            ClientView newFrag = new ClientView();
             Bundle args = new Bundle();
-            args.putInt(ClientView.ARG_Position, position);
             newFrag.setArguments(args);
 
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -138,15 +153,17 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
         }
     }
 
+
     @Override
-    public void onInfoClickedListener(int position) {
+    public void onInfoClickedListener(int position, boolean done) {
         ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (newFrag != null) {
-            newFrag.updateClientViewInfo(position);
+            newFrag.updateClientViewInfo(position, done);
         } else {
             newFrag = new ClientView();
             Bundle args = new Bundle();
             args.putInt(ClientView.ARG_Position, position);
+            args.putBoolean("done", done);
             newFrag.setArguments(args);
 
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -160,7 +177,7 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
 
     @Override
     public void onMenuFragmentInteraction(int position) {
-        switch(position) {
+        switch (position) {
             case -1:
                 Intent route = new Intent(this, Route.class);
                 startActivity(route);
@@ -196,7 +213,14 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
                 trans.commit();
                 break;
             case 3:
+                VitalFragment vF = new VitalFragment();
 
+                trans = getSupportFragmentManager().beginTransaction();
+
+                trans.replace(R.id.fragment_container, vF);
+                trans.addToBackStack(null);
+
+                trans.commit();
                 break;
             case 4:
                 MedicineOverview medicineFrag = new MedicineOverview();
@@ -221,6 +245,7 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
     public void onDocumentSelected(File position) {
         // The user selected the headline of an article from the HeadlinesFragment
         // Do something here to display that article
+
         Fragment wFrag = new Fragment();
         String name = position.getName();
 
@@ -247,38 +272,7 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
         trans.replace(R.id.fragment_container, wFrag);
         trans.addToBackStack(null);
 
-        trans.commit();
-    }
-
-
-
-    String mCurrentPhotoPath;
-
-
-
-    public void showImage(String s){
-        Intent intent = new Intent (this, ImageActivity.class);
-        intent.putExtra(s,0);
-        startActivity(intent);
-    }
-
-
-
-    public Image getTakenPicture(){
-        return this.takenPicture;
-    }
-
-    public void setPicture(String path){
-        ImageDisplayFragment f = new ImageDisplayFragment();
-        Bundle args = new Bundle();
-        args.putString("path", path);
-        f.setArguments(args);
-        FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
-
-        trans.replace(R.id.fragment_container, f);
-        trans.addToBackStack(null);
-
-        trans.commit();
+            trans.commit();
     }
 
 
@@ -289,6 +283,49 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
         DummyNotes.sortList();
         //update fragments
         // buggy, neue notizen nicht in reihenfolge
+
+        Fragment newFrag = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (newFrag instanceof LogBookFragment) {
+            ((LogBookFragment) newFrag).update();
+        }
+    }
+
+    @Override
+    public void onClickCall(String number) {
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:" + number));
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        startActivity(callIntent);
+    }
+
+    @Override
+    public void onDatePickerInteraction(TodoFragment frag, GeneralTask task) {
+        DialogShiftTask dialogShiftTask = new DialogShiftTask(frag, this, task);
+        dialogShiftTask.show();
+    }
+
+    @Override
+    public void newValueAdded(int value, int id) {
+
+        VitalFragment newFrag = (VitalFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (newFrag != null) {
+            newFrag.addValue(value, id);
+        } else {
+            newFrag = new VitalFragment();
+            Bundle args = new Bundle();
+            newFrag.setArguments(args);
+
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+            trans.replace(R.id.fragment_container, newFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
+        }
     }
 
 

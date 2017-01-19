@@ -4,12 +4,18 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.Date;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 
 public class Route extends AppCompatActivity implements ClientListFragment.OnListFragmentInteractionListener {
 
@@ -18,10 +24,11 @@ public class Route extends AppCompatActivity implements ClientListFragment.OnLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
 
-        if(findViewById(R.id.clientList)!=null){
+        if(findViewById(R.id.client_list)!=null){
             ClientListFragment lF = new ClientListFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.clientList, lF).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.client_list, lF).commit();
         }
+
     }
 
     @Override
