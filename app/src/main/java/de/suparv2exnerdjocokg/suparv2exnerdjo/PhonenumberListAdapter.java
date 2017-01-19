@@ -34,7 +34,6 @@ public class PhonenumberListAdapter extends BaseAdapter{
 
     public PhonenumberListAdapter(Context context, Client number, BasicDataBaseFragment.OnClickCall call){
         Log.println(Log.INFO, "test","2");
-    public PhonenumberListAdapter(Context context, Client number){
 
         inflator = LayoutInflater.from(context);
 

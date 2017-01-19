@@ -245,8 +245,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
     public void onDocumentSelected(File position) {
         // The user selected the headline of an article from the HeadlinesFragment
         // Do something here to display that article
-        if (position.getName() == "Wunddokumentation") {
-            WoundDocumentationFragment wFrag = new WoundDocumentationFragment();
+
         Fragment wFrag = new Fragment();
         String name = position.getName();
 
@@ -274,47 +273,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         trans.addToBackStack(null);
 
             trans.commit();
-        }
-    }
-
-    public void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
-    }
-        trans.commit();
-    }
-
-
-
-    String mCurrentPhotoPath;
-
-
-
-    public void showImage(String s){
-        Intent intent = new Intent (this, ImageActivity.class);
-        intent.putExtra(s,0);
-        startActivity(intent);
-    }
-
-
-
-    public Image getTakenPicture(){
-        return this.takenPicture;
-    }
-
-    public void setPicture(String path){
-        ImageDisplayFragment f = new ImageDisplayFragment();
-        Bundle args = new Bundle();
-        args.putString("path", path);
-        f.setArguments(args);
-        FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
-
-        trans.replace(R.id.fragment_container, f);
-        trans.addToBackStack(null);
-
-        trans.commit();
     }
 
 
