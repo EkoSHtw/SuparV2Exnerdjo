@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,7 @@ public class MoblilisationBeddingFragment extends Fragment {
                 int rowCount =1;
                 int fillCount = 0;
                 String f = c.getDocumentation().get(i).getPath();
+                Log.println(Log.INFO,"",f);
                 mTable.addRow();
                 try {
 
@@ -104,10 +106,8 @@ public class MoblilisationBeddingFragment extends Fragment {
                                     rowCount++;
                                 }
                             }
-
-                            bufferedReader.close();
                         }
-
+                        bufferedReader.close();
                     }else{
                         for (int j = 0; j < 2; j++) {
                             mTable.addwRow();
@@ -144,7 +144,7 @@ public class MoblilisationBeddingFragment extends Fragment {
                             String textLine = "" + i;
 
                             for (int j = 0; j <= t.getChildCount(); j++) {
-                                if(j == mTable.getHeadLenght()){
+                                if(j == t.getChildCount() -1){
                                     PictureButton pButton = (PictureButton) t.getChildAt(j);
                                     textLine += " "  + pButton.getPicPath() + "/" + "\n";
                                 }

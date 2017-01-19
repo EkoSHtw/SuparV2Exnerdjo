@@ -128,7 +128,7 @@ public class WoundDocumentationFragment extends Fragment{
                                     if (view instanceof TableRowExpand) {
                                         TableRowExpand t = (TableRowExpand) view;
                                         String s = receiveString.replace("/", "");
-                                        if (fillCount == t.getChildCount() -1) {
+                                        if (fillCount == mTable.getHeadLenght()) {
                                             PictureButton pb = (PictureButton) t.getChildAt(fillCount);
 
                                         }else {
@@ -142,11 +142,10 @@ public class WoundDocumentationFragment extends Fragment{
                                         rowCount++;
                                     }
                                 }
-
-                                bufferedReader.close();
                             }
-
+                        bufferedReader.close();
                     }else{
+                        bufferedReader.close();
                         for (int j = 0; j < 2; j++) {
                             mTable.addwRow();
                         }

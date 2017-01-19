@@ -97,16 +97,14 @@ public class DoctorialPrescription1 extends Fragment {
                                 EditText firstTextView = (EditText) t.getChildAt(fillCount);
                                 firstTextView.setText(s);
 
-                                if (fillCount == mTable.getHeadLenght()) {
+                                if (fillCount == t.getChildCount() -1) {
                                     mTable.addRow();
                                     fillCount =0;
                                     rowCount++;
                                 }
                             }
-
-                            bufferedReader.close();
                         }
-
+                        bufferedReader.close();
                     }
                 }catch (Exception e){
                     e.printStackTrace();
