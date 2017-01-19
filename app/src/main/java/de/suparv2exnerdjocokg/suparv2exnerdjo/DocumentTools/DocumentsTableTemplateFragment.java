@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStream;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
@@ -39,7 +40,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
     private View view;
     private String[] firstRow;
 
-    private File overwrite;
+    private String overwrite;
     private int index;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,15 +66,14 @@ public class DocumentsTableTemplateFragment extends Fragment {
         mTable = new TableGenerator(getActivity());
         layMain = (ScrollView) view.findViewById(R.id.table);
 
-        Log.println(Log.INFO, " ", "Vor For");
         mTable.addHead(firstRow);
         for (int i = 0; i < c.docsListLenghts(); i++) {
-            Log.println(Log.INFO, " ", "Nach For");
-
-            if (c.getDocumentation().get(i).getName() == filename) {
-                Log.println(Log.INFO, " ", "Nach if");
+            Log.println(Log.INFO, "filename",filename);
+            Log.println(Log.INFO, "filename c.doc",c.getDocumentation().get(i).getName());
+            if (c.getDocumentation().get(i).getName().equals(filename)) {
                 index = i;
-                this.overwrite = c.getDocumentation().get(i);
+                this.overwrite = c.getDocumentation().get(i).getName();
+                Log.println(Log.INFO, "filename over",overwrite);
                 String ret = "";
                 int rowCount = 1;
                 int fillCount = 0;
@@ -85,8 +85,6 @@ public class DocumentsTableTemplateFragment extends Fragment {
 
                     BufferedReader bufferedReader = new BufferedReader(
                             new FileReader(f));
-                    Log.println(Log.INFO,"","HI ich bin im reader");
-
                     if (bufferedReader.readLine() != null) {
 
                         String receiveString = "";
@@ -134,9 +132,10 @@ public class DocumentsTableTemplateFragment extends Fragment {
         saveIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OutputStream outputStream;
                 try {
+                    outputStream = getContext().openFileOutput(overwrite, Context.MODE_PRIVATE);
 
-                    FileOutputStream fops = new FileOutputStream(overwrite);
                     for (int i = 1; i < mTable.getIdCount(); i++) {
                         View vi = mTable.getTable().getChildAt(i);
                         if (vi instanceof TableRowExpand) {
@@ -153,13 +152,13 @@ public class DocumentsTableTemplateFragment extends Fragment {
                                 textLine += " " + text.getText().toString() + "/" + "\n";
 
                             }
-                            fops.write(textLine.getBytes());
+                            outputStream.write(textLine.getBytes());
+                            outputStream.flush();
 
                         }
                     }
-                    fops.flush();
-                    fops.close();
-                    c.getDocumentation().set(index, overwrite);
+
+                    outputStream.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -39,7 +39,7 @@ public class MobilisationBeddingFragment extends DocumentsTableTemplateFragment 
                 view.getContext().getString(R.string.mobMeasures), view.getContext().getString(R.string.mobcharacteristics),
                 view.getContext().getString(R.string.mobtime),
                 view.getContext().getString(R.string.hdz)};
-        Log.println(Log.INFO, "On CREATE"," Vor SHow table");
+
         showTable(firstRow,getString(R.string.mobdocname), view, c);
 
         return  view;

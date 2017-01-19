@@ -102,7 +102,7 @@ public class WoundDocumentationFragment extends Fragment{
 
         mTable.addHead(firstRow);
         for (int i =0; i < c.docsListLenghts(); i++){
-            if(c.getDocumentation().get(i).getName() == getString(R.string.wounddocname)){
+            if(c.getDocumentation().get(i).getName().equals( getString(R.string.wounddocname))){
                 this.index = i;
                 this.overwrite =  c.getDocumentation().get(i);
                 int rowCount =1;
