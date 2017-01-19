@@ -115,16 +115,16 @@
     <string name="saveContent">Speichern</string>
 
     <string name="wounddocname">Wunddokumentation</string>
-    <string name="mobdocname">Mobilisations Lagerungsplan</string>
+    <string name="mobdocname">MobilisationsLagerungsplan</string>
     <string name="mobdate">Datum</string>
     <string name="mobdestination">Mobilisierungsziel</string>
     <string name="mobMeasures">Mobilisierungsmaßnahmen</string>
     <string name="mobcharacteristics">Besonderheiten</string>;
     <string name="mobtime">Uhrpunkt</string>
 
-    <string name="doctorialprescription1">Ärztlich Verordnung 1 Verbandswechsel etc.</string>
-    <string name="doctorialprescription2">Ärztlich Verordnung 2 Injektion Infusion</string>
-    <string name="doctorialprescription3">Ärztlich Verordnung 3 Sonderkost parenterale Ernährung</string>
+    <string name="doctorialprescription1">Ärztlich_Verordnung_1_Verbandswechsel_etc</string>
+    <string name="doctorialprescription2">Ärztlich_Verordnung_2_Injektion_Infusion</string>
+    <string name="doctorialprescription3">Ärztlich_Verordnung_3_Sonderkost_parenterale_Ernährung</string>
     <string name="doctpre1hdz">Hdz. Pflege</string>
     <string name="doctorname">Arztname</string>
     <string name="doctorialmeasure">ärztlich verordnete Maßnahme</string>

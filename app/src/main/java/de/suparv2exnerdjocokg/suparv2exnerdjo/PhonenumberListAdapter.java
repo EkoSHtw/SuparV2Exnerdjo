@@ -31,7 +31,7 @@ public class PhonenumberListAdapter extends BaseAdapter{
 
 
     public PhonenumberListAdapter(Context context, Client number){
-        Log.println(Log.INFO, "test","2");
+
         inflator = LayoutInflater.from(context);
 
         this.numbers = new ArrayList<>();

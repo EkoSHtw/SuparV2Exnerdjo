@@ -18,7 +18,6 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image);
         this.image = (ImageView) findViewById(R.id.woundimage);
         Intent intent = getIntent();
-//        = getIntent().getStringExtra("PICTURE_ID")
        // String message = intent.getStringExtra();
 
         s = intent.getStringExtra("PICTURE_ID");

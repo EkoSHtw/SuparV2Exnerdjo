@@ -14,6 +14,7 @@ import android.widget.ScrollView;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -51,7 +52,6 @@ public class MoblilisationBeddingFragment extends Fragment {
     private File overwrite;
     private int index;
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view= inflater.inflate(R.layout.fragment_document_wound, container, false);
@@ -78,13 +78,15 @@ public class MoblilisationBeddingFragment extends Fragment {
                 String ret = "";
                 int rowCount =1;
                 int fillCount = 0;
+                String f = c.getDocumentation().get(i).getPath();
                 mTable.addRow();
                 try {
-                    InputStream inputStream = getContext().openFileInput(c.getDocumentation().get(i).getName());
 
-                    if ( inputStream != null ) {
-                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    BufferedReader bufferedReader = new BufferedReader(
+                            new FileReader("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"
+                                    + f +".txt"));
+                    if ( bufferedReader.readLine() != null ) {
+
                         String receiveString = "";
 
                         while ((receiveString = bufferedReader.readLine()) != null) {
@@ -103,7 +105,7 @@ public class MoblilisationBeddingFragment extends Fragment {
                                 }
                             }
 
-                            inputStream.close();
+                            bufferedReader.close();
                         }
 
                     }else{
@@ -117,10 +119,6 @@ public class MoblilisationBeddingFragment extends Fragment {
             }
         }
 
-
-        for (int j = 0; j < 2; j++) {
-            mTable.addRow();
-        }
 
         layMain.removeAllViews();
         layMain.addView(mTable.getTable());

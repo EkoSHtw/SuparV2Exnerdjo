@@ -14,6 +14,7 @@ import android.widget.ScrollView;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -51,7 +52,6 @@ public class DoctorialPrescription3 extends Fragment {
     private File overwrite;
 
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view= inflater.inflate(R.layout.fragment_document_wound, container, false);
@@ -60,8 +60,6 @@ public class DoctorialPrescription3 extends Fragment {
 
         return  view;
     }
-
-
 
 
     private void showTable() {
@@ -80,13 +78,15 @@ public class DoctorialPrescription3 extends Fragment {
                 this.overwrite =  c.getDocumentation().get(i);
                 int rowCount =1;
                 int fillCount = 0;
+
                 mTable.addRow();
+                String f = c.getDocumentation().get(i).getPath();
 
                 try {
-                    InputStream inputStream = getContext().openFileInput(c.getDocumentation().get(i).getName());
-                    if ( inputStream != null ) {
-                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/" + f +".txt"));
+                    if ( bufferedReader != null ) {
+
                         String receiveString = "";
 
                         while ((receiveString = bufferedReader.readLine()) != null) {
@@ -105,7 +105,7 @@ public class DoctorialPrescription3 extends Fragment {
                                 }
                             }
 
-                            inputStream.close();
+                            bufferedReader.close();
                         }
 
                     }
@@ -139,9 +139,10 @@ public class DoctorialPrescription3 extends Fragment {
         saveIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FileOutputStream fops;
                 try {
 
-                    FileOutputStream fops = new FileOutputStream(overwrite);
+                    fops =  getContext().openFileOutput(overwrite.getName(), Context.MODE_PRIVATE);
                     for (int i = 1; i < mTable.getIdCount(); i++) {
                         View view = mTable.getTable().getChildAt(i);
                         if (view instanceof TableRowExpand) {

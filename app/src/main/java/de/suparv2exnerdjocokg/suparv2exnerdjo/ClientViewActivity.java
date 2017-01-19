@@ -62,19 +62,22 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
 
         Intent intent = getIntent();
         client = (Client) DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
-        File f = new File(getFilesDir(), getString(R.string.wounddocname));
-        File f1 = new File(getFilesDir(),getString(R.string.mobdocname));
-        File f2 = new File(getFilesDir(),getString(R.string.doctorialprescription1));
-        File f3 = new File(getFilesDir(),getString(R.string.doctorialprescription2));
-        File f4 = new File(getFilesDir(),getString(R.string.doctorialprescription3));
+
+        File f = new File(getFilesDir(),getString(R.string.wounddocname)+".txt");
+        File f1 = new File(getFilesDir(),getString(R.string.mobdocname)+".txt");
+        File f2 = new File(getFilesDir(),getString(R.string.doctorialprescription1)+".txt");
+        File f3 = new File(getFilesDir(),getString(R.string.doctorialprescription2)+".txt");
+        File f4 = new File(getFilesDir(),getString(R.string.doctorialprescription3)+".txt");
         ArrayList<File> b = new ArrayList<>();
         b.add(f);
+
         b.add(f1);
         b.add(f2);
         b.add(f3);
         b.add(f4);
         client.setDocumentation(b);
 
+// Absoluter pfad gibt in wunddokument nur einen teilpfad zurück
 
 //        setContentView(R.layout.dialog_add_note);
 
@@ -234,8 +237,6 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
         fragList.add(new DoctorialPrescription1());
         fragList.add(new DoctorialPrescription2());
         fragList.add(new DoctorialPrescription3());
-        Log.println(Log.INFO, "2", "Kommt Durch");
-        Log.println(Log.INFO, "2", name);
         for(int i =0; i < doclist.size(); i ++){
             if (name == doclist.get(i)){
                 wFrag = fragList.get(i);

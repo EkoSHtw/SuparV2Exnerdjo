@@ -26,11 +26,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.regex.Matcher;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
@@ -62,7 +66,6 @@ public class WoundDocumentationFragment extends Fragment{
 
 
 
-
     public WoundDocumentationFragment(){}
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,7 +75,6 @@ public class WoundDocumentationFragment extends Fragment{
 
         return  view;
     }
-
 
 
     @Override
@@ -101,20 +103,24 @@ public class WoundDocumentationFragment extends Fragment{
         mTable.addHead(firstRow);
         for (int i =0; i < c.docsListLenghts(); i++){
             if(c.getDocumentation().get(i).getName() == getString(R.string.wounddocname)){
+
                 this.index = i;
-
                 this.overwrite =  c.getDocumentation().get(i);
-
-                String ret = "";
                 int rowCount =1;
                 int fillCount = 0;
                 mTable.addwRow();
                 try {
-                    FileInputStream in = getContext().openFileInput(c.getDocumentation().get(i).getName());
+                    String empty = "";
+                    String f = c.getDocumentation().get(i).getPath();
 
-                    if ( in != null ) {
-                        InputStreamReader inputStreamReader = new InputStreamReader(in);
-                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                 //   InputStream inputStream = getContext().openFileInput("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"+ c.getDocumentation().get(i).getPath());
+
+                    BufferedReader bufferedReader = new BufferedReader(
+                            new FileReader("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"
+                                    + f +".txt"));
+                    if ( bufferedReader.readLine() != null ) {
+
                         String receiveString = "";
 
                                 while ((receiveString = bufferedReader.readLine()) != null) {
@@ -122,7 +128,7 @@ public class WoundDocumentationFragment extends Fragment{
                                     if (view instanceof TableRowExpand) {
                                         TableRowExpand t = (TableRowExpand) view;
                                         String s = receiveString.replace("/", "");
-                                        if (fillCount == mTable.getHeadLenght()) {
+                                        if (fillCount == t.getChildCount() -1) {
                                             PictureButton pb = (PictureButton) t.getChildAt(fillCount);
 
                                         }else {
@@ -137,7 +143,7 @@ public class WoundDocumentationFragment extends Fragment{
                                     }
                                 }
 
-                                in.close();
+                                bufferedReader.close();
                             }
 
                     }else{
@@ -169,24 +175,29 @@ public class WoundDocumentationFragment extends Fragment{
             saveIt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    FileOutputStream fops = null;
+
                     try {
 
-                        FileOutputStream fops = new FileOutputStream(overwrite);
+                        fops = new FileOutputStream(
+                                "/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"
+                                        + overwrite.getName() +".txt", false);
+
                         for (int i = 1; i < mTable.getIdCount(); i++) {
                             View view = mTable.getTable().getChildAt(i);
                             if (view instanceof TableRowExpand) {
                                 TableRowExpand t = (TableRowExpand) view;
                                 String textLine = "" + i;
 
-                                for (int j = 0; j <= t.getChildCount(); j++) {
-                                    if(j == mTable.getHeadLenght()){
+                                for (int j = 0; j < t.getChildCount(); j++) {
+                                    if(j == t.getChildCount() -1){
                                         PictureButton pButton = (PictureButton) t.getChildAt(j);
                                         textLine += " "  + pButton.getPicPath() + "/" + "\n";
+                                    }else {
+                                        EditText text = (EditText) t.getChildAt(j);
+                                        //if(firstTextView == null) break;
+                                        textLine += " " + text.getText().toString() + "/" + "\n";
                                     }
-                                    EditText text= (EditText) t.getChildAt(j);
-                                    //if(firstTextView == null) break;
-                                    textLine += " "  + text.getText().toString() + "/" + "\n";
-
                                 }
                                 fops.write(textLine.getBytes());
 
