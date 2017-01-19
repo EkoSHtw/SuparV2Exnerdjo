@@ -2,45 +2,28 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.media.Image;
 import android.net.Uri;
-import android.os.Environment;
 import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.DatePicker;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.File;
 import java.sql.Timestamp;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.ImageActivity;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.ImageDisplayFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription1;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription2;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription3;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.MoblilisationBeddingFragment;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.MobilisationBeddingFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar.DialogAddNewNoteOrTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.LogBookFragment;
@@ -48,17 +31,12 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
-import java.io.File;
+
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Calendar;
-import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 public class ClientViewActivity extends AppCompatActivity implements VitalFragment.OnFragmentInteractionListener ,BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
@@ -273,7 +251,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         Log.println(Log.INFO, "Name pdf file ",position);
         ArrayList<Fragment> fragList = new ArrayList<>();
         fragList.add(new WoundDocumentationFragment());
-        fragList.add(new MoblilisationBeddingFragment());
+        fragList.add(new MobilisationBeddingFragment());
         fragList.add(new DoctorialPrescription1());
         fragList.add(new DoctorialPrescription2());
         fragList.add(new DoctorialPrescription3());

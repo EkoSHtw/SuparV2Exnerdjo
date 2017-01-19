@@ -17,9 +17,9 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.ImageDisplayFragment
 import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.TableGenerator;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
-public class MoblilisationBeddingFragment extends DocumentsTableTemplateFragment {
+public class MobilisationBeddingFragment extends DocumentsTableTemplateFragment {
 
-    public MoblilisationBeddingFragment() {
+    public MobilisationBeddingFragment() {
         // Required empty public constructor
     }
     private ScrollView layMain;
