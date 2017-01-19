@@ -38,7 +38,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
-public class ClientViewActivity extends AppCompatActivity implements BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
+public class ClientViewActivity extends AppCompatActivity implements VitalFragment.OnFragmentInteractionListener ,BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
     public Client client;
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -254,5 +254,25 @@ public class ClientViewActivity extends AppCompatActivity implements BasicDataBa
     public void onDatePickerInteraction(TodoFragment frag, GeneralTask task) {
         DialogShiftTask dialogShiftTask = new DialogShiftTask(frag, this, task);
         dialogShiftTask.show();
+    }
+
+    @Override
+    public void newValueAdded(int value, int id) {
+
+        VitalFragment newFrag = (VitalFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (newFrag != null) {
+            newFrag.addValue(value, id);
+        } else {
+            newFrag = new VitalFragment();
+            Bundle args = new Bundle();
+            newFrag.setArguments(args);
+
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+            trans.replace(R.id.fragment_container, newFrag);
+            trans.addToBackStack(null);
+
+            trans.commit();
+        }
     }
 }
