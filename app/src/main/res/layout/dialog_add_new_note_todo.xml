@@ -14,7 +14,7 @@
         android:id="@+id/dialog_add_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/note"/>
+        android:text="@string/new_logbook_entry"/>
 
     <TextView
         android:id="@+id/dialog_add_todo"

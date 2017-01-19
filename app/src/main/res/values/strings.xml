@@ -95,7 +95,7 @@
     <string name="picture">Bild</string>
 
     <!-- Add note alert -->
-    <string name="dialog_add_note_title">Neue Notiz</string>
+    <string name="dialog_add_note_title">Neuer Logbucheintrag</string>
     <string name="cancel">Abbrechen</string>
     <string name="confirm">Bestätigen</string>
     <string name="carer_name_fill">Carer Name Filler</string>
@@ -118,6 +118,7 @@
     <string name="today">Heute</string>
     <string name="tomorrow">Morgen</string>
     <string name="day_after_tomorrow">Übermorgen</string>
+    <string name="new_logbook_entry">Logbucheintrag</string>
 
 
 </resources>
