@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.File;
 import java.sql.Timestamp;
@@ -79,14 +80,28 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         Intent intent = getIntent();
         client = DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
 
-        File f = new File(getFilesDir(),getString(R.string.wounddocname)+".txt");
-        File f1 = new File(getFilesDir(),getString(R.string.mobdocname)+".txt");
-        File f2 = new File(getFilesDir(),getString(R.string.doctorialprescription1)+".txt");
-        File f3 = new File(getFilesDir(),getString(R.string.doctorialprescription2)+".txt");
-        File f4 = new File(getFilesDir(),getString(R.string.doctorialprescription3)+".txt");
+        File f = new File(getFilesDir(), this.getString(R.string.wounddocname));
+        Log.println(Log.INFO, "ACT PAth", f.getPath());
+        File f1 = new File(getFilesDir(), this.getString(R.string.mobdocname));
+        File f2 = new File(getFilesDir(), this.getString(R.string.doctorialprescription1));
+        File f3 = new File(getFilesDir(), this.getString(R.string.doctorialprescription2));
+        File f4 = new File(getFilesDir(), this.getString(R.string.doctorialprescription3));
+
+        String filename = "myfile";
+        String string = "Hello world!";
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = openFileOutput(f1.getName(),Context.MODE_PRIVATE);
+            outputStream.write(string.getBytes());
+            outputStream.close();
+            Log.println(Log.INFO,"Stream", "Schreiben erfolgreich");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         ArrayList<File> b = new ArrayList<>();
         b.add(f);
-
         b.add(f1);
         b.add(f2);
         b.add(f3);
@@ -242,12 +257,11 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         return client;
     }
 
-    public void onDocumentSelected(File position) {
+    public void onDocumentSelected(String position) {
         // The user selected the headline of an article from the HeadlinesFragment
         // Do something here to display that article
 
         Fragment wFrag = new Fragment();
-        String name = position.getName();
 
         ArrayList<String> doclist= new ArrayList<>();
         doclist.add(getString(R.string.wounddocname));
@@ -256,6 +270,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         doclist.add(getString(R.string.doctorialprescription2));
         doclist.add(getString(R.string.doctorialprescription3));
 
+        Log.println(Log.INFO, "Name pdf file ",position);
         ArrayList<Fragment> fragList = new ArrayList<>();
         fragList.add(new WoundDocumentationFragment());
         fragList.add(new MoblilisationBeddingFragment());
@@ -263,7 +278,9 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         fragList.add(new DoctorialPrescription2());
         fragList.add(new DoctorialPrescription3());
         for(int i =0; i < doclist.size(); i ++){
-            if (name == doclist.get(i)){
+            Log.println(Log.INFO, "Name pdf file doclist ",doclist.get(i));
+            if (position.equals( doclist.get(i))){
+                Log.println(Log.INFO, "Name pdf file","I#m inside");
                 wFrag = fragList.get(i);
                 break;
             }

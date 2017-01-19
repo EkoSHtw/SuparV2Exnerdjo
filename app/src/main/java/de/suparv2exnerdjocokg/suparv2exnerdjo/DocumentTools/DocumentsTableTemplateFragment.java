@@ -31,26 +31,28 @@ public class DocumentsTableTemplateFragment extends Fragment {
     public DocumentsTableTemplateFragment() {
         // Required empty public constructor
     }
+
     private ScrollView layMain;
     private TableGenerator mTable;
     private Button addRow;
     private Button saveIt;
     private View view;
+    private String[] firstRow;
 
     private File overwrite;
     private int index;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.view= inflater.inflate(R.layout.fragment_document_wound, container, false);
-        final Client c = ((ClientViewActivity)getActivity()).getClient();
+        this.view = inflater.inflate(R.layout.fragment_document_wound, container, false);
+        final Client c = ((ClientViewActivity) getActivity()).getClient();
         String[] firstRow = {view.getContext().getString(R.string.wounddate), view.getContext().getString(R.string.mobdestination),
                 view.getContext().getString(R.string.mobMeasures), view.getContext().getString(R.string.mobcharacteristics),
                 view.getContext().getString(R.string.mobtime),
                 view.getContext().getString(R.string.hdz)};
-        showTable(firstRow, getString(R.string.mobdocname),  this.view, c);
+        showTable(firstRow, getString(R.string.mobdocname), this.view, c);
 
-        return  view;
+        return view;
     }
 
 
@@ -58,29 +60,34 @@ public class DocumentsTableTemplateFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-    public void showTable(String [] firstRow, String filename, View view, final Client c) {
+
+    public void showTable(String[] firstRow, String filename, View view, final Client c) {
         mTable = new TableGenerator(getActivity());
         layMain = (ScrollView) view.findViewById(R.id.table);
 
-
-
+        Log.println(Log.INFO, " ", "Vor For");
         mTable.addHead(firstRow);
-        for (int i =0; i < c.docsListLenghts(); i++){
-            if(c.getDocumentation().get(i).getName() == filename){
+        for (int i = 0; i < c.docsListLenghts(); i++) {
+            Log.println(Log.INFO, " ", "Nach For");
+
+            if (c.getDocumentation().get(i).getName() == filename) {
+                Log.println(Log.INFO, " ", "Nach if");
                 index = i;
-                this.overwrite =  c.getDocumentation().get(i);
+                this.overwrite = c.getDocumentation().get(i);
                 String ret = "";
-                int rowCount =1;
+                int rowCount = 1;
                 int fillCount = 0;
-                String f = c.getDocumentation().get(i).getPath();
-                Log.println(Log.INFO,"",f);
+                String f = getContext().getFilesDir()
+                        + c.getDocumentation().get(i).getAbsolutePath();
+                Log.println(Log.INFO, "", f);
                 mTable.addRow();
                 try {
 
                     BufferedReader bufferedReader = new BufferedReader(
-                            new FileReader("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"
-                                    + f +".txt"));
-                    if ( bufferedReader.readLine() != null ) {
+                            new FileReader(f));
+                    Log.println(Log.INFO,"","HI ich bin im reader");
+
+                    if (bufferedReader.readLine() != null) {
 
                         String receiveString = "";
 
@@ -93,20 +100,20 @@ public class DocumentsTableTemplateFragment extends Fragment {
                                 EditText firstTextView = (EditText) t.getChildAt(fillCount);
                                 firstTextView.setText(s);
 
-                                if (fillCount == t.getChildCount() -1) {
+                                if (fillCount == t.getChildCount() - 1) {
                                     mTable.addRow();
-                                    fillCount =0;
+                                    fillCount = 0;
                                     rowCount++;
                                 }
                             }
                         }
                         bufferedReader.close();
-                    }else{
+                    } else {
                         for (int j = 0; j < 2; j++) {
                             mTable.addwRow();
                         }
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -137,13 +144,13 @@ public class DocumentsTableTemplateFragment extends Fragment {
                             String textLine = "" + i;
 
                             for (int j = 0; j <= t.getChildCount(); j++) {
-                                if(j == t.getChildCount() -1){
+                                if (j == t.getChildCount() - 1) {
                                     PictureButton pButton = (PictureButton) t.getChildAt(j);
-                                    textLine += " "  + pButton.getPicPath() + "/" + "\n";
+                                    textLine += " " + pButton.getPicPath() + "/" + "\n";
                                 }
-                                EditText text= (EditText) t.getChildAt(j);
+                                EditText text = (EditText) t.getChildAt(j);
                                 //if(firstTextView == null) break;
-                                textLine += " "  + text.getText().toString() + "/" + "\n";
+                                textLine += " " + text.getText().toString() + "/" + "\n";
 
                             }
                             fops.write(textLine.getBytes());

@@ -1,6 +1,7 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Documents;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +18,6 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.TableGenerator;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 public class MoblilisationBeddingFragment extends DocumentsTableTemplateFragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private ImageDisplayFragment.OnFragmentInteractionListener mListener;
 
     public MoblilisationBeddingFragment() {
         // Required empty public constructor
@@ -48,6 +39,7 @@ public class MoblilisationBeddingFragment extends DocumentsTableTemplateFragment
                 view.getContext().getString(R.string.mobMeasures), view.getContext().getString(R.string.mobcharacteristics),
                 view.getContext().getString(R.string.mobtime),
                 view.getContext().getString(R.string.hdz)};
+        Log.println(Log.INFO, "On CREATE"," Vor SHow table");
         showTable(firstRow,getString(R.string.mobdocname), view, c);
 
         return  view;

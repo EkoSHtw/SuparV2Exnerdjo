@@ -103,7 +103,6 @@ public class WoundDocumentationFragment extends Fragment{
         mTable.addHead(firstRow);
         for (int i =0; i < c.docsListLenghts(); i++){
             if(c.getDocumentation().get(i).getName() == getString(R.string.wounddocname)){
-
                 this.index = i;
                 this.overwrite =  c.getDocumentation().get(i);
                 int rowCount =1;
@@ -114,10 +113,10 @@ public class WoundDocumentationFragment extends Fragment{
                     String f = c.getDocumentation().get(i).getPath();
 
 
-                 //   InputStream inputStream = getContext().openFileInput("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"+ c.getDocumentation().get(i).getPath());
-
+                 // InputStream inputStream = getContext().openFileInput("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"+ c.getDocumentation().get(i).getPath());
+                    Log.println(Log.INFO, "FRAG PAth",""+getContext().getFilesDir()+f);
                     BufferedReader bufferedReader = new BufferedReader(
-                            new FileReader("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"
+                            new FileReader(getContext().getFilesDir()
                                     + f +".txt"));
                     if ( bufferedReader.readLine() != null ) {
 
