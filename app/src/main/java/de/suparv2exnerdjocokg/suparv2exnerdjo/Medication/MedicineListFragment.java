@@ -10,10 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClientMedicine;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyMedicine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -61,18 +65,24 @@ public class MedicineListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-            if(getArguments().get("category")!=null){
-                String medicine = getArguments().getString("category");
-                if(medicine.contains("prediscribed")){
-                    medicineList = DummyMedicine.ITEMS_PRESCRIBED;
-                }else if(medicine.contains("temporary")){
-                    medicineList = DummyMedicine.ITEMS_TEMPORARY;
-                }else if(medicine.contains("self")){
-                    medicineList = DummyMedicine.ITEMS_SELF_ORDERED;
-                }else if(medicine.contains("demand")){
-                    medicineList = DummyMedicine.ITEMS_SELF_ORDERED;
+        Client c = ((ClientViewActivity)getActivity()).getClient();
+        DummyClientMedicine m = c.getMedicineList();
+        if(m!=null) {
+            HashMap<String, List<Medicine>> medicines = m.CLIENTMEDICINE;
+
+            if (getArguments() != null) {
+                mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+                if (getArguments().get("category") != null) {
+                    String medicine = getArguments().getString("category");
+                    if (medicine.contains("prediscribed")) {
+                        medicineList = medicines.get("PREDESCRIBED");
+                    } else if (medicine.contains("temporary")) {
+                        medicineList = medicines.get("TEMPORARY");
+                    } else if (medicine.contains("self")) {
+                        medicineList = medicines.get("SELF_ORDERED");
+                    } else if (medicine.contains("demand")) {
+                        medicineList = medicines.get("SELF_ORDERED");
+                    }
                 }
             }
         }
