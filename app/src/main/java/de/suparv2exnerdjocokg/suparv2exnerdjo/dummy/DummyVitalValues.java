@@ -21,11 +21,12 @@ public class DummyVitalValues {
 
     public DummyVitalValues(){
 
-        List<Date> dates = new ArrayList<>();
+        List<Date> tempDates = new ArrayList<>();
+        List<Date> bloodPressureDates = new ArrayList<>();
         LineGraphSeries<DataPoint> diastolicB = new LineGraphSeries<>();
-        int[] diastolicValues = new int[7];
+        HashMap<Date, Integer> diastolicValues = new HashMap<>();
         LineGraphSeries<DataPoint> systolicB = new LineGraphSeries<>();
-        int[] systolicValues = new int[7];
+        HashMap<Date, Integer> systolicValues = new HashMap<>();
         LineGraphSeries<DataPoint> temp = new LineGraphSeries<>();
         HashMap<Date, Double> tempValues = new HashMap<>();
         LineGraphSeries<DataPoint> bloodSugar = new LineGraphSeries<>();
@@ -51,35 +52,51 @@ public class DummyVitalValues {
         date[1] = calendar.getTime();
         calendar.add(Calendar.DATE, -1);
         date[0] = calendar.getTime();
-        dates.add(date[0]);
-        dates.add(date[1]);
-        dates.add(date[2]);
-        dates.add(date[3]);
-        dates.add(date[4]);
-        dates.add(date[5]);
-        dates.add(date[6]);
+        tempDates.add(date[0]);
+        tempDates.add(date[1]);
+        tempDates.add(date[2]);
+        tempDates.add(date[3]);
+        tempDates.add(date[4]);
+        tempDates.add(date[5]);
+        tempDates.add(date[6]);
+
+        bloodPressureDates.add(date[0]);
+        bloodPressureDates.add(date[1]);
+        bloodPressureDates.add(date[2]);
+        bloodPressureDates.add(date[3]);
+        bloodPressureDates.add(date[4]);
+        bloodPressureDates.add(date[5]);
+        bloodPressureDates.add(date[6]);
 
 
         // BLUTDRUCK
 
-        diastolicValues = new int[]{79, 81, 82, 78, 79, 77, 78};
+        int[] diastolicValues1 = new int[]{79, 81, 82, 78, 79, 77, 78};
 
-        systolicValues = new int[]{119, 122, 120, 119, 119, 115, 116};
+        for(int i = 0; i < diastolicValues1.length; i++){
+            diastolicValues.put(bloodPressureDates.get(i), diastolicValues1[i]);
+        }
+
+        int[] systolicValues1 = new int[]{119, 122, 120, 119, 119, 115, 116};
+
+        for(int i = 0; i < systolicValues1.length; i++){
+            systolicValues.put(bloodPressureDates.get(i), systolicValues1[i]);
+        }
 
 
         // BLUTZUCKER
 
-        for (int i = 0; i < dates.size(); i++) {
+        for (int i = 0; i < tempDates.size(); i++) {
             Calendar c = Calendar.getInstance();
-            c.setTime(dates.get(i));
+            c.setTime(tempDates.get(i));
             c.add(Calendar.HOUR, 9);
-            bloodSugarDates.add(calendar.getTime());
+            bloodSugarDates.add(c.getTime());
             c.add(Calendar.HOUR, 3);
-            bloodSugarDates.add(calendar.getTime());
+            bloodSugarDates.add(c.getTime());
             c.add(Calendar.HOUR, 4);
-            bloodSugarDates.add(calendar.getTime());
+            bloodSugarDates.add(c.getTime());
             c.add(Calendar.HOUR, 4);
-            bloodSugarDates.add(calendar.getTime());
+            bloodSugarDates.add(c.getTime());
         }
 
         int[] bloodSugarValues1 = new int[]{
@@ -103,13 +120,11 @@ public class DummyVitalValues {
         double[] tempValues1 = new double[]{36.5, 36.25, 37.5, 36.7, 35.8, 36.5, 36};
 
         for (int i = 0; i < tempValues1.length; i++) {
-            tempValues.put(dates.get(i), tempValues1[i]);
+            tempValues.put(tempDates.get(i), tempValues1[i]);
         }
 
 
-
-
-        vitalValues = new VitalValues(dates, dates, diastolicB, diastolicValues, systolicB, systolicValues, temp, tempValues, bloodSugar, bloodSugarValues, bloodSugarDates);
+        vitalValues = new VitalValues(tempDates, bloodPressureDates, diastolicB, diastolicValues, systolicB, systolicValues, temp, tempValues, bloodSugar, bloodSugarValues, bloodSugarDates);
     }
 
 }

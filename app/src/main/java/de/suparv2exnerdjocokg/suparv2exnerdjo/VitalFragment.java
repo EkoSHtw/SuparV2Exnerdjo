@@ -9,12 +9,14 @@ import android.os.Handler;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -22,7 +24,10 @@ import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.BaseSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.OnDataPointTapListener;
+import com.jjoe64.graphview.series.Series;
 
 import java.text.DateFormat;
 import java.text.FieldPosition;
@@ -43,23 +48,18 @@ import java.util.Locale;
  * create an instance of this fragment.
  */
 public class VitalFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+
     private OnFragmentInteractionListener mListener;
     private View view;
     private Context context;
     private GraphView graph;
     private List<Date> bloodPressureDates;
     private LineGraphSeries<DataPoint> diastolicB;
-    private int[] diastolicValues;
+    private HashMap<Date, Integer> diastolicValues;
     private LineGraphSeries<DataPoint> systolicB;
-    private int[] systolicValues;
+    private HashMap<Date, Integer> systolicValues;
     private List<Date> tempDates;
     private LineGraphSeries<DataPoint> temp;
     private HashMap<Date, Double> tempValues;
@@ -67,7 +67,6 @@ public class VitalFragment extends Fragment {
     private HashMap<Date, Integer> bloodSugarValues;
     private List<Date> bloodSugarDates;
     private TextView oldSelection;
-    private Calendar c;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -87,8 +86,6 @@ public class VitalFragment extends Fragment {
     public static VitalFragment newInstance(String param1, String param2) {
         VitalFragment fragment = new VitalFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -96,10 +93,7 @@ public class VitalFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -126,7 +120,6 @@ public class VitalFragment extends Fragment {
 
         graph = (GraphView) view.findViewById(R.id.graph);
 
-        c = Calendar.getInstance();
 
         final TextView bloodPressure = (TextView) view.findViewById(R.id.blood_pressure);
         bloodPressure.setText("Blutdruck");
@@ -197,8 +190,8 @@ public class VitalFragment extends Fragment {
 
         graph.removeAllSeries();
 
-        for(int i = 0; i < series.length; i++) {
-            graph.addSeries(series[i]);
+        for (LineGraphSeries i : series) {
+            graph.addSeries(i);
         }
 
         DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.GERMAN);
@@ -207,7 +200,6 @@ public class VitalFragment extends Fragment {
         graph.getGridLabelRenderer().setHorizontalAxisTitle("Datum");
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(true);
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
-        graph.getGridLabelRenderer().setNumVerticalLabels(5);
 
         graph.getLegendRenderer().setVisible(true);
         graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
@@ -220,16 +212,11 @@ public class VitalFragment extends Fragment {
 
     private LineGraphSeries[] setBloodPressureTable() {
 
+        DataPoint[] diastolicData = new DataPoint[diastolicValues.size()];
 
-        DataPoint[] diastolicData = new DataPoint[]{
-                new DataPoint(bloodPressureDates.get(0), diastolicValues[0]),
-                new DataPoint(bloodPressureDates.get(1), diastolicValues[1]),
-                new DataPoint(bloodPressureDates.get(2), diastolicValues[2]),
-                new DataPoint(bloodPressureDates.get(3), diastolicValues[3]),
-                new DataPoint(bloodPressureDates.get(4), diastolicValues[4]),
-                new DataPoint(bloodPressureDates.get(5), diastolicValues[5]),
-                new DataPoint(bloodPressureDates.get(6), diastolicValues[6])
-        };
+        for(int i = 0; i < diastolicValues.size(); i++){
+            diastolicData[i] = new DataPoint(bloodPressureDates.get(i), diastolicValues.get(bloodPressureDates.get(i)));
+        }
 
         diastolicB.resetData(diastolicData);
 
@@ -238,27 +225,75 @@ public class VitalFragment extends Fragment {
         diastolicB.setDrawDataPoints(true);
         diastolicB.setBackgroundColor(R.color.transparent);
         diastolicB.setDrawBackground(false);
+        diastolicB.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+                LayoutInflater inflater = getLayoutInflater(getArguments());
+                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup) view.findViewById(R.id.custom_toast_container));
+
+                TextView title = (TextView) layout.findViewById(R.id.title);
+                title.setText("Diastolischer Blutdruck: ");
+
+                Date currentTime = new Date(new Double(dataPoint.getX()).longValue());
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentTime);
+                TextView time = (TextView) layout.findViewById(R.id.time);
+                time.setText("Zeit: " + c.get(Calendar.DATE) +"." + (c.get(Calendar.MONTH)+1)+"."+c.get(Calendar.YEAR) +" "+c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE)+" Uhr");
+
+                TextView value = (TextView) layout.findViewById(R.id.value);
+                value.setText("Wert: "+dataPoint.getY() + " mmHg");
+
+                Toast toast = new Toast(getContext());
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+                toast.show();
+            }
+        });
 
 
-        DataPoint[] systolicData = new DataPoint[]{
-                new DataPoint(bloodPressureDates.get(0), systolicValues[0]),
-                new DataPoint(bloodPressureDates.get(1), systolicValues[1]),
-                new DataPoint(bloodPressureDates.get(2), systolicValues[2]),
-                new DataPoint(bloodPressureDates.get(3), systolicValues[3]),
-                new DataPoint(bloodPressureDates.get(4), systolicValues[4]),
-                new DataPoint(bloodPressureDates.get(5), systolicValues[5]),
-                new DataPoint(bloodPressureDates.get(6), systolicValues[6])
-        };
+        DataPoint[] systolicData = new DataPoint[systolicValues.size()];
 
-        systolicB .resetData(systolicData);
+        for(int i = 0; i < systolicValues.size(); i++){
+            systolicData[i] = new DataPoint(bloodPressureDates.get(i), systolicValues.get(bloodPressureDates.get(i)));
+        }
+
+        systolicB.resetData(systolicData);
 
         systolicB.setTitle("Systolischer Blutdruck");
         systolicB.setColor(Color.argb(255, 104, 125, 56));
         systolicB.setDrawDataPoints(true);
         systolicB.setBackgroundColor(R.color.colorAccent);
         systolicB.setDrawBackground(false);
+        systolicB.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+                LayoutInflater inflater = getLayoutInflater(getArguments());
+                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup) view.findViewById(R.id.custom_toast_container));
+
+                TextView title = (TextView) layout.findViewById(R.id.title);
+                title.setText("Systolischer Blutdruck: ");
+
+                Date currentTime = new Date(new Double(dataPoint.getX()).longValue());
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentTime);
+                TextView time = (TextView) layout.findViewById(R.id.time);
+                time.setText("Zeit: " + c.get(Calendar.DATE) +"." + (c.get(Calendar.MONTH)+1)+"."+c.get(Calendar.YEAR) +" "+c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE)+" Uhr");
+
+                TextView value = (TextView) layout.findViewById(R.id.value);
+                value.setText("Wert: "+dataPoint.getY() + " mmHg");
+
+                Toast toast = new Toast(getContext());
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+                toast.show();
+            }
+        });
 
         return new LineGraphSeries[]{systolicB, diastolicB};
+
+
     }
 
     private void setBloodPressureValues(GraphView graph){
@@ -266,17 +301,17 @@ public class VitalFragment extends Fragment {
         graph.getViewport().setMinX(bloodPressureDates.get(0).getTime());
         graph.getViewport().setMaxX(bloodPressureDates.get(bloodPressureDates.size()-1).getTime());
 
-        graph.getViewport().setMinY(70);
-        graph.getViewport().setMaxY(150);
+        graph.getViewport().setMinY(65);
+        graph.getViewport().setMaxY(190);
         graph.getViewport().setYAxisBoundsManual(true);
 
         graph.getGridLabelRenderer().setVerticalAxisTitle("mmHg");
         graph.getGridLabelRenderer().setVerticalLabelsVisible(true);
+        graph.getGridLabelRenderer().setNumVerticalLabels(5);
 
     }
 
     private LineGraphSeries[] setBloodSugarTable() {
-
 
         DataPoint[] bloodSugarData = new DataPoint[bloodSugarValues.size()];
 
@@ -289,6 +324,31 @@ public class VitalFragment extends Fragment {
         bloodSugar.setTitle("Blutzucker");
         bloodSugar.setColor(getResources().getColor(R.color.colorAccent));
         bloodSugar.setDrawDataPoints(true);
+        bloodSugar.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+                LayoutInflater inflater = getLayoutInflater(getArguments());
+                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup) view.findViewById(R.id.custom_toast_container));
+
+                TextView title = (TextView) layout.findViewById(R.id.title);
+                title.setText("Blutzucker: ");
+
+                Date currentTime = new Date(new Double(dataPoint.getX()).longValue());
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentTime);
+                TextView time = (TextView) layout.findViewById(R.id.time);
+                time.setText("Zeit: " + c.get(Calendar.DATE) +"." + (c.get(Calendar.MONTH)+1)+"."+c.get(Calendar.YEAR) +" "+c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE)+" Uhr");
+
+                TextView value = (TextView) layout.findViewById(R.id.value);
+                value.setText("Wert: "+dataPoint.getY() + " mg/dl");
+
+                Toast toast = new Toast(getContext());
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+                toast.show();
+            }
+        });
 
         return new LineGraphSeries[]{bloodSugar};
     }
@@ -304,6 +364,7 @@ public class VitalFragment extends Fragment {
 
         graph.getGridLabelRenderer().setVerticalAxisTitle("mg/dl");
         graph.getGridLabelRenderer().setVerticalLabelsVisible(true);
+        graph.getGridLabelRenderer().setNumVerticalLabels(5);
 
     }
 
@@ -320,6 +381,31 @@ public class VitalFragment extends Fragment {
         temp.setTitle("Körpertemperatur");
         temp.setColor(Color.argb(255, 104, 159, 56));
         temp.setDrawDataPoints(true);
+        temp.setOnDataPointTapListener(new OnDataPointTapListener() {
+            @Override
+            public void onTap(Series series, DataPointInterface dataPoint) {
+                LayoutInflater inflater = getLayoutInflater(getArguments());
+                View layout = inflater.inflate(R.layout.toast_layout,(ViewGroup) view.findViewById(R.id.custom_toast_container));
+
+                TextView title = (TextView) layout.findViewById(R.id.title);
+                title.setText("Temperatur: ");
+
+                Date currentTime = new Date(new Double(dataPoint.getX()).longValue());
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentTime);
+                TextView time = (TextView) layout.findViewById(R.id.time);
+                time.setText("Zeit: " + c.get(Calendar.DATE) +"." + (c.get(Calendar.MONTH)+1)+"."+c.get(Calendar.YEAR) +" "+c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE)+" Uhr");
+
+                TextView value = (TextView) layout.findViewById(R.id.value);
+                value.setText("Wert: "+dataPoint.getY() + " °C");
+
+                Toast toast = new Toast(getContext());
+                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(layout);
+                toast.show();
+            }
+        });
 
         return new LineGraphSeries[]{temp};
 
@@ -336,6 +422,7 @@ public class VitalFragment extends Fragment {
 
         graph.getGridLabelRenderer().setVerticalAxisTitle("°C");
         graph.getGridLabelRenderer().setVerticalLabelsVisible(true);
+        graph.getGridLabelRenderer().setNumVerticalLabels(5);
 
     }
 
@@ -345,14 +432,24 @@ public class VitalFragment extends Fragment {
         }
     }
 
-    public void addValue(final int value, int id) {
+    public void addValue(final int value, final int secondValue, int id) {
+
+        Calendar c = Calendar.getInstance();
 
         switch (id) {
             case R.id.temp:
 
-                c.add(Calendar.HOUR, 10);
+                Date lastTime = tempDates.get(tempDates.size()-1);
+                Date time = c.getTime();
 
-                tempDates.add(c.getTime());
+                if(lastTime.getDate()== time.getDate()) {
+                    while (lastTime.getHours() >= time.getHours()) {
+                        c.add(Calendar.HOUR, 10);
+                        time = c.getTime();
+                    }
+                }
+
+                tempDates.add(time);
                 tempValues.put(tempDates.get(tempDates.size()-1), (double)value);
 
                 createGraph(graph, setTempTable());
@@ -362,23 +459,38 @@ public class VitalFragment extends Fragment {
                 break;
             case R.id.blood_pressure:
 
+                lastTime = bloodPressureDates.get(bloodPressureDates.size()-1);
+                time = c.getTime();
+
+                if(lastTime.getDate()== time.getDate()) {
+                    while (lastTime.getHours() >= time.getHours()) {
+                        c.add(Calendar.HOUR, 10);
+                        time = c.getTime();
+                    }
+                }
+
+                bloodPressureDates.add(time);
+                systolicValues.put(bloodPressureDates.get(bloodPressureDates.size()-1), value);
+                diastolicValues.put(bloodPressureDates.get(bloodPressureDates.size()-1), secondValue);
+
+                createGraph(graph, setBloodPressureTable());
+                setBloodPressureValues(graph);
 
                 break;
             case R.id.blood_sugar:
 
-                Date lastTime = bloodSugarDates.get(bloodSugarDates.size()-1);
-                Date time = c.getTime();
-                if(lastTime.getDate()== time.getDate()){
-                    if(lastTime.getHours() < time.getHours()){
+                lastTime = bloodSugarDates.get(bloodSugarDates.size()-1);
+                time = c.getTime();
 
-                        bloodSugarDates.add(time);
-                        bloodSugarValues.put(bloodSugarDates.get(bloodSugarDates.size()-1), value);
-                    }else{
+                if(lastTime.getDate()== time.getDate()) {
+                    while (lastTime.getHours() >= time.getHours()) {
                         c.add(Calendar.HOUR, 10);
-                        bloodSugarDates.add(c.getTime());
-                        bloodSugarValues.put(bloodSugarDates.get(bloodSugarDates.size()-1), value);
+                        time = c.getTime();
                     }
                 }
+
+                bloodSugarDates.add(time);
+                bloodSugarValues.put(bloodSugarDates.get(bloodSugarDates.size()-1), value);
 
                 createGraph(graph, setBloodSugarTable());
                 setBloodSugarValues(graph);
@@ -416,6 +528,6 @@ public class VitalFragment extends Fragment {
     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void newValueAdded(int value, int id);
+        void newValueAdded(int value, int second, int id);
     }
 }

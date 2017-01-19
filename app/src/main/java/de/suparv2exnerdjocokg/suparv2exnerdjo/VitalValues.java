@@ -18,16 +18,16 @@ public class VitalValues {
     private List<Date> tempDates;
     private List<Date> bloodPressureDates;
     private LineGraphSeries<DataPoint> diastolicB;
-    private int[] diastolicValues;
+    private HashMap<Date, Integer> diastolicValues;
     private LineGraphSeries<DataPoint> systolicB;
-    private int[] systolicValues;
+    private HashMap<Date, Integer> systolicValues;
     private LineGraphSeries<DataPoint> temp;
     private HashMap<Date, Double> tempValues;
     private LineGraphSeries<DataPoint> bloodSugar;
     private HashMap<Date, Integer> bloodSugarValues;
     private List<Date> bloodSugarDates;
 
-    public VitalValues(List<Date> tempDates, List<Date> bloodPressureDates, LineGraphSeries<DataPoint> diastolicB, int[] diastolicValues, LineGraphSeries<DataPoint> systolicB, int[] systolicValues, LineGraphSeries<DataPoint> temp, HashMap<Date, Double> tempValues, LineGraphSeries<DataPoint> bloodSugar, HashMap<Date, Integer> bloodSugarValues, List<Date> bloodSugarDates) {
+    public VitalValues(List<Date> tempDates, List<Date> bloodPressureDates, LineGraphSeries<DataPoint> diastolicB, HashMap<Date, Integer> diastolicValues, LineGraphSeries<DataPoint> systolicB, HashMap<Date, Integer> systolicValues, LineGraphSeries<DataPoint> temp, HashMap<Date, Double> tempValues, LineGraphSeries<DataPoint> bloodSugar, HashMap<Date, Integer> bloodSugarValues, List<Date> bloodSugarDates) {
         this.tempDates = tempDates;
         this.bloodPressureDates = bloodPressureDates;
         this.diastolicB = diastolicB;
@@ -73,11 +73,11 @@ public class VitalValues {
         this.diastolicB = diastolicB;
     }
 
-    public int[] getDiastolicValues() {
+    public HashMap<Date, Integer> getDiastolicValues() {
         return diastolicValues;
     }
 
-    public void setDiastolicValues(int[] diastolicValues) {
+    public void setDiastolicValues(HashMap<Date, Integer> diastolicValues) {
         this.diastolicValues = diastolicValues;
     }
 
@@ -89,11 +89,11 @@ public class VitalValues {
         this.systolicB = systolicB;
     }
 
-    public int[] getSystolicValues() {
+    public HashMap<Date, Integer> getSystolicValues() {
         return systolicValues;
     }
 
-    public void setSystolicValues(int[] systolicValues) {
+    public void setSystolicValues(HashMap<Date, Integer> systolicValues) {
         this.systolicValues = systolicValues;
     }
 

@@ -295,11 +295,11 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
     }
 
     @Override
-    public void newValueAdded(int value, int id) {
+    public void newValueAdded(int value, int second, int id) {
 
         VitalFragment newFrag = (VitalFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (newFrag != null) {
-            newFrag.addValue(value, id);
+            newFrag.addValue(value, second, id);
         } else {
             newFrag = new VitalFragment();
             Bundle args = new Bundle();

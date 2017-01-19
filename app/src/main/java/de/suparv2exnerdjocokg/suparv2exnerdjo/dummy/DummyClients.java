@@ -20,6 +20,7 @@ public class DummyClients {
 
     public static final List<Client> ITEMS = new ArrayList<>();
 
+
     static {
         ITEMS.add(createDummyClient());
         ArrayList<PhoneNumber> phoneNumbers = new ArrayList<>();
