@@ -1,80 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:background="@color/colorPrimaryLight"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryLight"
+    android:orientation="horizontal">
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        android:progressDrawable="@drawable/progressbar_vertical" />
 
     <TextView
-        android:id="@+id/timeRoute"
-        android:layout_width="0dp"
-        android:layout_weight="0.15"
-        style="@style/AppTextClientList"/>
-
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="0dp"
-        android:layout_weight="0.1"
-        android:layout_height="100dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:id="@+id/time_route"
         style="@style/AppTextClientList"
-        />
+        android:layout_width="0dp"
+        android:layout_weight="0.1" />
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="0.35"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/AppTextClientList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="Fortschritt" />
+
+        <TextView
+            android:id="@+id/task_status"
+            style="@style/AppTextClientList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="26dp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image"
+        style="@style/AppTextClientList"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="0.1" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
-        android:layout_height="match_parent">
+        android:layout_weight="0.3"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="match_parent"
             style="@style/AppTextClientList"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
             android:gravity="bottom"
-            />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/address"
-            android:layout_width="match_parent"
             style="@style/AppTextClientList"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
-            android:gravity="top"
-            />
+            android:gravity="top" />
 
     </LinearLayout>
 
     <View
         android:layout_width="0dp"
-        android:layout_weight="0.2"
         android:layout_height="match_parent"
-        />
+        android:layout_weight="0.2" />
 
     <ImageButton
-        android:id="@+id/routeButton"
-        android:layout_width="0dp"
-        app:srcCompat="@android:drawable/ic_dialog_map"
-        android:background="@color/transparent"
-        android:layout_weight="0.1"
+        android:id="@+id/route_button"
         style="@style/AppTextClientList"
-        />
+        android:layout_width="0dp"
+        android:layout_weight="0.1"
+        android:background="@color/transparent"
+        app:srcCompat="@android:drawable/ic_dialog_map" />
 
     <ImageButton
         android:id="@+id/arrow"
-        app:srcCompat="@drawable/arrow"
-        android:background="@color/transparent"
+        style="@style/AppTextClientList"
         android:layout_width="0dp"
         android:layout_weight="0.1"
-        style="@style/AppTextClientList"
-        />
-
+        android:background="@color/transparent"
+        app:srcCompat="@drawable/arrow" />
 
 
 </LinearLayout>

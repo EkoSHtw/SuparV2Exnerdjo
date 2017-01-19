@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#607D8B</color>
     <color name="colorPrimaryLight">#CFD8DC</color>
     <color name="colorAccent">#689F38</color>
+    <color name="colorAccentRed">#c79f3838</color>
     <color name="grey">#bdb7b7b7</color>
     <color name="white">#bdffffff</color>
     <color name="transparent">#00000000</color>
@@ -11,6 +12,6 @@
     <color name="table_background">#999999</color>
     <color name="row_background">#ffffff</color>
 
-    <color name="text_not_set_color">#123456</color>
+    <color name="text_not_set_color">#fd0004</color>
 
 </resources>

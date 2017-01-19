@@ -2,11 +2,13 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
 
 import java.io.File;
+import java.net.URI;
 
 /**
  * Created by Eko on 29.12.2016.
@@ -17,11 +19,8 @@ public class PictureButton extends Button {
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
 
-    private boolean addedpicAdded = false;
-    private File image;
 
-
-
+    private Image image;
     private String picPath;
     private Context context;
 
@@ -29,27 +28,30 @@ public class PictureButton extends Button {
         super(context);
         this.context = context;
     }
-    public boolean isPicAdded() {
-        return addedpicAdded;
-    }
 
-    public void setpicAdded(boolean addedpicAdded) {
-        this.addedpicAdded = addedpicAdded;
-    }
-    public File getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(File image) {
+    public void setImage(Image image) {
         this.image = image;
-        this.picPath = image.getPath();
     }
-    public String getPicPath() {
+
+    public String getImagePath() {
+        return image.toString();
+    }
+
+    public String getPicPath(){
         return picPath;
     }
 
     public void setPicPath(String picPath) {
         this.picPath = picPath;
     }
+
+
+   public void getPicture(){
+
+   }
 
 }

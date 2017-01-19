@@ -28,7 +28,6 @@
         android:layout_marginTop="0dp"
         />
 
-
     <TextView
         android:id="@+id/client_view"
         android:layout_width="wrap_content"
@@ -70,12 +69,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/logout"
-        android:textSize="20sp"
-        android:paddingTop="10dp"
-        android:paddingBottom="20dp"
-        android:textColor="@color/colorAccent"
-        android:background="@color/transparent"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        style="@style/AppButton"
+        />
 
     <TextView
         android:id="@+id/logedInAs"

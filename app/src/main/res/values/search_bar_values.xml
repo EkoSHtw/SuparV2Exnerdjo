@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="search_bar_choices">
-        <item>Tag</item>
-        <item>Date</item>
-        <item>Content</item>
-        <item>Carer</item>
+        <item>@string/tag</item>
+        <item>@string/date</item>
+        <item>@string/note</item>
+        <item>@string/carer</item>
     </string-array>
 </resources>

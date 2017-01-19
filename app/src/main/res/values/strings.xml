@@ -44,6 +44,14 @@
     <string name="infodump">Schwerhörig.
     Trinkt gerne Tee. Redet gerne über Formel 1.</string>
     <string name="concerns">test</string>
+    <string name="clientmartial_status">ledig</string>
+    <string name="clientcitizenship">Deutsch</string>
+    <string name="clientlivingcon">lebt allein</string>
+    <string name="healthinsurance">Techniker Krankenkasse</string>
+    <string name="insurancenumber">5492854</string>
+    <string name="clientdoctor">Gert Witter</string>
+    <string name="clientdoctelnumber">82483037</string>
+    
 
 
     <!-- Logbook search bar -->
@@ -62,7 +70,27 @@
     <string name="hdz">Hdz</string>
     <string name="addRow">Zeile hinzufügen</string>
     <string name="saveContent">Speichern</string>
+
     <string name="wounddocname">Wunddokumentation</string>
+    <string name="mobdocname">MobilisationsLagerungsplan</string>
+    <string name="mobdate">Datum</string>
+    <string name="mobdestination">Mobilisierungsziel</string>
+    <string name="mobMeasures">Mobilisierungsmaßnahmen</string>
+    <string name="mobcharacteristics">Besonderheiten</string>;
+    <string name="mobtime">Uhrpunkt</string>
+
+    <string name="doctorialprescription1">Ärztlich_Verordnung_1_Verbandswechsel_etc</string>
+    <string name="doctorialprescription2">Ärztlich_Verordnung_2_Injektion_Infusion</string>
+    <string name="doctorialprescription3">Ärztlich_Verordnung_3_Sonderkost_parenterale_Ernährung</string>
+    <string name="doctpre1hdz">Hdz. Pflege</string>
+    <string name="doctorname">Arztname</string>
+    <string name="doctorialmeasure">ärztlich verordnete Maßnahme</string>
+    <string name="frequency">Häufigkeit</string>
+    <string name="dochdz">Hdz. Arzt</string>
+    <string name="endon">abgesetzt am</string>
+    <string name="injec_infu">Injektion/Infusion</string>
+    <string name="specialdiet">Verabreichung von Sondenkost / enterale Ernährung </string>
+
     <string name="addPicture">hinzufügen</string>
     <string name="picture">Bild</string>
 
@@ -75,8 +103,21 @@
     <string name="tag">Stichwort</string>
     <string name="input_tags">Geben Sie Stichwörter ein</string>
     <string name="note_comment">Kommentar...</string>
-    <string name="type_here">type_here</string>
+    <string name="type_here">Hier tippen...</string>
     <string name="text_not_set">Wird benötigt!</string>
+    <string name="date">Zeit</string>
+    <string name="note">Notiz</string>
+    <string name="carer">Pfleger</string>
+    <string name="logbook_searchbar_search">Suchen...</string>
+    <string name="add_new_note_or_task">Neue Aufgabe oder Notiz</string>
+    <string name="new_note">Neue Notiz</string>
+    <string name="add_new">Erstelle neue...</string>
+    <string name="task">Aufgabe</string>
+    <string name="add_new_todo">Neue Aufgabe hinzufügen</string>
+    <string name="description">Beschreibung</string>
+    <string name="today">Heute</string>
+    <string name="tomorrow">Morgen</string>
+    <string name="day_after_tomorrow">Übermorgen</string>
 
 
 </resources>

@@ -11,12 +11,16 @@ public class GeneralTask {
     private String[] description;
     private String tag;
     private boolean isDone;
+    private int shiftetDays;
+
+
 
     public GeneralTask(String name, String[] description, String tag) {
         this.name = name;
         this.description = description;
         this.tag = tag;
         this.isDone = false;
+        this.shiftetDays = 0;
     }
 
     public String getName() {
@@ -43,5 +47,13 @@ public class GeneralTask {
 
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    public int getDaysShiftet() {
+        return shiftetDays;
+    }
+
+    public void setShiftet(int shiftet) {
+        shiftetDays = shiftet;
     }
 }
