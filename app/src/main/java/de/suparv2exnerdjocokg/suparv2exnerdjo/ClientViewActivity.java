@@ -5,9 +5,19 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.net.Uri;
+import android.os.Environment;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -15,13 +25,21 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 
+import java.io.IOException;
 import java.io.File;
 import java.sql.Timestamp;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.ImageActivity;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.ImageDisplayFragment;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription1;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription2;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription3;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.MoblilisationBeddingFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar.DialogAddNewNoteOrTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.LogBookFragment;
@@ -31,6 +49,9 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Calendar;
 import java.util.List;
 
@@ -41,12 +62,13 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 public class ClientViewActivity extends AppCompatActivity implements VitalFragment.OnFragmentInteractionListener ,BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
     public Client client;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+
 
 
     private FloatingActionButton fab;
-    private Context context;
     private Activity activity = this;
+    private Image takenPicture;
+    private File imPic;
 
 
     @Override
@@ -57,7 +79,21 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         Intent intent = getIntent();
         client = DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
 
-        context = this;
+        File f = new File(getFilesDir(),getString(R.string.wounddocname)+".txt");
+        File f1 = new File(getFilesDir(),getString(R.string.mobdocname)+".txt");
+        File f2 = new File(getFilesDir(),getString(R.string.doctorialprescription1)+".txt");
+        File f3 = new File(getFilesDir(),getString(R.string.doctorialprescription2)+".txt");
+        File f4 = new File(getFilesDir(),getString(R.string.doctorialprescription3)+".txt");
+        ArrayList<File> b = new ArrayList<>();
+        b.add(f);
+
+        b.add(f1);
+        b.add(f2);
+        b.add(f3);
+        b.add(f4);
+        client.setDocumentation(b);
+
+// Absoluter pfad gibt in wunddokument nur einen teilpfad zurück
 
 //        setContentView(R.layout.dialog_add_note);
 
@@ -202,16 +238,40 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         }
     }
 
+    public Client getClient() {
+        return client;
+    }
+
     public void onDocumentSelected(File position) {
         // The user selected the headline of an article from the HeadlinesFragment
         // Do something here to display that article
         if (position.getName() == "Wunddokumentation") {
             WoundDocumentationFragment wFrag = new WoundDocumentationFragment();
+        Fragment wFrag = new Fragment();
+        String name = position.getName();
 
-            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+        ArrayList<String> doclist= new ArrayList<>();
+        doclist.add(getString(R.string.wounddocname));
+        doclist.add(getString(R.string.mobdocname));
+        doclist.add(getString(R.string.doctorialprescription1));
+        doclist.add(getString(R.string.doctorialprescription2));
+        doclist.add(getString(R.string.doctorialprescription3));
 
-            trans.replace(R.id.fragment_container, wFrag);
-            trans.addToBackStack(null);
+        ArrayList<Fragment> fragList = new ArrayList<>();
+        fragList.add(new WoundDocumentationFragment());
+        fragList.add(new MoblilisationBeddingFragment());
+        fragList.add(new DoctorialPrescription1());
+        fragList.add(new DoctorialPrescription2());
+        fragList.add(new DoctorialPrescription3());
+        for(int i =0; i < doclist.size(); i ++){
+            if (name == doclist.get(i)){
+                wFrag = fragList.get(i);
+                break;
+            }
+        }
+        FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+        trans.replace(R.id.fragment_container, wFrag);
+        trans.addToBackStack(null);
 
             trans.commit();
         }
@@ -223,6 +283,40 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
+        trans.commit();
+    }
+
+
+
+    String mCurrentPhotoPath;
+
+
+
+    public void showImage(String s){
+        Intent intent = new Intent (this, ImageActivity.class);
+        intent.putExtra(s,0);
+        startActivity(intent);
+    }
+
+
+
+    public Image getTakenPicture(){
+        return this.takenPicture;
+    }
+
+    public void setPicture(String path){
+        ImageDisplayFragment f = new ImageDisplayFragment();
+        Bundle args = new Bundle();
+        args.putString("path", path);
+        f.setArguments(args);
+        FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+        trans.replace(R.id.fragment_container, f);
+        trans.addToBackStack(null);
+
+        trans.commit();
+    }
+
 
     public void addNote(String content, String tag) {
 //        EditText editText = (EditText)findViewById(R.id.dialog_input_text);
@@ -275,4 +369,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
             trans.commit();
         }
     }
+
+
 }

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +18,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -58,10 +63,10 @@ public class BasicDataBaseFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_basic_data_base, container, false);
 
         if (savedInstanceState == null) {
-            Client c = DummyClients.ITEMS.get(0);
-            this.c = c;
+            this.c = ((ClientViewActivity)getActivity()).getClient();
             if(c!=null) {
                 img = (ImageView) rootView.findViewById(R.id.image);
+
                 img.setImageResource(R.drawable.woman_image);
                 name = (TextView) rootView.findViewById(R.id.clientname);
                 name.setText(c.getFirstName() + " " + c.getLastName());
@@ -77,11 +82,19 @@ public class BasicDataBaseFragment extends Fragment {
 
                 adapter = new PhonenumberListAdapter(rootView.getContext(), c, call);
                 numbers.setAdapter(adapter);
-                ArrayList<String> s = getLFile();
-                File f = new File("Wunddokumentation");
-                ArrayList<File> docs = new ArrayList<File>();
-                docs.add(f);
-                c.setDocumentation(docs);
+                File f = new File(getString(R.string.wounddocname));
+                File f1 = new File(getString(R.string.mobdocname));
+                File f2 = new File(getString(R.string.doctorialprescription1));
+                File f3 = new File(getString(R.string.doctorialprescription2));
+                File f4 = new File(getString(R.string.doctorialprescription3));
+                ArrayList<File> b = new ArrayList<>();
+                b.add(f);
+                b.add(f1);
+                b.add(f2);
+                b.add(f3);
+                b.add(f4);
+                c.setDocumentation(b);
+
                 documents = (ListView) rootView.findViewById(document_list);
                 ArrayAdapter<File> arrayAdapter = new ArrayAdapter<File>(rootView.getContext(),
                         R.layout.simple_list_item,
@@ -91,12 +104,18 @@ public class BasicDataBaseFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         File p = (File) parent.getItemAtPosition(position);
-
-                        Log.println(Log.INFO, "File", ""+p.getName());
                         mCallback.onDocumentSelected(p);
                     }
                 });
-
+/*
+                ArrayList<String> docPic = new ArrayList<>();
+                String s1 = "Pfelgeplanung";
+                String s2 = "Pflegeplanungskontrolle";
+                String s3 = "Nachweiß Pflegevisited";
+                int a1 =(R.drawable.pflegeplanung);
+                int a2 = (R.drawable.pflegeplanungskontrolle);
+                int a3 = (R.drawable.nachweis_pflegevisite);
+*/
             }else{
 
             }
@@ -106,20 +125,32 @@ public class BasicDataBaseFragment extends Fragment {
         return rootView;
     }
 
-    public ArrayList<String> getLFile() {
+    public ArrayList<File> getLFile() {
         Field[] fields = R.raw.class.getFields();
-        ArrayList<String> s = new ArrayList<>();
-        Log.println(Log.INFO, "Länge", ""+fields.length);
+        ArrayList<File> s = new ArrayList<>();
         for (int count = 0; count < fields.length; count++) {
             try {
+                copyFile(getResources().openRawResource(R.raw.test)
+                , new FileOutputStream(new File(getContext().getFilesDir(), "download/test.pdf")));
 
-                s.add(fields[count].getName());
+                File pdfFile = new File(getContext().getFilesDir(), "download/test.pdf");
+
+              s.add(pdfFile);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return s;
     }
+
+    private void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
+    }
+
 
     public interface OnDocumentSelectedListener {
             void onDocumentSelected(File position);
