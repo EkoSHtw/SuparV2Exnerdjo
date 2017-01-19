@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClientMedicine;
 
 public class Client implements Serializable {
   private static final long serialVersionUID = -2163051469151804394L;
@@ -27,30 +29,33 @@ public class Client implements Serializable {
 
   private int carelevel;
 
-  private ArrayList<ClientMedicine> medicineList;
+  private DummyClientMedicine medicineList;
 
-  private ArrayList<Service> erbrachteLeistung;
+  private ArrayList<Note> notes ;
 
   private String concerns;
 
   private List<ToDo> toDoList;
 
+  private VitalValues vital;
+
   private ArrayList<PhoneNumber> phoneNumber;
   private ArrayList<File> documentation;
 
-  public Client(int id, int imagePath, String firstName, String lastName, String dateString, ArrayList<ClientMedicine> medicineList,
-                ArrayList<Service> erbrachteLeistung, List<ToDo> toDoList, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber){
+  public Client(int id, int imagePath, String firstName, String lastName, String dateString, DummyClientMedicine medicineList,
+                ArrayList<Note> notes, List<ToDo> toDoList, VitalValues vital, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber){
     this.firstName = firstName;
     this.lastName = lastName;
     this.id = id;
     this.imagePath = imagePath;
 
     String dateFormat = "dd/mm/yyyy";
-   // this.birthDate = stringToDate(dateString, dateFormat);
+    // this.birthDate = stringToDate(dateString, dateFormat);
     this.birthDate = dateString;
     this.medicineList = medicineList;
-    this.erbrachteLeistung = erbrachteLeistung;
+    this.notes = notes;
     this.toDoList = toDoList;
+    this.vital = vital;
     this.concerns= infodump;
     this.carelevel = carelevel;
     this.adress = adress;
@@ -85,6 +90,32 @@ public class Client implements Serializable {
 public String getFullName(){
   return (getFirstName()+" "+ getLastName());
 }
+
+
+  public ArrayList<File> getDocumentation() {
+    return documentation;
+  }
+
+  public void setNotes(ArrayList<Note> notes) {
+    this.notes = notes;
+  }
+
+
+  public void setDocumentation(ArrayList<File> f){
+    this.documentation = f;
+  }
+
+
+  public void addDocumentation(File documentation) {
+    this.documentation.add(documentation);
+  }
+
+
+
+  public int getImagePath() {
+    return imagePath;
+  }
+
 
 
   public int docsListLenghts(){
@@ -170,21 +201,19 @@ public String getFullName(){
     this.concerns = concerns;
   }
 
-  public ArrayList<Service> getErbrachteLeistung() {
-    return erbrachteLeistung;
+  public ArrayList<Note> getNotes() {
+    return this.notes;
   }
 
-  public void addErbrachteLeistung(Service erbrachteLeistung) {
-    this.erbrachteLeistung.add(erbrachteLeistung);
+  public void addErbrachteLeistung(Note notes) {
+    this.notes.add(notes);
   }
 
-  public ArrayList<ClientMedicine> getMedicineList() {
+  public DummyClientMedicine getMedicineList() {
     return medicineList;
   }
 
-  public void addMedicineList(ClientMedicine medicine) {
-    medicineList.add(medicine);
-  }
+  public void setMedicineList(DummyClientMedicine medicine) {this.medicineList = medicine;}
 /*
   public void deleteMedicine(String medicine){
     for (ClientMedicine med : medicineList) {
@@ -199,5 +228,13 @@ public String getFullName(){
 
   }
 */
+
+  public VitalValues getVital() {
+    return vital;
+  }
+
+  public void setVital(VitalValues vital) {
+    this.vital = vital;
+  }
 
 }
