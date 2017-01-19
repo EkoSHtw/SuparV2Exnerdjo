@@ -28,7 +28,7 @@
         android:layout_below="@id/dialog_add_note_title"
         android:text="@string/tag"/>
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/dialog_input_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
