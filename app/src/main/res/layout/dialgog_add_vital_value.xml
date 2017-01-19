@@ -1,26 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="20dp"
+    >
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gib den Wert von heute ein: "
         style="@style/AppTextNormal"
+        android:textColor="@color/colorAccent"
+        android:paddingBottom="10dp"
         />
 
-    <NumberPicker
-        android:id="@+id/edit"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        >
 
-        />
-    
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:paddingRight="10dp"
+            >
+
+            <TextView
+                android:id="@+id/first_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AppTextNormal"
+                />
+
+            <NumberPicker
+                android:id="@+id/edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            >
+
+            <TextView
+                android:id="@+id/second_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AppTextNormal"
+                />
+
+            <NumberPicker
+                android:id="@+id/edit_second"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/confirm"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="OK"
+        style="@style/AppButton"
+        />
 
 </LinearLayout>
