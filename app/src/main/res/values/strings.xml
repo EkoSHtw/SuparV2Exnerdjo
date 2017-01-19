@@ -75,8 +75,21 @@
     <string name="tag">Stichwort</string>
     <string name="input_tags">Geben Sie Stichwörter ein</string>
     <string name="note_comment">Kommentar...</string>
-    <string name="type_here">type_here</string>
+    <string name="type_here">Hier tippen...</string>
     <string name="text_not_set">Wird benötigt!</string>
+    <string name="date">Zeit</string>
+    <string name="note">Notiz</string>
+    <string name="carer">Pfleger</string>
+    <string name="logbook_searchbar_search">Suchen...</string>
+    <string name="add_new_note_or_task">Neue Aufgabe oder Notiz</string>
+    <string name="new_note">Neue Notiz</string>
+    <string name="add_new">Erstelle neue...</string>
+    <string name="task">Aufgabe</string>
+    <string name="add_new_todo">Neue Aufgabe hinzufügen</string>
+    <string name="description">Beschreibung</string>
+    <string name="today">Heute</string>
+    <string name="tomorrow">Morgen</string>
+    <string name="day_after_tomorrow">Übermorgen</string>
 
 
 </resources>

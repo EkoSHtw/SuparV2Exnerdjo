@@ -8,19 +8,19 @@
         android:id="@+id/dialog_add_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Neue irgendwas"/>
+        android:text="@string/add_new"/>
 
     <TextView
         android:id="@+id/dialog_add_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="neue notiz"/>
+        android:text="@string/note"/>
 
     <TextView
         android:id="@+id/dialog_add_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="neue aufgabe"/>
+        android:text="@string/task"/>
 
 
 </LinearLayout>

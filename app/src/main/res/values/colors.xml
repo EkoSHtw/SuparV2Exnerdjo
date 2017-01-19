@@ -12,6 +12,6 @@
     <color name="table_background">#999999</color>
     <color name="row_background">#ffffff</color>
 
-    <color name="text_not_set_color">#123456</color>
+    <color name="text_not_set_color">#fd0004</color>
 
 </resources>

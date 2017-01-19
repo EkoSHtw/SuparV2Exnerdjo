@@ -53,7 +53,7 @@ public class DummyNotes {
 
 //        ITEMS.sort();
 //        Collections.sort(ITEMS);
-        Collections.sort(ITEMS,Collections.<Note>reverseOrder());// oder sort und dann Collections.reverse()
+        // oder sort und dann Collections.reverse()
 
     }
 
