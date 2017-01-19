@@ -136,7 +136,7 @@ public class WoundDocumentationFragment extends Fragment{
                                             firstTextView.setText(s);
                                         }
 
-                                    if (fillCount == mTable.getHeadLenght()) {
+                                    if (fillCount == t.getChildCount()) {
                                         mTable.addwRow();
                                         fillCount =0;
                                         rowCount++;
