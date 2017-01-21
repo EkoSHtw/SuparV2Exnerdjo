@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -41,6 +42,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
 
         final LinearLayout view = (LinearLayout) inflater.inflate(R.layout.dialog_add_todo, container, false);
         Button confirm = (Button) view.findViewById(R.id.dialog_todo_button_confirm);
@@ -143,6 +145,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
                 datePickerFragment.show(getFragmentManager(), "Date Picker");
             }
         });
+
 
         return view;
     }

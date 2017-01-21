@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -30,6 +31,7 @@ public class DialogAddNote extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_add_note);
+
 
         confirm = (Button) findViewById(R.id.dialog_button_positive);
         cancel = (Button) findViewById(R.id.dialog_button_negative);

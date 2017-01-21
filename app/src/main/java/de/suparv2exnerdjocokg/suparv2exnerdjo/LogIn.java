@@ -24,8 +24,6 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
         // Views aus der XML heraussuchen
         description = (TextView) findViewById(R.id.logInDescription);
         userName = (EditText) findViewById(R.id.userNameField);

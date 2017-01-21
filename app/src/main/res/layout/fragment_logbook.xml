@@ -59,7 +59,7 @@
         android:id="@+id/list"
         android:name="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:divider="@android:color/darker_gray"
         app:layoutManager="LinearLayoutManager"
         tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.LogBookFragment"

@@ -33,8 +33,6 @@ public class DialogAddVitalValue extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialgog_add_vital_value);
 
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
         final NumberPicker note = (NumberPicker) findViewById(R.id.edit);
         final NumberPicker second = (NumberPicker) findViewById(R.id.edit_second);
 
