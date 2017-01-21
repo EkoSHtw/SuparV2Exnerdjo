@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TableLayout;
@@ -38,9 +39,8 @@ import static de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton
 public class TableGenerator {
     private final Context mContext;
     private TableLayout mTable;
-    private FrameLayout mFrame;
-    private TableLayout.LayoutParams rowParams = new TableLayout.LayoutParams();
-    private TableRow.LayoutParams colParams = new TableRow.LayoutParams();
+    private TableLayout.LayoutParams rowParams = new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+    private TableRow.LayoutParams colParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     private Activity act;
     private String mCurrentPhotoPath;
     private Image currentPhoto;
@@ -64,42 +64,31 @@ public class TableGenerator {
         mContext = activity.getApplicationContext();
         act = activity;
         mTable = new TableLayout(activity);
-        mFrame = new FrameLayout(activity);
-        rowParams.setMargins(0, 0, 0, 1);
-        colParams.setMargins(0, 0, 1, 0);
+        rowParams.setMargins(0, 0, 0, 0);
+        colParams.setMargins(0, 0, 0, 0);
 
         TableLayout.LayoutParams lptable = new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.MATCH_PARENT,
                 TableLayout.LayoutParams.MATCH_PARENT);
-        FrameLayout.LayoutParams frlay = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT);
         mTable.setLayoutParams(lptable);
-        mFrame.setLayoutParams(frlay);
         mTable.setStretchAllColumns(true);
-        mTable.setBackgroundColor(mContext.getResources().getColor(
-                R.color.table_background));
     }
 
     public void addwRow() {
-        TableRowExpand tr = new TableRowExpand(mContext);
+        TableRow tr = new TableRow(mContext);
         tr.setId(idCount);
 
-        tr.setBackgroundColor(mContext.getResources().getColor(
-                R.color.table_background));
         tr.setLayoutParams(rowParams);
 
         for (int iCol = 0; iCol < headLenght; iCol++) {
-            if (iCol == headLenght - 1) {
+            if (iCol == headLenght-1) {
                 final PictureButton pb = new PictureButton(mContext);
-                pb.setGravity(Gravity.CENTER | Gravity.CENTER);
-                pb.setPadding(3, 3, 3, 3);
-                pb.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                pb.setMaxHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-                pb.setLayoutParams(colParams);
+                pb.setGravity(Gravity.CENTER);
                 pb.setTextAppearance(mContext, R.style.AppButton);
                 pb.setBackgroundColor(mContext.getResources().getColor(
-                        R.color.row_background));
+                        R.color.transparent));
+                pb.setLayoutParams(colParams);
+                pb.setPadding(3, 3, 3, 3);
                 pb.setTextSize(10);
                 pb.setPicPath("");
                 if (pb.getPicPath() != "") {
@@ -128,7 +117,7 @@ public class TableGenerator {
                 tr.addView(pb);
             } else {
                 EditText tvCol = new EditText(mContext);
-                tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
+                tvCol.setGravity(Gravity.CENTER);
                 tvCol.setPadding(3, 3, 3, 3);
                 tvCol.setTextColor(mContext.getResources().getColor(
                         R.color.colorPrimary));
@@ -136,12 +125,18 @@ public class TableGenerator {
                 tvCol.setLayoutParams(colParams);
                 tvCol.setBackgroundColor(mContext.getResources().getColor(
                         R.color.row_background));
+                tvCol.setTextSize(14);
                 tr.addView(tvCol);
+
+                addColDivider(tr);
             }
         }
 
+
         mTable.addView(tr);
         idCount++;
+
+        addDivider();
     }
 
     private void showImage(PictureButton pb) {
@@ -153,6 +148,7 @@ public class TableGenerator {
         mContext.startActivity(intent);
     }
 
+
     public void addRow() {
         TableRowExpand tr = new TableRowExpand(mContext);
         tr.setId(idCount);
@@ -162,34 +158,73 @@ public class TableGenerator {
         tr.setLayoutParams(rowParams);
         for (int iCol = 0; iCol < headLenght; iCol++) {
             EditText tvCol = new EditText(mContext);
-            //tvCol.setTextAppearance(mContext, R.style.TableRowEdit);
+            tvCol.setGravity(Gravity.CENTER);
+            tvCol.setPadding(3, 3, 3, 3);
+            tvCol.setTextColor(mContext.getResources().getColor(
+                    R.color.colorPrimary));
+            tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+            tvCol.setLayoutParams(colParams);
+            tvCol.setBackgroundColor(mContext.getResources().getColor(
+                    R.color.row_background));
             tr.addView(tvCol);
+
         }
 
         mTable.addView(tr);
     }
 
+    public void addDivider(){
+
+        TableRowExpand tr = new TableRowExpand(mContext);
+        tr.setId(idCount);
+
+        tr.setBackgroundColor(mContext.getResources().getColor(
+                R.color.table_background));
+
+        TextView tvCol = new TextView(mContext);
+        tvCol.setHeight(1);
+        tr.addView(tvCol);
+
+        mTable.addView(tr);
+        idCount++;
+    }
+
+    private void addColDivider(TableRow tr){
+
+        TextView tvCol = new TextView(mContext);
+        tvCol.setLayoutParams(colParams);
+        tvCol.setWidth(1);
+        tvCol.setBackgroundColor(mContext.getResources().getColor(R.color.table_background));
+        tr.addView(tvCol);
+
+    }
+
 
     public void addHead(String[] data) {
         TableRow tr = new TableRow(mContext);
-        tr.setBackgroundColor(mContext.getResources().getColor(
-                R.color.table_background));
         headLenght = data.length;
         tr.setLayoutParams(rowParams);
 
         for (int iCol = 0; iCol < data.length; iCol++) {
             TextView tvCol = new TextView(mContext);
             tvCol.setText(data[iCol]);
-            tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
+            tvCol.setGravity(Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
             tvCol.setTextSize(14);
+            tvCol.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
             tr.addView(tvCol);
+
+            if(iCol < data.length-1) {
+                addColDivider(tr);
+            }
         }
 
         mTable.addView(tr);
+
+        addDivider();
     }
 
 

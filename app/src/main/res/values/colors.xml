@@ -9,9 +9,8 @@
     <color name="white">#bdffffff</color>
     <color name="transparent">#00000000</color>
     <color name="black">#000000</color>
-    <color name="table_background">#999999</color>
-    <color name="row_background">#ffffff</color>
-
+    <color name="table_background">#CFD8DC</color>
+    <color name="row_background">#fafafa</color>
     <color name="text_not_set_color">#fd0004</color>
 
 </resources>

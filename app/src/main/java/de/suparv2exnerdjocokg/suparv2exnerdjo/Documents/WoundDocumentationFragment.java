@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 
@@ -51,7 +52,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class WoundDocumentationFragment extends Fragment{
-    private ScrollView layMain;
+    private FrameLayout layMain;
     private TableGenerator mTable;
     private Button addRow;
     private Button saveIt;
@@ -91,7 +92,7 @@ public class WoundDocumentationFragment extends Fragment{
 
     private void showTable() {
         mTable = new TableGenerator(getActivity());
-        layMain = (ScrollView) view.findViewById(R.id.table);
+        layMain = (FrameLayout) view.findViewById(R.id.table);
 
         String[] firstRow = {view.getContext().getString(R.string.wounddate), view.getContext().getString(R.string.woundphase),
                 view.getContext().getString(R.string.woundsizel), view.getContext().getString(R.string.woundsizew),

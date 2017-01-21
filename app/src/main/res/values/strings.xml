@@ -63,7 +63,7 @@
     <string name="wounddate">Datum</string>
     <string name="woundphase">Wundphase</string>
     <string name="woundsizel">Wunddlänge</string>
-    <string name="woundsizew">Wundbraite</string>
+    <string name="woundsizew">Wundbreite</string>
     <string name="woundsized">Wundtiefe</string>
     <string name="wounddescription">Wundbeschreibung</string>
     <string name="woundkindfrequency">Art und Häufigkeit der Wundversorgung</string>
