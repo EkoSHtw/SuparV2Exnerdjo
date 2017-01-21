@@ -1,62 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:minWidth="400dp"
+    >
 
     <TextView
         android:id="@+id/dialog_add_note_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/dialog_add_note_title" />
+        android:text="@string/dialog_add_note_title"
+        style="@style/AppTextNormal"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        />
 
     <TextView
         android:id="@+id/dialog_add_note_carer_name"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/carer_name_fill"/>
+        android:text="@string/carer_name_fill"
+        style="@style/AppTextNormal"
+        android:gravity="end"
+        />
 
-    <TextView
-        android:id="@+id/dialog_textview_tag"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/dialog_add_note_title"
-        android:text="@string/tag"/>
+        android:orientation="horizontal"
+        >
 
-    <AutoCompleteTextView
-        android:id="@+id/dialog_input_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/dialog_textview_tag"
-        android:layout_toRightOf="@id/dialog_textview_tag"
-        android:hint="@string/input_tags"/>
+        <TextView
+            android:id="@+id/dialog_textview_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tag"
+            style="@style/AppTextNormal"
+            android:paddingRight="10dp"
+            android:paddingLeft="3dp"
+            />
+
+        <AutoCompleteTextView
+            android:id="@+id/dialog_input_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_tags"
+            android:textColorHint="@color/colorPrimary"
+            style="@style/AppTextNormal"
+            />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/dialog_input_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/dialog_input_tag"
-        android:hint="@string/note_comment"/>
+        android:hint="@string/note_comment"
+        android:textColorHint="@color/colorPrimary"
+        android:minLines="5"
+        android:gravity="top|left"
+        style="@style/AppTextNormal"
+        />
 
-    <Button
-        android:id="@+id/dialog_button_positive"
-        android:text="@string/confirm"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:orientation="horizontal"
+        >
 
-    <Button
-        android:id="@+id/dialog_button_negative"
-        android:text="@string/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@id/dialog_button_positive"/>
+        <Button
+            android:id="@+id/dialog_button_negative"
+            android:text="@string/cancel"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            style="@style/AppButton"
+            android:paddingTop="20dp"
+            />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/dialog_button_positive"
+            android:text="@string/confirm"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            style="@style/AppButton"
+            android:paddingTop="20dp"
+
+            />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

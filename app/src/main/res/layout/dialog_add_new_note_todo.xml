@@ -2,25 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    >
 
     <TextView
         android:id="@+id/dialog_add_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_new"/>
+        android:text="@string/add_new"
+        style="@style/AppTextNormal"
+        android:textColor="@color/colorAccent"
+        android:paddingBottom="10dp"
+        android:textSize="20sp"
+        />
 
     <TextView
         android:id="@+id/dialog_add_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new_logbook_entry"/>
+        android:text="@string/new_logbook_entry"
+        style="@style/AppTextNormal"
+        android:paddingBottom="5dp"
+        android:textSize="16sp"
+        />
 
     <TextView
         android:id="@+id/dialog_add_todo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/task"/>
+        android:text="@string/task"
+        style="@style/AppTextNormal"
+        android:paddingBottom="5dp"
+        android:textSize="16sp"
+        />
 
 
 </LinearLayout>
