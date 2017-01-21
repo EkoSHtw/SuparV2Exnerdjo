@@ -51,7 +51,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.7"
                     android:layout_height="wrap_content"
-                    style="@style/AppTextBasicData"
+                    style="@style/AppTextNormal"
                     />
 
             </LinearLayout>
@@ -76,7 +76,7 @@
             android:layout_weight="0.7"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            style="@style/AppTextBasicData"
+            style="@style/AppTextNormal"
             />
 
                 </LinearLayout>
@@ -101,7 +101,7 @@
             android:layout_weight="0.7"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            style="@style/AppTextBasicData"
+            style="@style/AppTextNormal"
             />
 
                 </LinearLayout>
@@ -149,7 +149,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.7"
             android:layout_height="wrap_content"
-            style="@style/AppTextBasicData"
+            style="@style/AppTextNormal"
             />
 
                 </LinearLayout>
@@ -173,9 +173,7 @@
             />
 
         <ListView
-            android:layout_gravity="end"
             android:id="@+id/document_list"
-            android:layout_below="@+id/care_level"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
