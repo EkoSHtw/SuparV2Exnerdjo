@@ -3,30 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    >
 
     <TextView
         android:id="@+id/numbername"
         android:layout_weight="0.3"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/AppTextBasicData"
+        android:layout_height="match_parent"
+        style="@style/AppTextNormal"
+        android:gravity="center_vertical"
         />
 
     <TextView
         android:id="@+id/relation"
         android:layout_width="0dp"
         android:layout_weight="0.3"
-        android:layout_height="wrap_content"
-        style="@style/AppTextBasicData"
+        android:layout_height="match_parent"
+        style="@style/AppTextNormal"
+        android:gravity="center_vertical"
         />
 
     <TextView
         android:id="@+id/phonenumber"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="0.3"
-        style="@style/AppTextBasicData"
+        style="@style/AppTextNormal"
+        android:gravity="center_vertical"
         />
 
     <ImageButton
