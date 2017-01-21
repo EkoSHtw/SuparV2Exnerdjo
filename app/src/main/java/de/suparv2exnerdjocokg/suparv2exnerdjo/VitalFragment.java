@@ -32,6 +32,7 @@ import com.jjoe64.graphview.series.Series;
 import java.text.DateFormat;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -67,6 +68,7 @@ public class VitalFragment extends Fragment {
     private HashMap<Date, Integer> bloodSugarValues;
     private List<Date> bloodSugarDates;
     private TextView oldSelection;
+    SimpleDateFormat format;
 
     //private OnFragmentInteractionListener mListener;
 
@@ -182,6 +184,7 @@ public class VitalFragment extends Fragment {
         });
 
 
+        format = new SimpleDateFormat("dd.MM.yy, HH:mm", Locale.GERMAN);
 
         return view;
     }
@@ -234,20 +237,10 @@ public class VitalFragment extends Fragment {
                 TextView title = (TextView) layout.findViewById(R.id.title);
                 title.setText("Diastolischer Blutdruck: ");
 
-                Date currentTime = new Date(new Double(dataPoint.getX()).longValue());
-                Calendar c = Calendar.getInstance();
-                c.setTime(currentTime);
-                TextView time = (TextView) layout.findViewById(R.id.time);
-                time.setText("Zeit: " + c.get(Calendar.DATE) +"." + (c.get(Calendar.MONTH)+1)+"."+c.get(Calendar.YEAR) +" "+c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE)+" Uhr");
-
                 TextView value = (TextView) layout.findViewById(R.id.value);
                 value.setText("Wert: "+dataPoint.getY() + " mmHg");
 
-                Toast toast = new Toast(getContext());
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.setView(layout);
-                toast.show();
+                setToast(dataPoint, layout);
             }
         });
 
@@ -274,20 +267,10 @@ public class VitalFragment extends Fragment {
                 TextView title = (TextView) layout.findViewById(R.id.title);
                 title.setText("Systolischer Blutdruck: ");
 
-                Date currentTime = new Date(new Double(dataPoint.getX()).longValue());
-                Calendar c = Calendar.getInstance();
-                c.setTime(currentTime);
-                TextView time = (TextView) layout.findViewById(R.id.time);
-                time.setText("Zeit: " + c.get(Calendar.DATE) +"." + (c.get(Calendar.MONTH)+1)+"."+c.get(Calendar.YEAR) +" "+c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE)+" Uhr");
-
                 TextView value = (TextView) layout.findViewById(R.id.value);
                 value.setText("Wert: "+dataPoint.getY() + " mmHg");
 
-                Toast toast = new Toast(getContext());
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.setView(layout);
-                toast.show();
+                setToast(dataPoint, layout);
             }
         });
 
@@ -295,6 +278,8 @@ public class VitalFragment extends Fragment {
 
 
     }
+
+
 
     private void setBloodPressureValues(GraphView graph){
 
@@ -333,20 +318,10 @@ public class VitalFragment extends Fragment {
                 TextView title = (TextView) layout.findViewById(R.id.title);
                 title.setText("Blutzucker: ");
 
-                Date currentTime = new Date(new Double(dataPoint.getX()).longValue());
-                Calendar c = Calendar.getInstance();
-                c.setTime(currentTime);
-                TextView time = (TextView) layout.findViewById(R.id.time);
-                time.setText("Zeit: " + c.get(Calendar.DATE) +"." + (c.get(Calendar.MONTH)+1)+"."+c.get(Calendar.YEAR) +" "+c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE)+" Uhr");
-
                 TextView value = (TextView) layout.findViewById(R.id.value);
                 value.setText("Wert: "+dataPoint.getY() + " mg/dl");
 
-                Toast toast = new Toast(getContext());
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.setView(layout);
-                toast.show();
+                setToast(dataPoint, layout);
             }
         });
 
@@ -390,20 +365,10 @@ public class VitalFragment extends Fragment {
                 TextView title = (TextView) layout.findViewById(R.id.title);
                 title.setText("Temperatur: ");
 
-                Date currentTime = new Date(new Double(dataPoint.getX()).longValue());
-                Calendar c = Calendar.getInstance();
-                c.setTime(currentTime);
-                TextView time = (TextView) layout.findViewById(R.id.time);
-                time.setText("Zeit: " + c.get(Calendar.DATE) +"." + (c.get(Calendar.MONTH)+1)+"."+c.get(Calendar.YEAR) +" "+c.get(Calendar.HOUR)+":"+c.get(Calendar.MINUTE)+" Uhr");
-
                 TextView value = (TextView) layout.findViewById(R.id.value);
                 value.setText("Wert: "+dataPoint.getY() + " °C");
 
-                Toast toast = new Toast(getContext());
-                toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.setView(layout);
-                toast.show();
+                setToast(dataPoint, layout);
             }
         });
 
@@ -497,6 +462,22 @@ public class VitalFragment extends Fragment {
 
                 break;
         }
+    }
+
+    private void setToast(DataPointInterface dataPoint, View layout) {
+
+        Date currentTime = new Date(new Double(dataPoint.getX()).longValue());
+
+        String dateString = format.format(currentTime);
+
+        TextView time = (TextView) layout.findViewById(R.id.time);
+        time.setText("Zeit: "+dateString+" Uhr");
+
+        Toast toast = new Toast(getContext());
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 
     @Override
