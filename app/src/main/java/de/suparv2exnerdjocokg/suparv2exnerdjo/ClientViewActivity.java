@@ -122,7 +122,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
                 FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
 
                 trans.replace(R.id.fragment_container, newFrag);
-                trans.addToBackStack(null);
 
                 trans.commit();
             }
@@ -134,7 +133,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
 
             trans.replace(R.id.fragment_container, newFrag);
-            trans.addToBackStack(null);
 
             trans.commit();
         }
@@ -156,7 +154,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
 
             trans.replace(R.id.fragment_container, newFrag);
-            trans.addToBackStack(null);
 
             trans.commit();
         }
@@ -175,7 +172,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
                 FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
 
                 trans.replace(R.id.fragment_container, clientFragment);
-                trans.addToBackStack(null);
 
                 trans.commit();
                 break;
@@ -185,7 +181,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
                 trans = getSupportFragmentManager().beginTransaction();
 
                 trans.replace(R.id.fragment_container, basicFragment);
-                trans.addToBackStack(null);
 
                 trans.commit();
                 break;
@@ -195,7 +190,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
                 trans = getSupportFragmentManager().beginTransaction();
 
                 trans.replace(R.id.fragment_container, logFragment);
-                trans.addToBackStack(null);
 
                 trans.commit();
                 break;
@@ -205,7 +199,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
                 trans = getSupportFragmentManager().beginTransaction();
 
                 trans.replace(R.id.fragment_container, vF);
-                trans.addToBackStack(null);
 
                 trans.commit();
                 break;
@@ -214,14 +207,16 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
 
                 trans = getSupportFragmentManager().beginTransaction();
                 trans.replace(R.id.fragment_container, medicineFrag);
-                trans.addToBackStack(null);
 
                 trans.commit();
 
                 break;
             case 5:
                 Intent logOut = new Intent(this, LogIn.class);
+                logOut.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(logOut);
+                this.finish();
+
         }
     }
 
@@ -308,7 +303,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
             FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
 
             trans.replace(R.id.fragment_container, newFrag);
-            trans.addToBackStack(null);
 
             trans.commit();
         }
