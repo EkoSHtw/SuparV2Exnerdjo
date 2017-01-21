@@ -14,11 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_new_todo"
-        style="@style/AppTextNormal"
-        android:textSize="20sp"
-        android:textColor="@color/colorAccent"
-        android:gravity="center"
-        android:paddingBottom="10dp"
+        style="@style/DialogHeadline"
         />
 
     <!--<TextView-->

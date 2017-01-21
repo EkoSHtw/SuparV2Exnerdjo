@@ -13,10 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_new"
-        style="@style/AppTextNormal"
-        android:textColor="@color/colorAccent"
-        android:paddingBottom="10dp"
-        android:textSize="20sp"
+        style="@style/DialogHeadline"
         />
 
     <TextView

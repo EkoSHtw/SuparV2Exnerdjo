@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -36,12 +37,13 @@ public class DialogAddVitalValue extends Dialog {
 
         final NumberPicker note = (NumberPicker) findViewById(R.id.edit);
         final NumberPicker second = (NumberPicker) findViewById(R.id.edit_second);
-        second.setVisibility(View.GONE);
 
         final TextView first = (TextView) findViewById(R.id.first_header);
 
         final TextView secondHeader = (TextView) findViewById(R.id.second_header);
-        secondHeader.setVisibility(View.GONE);
+
+        final LinearLayout container = (LinearLayout) findViewById(R.id.container_second);
+        container.setVisibility(View.GONE);
 
         switch (id){
             case R.id.temp:
@@ -56,10 +58,10 @@ public class DialogAddVitalValue extends Dialog {
                 note.setMinValue(105);
                 note.setMaxValue(190);
 
-                secondHeader.setVisibility(View.VISIBLE);
+                container.setVisibility(View.VISIBLE);
+
                 secondHeader.setText("Diastolischer Blutdruck");
 
-                second.setVisibility(View.VISIBLE);
                 second.setMinValue(65);
                 second.setMaxValue(120);
                 break;
@@ -79,6 +81,14 @@ public class DialogAddVitalValue extends Dialog {
                 int text = note.getValue();
                 int secondValue = second.getValue();
                 mListener.newValueAdded(text, secondValue, id);
+                dismiss();
+            }
+        });
+
+        Button cancel = (Button) findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 dismiss();
             }
         });

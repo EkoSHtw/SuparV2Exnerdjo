@@ -11,8 +11,7 @@
         android:layout_height="wrap_content"
         android:text="Um wie viele Tage möchtest du die Aufgabe verschieben?"
         android:layout_weight="1"
-        style="@style/AppTextNormal"
-        android:textColor="@color/colorAccent"
+        style="@style/DialogHeadline"
         />
 
     <NumberPicker
@@ -34,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="Cancel"
+            android:text="@string/cancel"
             style="@style/AppButton"
             />
 
@@ -43,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:text="Ok"
+            android:text="@string/confirm"
             style="@style/AppButton"
             />
 
