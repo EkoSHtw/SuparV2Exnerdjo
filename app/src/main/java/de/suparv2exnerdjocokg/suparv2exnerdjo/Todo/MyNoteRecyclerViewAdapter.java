@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
@@ -36,7 +38,15 @@ public class MyNoteRecyclerViewAdapter extends RecyclerView.Adapter<MyNoteRecycl
         holder.mItem = mValues.get(position);
         holder.mTagView.setText(mValues.get(position).getTag());
         holder.mContentView.setText(mValues.get(position).getContent());
-        holder.mTimestampView.setText(""+mValues.get(position).getTimestamp());
+
+        Date date = new Date(mValues.get(position).getTimestamp().getTime());
+
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy, HH:mm", Locale.GERMAN);
+
+        String dateString = format.format(date);
+
+        holder.mTimestampView.setText(dateString+" Uhr");
+
         holder.mCarerView.setText(mValues.get(position).getCarer().getName());
 
     }

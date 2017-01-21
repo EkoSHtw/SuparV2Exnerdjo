@@ -51,9 +51,9 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
         Spinner spinner = (Spinner) view.findViewById(R.id.search_bar_spinner);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.search_bar_choices, android.R.layout.simple_spinner_item);
+                R.array.search_bar_choices, R.layout.spinner_item);
 
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(this);
 
