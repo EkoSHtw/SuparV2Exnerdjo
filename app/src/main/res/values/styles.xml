@@ -72,6 +72,14 @@
 
     </style>
 
+    <style name="DialogHeadline" parent="AppTextNormal">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">10dp</item>
+
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
