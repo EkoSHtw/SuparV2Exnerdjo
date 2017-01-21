@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
 import java.io.BufferedReader;
@@ -43,7 +44,7 @@ public class DoctorialPrescription3 extends Fragment {
     public DoctorialPrescription3() {
         // Required empty public constructor
     }
-    private ScrollView layMain;
+    private FrameLayout layMain;
     private TableGenerator mTable;
     private Button addRow;
     private Button saveIt;
@@ -64,7 +65,7 @@ public class DoctorialPrescription3 extends Fragment {
 
     private void showTable() {
         mTable = new TableGenerator(getActivity());
-        layMain = (ScrollView) view.findViewById(R.id.table);
+        layMain = (FrameLayout) view.findViewById(R.id.table);
 
         String[] firstRow = {view.getContext().getString(R.string.wounddate), view.getContext().getString(R.string.doctpre1hdz),
                 view.getContext().getString(R.string.doctorname), view.getContext().getString(R.string.specialdiet),

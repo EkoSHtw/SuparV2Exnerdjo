@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v4.widget.TextViewCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -21,6 +22,8 @@ import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,8 +42,8 @@ import static de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton
 public class TableGenerator {
     private final Context mContext;
     private TableLayout mTable;
-    private TableLayout.LayoutParams rowParams = new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-    private TableRow.LayoutParams colParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+    private TableLayout.LayoutParams rowParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT);
+    private TableRow.LayoutParams colParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
     private Activity act;
     private String mCurrentPhotoPath;
     private Image currentPhoto;
@@ -65,7 +68,7 @@ public class TableGenerator {
         act = activity;
         mTable = new TableLayout(activity);
         rowParams.setMargins(0, 0, 0, 0);
-        colParams.setMargins(0, 0, 0, 0);
+        colParams.setMargins(0, 0, 1, 0);
 
         TableLayout.LayoutParams lptable = new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.MATCH_PARENT,
@@ -79,6 +82,7 @@ public class TableGenerator {
         tr.setId(idCount);
 
         tr.setLayoutParams(rowParams);
+        tr.setBackgroundColor(mContext.getResources().getColor(R.color.table_background));
 
         for (int iCol = 0; iCol < headLenght; iCol++) {
             if (iCol == headLenght-1) {
@@ -86,7 +90,7 @@ public class TableGenerator {
                 pb.setGravity(Gravity.CENTER);
                 pb.setTextAppearance(mContext, R.style.AppButton);
                 pb.setBackgroundColor(mContext.getResources().getColor(
-                        R.color.transparent));
+                        R.color.row_background));
                 pb.setLayoutParams(colParams);
                 pb.setPadding(3, 3, 3, 3);
                 pb.setTextSize(10);
@@ -119,16 +123,15 @@ public class TableGenerator {
                 EditText tvCol = new EditText(mContext);
                 tvCol.setGravity(Gravity.CENTER);
                 tvCol.setPadding(3, 3, 3, 3);
+                tvCol.setLayoutParams(colParams);
                 tvCol.setTextColor(mContext.getResources().getColor(
                         R.color.colorPrimary));
                 tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-                tvCol.setLayoutParams(colParams);
                 tvCol.setBackgroundColor(mContext.getResources().getColor(
                         R.color.row_background));
                 tvCol.setTextSize(14);
-                tr.addView(tvCol);
 
-                addColDivider(tr);
+                tr.addView(tvCol);
             }
         }
 
@@ -156,6 +159,7 @@ public class TableGenerator {
         tr.setBackgroundColor(mContext.getResources().getColor(
                 R.color.table_background));
         tr.setLayoutParams(rowParams);
+
         for (int iCol = 0; iCol < headLenght; iCol++) {
             EditText tvCol = new EditText(mContext);
             tvCol.setGravity(Gravity.CENTER);
@@ -166,9 +170,12 @@ public class TableGenerator {
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
+
             tr.addView(tvCol);
 
         }
+
+        addDivider();
 
         mTable.addView(tr);
     }
@@ -189,37 +196,28 @@ public class TableGenerator {
         idCount++;
     }
 
-    private void addColDivider(TableRow tr){
 
-        TextView tvCol = new TextView(mContext);
-        tvCol.setLayoutParams(colParams);
-        tvCol.setWidth(1);
-        tvCol.setBackgroundColor(mContext.getResources().getColor(R.color.table_background));
-        tr.addView(tvCol);
-
-    }
 
 
     public void addHead(String[] data) {
         TableRow tr = new TableRow(mContext);
         headLenght = data.length;
         tr.setLayoutParams(rowParams);
+        tr.setBackgroundColor(mContext.getResources().getColor(R.color.table_background));
 
         for (int iCol = 0; iCol < data.length; iCol++) {
             TextView tvCol = new TextView(mContext);
             tvCol.setText(data[iCol]);
             tvCol.setGravity(Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
-            tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
             tvCol.setTextSize(14);
             tvCol.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
-            tr.addView(tvCol);
 
-            if(iCol < data.length-1) {
-                addColDivider(tr);
-            }
+            tvCol.setLayoutParams(colParams);
+
+            tr.addView(tvCol);
         }
 
         mTable.addView(tr);
