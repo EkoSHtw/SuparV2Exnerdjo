@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.support.v4.widget.TextViewCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -92,13 +94,13 @@ public class TableGenerator {
                 final PictureButton pb = new PictureButton(mContext);
                 pb.setGravity(Gravity.CENTER | Gravity.CENTER);
                 pb.setPadding(3, 3, 3, 3);
-                pb.setTextColor(mContext.getResources().getColor(
-                        R.color.black));
                 pb.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 pb.setMaxHeight(ViewGroup.LayoutParams.MATCH_PARENT);
                 pb.setLayoutParams(colParams);
+                pb.setTextAppearance(mContext, R.style.AppButton);
                 pb.setBackgroundColor(mContext.getResources().getColor(
                         R.color.row_background));
+                pb.setTextSize(10);
                 pb.setPicPath("");
                 if (pb.getPicPath() != "") {
                     pb.setText("Bild anzeigen");
@@ -129,7 +131,7 @@ public class TableGenerator {
                 tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
                 tvCol.setPadding(3, 3, 3, 3);
                 tvCol.setTextColor(mContext.getResources().getColor(
-                        R.color.black));
+                        R.color.colorPrimary));
                 tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 tvCol.setLayoutParams(colParams);
                 tvCol.setBackgroundColor(mContext.getResources().getColor(
@@ -160,13 +162,7 @@ public class TableGenerator {
         tr.setLayoutParams(rowParams);
         for (int iCol = 0; iCol < headLenght; iCol++) {
             EditText tvCol = new EditText(mContext);
-            tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
-            tvCol.setPadding(3, 3, 3, 3);
-            tvCol.setTextColor(mContext.getResources().getColor(
-                    R.color.black));
-            tvCol.setLayoutParams(colParams);
-            tvCol.setBackgroundColor(mContext.getResources().getColor(
-                    R.color.row_background));
+            //tvCol.setTextAppearance(mContext, R.style.TableRowEdit);
             tr.addView(tvCol);
         }
 
@@ -186,12 +182,10 @@ public class TableGenerator {
             tvCol.setText(data[iCol]);
             tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
-            tvCol.setTextColor(mContext.getResources().getColor(
-                    R.color.black));
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
-            tvCol.setTextAppearance(tvCol.getContext(), R.style.AppTextNormal);
+            tvCol.setTextSize(14);
             tr.addView(tvCol);
         }
 
