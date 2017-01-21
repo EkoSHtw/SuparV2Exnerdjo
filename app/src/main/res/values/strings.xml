@@ -102,6 +102,7 @@
 
     <string name="tag">Stichwort</string>
     <string name="input_tags">Geben Sie Stichwörter ein</string>
+    <string name="input_description">Beschreibung...</string>
     <string name="note_comment">Kommentar...</string>
     <string name="type_here">Hier tippen...</string>
     <string name="text_not_set">Wird benötigt!</string>
