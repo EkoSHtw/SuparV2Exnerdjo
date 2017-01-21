@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -211,6 +212,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
             ToDo toDo = toDos.get(i);
             tags.add(toDo.getTask().getTag());
         }
+
         return tags.toArray(new String[tags.size()]);
     }
 
