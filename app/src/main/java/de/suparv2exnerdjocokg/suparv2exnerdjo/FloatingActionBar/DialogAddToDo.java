@@ -38,8 +38,6 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
     private DatePicker datePicker;
     private NumberPicker numberPicker;
     ArrayList<ToDo> toDos;
-    String[] description;
-    private LinearLayout rootView;
 
 
     public DialogAddToDo() {
@@ -52,7 +50,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        rootView = (LinearLayout) inflater.inflate(R.layout.dialog_add_todo, container, false);
+        LinearLayout rootView = (LinearLayout) inflater.inflate(R.layout.dialog_add_todo, container, false);
         Button confirm = (Button) rootView.findViewById(R.id.dialog_todo_button_confirm);
         Button cancel = (Button) rootView.findViewById(R.id.dialog_todo_button_cancel);
         final AutoCompleteTextView tagEdittext = (AutoCompleteTextView) rootView.findViewById(R.id.dialog_add_todo_tag);
@@ -68,20 +66,16 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
         tagEdittext.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 TextView textView = (TextView) view.findViewById(R.id.auto_complete_text_view);
                 String name = textView.getText().toString().trim();
                 for (int i = 0; i < toDos.size(); i++) {
                     ToDo toDo = toDos.get(i);
                     if (toDo.getTask().getName().equals(name)) {
-
-
                         String result = "";
-                        for (String line: toDo.getTask().getDescription()){
-                            result+=line;
-                            result+="\n";
+                        for (String line : toDo.getTask().getDescription()) {
+                            result += line;
+                            result += "\n";
                         }
-//                        description = result;
                         descriptionEditText.setText(result);
 
                         break;
@@ -122,7 +116,6 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
             }
         });
 
-
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +125,6 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
                 String description = descriptionEditText.getText().toString().trim();
 
                 String tag = tagEdittext.getText().toString().trim();
-
 
                 if ("".equals(description) || "".equals(tag)) {
 
@@ -145,11 +137,19 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
 
                 } else {
 
-                    int datePickerDayOfMonth = datePicker.getDayOfMonth();
-                    int datePickerMonth = datePicker.getMonth();
-                    int datePickerYear = datePicker.getYear();
+                    if(datePicker.getVisibility()==View.VISIBLE) {
 
-                    if (dateIsToday(datePickerDayOfMonth, datePickerMonth)) {
+                        int datePickerDayOfMonth = datePicker.getDayOfMonth();
+                        int datePickerMonth = datePicker.getMonth();
+                        int datePickerYear = datePicker.getYear();
+
+                        if (dateIsToday(datePickerDayOfMonth, datePickerMonth)) {
+                            GeneralTask generalTask = new GeneralTask(tag, new String[]{description, "" + datePickerDayOfMonth + " " + datePickerMonth + " " + datePickerYear}, tag);
+                            ToDo toDo = new ToDo(new Timestamp(datePickerYear, datePickerMonth, datePickerDayOfMonth, 0, 0, 0, 0), generalTask);
+                            DummyToDos.ITEMS.add(toDo);
+                        }
+                    }else{
+                       int val = numberPicker.getValue();
                         GeneralTask generalTask = new GeneralTask(tag, new String[]{description, "" + datePickerDayOfMonth + " " + datePickerMonth + " " + datePickerYear}, tag);
                         ToDo toDo = new ToDo(new Timestamp(datePickerYear, datePickerMonth, datePickerDayOfMonth, 0, 0, 0, 0), generalTask);
                         DummyToDos.ITEMS.add(toDo);
@@ -182,7 +182,6 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
                 datePickerFragment.show(getFragmentManager(), "Date Picker");
             }
         });
-
         return rootView;
     }
 
@@ -208,7 +207,6 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
             ToDo toDo = toDos.get(i);
             tags.add(toDo.getTask().getTag());
         }
-
         return tags.toArray(new String[tags.size()]);
     }
 
