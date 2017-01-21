@@ -93,7 +93,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
 
         calender.add(Calendar.DATE, 30);
 
-        datePicker.setMaxDate(calender.getTime().getTime());
+        datePicker.setMaxDate(calender.getTime().getTime()); // später überprüfen wegen febrauar (<30 tage)
         datePicker.setOnClickListener(null);
         numberPicker = (NumberPicker) rootView.findViewById(R.id.dialog_number_picker);
         numberPicker.setMinValue(0);
@@ -119,8 +119,6 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                EditText nameEditText = (EditText) view.findViewById(R.id.dialog_add_todo_name);
-//                String name = nameEditText.getText().toString();
 
                 String description = descriptionEditText.getText().toString().trim();
 
@@ -136,23 +134,31 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
                     }
 
                 } else {
+                    Calendar calendar = Calendar.getInstance();
 
-                    if(datePicker.getVisibility()==View.VISIBLE) {
+                    //alles was in der zukunft passiert wird irgnoriert
+
+
+                    if (datePicker.getVisibility() == View.VISIBLE) {
 
                         int datePickerDayOfMonth = datePicker.getDayOfMonth();
                         int datePickerMonth = datePicker.getMonth();
-                        int datePickerYear = datePicker.getYear();
 
                         if (dateIsToday(datePickerDayOfMonth, datePickerMonth)) {
-                            GeneralTask generalTask = new GeneralTask(tag, new String[]{description, "" + datePickerDayOfMonth + " " + datePickerMonth + " " + datePickerYear}, tag);
-                            ToDo toDo = new ToDo(new Timestamp(datePickerYear, datePickerMonth, datePickerDayOfMonth, 0, 0, 0, 0), generalTask);
+                            GeneralTask generalTask = new GeneralTask(tag, new String[]{description}, tag);
+                            ToDo toDo = new ToDo(new Timestamp(calendar.getTimeInMillis()), generalTask);
                             DummyToDos.ITEMS.add(toDo);
                         }
-                    }else{
-                       int val = numberPicker.getValue();
-                        GeneralTask generalTask = new GeneralTask(tag, new String[]{description, "" + datePickerDayOfMonth + " " + datePickerMonth + " " + datePickerYear}, tag);
-                        ToDo toDo = new ToDo(new Timestamp(datePickerYear, datePickerMonth, datePickerDayOfMonth, 0, 0, 0, 0), generalTask);
-                        DummyToDos.ITEMS.add(toDo);
+                    } else {
+                        int val = numberPicker.getValue();
+
+                        if (val == 0) {
+
+
+                            GeneralTask generalTask = new GeneralTask(tag, new String[]{description}, tag);
+                            ToDo toDo = new ToDo(new Timestamp(calendar.getTimeInMillis()), generalTask);
+                            DummyToDos.ITEMS.add(toDo);
+                        }
                     }
                     dismissThis(true);
                 }
@@ -162,8 +168,6 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
                  *http://stackoverflow.com/questions/20989809/text-view-with-suggestion-list
                  */
 
-                //was soll damit dann passieren
-//                dismissThis(true);
             }
         });
 
