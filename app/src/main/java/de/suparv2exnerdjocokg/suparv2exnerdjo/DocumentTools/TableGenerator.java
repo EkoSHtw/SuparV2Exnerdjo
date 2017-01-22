@@ -45,6 +45,12 @@ public class TableGenerator {
     private static final int REQUEST_TAKE_PHOTO = 1;
     private PictureButton currentButton;
 
+    public int getChildCount() {
+        return childCount;
+    }
+
+    private int childCount=0;
+
 
     public int getHeadLenght() {
         return headLenght;
@@ -81,7 +87,7 @@ public class TableGenerator {
 
     public void addwRow() {
         TableRowExpand tr = new TableRowExpand(mContext);
-        tr.setId(idCount);
+       childCount++;
 
         tr.setBackgroundColor(mContext.getResources().getColor(
                 R.color.table_background));
@@ -137,9 +143,9 @@ public class TableGenerator {
                 tr.addView(tvCol);
             }
         }
-
-        mTable.addView(tr);
         idCount++;
+        mTable.addView(tr);
+
     }
 
     private void showImage(PictureButton pb) {
@@ -153,7 +159,7 @@ public class TableGenerator {
 
     public void addRow() {
         TableRowExpand tr = new TableRowExpand(mContext);
-        tr.setId(idCount);
+        childCount++;
 
         tr.setBackgroundColor(mContext.getResources().getColor(
                 R.color.table_background));
@@ -180,7 +186,7 @@ public class TableGenerator {
                 R.color.table_background));
         headLenght = data.length;
         tr.setLayoutParams(rowParams);
-
+        childCount++;
         for (int iCol = 0; iCol < data.length; iCol++) {
             TextView tvCol = new TextView(mContext);
             tvCol.setText(data[iCol]);

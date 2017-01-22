@@ -77,18 +77,6 @@ public class WoundDocumentationFragment extends Fragment{
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-           /* Bundle extras = data.getExtras();
-            Image image = (Image) extras.get("data");
-            File  im = (File) extras.get("data");
-            this.takenPicture = image;*/
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-        }
-    }
-
     private void showTable() {
         mTable = new TableGenerator(getActivity());
         layMain = (ScrollView) view.findViewById(R.id.table);
@@ -112,12 +100,8 @@ public class WoundDocumentationFragment extends Fragment{
                     String empty = "";
                     String f = c.getDocumentation().get(i).getPath();
 
-
-                 // InputStream inputStream = getContext().openFileInput("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"+ c.getDocumentation().get(i).getPath());
-                    Log.println(Log.INFO, "FRAG PAth",""+getContext().getFilesDir()+f);
                     BufferedReader bufferedReader = new BufferedReader(
-                            new FileReader(getContext().getFilesDir()
-                                    + f +".txt"));
+                            new FileReader(f ));
                     if ( bufferedReader.readLine() != null ) {
 
                         String receiveString = "";
@@ -129,10 +113,12 @@ public class WoundDocumentationFragment extends Fragment{
                                         String s = receiveString.replace("/", "");
                                         if (fillCount == mTable.getHeadLenght()) {
                                             PictureButton pb = (PictureButton) t.getChildAt(fillCount);
-
+                                            pb.setText(s);
+                                            fillCount++;
                                         }else {
                                             EditText firstTextView = (EditText) t.getChildAt(fillCount);
                                             firstTextView.setText(s);
+                                            fillCount++;
                                         }
 
                                     if (fillCount == t.getChildCount()) {
@@ -173,22 +159,20 @@ public class WoundDocumentationFragment extends Fragment{
             saveIt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FileOutputStream fops = null;
+                    FileOutputStream outputStream = null;
 
                     try {
 
-                        fops = new FileOutputStream(
-                                "/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"
-                                        + overwrite.getName() +".txt", false);
-
-                        for (int i = 1; i < mTable.getIdCount(); i++) {
+                        outputStream = new FileOutputStream(overwrite);
+                        OutputStreamWriter myOutWriter = new OutputStreamWriter(outputStream);
+                        for (int i = 1; i < mTable.getHeadLenght(); i++) {
                             View view = mTable.getTable().getChildAt(i);
                             if (view instanceof TableRowExpand) {
                                 TableRowExpand t = (TableRowExpand) view;
-                                String textLine = "" + i;
+                                String textLine = "";
 
-                                for (int j = 0; j < t.getChildCount(); j++) {
-                                    if(j == t.getChildCount() -1){
+                                for (int j = 0; j < mTable.getHeadLenght(); j++) {
+                                    if(j == mTable.getHeadLenght()){
                                         PictureButton pButton = (PictureButton) t.getChildAt(j);
                                         textLine += " "  + pButton.getPicPath() + "/" + "\n";
                                     }else {
@@ -197,12 +181,13 @@ public class WoundDocumentationFragment extends Fragment{
                                         textLine += " " + text.getText().toString() + "/" + "\n";
                                     }
                                 }
-                                fops.write(textLine.getBytes());
-
+                                myOutWriter.write(textLine);
+                                myOutWriter.flush();
+                                outputStream.flush();
                             }
                         }
-                        fops.flush();
-                        fops.close();
+                        myOutWriter.close();
+                        outputStream.close();
                         c.getDocumentation().set(index, overwrite);
                     } catch (Exception e) {
                         e.printStackTrace();

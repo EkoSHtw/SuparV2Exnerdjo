@@ -65,19 +65,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         File f3 = new File(getFilesDir(), this.getString(R.string.doctorialprescription2));
         File f4 = new File(getFilesDir(), this.getString(R.string.doctorialprescription3));
 
-        String filename = "myfile";
-        String string = "Hello world!";
-        FileOutputStream outputStream;
-
-        try {
-            outputStream = openFileOutput(f1.getName(),Context.MODE_PRIVATE);
-            outputStream.write(string.getBytes());
-            outputStream.close();
-            Log.println(Log.INFO,"Stream", "Schreiben erfolgreich");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         ArrayList<File> b = new ArrayList<>();
         b.add(f);
         b.add(f1);
@@ -86,9 +73,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         b.add(f4);
         client.setDocumentation(b);
 
-// Absoluter pfad gibt in wunddokument nur einen teilpfad zurück
-
-//        setContentView(R.layout.dialog_add_note);
 
         if (findViewById(R.id.menu) != null) {
             MenuFragment firstFragment = new MenuFragment();
@@ -248,7 +232,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         doclist.add(getString(R.string.doctorialprescription2));
         doclist.add(getString(R.string.doctorialprescription3));
 
-        Log.println(Log.INFO, "Name pdf file ",position);
+
         ArrayList<Fragment> fragList = new ArrayList<>();
         fragList.add(new WoundDocumentationFragment());
         fragList.add(new MobilisationBeddingFragment());
@@ -256,9 +240,8 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         fragList.add(new DoctorialPrescription2());
         fragList.add(new DoctorialPrescription3());
         for(int i =0; i < doclist.size(); i ++){
-            Log.println(Log.INFO, "Name pdf file doclist ",doclist.get(i));
+
             if (position.equals( doclist.get(i))){
-                Log.println(Log.INFO, "Name pdf file","I#m inside");
                 wFrag = fragList.get(i);
                 break;
             }

@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
@@ -40,7 +41,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
     private View view;
     private String[] firstRow;
 
-    private String overwrite;
+    private File overwrite;
     private int index;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,53 +69,48 @@ public class DocumentsTableTemplateFragment extends Fragment {
 
         mTable.addHead(firstRow);
         for (int i = 0; i < c.docsListLenghts(); i++) {
-            Log.println(Log.INFO, "filename",filename);
-            Log.println(Log.INFO, "filename c.doc",c.getDocumentation().get(i).getName());
+            this.overwrite = c.getDocumentation().get(i);
             if (c.getDocumentation().get(i).getName().equals(filename)) {
                 index = i;
-                this.overwrite = c.getDocumentation().get(i).getName();
-                Log.println(Log.INFO, "filename over",overwrite);
                 String ret = "";
                 int rowCount = 1;
                 int fillCount = 0;
-                String f = getContext().getFilesDir()
-                        + c.getDocumentation().get(i).getAbsolutePath();
-                Log.println(Log.INFO, "", f);
                 mTable.addRow();
                 try {
 
                     BufferedReader bufferedReader = new BufferedReader(
-                            new FileReader(f));
+                            new FileReader(c.getDocumentation().get(i)));
                     if (bufferedReader.readLine() != null) {
-
                         String receiveString = "";
 
                         while ((receiveString = bufferedReader.readLine()) != null) {
                             View v = mTable.getTable().getChildAt(rowCount);
-                            if (v instanceof TableRowExpand) {
-                                TableRowExpand t = (TableRowExpand) v;
-                                String s = receiveString.replace("/", "");
+                            TableRowExpand t = (TableRowExpand) v;
+                            String s = receiveString.replace("/", "");
 
-                                EditText firstTextView = (EditText) t.getChildAt(fillCount);
-                                firstTextView.setText(s);
-
-                                if (fillCount == t.getChildCount() - 1) {
-                                    mTable.addRow();
-                                    fillCount = 0;
-                                    rowCount++;
-                                }
+                            EditText firstTextView = (EditText) t.getChildAt(fillCount);
+                            firstTextView.setText(s);
+                            fillCount++;
+                            if (fillCount == mTable.getHeadLenght()) {
+                                mTable.addRow();
+                                fillCount = 0;
+                                rowCount++;
                             }
+
                         }
                         bufferedReader.close();
                     } else {
+                        bufferedReader.close();
                         for (int j = 0; j < 2; j++) {
-                            mTable.addwRow();
+                            mTable.addRow();
                         }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                break;
             }
+
         }
 
 
@@ -132,41 +128,32 @@ public class DocumentsTableTemplateFragment extends Fragment {
         saveIt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OutputStream outputStream;
                 try {
-                    outputStream = getContext().openFileOutput(overwrite, Context.MODE_PRIVATE);
+                    FileOutputStream outputStream;
+                    int k = mTable.getChildCount();
 
-                    for (int i = 1; i < mTable.getIdCount(); i++) {
+                    outputStream = new FileOutputStream(overwrite);
+                    OutputStreamWriter myOutWriter = new OutputStreamWriter(outputStream);
+                    for (int i = 1; i < mTable.getChildCount(); i++) {
                         View vi = mTable.getTable().getChildAt(i);
-                        if (vi instanceof TableRowExpand) {
-                            TableRowExpand t = (TableRowExpand) vi;
-                            String textLine = "" + i;
 
-                            for (int j = 0; j <= t.getChildCount(); j++) {
-                                if (j == t.getChildCount() - 1) {
-                                    PictureButton pButton = (PictureButton) t.getChildAt(j);
-                                    textLine += " " + pButton.getPicPath() + "/" + "\n";
-                                }
-                                EditText text = (EditText) t.getChildAt(j);
-                                //if(firstTextView == null) break;
-                                textLine += " " + text.getText().toString() + "/" + "\n";
-
-                            }
-                            outputStream.write(textLine.getBytes());
-                            outputStream.flush();
-
+                        TableRowExpand t = (TableRowExpand) vi;
+                        String textLine = "" ;
+                        for (int j = 0; j < mTable.getHeadLenght(); j++) {
+                            EditText text = (EditText) t.getChildAt(j);
+                            textLine += " " + text.getText().toString() + "/" + "\n";
                         }
-                    }
+                        myOutWriter.write(textLine);
+                        myOutWriter.flush();
+                        outputStream.flush();
 
+                    }
+                    myOutWriter.close();
                     outputStream.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
-            ;
         });
     }
-
-
 }
