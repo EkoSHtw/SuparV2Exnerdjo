@@ -92,12 +92,14 @@
 
     <string name="addPicture">hinzufügen</string>
     <string name="picture">Bild</string>
+    <string name="saved">gespeichert</string>
 
     <!-- Add note alert -->
     <string name="dialog_add_note_title">Neue Notiz</string>
     <string name="cancel">Abbrechen</string>
     <string name="confirm">Bestätigen</string>
     <string name="carer_name_fill">Carer Name Filler</string>
+
 
     <string name="tag">Stichwort</string>
     <string name="input_tags">Geben Sie Stichwörter ein</string>

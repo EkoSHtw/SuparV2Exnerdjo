@@ -48,16 +48,11 @@ public class TableGenerator {
     public int getChildCount() {
         return childCount;
     }
-
     private int childCount=0;
-
-
     public int getHeadLenght() {
         return headLenght;
     }
-
     private int headLenght;
-
     public int getIdCount() {
         return idCount;
     }
@@ -143,7 +138,6 @@ public class TableGenerator {
                 tr.addView(tvCol);
             }
         }
-        idCount++;
         mTable.addView(tr);
 
     }
@@ -225,7 +219,6 @@ public class TableGenerator {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Log.println(Log.INFO, "", "HELLO URI !!");
 
                 Uri photoURI = FileProvider.getUriForFile(mContext,
                         "com.example.android.fileprovider",
@@ -251,7 +244,6 @@ public class TableGenerator {
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
         currentButton.setPicPath(mCurrentPhotoPath);
-        Log.println(Log.INFO, "", "FILE WURDE ERSTELLT !!");
         return image;
     }
 
@@ -262,7 +254,4 @@ public class TableGenerator {
         }
     }
 
-
 }
-
-

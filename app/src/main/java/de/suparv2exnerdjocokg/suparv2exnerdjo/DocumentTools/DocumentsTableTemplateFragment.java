@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -57,7 +58,6 @@ public class DocumentsTableTemplateFragment extends Fragment {
         return view;
     }
 
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
@@ -72,12 +72,11 @@ public class DocumentsTableTemplateFragment extends Fragment {
             this.overwrite = c.getDocumentation().get(i);
             if (c.getDocumentation().get(i).getName().equals(filename)) {
                 index = i;
-                String ret = "";
+
                 int rowCount = 1;
                 int fillCount = 0;
                 mTable.addRow();
                 try {
-
                     BufferedReader bufferedReader = new BufferedReader(
                             new FileReader(c.getDocumentation().get(i)));
                     if (bufferedReader.readLine() != null) {
@@ -96,7 +95,6 @@ public class DocumentsTableTemplateFragment extends Fragment {
                                 fillCount = 0;
                                 rowCount++;
                             }
-
                         }
                         bufferedReader.close();
                     } else {
@@ -110,10 +108,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
                 }
                 break;
             }
-
         }
-
-
         layMain.removeAllViews();
         layMain.addView(mTable.getTable());
         addRow = (Button) view.findViewById(R.id.addRowB);
@@ -134,22 +129,30 @@ public class DocumentsTableTemplateFragment extends Fragment {
 
                     outputStream = new FileOutputStream(overwrite);
                     OutputStreamWriter myOutWriter = new OutputStreamWriter(outputStream);
+                    myOutWriter.write(" " + "/" + "\n");
                     for (int i = 1; i < mTable.getChildCount(); i++) {
                         View vi = mTable.getTable().getChildAt(i);
 
                         TableRowExpand t = (TableRowExpand) vi;
                         String textLine = "" ;
                         for (int j = 0; j < mTable.getHeadLenght(); j++) {
+
                             EditText text = (EditText) t.getChildAt(j);
                             textLine += " " + text.getText().toString() + "/" + "\n";
+                            Log.println(Log.INFO, "gelesener String", textLine);
                         }
                         myOutWriter.write(textLine);
                         myOutWriter.flush();
                         outputStream.flush();
-
                     }
                     myOutWriter.close();
                     outputStream.close();
+
+                    Context context = getContext();
+                    CharSequence text = getString(R.string.saved);
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -170,7 +171,7 @@ public class WoundDocumentationFragment extends Fragment{
                             if (view instanceof TableRowExpand) {
                                 TableRowExpand t = (TableRowExpand) view;
                                 String textLine = "";
-
+                                myOutWriter.write(" " + "/" + "\n");
                                 for (int j = 0; j < mTable.getHeadLenght(); j++) {
                                     if(j == mTable.getHeadLenght()){
                                         PictureButton pButton = (PictureButton) t.getChildAt(j);
@@ -188,7 +189,11 @@ public class WoundDocumentationFragment extends Fragment{
                         }
                         myOutWriter.close();
                         outputStream.close();
-                        c.getDocumentation().set(index, overwrite);
+                        Context context = getContext();
+                        CharSequence text = getString(R.string.saved);
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
