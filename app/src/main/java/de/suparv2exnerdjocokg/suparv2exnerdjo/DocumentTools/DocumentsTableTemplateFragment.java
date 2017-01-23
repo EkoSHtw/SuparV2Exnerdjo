@@ -133,7 +133,6 @@ public class DocumentsTableTemplateFragment extends Fragment {
                         TableRowExpand t = (TableRowExpand) vi;
                         String textLine = "" ;
                         for (int j = 0; j < mTable.getHeadLenght(); j++) {
-
                             EditText text = (EditText) t.getChildAt(j);
                             textLine += " " + text.getText().toString() + "/" + "\n";
                             Log.println(Log.INFO, "gelesener String", textLine);

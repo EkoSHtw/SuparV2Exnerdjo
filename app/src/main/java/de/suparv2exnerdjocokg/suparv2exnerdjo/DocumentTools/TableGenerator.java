@@ -116,7 +116,9 @@ public class TableGenerator {
                             // Bild wird aufgenommen
                             dispatchTakePictureIntent();
                             pb.setText(mContext.getString(R.string.showpicture));
+
                         } else {
+
                             showImage(pb);
 
                         }

@@ -167,7 +167,7 @@ public class WoundDocumentationFragment extends Fragment{
                                 String textLine = "";
                                 myOutWriter.write(" " + "/" + "\n");
                                 for (int j = 0; j < mTable.getHeadLenght(); j++) {
-                                    if(j == mTable.getHeadLenght()){
+                                    if(j == mTable.getHeadLenght()-1){
                                         PictureButton pButton = (PictureButton) t.getChildAt(j);
                                         textLine += " "  + pButton.getPicPath() + "/" + "\n";
                                     }else {
