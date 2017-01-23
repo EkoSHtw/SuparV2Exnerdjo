@@ -1,5 +1,7 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
+
 public class GeneralTask {
 
     private String name;
@@ -7,7 +9,8 @@ public class GeneralTask {
     private String tag;
     private boolean isDone;
     private int shiftetDays;
-    private String note;
+    private String shiftedNote;
+    private Note note;
 
 
 
@@ -19,12 +22,20 @@ public class GeneralTask {
         this.shiftetDays = 0;
     }
 
-    public String getNote() {
+    public Note getNote() {
         return note;
     }
 
-    public void setNote(String note) {
+    public void setNote(Note note) {
         this.note = note;
+    }
+
+    public String getShiftedNote() {
+        return shiftedNote;
+    }
+
+    public void setShiftedNote(String shiftedNote) {
+        this.shiftedNote = shiftedNote;
     }
 
     public String getName() {

@@ -3,6 +3,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,6 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             holder.addNote.setVisibility(View.GONE);
         }
 
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,12 +97,9 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 mListener.onListFragmentInteraction(-2, true);
                 if (isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
-                    String note = currentTask.getNote();
-                    if (note ==null|| note.equals("")) {
-                        DummyNotes.ITEMS.add(new Note(currentTask.getTag(), "" + currentTask.getName() + " durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis())));
-                    }else{
-                        DummyNotes.ITEMS.add(new Note(currentTask.getTag(), note, new Carer("John"), new Timestamp(System.currentTimeMillis())));
-                    }
+                    Note note = new Note(currentTask.getTag(), "" + currentTask.getName() + " durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis()));
+                    DummyNotes.ITEMS.add(note);
+                    currentTask.setNote(note);
                 } else {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.transparent));
                     for (int i = 0; i < mValues.size(); i++) {
@@ -144,26 +141,18 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.addNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                DialogAddNote dialogFragment = new DialogAddNote(fragment.getActivity());
-//                dialogFragment.show();
-//
-//                EditText editText = (EditText) dialogFragment.findViewById(R.id.dialog_input_text);
-//    editText.setText(currentTask.);
-//
-//                dialogFragment.findViewById(R.id.dialog_textview_tag).setVisibility(View.GONE);
-//                dialogFragment.findViewById(R.id.dialog_input_tag).setVisibility(View.GONE);
-//
-//                Button confirm = (Button) dialogFragment.findViewById(R.id.dialog_button_positive);
-//                confirm.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                    }
-//                });
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getActivity());
-                builder.setTitle(R.string.dialog_add_note_title);
+                builder.setTitle(R.string.new_note);
                 final EditText editText = new EditText(fragment.getContext());
+
                 builder.setView(editText);
+                if (currentTask.getDaysShiftet() > 0) {
+                    editText.setText(currentTask.getShiftedNote());
+                } else {
+                    editText.setText(currentTask.getNote().getContent());
+                }
+
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -173,7 +162,14 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        currentTask.setNote(editText.getText().toString());
+                         String input = editText.getText().toString();
+                        if (currentTask.getDaysShiftet() > 0) {
+                            currentTask.setShiftedNote(input);
+                        } else {
+                            Log.println(Log.INFO,"","HEEEEYAAA");
+                            currentTask.getNote().setContent(input);
+                        }
+
                         dialog.dismiss();
                     }
                 });
