@@ -94,7 +94,7 @@
     <string name="addPicture">hinzufügen</string>
     <string name="picture">Bild</string>
 
-    <!-- Add note alert -->
+    <!-- Add shiftedNote alert -->
     <string name="dialog_add_note_title">Neuer Logbucheintrag</string>
     <string name="cancel">Abbrechen</string>
     <string name="confirm">Bestätigen</string>
@@ -106,7 +106,7 @@
     <string name="type_here">Hier tippen...</string>
     <string name="text_not_set">Wird benötigt!</string>
     <string name="date">Zeit</string>
-    <string name="note">Notiz</string>
+    <string name="shiftedNote">Notiz</string>
     <string name="carer">Pfleger</string>
     <string name="logbook_searchbar_search">Suchen...</string>
     <string name="add_new_note_or_task">Neue Aufgabe oder Notiz</string>
@@ -119,6 +119,7 @@
     <string name="tomorrow">Morgen</string>
     <string name="day_after_tomorrow">Übermorgen</string>
     <string name="new_logbook_entry">Logbucheintrag</string>
+    <string name="note">Notiz</string>
 
 
 </resources>
