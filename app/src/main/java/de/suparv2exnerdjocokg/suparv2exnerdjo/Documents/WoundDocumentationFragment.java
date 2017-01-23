@@ -91,12 +91,12 @@ public class WoundDocumentationFragment extends Fragment{
 
         mTable.addHead(firstRow);
         for (int i =0; i < c.docsListLenghts(); i++){
-            if(c.getDocumentation().get(i).getName().equals( getString(R.string.wounddocname))){
+            if(c.getDocumentation().get(i).getName().equals( getString(R.string.wounddocname) + " " + c.getFullName())){
                 this.index = i;
                 this.overwrite =  c.getDocumentation().get(i);
                 int rowCount =1;
                 int fillCount = 0;
-                mTable.addwRow();
+
                 try {
                     String empty = "";
                     String f = c.getDocumentation().get(i).getPath();
@@ -104,6 +104,7 @@ public class WoundDocumentationFragment extends Fragment{
                     BufferedReader bufferedReader = new BufferedReader(
                             new FileReader(f ));
                     if ( bufferedReader.readLine() != null ) {
+                        mTable.addwRow();
 
                         String receiveString = "";
 
@@ -132,9 +133,7 @@ public class WoundDocumentationFragment extends Fragment{
                         bufferedReader.close();
                     }else{
                         bufferedReader.close();
-                        for (int j = 0; j < 2; j++) {
                             mTable.addwRow();
-                        }
                     }
                 }catch (Exception e){
                     e.printStackTrace();

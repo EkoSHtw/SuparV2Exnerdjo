@@ -58,12 +58,12 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         Intent intent = getIntent();
         client = DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
 
-        File f = new File(getFilesDir(), this.getString(R.string.wounddocname));
-        Log.println(Log.INFO, "ACT PAth", f.getPath());
-        File f1 = new File(getFilesDir(), this.getString(R.string.mobdocname));
-        File f2 = new File(getFilesDir(), this.getString(R.string.doctorialprescription1));
-        File f3 = new File(getFilesDir(), this.getString(R.string.doctorialprescription2));
-        File f4 = new File(getFilesDir(), this.getString(R.string.doctorialprescription3));
+        File f = new File(getFilesDir(), this.getString(R.string.wounddocname)+ " "  + client.getFullName());
+        File f1 = new File(getFilesDir(), this.getString(R.string.mobdocname) + " " + client.getFullName());
+
+        File f2 = new File(getFilesDir(), this.getString(R.string.doctorialprescription1) + " " +client.getFullName());
+        File f3 = new File(getFilesDir(), this.getString(R.string.doctorialprescription2) + " " + client.getFullName());
+        File f4 = new File(getFilesDir(), this.getString(R.string.doctorialprescription3) + " " + client.getFullName());
 
         ArrayList<File> b = new ArrayList<>();
         b.add(f);
@@ -71,8 +71,18 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         b.add(f2);
         b.add(f3);
         b.add(f4);
-        client.setDocumentation(b);
 
+        try{
+            for(int i =0; i < b.size(); i++){
+                if(b.get(i).exists() != true){
+                    b.get(i).createNewFile();
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        client.setDocumentation(b);
 
         if (findViewById(R.id.menu) != null) {
             MenuFragment firstFragment = new MenuFragment();
@@ -226,12 +236,12 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         Fragment wFrag = new Fragment();
 
         ArrayList<String> doclist= new ArrayList<>();
+
         doclist.add(getString(R.string.wounddocname));
         doclist.add(getString(R.string.mobdocname));
         doclist.add(getString(R.string.doctorialprescription1));
         doclist.add(getString(R.string.doctorialprescription2));
         doclist.add(getString(R.string.doctorialprescription3));
-
 
         ArrayList<Fragment> fragList = new ArrayList<>();
         fragList.add(new WoundDocumentationFragment());
@@ -240,19 +250,17 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         fragList.add(new DoctorialPrescription2());
         fragList.add(new DoctorialPrescription3());
         for(int i =0; i < doclist.size(); i ++){
-
-            if (position.equals( doclist.get(i))){
+            if (position.equals(doclist.get(i))){
                 wFrag = fragList.get(i);
                 break;
             }
         }
+
         FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
         trans.replace(R.id.fragment_container, wFrag);
         trans.addToBackStack(null);
-
             trans.commit();
     }
-
 
     public void addNote(String content, String tag) {
 //        EditText editText = (EditText)findViewById(R.id.dialog_input_text);

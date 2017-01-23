@@ -86,7 +86,8 @@ public class BasicDataBaseFragment extends Fragment {
 
                 ArrayList<String> slist = new ArrayList<>();
                 for(int i =0; i<c.getDocumentation().size(); i++){
-                    slist.add(c.getDocumentation().get(i).getName());
+                    String s = c.getDocumentation().get(i).getName().replace(" " + c.getFullName(), "");
+                    slist.add(s);
                 }
                 documents = (ListView) rootView.findViewById(document_list);
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(rootView.getContext(),
@@ -106,32 +107,6 @@ public class BasicDataBaseFragment extends Fragment {
         }
 
         return rootView;
-    }
-
-    public ArrayList<File> getLFile() {
-        Field[] fields = R.raw.class.getFields();
-        ArrayList<File> s = new ArrayList<>();
-        for (int count = 0; count < fields.length; count++) {
-            try {
-                copyFile(getResources().openRawResource(R.raw.test)
-                , new FileOutputStream(new File(getContext().getFilesDir(), "download/test.pdf")));
-
-                File pdfFile = new File(getContext().getFilesDir(), "download/test.pdf");
-
-              s.add(pdfFile);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return s;
-    }
-
-    private void copyFile(InputStream in, OutputStream out) throws IOException {
-        byte[] buffer = new byte[1024];
-        int read;
-        while((read = in.read(buffer)) != -1){
-            out.write(buffer, 0, read);
-        }
     }
 
 

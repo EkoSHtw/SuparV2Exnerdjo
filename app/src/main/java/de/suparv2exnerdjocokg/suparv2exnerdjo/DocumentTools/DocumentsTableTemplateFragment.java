@@ -59,7 +59,6 @@ public class DocumentsTableTemplateFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
@@ -70,16 +69,16 @@ public class DocumentsTableTemplateFragment extends Fragment {
         mTable.addHead(firstRow);
         for (int i = 0; i < c.docsListLenghts(); i++) {
             this.overwrite = c.getDocumentation().get(i);
-            if (c.getDocumentation().get(i).getName().equals(filename)) {
+            if (c.getDocumentation().get(i).getName().equals(filename + " " + c.getFullName())) {
                 index = i;
-
                 int rowCount = 1;
                 int fillCount = 0;
-                mTable.addRow();
+
                 try {
                     BufferedReader bufferedReader = new BufferedReader(
                             new FileReader(c.getDocumentation().get(i)));
                     if (bufferedReader.readLine() != null) {
+                        mTable.addRow();
                         String receiveString = "";
 
                         while ((receiveString = bufferedReader.readLine()) != null) {
@@ -99,9 +98,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
                         bufferedReader.close();
                     } else {
                         bufferedReader.close();
-                        for (int j = 0; j < 2; j++) {
                             mTable.addRow();
-                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
