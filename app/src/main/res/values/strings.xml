@@ -69,6 +69,8 @@
     <string name="hdz">Hdz</string>
     <string name="addRow">Zeile hinzufügen</string>
     <string name="saveContent">Speichern</string>
+    <string name="showpicture">Bild  anzeigen</string>
+    <string name="addpicture">Bild hinzufügen</string>
 
     <string name="wounddocname">Wunddokumentation</string>
     <string name="mobdocname">Mobilisations Lagerungsplan</string>

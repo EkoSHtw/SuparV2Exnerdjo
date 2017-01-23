@@ -52,6 +52,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
+        int note = position;
         final GeneralTask currentTask = holder.mItem.getTask();
         holder.mNameView.setText(mValues.get(position).getTask().getName());
 
@@ -90,6 +91,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 }
             }
         });
+
         holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -97,7 +99,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 mListener.onListFragmentInteraction(-2, true);
                 if(isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
-                    DummyNotes.ITEMS.add(new Note(currentTask.getTag(), ""+currentTask.getName()+" durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis())));
+                    DummyNotes.ITEMS.add(new Note(currentTask.getTag(), ""+ currentTask.getName()+" durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis())));
                 }else{
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.transparent));
                     for(int i = 0; i < mValues.size(); i++){
@@ -111,7 +113,6 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                         }
                     }
                     currentTask.setShiftet(0);
-
                 }
             }
         });
@@ -141,11 +142,9 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         if(TodoFragment.getOldSelection() != null) {
             TextView name = (TextView) TodoFragment.getOldSelection().findViewById(R.id.name);
             name.setTextColor(TodoFragment.getOldSelection().getResources().getColor(R.color.colorPrimaryDark));
-
             ImageButton info = (ImageButton) TodoFragment.getOldSelection().findViewById(R.id.info);
             info.setBackgroundColor(TodoFragment.getOldSelection().getResources().getColor(android.R.color.transparent));
             info.clearColorFilter();
-
         }
     }
 

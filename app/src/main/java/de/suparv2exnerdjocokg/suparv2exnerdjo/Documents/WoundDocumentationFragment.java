@@ -60,11 +60,9 @@ public class WoundDocumentationFragment extends Fragment{
     private Client c;
     private File overwrite;
     private int index;
-
     private String mCurrentPhotoPath;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_TAKE_PHOTO = 0;
-
 
 
     public WoundDocumentationFragment(){}
@@ -76,7 +74,6 @@ public class WoundDocumentationFragment extends Fragment{
 
         return  view;
     }
-
 
     private void showTable() {
         mTable = new TableGenerator(getActivity());
@@ -115,7 +112,8 @@ public class WoundDocumentationFragment extends Fragment{
                                         String s = receiveString.replace("/", "");
                                         if (fillCount == mTable.getHeadLenght()) {
                                             PictureButton pb = (PictureButton) t.getChildAt(fillCount);
-                                            pb.setText(s);
+                                            pb.setPicPath(s);
+                                            pb.setText(getString(R.string.showpicture));
                                             fillCount++;
                                         }else {
                                             EditText firstTextView = (EditText) t.getChildAt(fillCount);
@@ -140,9 +138,6 @@ public class WoundDocumentationFragment extends Fragment{
                 }
             }
         }
-
-
-
 
         layMain.removeAllViews();
         layMain.addView(mTable.getTable());

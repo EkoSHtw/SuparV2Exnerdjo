@@ -104,7 +104,7 @@ public class TableGenerator {
                 if (pb.getPicPath() != "") {
                     pb.setText("Bild anzeigen");
                 } else {
-                    pb.setText("Bild hinzufügen");
+                    pb.setText(mContext.getString(R.string.addPicture));
                 }
 
                 pb.setOnClickListener(new View.OnClickListener() {
@@ -115,10 +115,8 @@ public class TableGenerator {
 
                             // Bild wird aufgenommen
                             dispatchTakePictureIntent();
-                            pb.setText("Bild anzeigen");
-
+                            pb.setText(mContext.getString(R.string.showpicture));
                         } else {
-
                             showImage(pb);
 
                         }
