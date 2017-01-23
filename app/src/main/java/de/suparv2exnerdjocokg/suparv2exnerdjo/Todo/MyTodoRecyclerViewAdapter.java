@@ -1,17 +1,16 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
-import android.app.Activity;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -22,7 +21,6 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 /**
-
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecyclerViewAdapter.ViewHolder> {
@@ -55,21 +53,23 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         final GeneralTask currentTask = holder.mItem.getTask();
         holder.mNameView.setText(mValues.get(position).getTask().getName());
 
-        if(currentTask.isDone()){
+        if (currentTask.isDone()) {
             holder.mCheckBox.setChecked(true);
+            holder.addNote.setVisibility(View.VISIBLE);
             //holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorPrimaryLight));
             holder.mInfo.clearColorFilter();
             holder.shiftTask.setVisibility(View.GONE);
-            if(currentTask.getDaysShiftet() > 0){
-                if(currentTask.getDaysShiftet() > 1) {
+            if (currentTask.getDaysShiftet() > 0) {
+                if (currentTask.getDaysShiftet() > 1) {
                     holder.shiftet.setText("um " + currentTask.getDaysShiftet() + " Tage verschoben");
-                }else{
+                } else {
                     holder.shiftet.setText("um " + currentTask.getDaysShiftet() + " Tag verschoben");
                 }
             }
-        }else{
+        } else {
             holder.shiftTask.setColorFilter(holder.mView.getResources().getColor(R.color.grey));
             holder.shiftet.setVisibility(View.GONE);
+            holder.addNote.setVisibility(View.GONE);
         }
 
 
@@ -79,9 +79,9 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    if(TodoFragment.getOldSelection() == holder.mView){
+                    if (TodoFragment.getOldSelection() == holder.mView) {
                         mListener.onListFragmentInteraction(-1, true);
-                    }else {
+                    } else {
                         clearSelection();
                         TodoFragment.setOldSelection(holder.mView);
                         mListener.onListFragmentInteraction(position, holder.mItem.getTask().isDone());
@@ -95,17 +95,22 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 holder.mItem.getTask().setDone(isChecked);
                 mListener.onListFragmentInteraction(-2, true);
-                if(isChecked) {
+                if (isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
-                    DummyNotes.ITEMS.add(new Note(currentTask.getTag(), ""+currentTask.getName()+" durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis())));
-                }else{
+                    String note = currentTask.getNote();
+                    if (note ==null|| note.equals("")) {
+                        DummyNotes.ITEMS.add(new Note(currentTask.getTag(), "" + currentTask.getName() + " durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis())));
+                    }else{
+                        DummyNotes.ITEMS.add(new Note(currentTask.getTag(), note, new Carer("John"), new Timestamp(System.currentTimeMillis())));
+                    }
+                } else {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.transparent));
-                    for(int i = 0; i < mValues.size(); i++){
-                        if(mValues.get(i).getTask().getTag().toLowerCase().contains(currentTask.getTag().toLowerCase())){
+                    for (int i = 0; i < mValues.size(); i++) {
+                        if (mValues.get(i).getTask().getTag().toLowerCase().contains(currentTask.getTag().toLowerCase())) {
                             long timestamp = holder.mItem.getTimestamp().getDay();
                             long secondTimestamp = mValues.get(i).getTimestamp().getDay();
 
-                            if(timestamp==secondTimestamp){
+                            if (timestamp == secondTimestamp) {
                                 mValues.remove(i);
                             }
                         }
@@ -122,7 +127,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 clearSelection();
                 TodoFragment.setOldSelection(holder.mView);
                 holder.mInfo.setColorFilter(holder.mView.getResources().getColor(R.color.colorAccent));
-                if(null!=infoListener) {
+                if (null != infoListener) {
                     infoListener.onInfoClickedListener(position, holder.mItem.getTask().isDone());
                 }
             }
@@ -135,10 +140,51 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
 
             }
         });
+
+        holder.addNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                DialogAddNote dialogFragment = new DialogAddNote(fragment.getActivity());
+//                dialogFragment.show();
+//
+//                EditText editText = (EditText) dialogFragment.findViewById(R.id.dialog_input_text);
+//    editText.setText(currentTask.);
+//
+//                dialogFragment.findViewById(R.id.dialog_textview_tag).setVisibility(View.GONE);
+//                dialogFragment.findViewById(R.id.dialog_input_tag).setVisibility(View.GONE);
+//
+//                Button confirm = (Button) dialogFragment.findViewById(R.id.dialog_button_positive);
+//                confirm.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                    }
+//                });
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getActivity());
+                builder.setTitle(R.string.dialog_add_note_title);
+                final EditText editText = new EditText(fragment.getContext());
+                builder.setView(editText);
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        currentTask.setNote(editText.getText().toString());
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.show();
+            }
+        });
     }
 
     public void clearSelection() {
-        if(TodoFragment.getOldSelection() != null) {
+        if (TodoFragment.getOldSelection() != null) {
             TextView name = (TextView) TodoFragment.getOldSelection().findViewById(R.id.name);
             name.setTextColor(TodoFragment.getOldSelection().getResources().getColor(R.color.colorPrimaryDark));
 
@@ -161,6 +207,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         public final TextView shiftet;
         public final ImageButton shiftTask;
         public final ImageButton mInfo;
+        public final ImageButton addNote;
         public final CheckBox mCheckBox;
         public ToDo mItem;
 
@@ -172,6 +219,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             shiftTask = (ImageButton) view.findViewById(R.id.shift_task);
             mInfo = (ImageButton) view.findViewById(R.id.info);
             mCheckBox = (CheckBox) view.findViewById(R.id.checkBox);
+            addNote = (ImageButton) view.findViewById(R.id.add_note);
         }
 
         @Override
