@@ -71,7 +71,6 @@ public class WoundDocumentationFragment extends Fragment{
         this.view= inflater.inflate(R.layout.fragment_document_wound, container, false);
         this.c = ((ClientViewActivity)getActivity()).getClient();
         showTable();
-
         return  view;
     }
 
@@ -109,8 +108,8 @@ public class WoundDocumentationFragment extends Fragment{
                                     View view = mTable.getTable().getChildAt(rowCount);
                                     if (view instanceof TableRowExpand) {
                                         TableRowExpand t = (TableRowExpand) view;
-                                        String s = receiveString.replace("/", "");
-                                        if (fillCount == mTable.getHeadLenght()) {
+                                        String s = receiveString;
+                                        if (fillCount == mTable.getHeadLenght()-1) {
                                             PictureButton pb = (PictureButton) t.getChildAt(fillCount);
                                             pb.setPicPath(s);
                                             pb.setText(getString(R.string.showpicture));
@@ -169,11 +168,11 @@ public class WoundDocumentationFragment extends Fragment{
                                 for (int j = 0; j < mTable.getHeadLenght(); j++) {
                                     if(j == mTable.getHeadLenght()-1){
                                         PictureButton pButton = (PictureButton) t.getChildAt(j);
-                                        textLine += " "  + pButton.getPicPath() + "/" + "\n";
+                                        textLine += pButton.getPicPath() + "\n";
                                     }else {
                                         EditText text = (EditText) t.getChildAt(j);
                                         //if(firstTextView == null) break;
-                                        textLine += " " + text.getText().toString() + "/" + "\n";
+                                        textLine += " " + text.getText().toString() + "\n";
                                     }
                                 }
                                 myOutWriter.write(textLine);

@@ -134,7 +134,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
                         String textLine = "" ;
                         for (int j = 0; j < mTable.getHeadLenght(); j++) {
                             EditText text = (EditText) t.getChildAt(j);
-                            textLine += " " + text.getText().toString() + "/" + "\n";
+                            textLine += text.getText().toString() + "\n";
                             Log.println(Log.INFO, "gelesener String", textLine);
                         }
                         myOutWriter.write(textLine);
