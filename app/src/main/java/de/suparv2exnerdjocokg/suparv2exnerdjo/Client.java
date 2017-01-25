@@ -38,26 +38,6 @@ public class Client implements Serializable {
   private ArrayList<PhoneNumber> phoneNumber;
   private ArrayList<File> documentation;
 
-  public ArrayList<File> getDocumentation() {
-    return documentation;
-  }
-
-
-  public void setDocumentation(ArrayList<File> f){
-    this.documentation = f;
-  }
-
-
-  public void addDocumentation(File documentation) {
-    this.documentation.add(documentation);
-  }
-
-
-
-  public int getImagePath() {
-    return imagePath;
-  }
-
   public Client(int id, int imagePath, String firstName, String lastName, String dateString, ArrayList<ClientMedicine> medicineList,
                 ArrayList<Service> erbrachteLeistung, List<ToDo> toDoList, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber){
     this.firstName = firstName;
@@ -86,6 +66,25 @@ public class Client implements Serializable {
     String a = "" + phoneNumber.size();
     Log.println(Log.INFO, "test",a);
   }
+
+  public int getImagePath() {
+    return imagePath;
+  }
+
+  public ArrayList<File> getDocumentation() {
+    return documentation;
+  }
+
+  public void setDocumentation(ArrayList<File> f){
+    this.documentation = f;
+  }
+  public void addDocumentation(File documentation) {
+    this.documentation.add(documentation);
+  }
+
+public String getFullName(){
+  return (getFirstName()+" "+ getLastName());
+}
 
 
   public int docsListLenghts(){

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 /**
+
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecyclerViewAdapter.ViewHolder> {
@@ -51,6 +53,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
+        int note = position;
         final GeneralTask currentTask = holder.mItem.getTask();
         holder.mNameView.setText(mValues.get(position).getTask().getName());
 
@@ -72,6 +75,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
             holder.shiftet.setVisibility(View.GONE);
             holder.addNote.setVisibility(View.GONE);
         }
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
