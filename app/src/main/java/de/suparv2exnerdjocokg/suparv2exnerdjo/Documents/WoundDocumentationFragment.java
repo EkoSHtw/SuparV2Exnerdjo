@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -60,11 +61,9 @@ public class WoundDocumentationFragment extends Fragment{
     private Client c;
     private File overwrite;
     private int index;
-
     private String mCurrentPhotoPath;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_TAKE_PHOTO = 0;
-
 
 
     public WoundDocumentationFragment(){}
@@ -73,21 +72,7 @@ public class WoundDocumentationFragment extends Fragment{
         this.view= inflater.inflate(R.layout.fragment_document_wound, container, false);
         this.c = ((ClientViewActivity)getActivity()).getClient();
         showTable();
-
         return  view;
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-           /* Bundle extras = data.getExtras();
-            Image image = (Image) extras.get("data");
-            File  im = (File) extras.get("data");
-            this.takenPicture = image;*/
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-        }
     }
 
     private void showTable() {
@@ -103,24 +88,20 @@ public class WoundDocumentationFragment extends Fragment{
 
         mTable.addHead(firstRow);
         for (int i =0; i < c.docsListLenghts(); i++){
-            if(c.getDocumentation().get(i).getName() == getString(R.string.wounddocname)){
-
+            if(c.getDocumentation().get(i).getName().equals( getString(R.string.wounddocname) + " " + c.getFullName())){
                 this.index = i;
                 this.overwrite =  c.getDocumentation().get(i);
                 int rowCount =1;
                 int fillCount = 0;
-                mTable.addwRow();
+
                 try {
                     String empty = "";
                     String f = c.getDocumentation().get(i).getPath();
 
-
-                 //   InputStream inputStream = getContext().openFileInput("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"+ c.getDocumentation().get(i).getPath());
-
                     BufferedReader bufferedReader = new BufferedReader(
-                            new FileReader("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"
-                                    + f +".txt"));
+                            new FileReader(f ));
                     if ( bufferedReader.readLine() != null ) {
+                        mTable.addwRow();
 
                         String receiveString = "";
 
@@ -128,38 +109,35 @@ public class WoundDocumentationFragment extends Fragment{
                                     View view = mTable.getTable().getChildAt(rowCount);
                                     if (view instanceof TableRowExpand) {
                                         TableRowExpand t = (TableRowExpand) view;
-                                        String s = receiveString.replace("/", "");
-                                        if (fillCount == t.getChildCount() -1) {
+                                        String s = receiveString;
+                                        if (fillCount == mTable.getHeadLenght()-1) {
                                             PictureButton pb = (PictureButton) t.getChildAt(fillCount);
-
+                                            pb.setPicPath(s);
+                                            pb.setText(getString(R.string.showpicture));
+                                            fillCount++;
                                         }else {
                                             EditText firstTextView = (EditText) t.getChildAt(fillCount);
                                             firstTextView.setText(s);
+                                            fillCount++;
                                         }
 
-                                    if (fillCount == mTable.getHeadLenght()) {
+                                    if (fillCount == t.getChildCount()) {
                                         mTable.addwRow();
                                         fillCount =0;
                                         rowCount++;
                                     }
                                 }
-
-                                bufferedReader.close();
                             }
-
+                        bufferedReader.close();
                     }else{
-                        for (int j = 0; j < 2; j++) {
+                        bufferedReader.close();
                             mTable.addwRow();
-                        }
                     }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
         }
-
-
-
 
         layMain.removeAllViews();
         layMain.addView(mTable.getTable());
@@ -176,37 +154,40 @@ public class WoundDocumentationFragment extends Fragment{
             saveIt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FileOutputStream fops = null;
+                    FileOutputStream outputStream = null;
 
                     try {
 
-                        fops = new FileOutputStream(
-                                "/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/"
-                                        + overwrite.getName() +".txt", false);
-
-                        for (int i = 1; i < mTable.getIdCount(); i++) {
+                        outputStream = new FileOutputStream(overwrite);
+                        OutputStreamWriter myOutWriter = new OutputStreamWriter(outputStream);
+                        for (int i = 1; i < mTable.getHeadLenght(); i++) {
                             View view = mTable.getTable().getChildAt(i);
                             if (view instanceof TableRowExpand) {
                                 TableRowExpand t = (TableRowExpand) view;
-                                String textLine = "" + i;
-
-                                for (int j = 0; j < t.getChildCount(); j++) {
-                                    if(j == t.getChildCount() -1){
+                                String textLine = "";
+                                myOutWriter.write(" " + "/" + "\n");
+                                for (int j = 0; j < mTable.getHeadLenght(); j++) {
+                                    if(j == mTable.getHeadLenght()-1){
                                         PictureButton pButton = (PictureButton) t.getChildAt(j);
-                                        textLine += " "  + pButton.getPicPath() + "/" + "\n";
+                                        textLine += pButton.getPicPath() + "\n";
                                     }else {
                                         EditText text = (EditText) t.getChildAt(j);
                                         //if(firstTextView == null) break;
-                                        textLine += " " + text.getText().toString() + "/" + "\n";
+                                        textLine += " " + text.getText().toString() + "\n";
                                     }
                                 }
-                                fops.write(textLine.getBytes());
-
+                                myOutWriter.write(textLine);
+                                myOutWriter.flush();
+                                outputStream.flush();
                             }
                         }
-                        fops.flush();
-                        fops.close();
-                        c.getDocumentation().set(index, overwrite);
+                        myOutWriter.close();
+                        outputStream.close();
+                        Context context = getContext();
+                        CharSequence text = getString(R.string.saved);
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

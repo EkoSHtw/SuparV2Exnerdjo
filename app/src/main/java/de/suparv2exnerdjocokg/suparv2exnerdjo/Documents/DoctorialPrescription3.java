@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.DocumentsTableTemplateFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.ImageDisplayFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.TableGenerator;
@@ -29,15 +30,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.TableRowExpand;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 
-public class DoctorialPrescription3 extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class DoctorialPrescription3 extends DocumentsTableTemplateFragment {
 
     private ImageDisplayFragment.OnFragmentInteractionListener mListener;
 
@@ -49,10 +42,9 @@ public class DoctorialPrescription3 extends Fragment {
     private Button addRow;
     private Button saveIt;
     private View view;
-    private Client c;
     private File overwrite;
 
-
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view= inflater.inflate(R.layout.fragment_document_wound, container, false);
@@ -67,112 +59,14 @@ public class DoctorialPrescription3 extends Fragment {
         mTable = new TableGenerator(getActivity());
         layMain = (FrameLayout) view.findViewById(R.id.table);
 
+        final Client c = ((ClientViewActivity)getActivity()).getClient();
         String[] firstRow = {view.getContext().getString(R.string.wounddate), view.getContext().getString(R.string.doctpre1hdz),
                 view.getContext().getString(R.string.doctorname), view.getContext().getString(R.string.specialdiet),
                 view.getContext().getString(R.string.frequency), view.getContext().getString(R.string.dochdz),
                 view.getContext().getString(R.string.endon), view.getContext().getString(R.string.dochdz)};
+        showTable(firstRow,getString(R.string.doctorialprescription2), view,c);
 
-        mTable.addHead(firstRow);
-        for (int i =0; i < c.docsListLenghts(); i++){
-            if(c.getDocumentation().get(i).getName() == getString(R.string.doctorialprescription2)){
-
-                this.overwrite =  c.getDocumentation().get(i);
-                int rowCount =1;
-                int fillCount = 0;
-
-                mTable.addRow();
-                String f = c.getDocumentation().get(i).getPath();
-
-                try {
-
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader("/data/user/0/de.suparv2exnerdjocokg.suparv2exnerdjo/files/" + f +".txt"));
-                    if ( bufferedReader != null ) {
-
-                        String receiveString = "";
-
-                        while ((receiveString = bufferedReader.readLine()) != null) {
-                            View view = mTable.getTable().getChildAt(rowCount);
-                            if (view instanceof TableRowExpand) {
-                                TableRowExpand t = (TableRowExpand) view;
-                                String s = receiveString.replace("/", "");
-
-                                EditText firstTextView = (EditText) t.getChildAt(fillCount);
-                                firstTextView.setText(s);
-
-                                if (fillCount == mTable.getHeadLenght()) {
-                                    mTable.addRow();
-                                    fillCount =0;
-                                    rowCount++;
-                                }
-                            }
-
-                            bufferedReader.close();
-                        }
-
-                    }
-                    else{
-                        for (int j = 0; j < 2; j++) {
-                            mTable.addwRow();
-                        }
-                    }
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }
-
-
-        for (int j = 0; j < 2; j++) {
-            mTable.addRow();
-        }
-
-        layMain.removeAllViews();
-        layMain.addView(mTable.getTable());
-        addRow = (Button) view.findViewById(R.id.addRowB);
-        saveIt = (Button) view.findViewById(R.id.saveStuff);
-        addRow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTable.addRow();
-            }
-        });
-        saveIt = (Button) view.findViewById(R.id.saveStuff);
-        saveIt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FileOutputStream fops;
-                try {
-
-                    fops =  getContext().openFileOutput(overwrite.getName(), Context.MODE_PRIVATE);
-                    for (int i = 1; i < mTable.getIdCount(); i++) {
-                        View view = mTable.getTable().getChildAt(i);
-                        if (view instanceof TableRowExpand) {
-                            TableRowExpand t = (TableRowExpand) view;
-                            String textLine = "" + i;
-
-                            for (int j = 0; j <= t.getChildCount(); j++) {
-                                if(j == mTable.getHeadLenght()){
-                                    PictureButton pButton = (PictureButton) t.getChildAt(j);
-                                    textLine += " "  + pButton.getPicPath() + "/" + "\n";
-                                }
-                                EditText text= (EditText) t.getChildAt(j);
-                                //if(firstTextView == null) break;
-                                textLine += " "  + text.getText().toString() + "/" + "\n";
-
-                            }
-                            fops.write(textLine.getBytes());
-
-                        }
-                    }
-                    fops.flush();
-                    fops.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            ;
-        });
+        return  view;
     }
 
 }
