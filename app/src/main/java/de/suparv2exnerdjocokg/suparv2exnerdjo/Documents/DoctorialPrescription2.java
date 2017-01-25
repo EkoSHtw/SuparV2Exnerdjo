@@ -50,18 +50,6 @@ public class DoctorialPrescription2 extends DocumentsTableTemplateFragment {
                              Bundle savedInstanceState) {
         this.view= inflater.inflate(R.layout.fragment_document_wound, container, false);
         this.c = ((ClientViewActivity)getActivity()).getClient();
-        showTable();
-        con = getContext();
-
-        return  view;
-    }
-
-
-
-    private void showTable() {
-        mTable = new TableGenerator(getActivity());
-        layMain = (FrameLayout) view.findViewById(R.id.table);
-        Log.println(Log.INFO, "2", "Kommt Durch");
         String[] firstRow = {getString(R.string.wounddate), getString(R.string.doctpre1hdz),
                 getString(R.string.doctorname), getString(R.string.injec_infu),
                 getString(R.string.frequency), getString(R.string.dochdz),

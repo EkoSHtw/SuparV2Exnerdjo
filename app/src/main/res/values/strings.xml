@@ -56,7 +56,6 @@
     <string name="addpicture">Bild hinzufügen</string>
 
     <string name="wounddocname">Wunddokumentation</string>
-    <string name="mobdocname">MobilisationsLagerungsplan</string>
     <string name="mobdocname">Mobilisations Lagerungsplan</string>
     <string name="mobdate">Datum</string>
     <string name="mobdestination">Mobilisierungsziel</string>

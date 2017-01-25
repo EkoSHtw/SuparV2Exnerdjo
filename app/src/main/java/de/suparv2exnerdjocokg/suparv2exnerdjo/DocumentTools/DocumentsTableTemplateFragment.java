@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -35,7 +36,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private ScrollView layMain;
+    private FrameLayout layMain;
     private TableGenerator mTable;
     private Button addRow;
     private Button saveIt;
@@ -64,7 +65,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
 
     public void showTable(String[] firstRow, String filename, View view, final Client c) {
         mTable = new TableGenerator(getActivity());
-        layMain = (ScrollView) view.findViewById(R.id.table);
+        layMain = (FrameLayout) view.findViewById(R.id.table);
 
         mTable.addHead(firstRow);
         for (int i = 0; i < c.docsListLenghts(); i++) {

@@ -5,25 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.support.v4.widget.TextViewCompat;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +36,7 @@ import static de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton
 public class TableGenerator {
     private final Context mContext;
     private TableLayout mTable;
+    private FrameLayout mFrame;
     private TableLayout.LayoutParams rowParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     private TableRow.LayoutParams colParams = new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     private Activity act;
@@ -68,13 +63,18 @@ public class TableGenerator {
         mContext = activity.getApplicationContext();
         act = activity;
         mTable = new TableLayout(activity);
+        mFrame = new FrameLayout(activity);
         rowParams.setMargins(0, 0, 0, 0);
         colParams.setMargins(0, 0, 0, 0);
 
         TableLayout.LayoutParams lptable = new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.MATCH_PARENT,
                 TableLayout.LayoutParams.MATCH_PARENT);
+        FrameLayout.LayoutParams frlay = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT);
         mTable.setLayoutParams(lptable);
+        mFrame.setLayoutParams(frlay);
     }
 
     public void addwRow() {

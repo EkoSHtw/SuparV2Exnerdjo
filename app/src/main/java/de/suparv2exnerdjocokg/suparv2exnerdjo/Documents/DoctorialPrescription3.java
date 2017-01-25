@@ -48,17 +48,6 @@ public class DoctorialPrescription3 extends DocumentsTableTemplateFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         this.view= inflater.inflate(R.layout.fragment_document_wound, container, false);
-        this.c = ((ClientViewActivity)getActivity()).getClient();
-        showTable();
-
-        return  view;
-    }
-
-
-    private void showTable() {
-        mTable = new TableGenerator(getActivity());
-        layMain = (FrameLayout) view.findViewById(R.id.table);
-
         final Client c = ((ClientViewActivity)getActivity()).getClient();
         String[] firstRow = {view.getContext().getString(R.string.wounddate), view.getContext().getString(R.string.doctpre1hdz),
                 view.getContext().getString(R.string.doctorname), view.getContext().getString(R.string.specialdiet),
