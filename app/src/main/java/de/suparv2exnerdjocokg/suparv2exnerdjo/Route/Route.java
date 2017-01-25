@@ -28,7 +28,6 @@ public class Route extends AppCompatActivity implements ClientListFragment.OnLis
             ClientListFragment lF = new ClientListFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.client_list, lF).commit();
         }
-
     }
 
     @Override

@@ -54,7 +54,9 @@
 
         <activity
             android:name=".ClientViewActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            />
         <activity
             android:name=".Route.Route"
             android:screenOrientation="landscape" />
