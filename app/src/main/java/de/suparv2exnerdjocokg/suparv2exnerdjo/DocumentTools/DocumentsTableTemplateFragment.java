@@ -87,9 +87,11 @@ public class DocumentsTableTemplateFragment extends Fragment {
                             TableRowExpand t = (TableRowExpand) v;
                             String s = receiveString.replace("/", "");
 
-                            EditText firstTextView = (EditText) t.getChildAt(fillCount);
-                            firstTextView.setText(s);
-                            fillCount++;
+                            if(t.getChildAt(fillCount) instanceof EditText) {
+                                EditText firstTextView = (EditText) t.getChildAt(fillCount);
+                                firstTextView.setText(s);
+                                fillCount++;
+                            }
                             if (fillCount == mTable.getHeadLenght()) {
                                 mTable.addRow();
                                 fillCount = 0;
@@ -134,9 +136,11 @@ public class DocumentsTableTemplateFragment extends Fragment {
                         TableRowExpand t = (TableRowExpand) vi;
                         String textLine = "" ;
                         for (int j = 0; j < mTable.getHeadLenght(); j++) {
-                            EditText text = (EditText) t.getChildAt(j);
-                            textLine += text.getText().toString() + "\n";
-                            Log.println(Log.INFO, "gelesener String", textLine);
+                            if(t.getChildAt(j) instanceof EditText) {
+                                EditText text = (EditText) t.getChildAt(j);
+                                textLine += text.getText().toString() + "\n";
+                                Log.println(Log.INFO, "gelesener String", textLine);
+                            }
                         }
                         myOutWriter.write(textLine);
                         myOutWriter.flush();

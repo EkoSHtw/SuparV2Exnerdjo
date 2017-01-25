@@ -38,7 +38,7 @@ public class TableGenerator {
     private TableLayout mTable;
     private FrameLayout mFrame;
     private TableLayout.LayoutParams rowParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    private TableRow.LayoutParams colParams = new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+    private TableRowExpand.LayoutParams colParams = new TableRowExpand.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     private Activity act;
     private String mCurrentPhotoPath;
     private Image currentPhoto;
@@ -78,13 +78,13 @@ public class TableGenerator {
     }
 
     public void addwRow() {
-        TableRow tr = new TableRow(mContext);
+        TableRowExpand tr = new TableRowExpand(mContext);
         childCount++;
 
         tr.setLayoutParams(rowParams);
 
         for (int iCol = 0; iCol < headLenght; iCol++) {
-            if (iCol == headLenght-1) {
+            if (iCol == headLenght - 1) {
                 final PictureButton pb = new PictureButton(mContext);
                 pb.setGravity(Gravity.CENTER);
                 pb.setTextAppearance(mContext, R.style.AppButton);
@@ -137,7 +137,6 @@ public class TableGenerator {
 
 
         mTable.addView(tr);
-        idCount++;
 
         addDivider();
     }
@@ -202,7 +201,7 @@ public class TableGenerator {
 
         TextView tvCol = new TextView(mContext);
 
-        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(1, TableRow.LayoutParams.MATCH_PARENT);
+        TableRowExpand.LayoutParams layoutParams = new TableRowExpand.LayoutParams(1, TableRowExpand.LayoutParams.MATCH_PARENT);
         tvCol.setLayoutParams(layoutParams);
         tvCol.setBackgroundColor(mContext.getResources().getColor(R.color.table_background));
         tr.addView(tvCol);
