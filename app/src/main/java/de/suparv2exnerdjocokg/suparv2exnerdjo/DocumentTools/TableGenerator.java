@@ -94,7 +94,7 @@ public class TableGenerator {
                 pb.setGravity(Gravity.CENTER | Gravity.CENTER);
                 pb.setPadding(3, 3, 3, 3);
                 pb.setTextColor(mContext.getResources().getColor(
-                        R.color.black));
+                        R.color.colorPrimaryDark));
                 pb.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 pb.setMaxHeight(ViewGroup.LayoutParams.MATCH_PARENT);
                 pb.setLayoutParams(colParams);
@@ -104,7 +104,7 @@ public class TableGenerator {
                 if (pb.getPicPath() != "") {
                     pb.setText("Bild anzeigen");
                 } else {
-                    pb.setText(mContext.getString(R.string.addPicture));
+                    pb.setText(mContext.getString(R.string.addpicture));
                 }
 
                 pb.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +130,7 @@ public class TableGenerator {
                 tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
                 tvCol.setPadding(3, 3, 3, 3);
                 tvCol.setTextColor(mContext.getResources().getColor(
-                        R.color.black));
+                        R.color.colorPrimaryDark));
                 tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 tvCol.setLayoutParams(colParams);
                 tvCol.setBackgroundColor(mContext.getResources().getColor(
@@ -163,7 +163,7 @@ public class TableGenerator {
             tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
             tvCol.setTextColor(mContext.getResources().getColor(
-                    R.color.black));
+                    R.color.colorPrimaryDark));
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
@@ -187,7 +187,7 @@ public class TableGenerator {
             tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
             tvCol.setTextColor(mContext.getResources().getColor(
-                    R.color.black));
+                    R.color.colorPrimaryDark));
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));

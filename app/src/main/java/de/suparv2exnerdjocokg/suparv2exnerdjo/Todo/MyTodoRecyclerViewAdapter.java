@@ -60,6 +60,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         if (currentTask.isDone()) {
             holder.mCheckBox.setChecked(true);
             holder.addNote.setVisibility(View.VISIBLE);
+            holder.addNote.setColorFilter(holder.mView.getResources().getColor(R.color.grey));
             //holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.colorPrimaryLight));
             holder.mInfo.clearColorFilter();
             holder.shiftTask.setVisibility(View.GONE);

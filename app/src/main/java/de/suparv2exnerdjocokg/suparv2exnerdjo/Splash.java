@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
+
 /**
  * Created by V2 on 24.01.2017.
  */
@@ -29,7 +31,7 @@ public class Splash extends Activity {
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-                Intent mainIntent = new Intent(Splash.this,ClientViewActivity.class);
+                Intent mainIntent = new Intent(Splash.this,Route.class);
                 Splash.this.startActivity(mainIntent);
                 Splash.this.finish();
             }
