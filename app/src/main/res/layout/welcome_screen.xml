@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:layout_height="fill_parent">
 
-    <ImageView
-        android:id="@+id/splashscreen"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        android:src="@drawable/arrow" />
     <TextView
-        android:layout_width="fill_parent"
+        android:id="@+id/splash_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="1dp"
         android:text="Hello World, splash" />
 
+    <!--<ImageView-->
+        <!--android:id="@+id/splashscreen"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_above="@id/splash_text"-->
+        <!--android:src="@drawable/arrow" />-->
 
-</LinearLayout>
+
+    <!--android:layout_alignLeft="@id/splashscreen"-->
+    <!--android:layout_alignTop="@id/splashscreen"-->
+    <!--android:layout_alignRight="@id/splashscreen"-->
+    <!--android:layout_alignBottom="@id/splashscreen"-->
+
+
+</RelativeLayout>
