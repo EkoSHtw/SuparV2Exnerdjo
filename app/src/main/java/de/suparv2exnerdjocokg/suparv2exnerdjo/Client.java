@@ -72,18 +72,31 @@ public class Client implements Serializable {
     Log.println(Log.INFO, "test",a);
   }
 
-
-
-  public String getFullName(){
-    return (getFirstName()+" "+ getLastName());
+  public int getImagePath() {
+    return imagePath;
   }
+
+  public ArrayList<File> getDocumentation() {
+    return documentation;
+  }
+
+  public void setDocumentation(ArrayList<File> f){
+    this.documentation = f;
+  }
+  public void addDocumentation(File documentation) {
+    this.documentation.add(documentation);
+  }
+
+public String getFullName(){
+  return (getFirstName()+" "+ getLastName());
+}
 
 
   public int docsListLenghts(){
     int count =0;
 
     for (File e : documentation
-            ) {
+         ) {
       count++;
     }
     return count;
