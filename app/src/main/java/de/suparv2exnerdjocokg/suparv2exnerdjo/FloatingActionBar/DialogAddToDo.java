@@ -1,6 +1,8 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,9 +26,13 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.VitalFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 /**
@@ -162,6 +168,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
                         }
                     }
                     dismissThis(true);
+
                 }
 
                 /**
@@ -232,7 +239,10 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
             DialogAddNewNoteOrTask dialogAddNewNoteOrTask = new DialogAddNewNoteOrTask(getActivity());
             dialogAddNewNoteOrTask.show();
         }
+        ClientViewActivity ac = (ClientViewActivity) getActivity();
+        ac.updateView();
         dismiss();
+
     }
 
 

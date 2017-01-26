@@ -105,6 +105,21 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         });
     }
 
+    public void updateView(){
+        ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (newFrag != null) {
+            newFrag.updateClientView(-2, false);
+        } else {
+            newFrag = new ClientView();
+            Bundle args = new Bundle();
+            newFrag.setArguments(args);
+
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+            trans.replace(R.id.fragment_container, newFrag);
+
+            trans.commit();}
+    }
 
     @Override
     public void onListFragmentInteraction(int position, boolean done) {
@@ -254,7 +269,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
         trans.replace(R.id.fragment_container, wFrag);
         trans.addToBackStack(null);
-            trans.commit();
+        trans.commit();
     }
 
 

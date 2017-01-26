@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 
 /**
  * Created by v2 on 05.01.2017.
