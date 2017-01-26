@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
@@ -31,7 +33,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
     private ArrayList<Note> notes;
     private RecyclerView mRecyclerView;
-    private EditText inputSearch;
+    private AutoCompleteTextView inputSearch;
     private MyLogBookRecyclerViewAdapter recyclerViewAdapter;
 
     private int currentSpinnerSelection;
@@ -49,9 +51,9 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
         Spinner spinner = (Spinner) view.findViewById(R.id.search_bar_spinner);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.search_bar_choices, android.R.layout.simple_spinner_item);
+                R.array.search_bar_choices, R.layout.spinner_item);
 
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(this);
 
@@ -60,7 +62,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
         prepareList();
         recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
 
-        inputSearch = (EditText) view.findViewById(R.id.logbook_search_bar);
+        inputSearch = (AutoCompleteTextView) view.findViewById(R.id.logbook_search_bar);
         inputSearch.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -84,7 +86,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
         String filterString = cs.toString().toLowerCase();
 
         if (filterString.equals("")) {
-            mRecyclerView.swapAdapter(new MyLogBookRecyclerViewAdapter(notes),true);
+            mRecyclerView.swapAdapter(new MyLogBookRecyclerViewAdapter(notes), true);
 //            mRecyclerView.swapAdapter();
         } else {
             final List<Note> list = notes;
@@ -102,15 +104,33 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
                 }
             }
 
-            mRecyclerView.swapAdapter(new MyLogBookRecyclerViewAdapter(nlist),true);
+            mRecyclerView.swapAdapter(new MyLogBookRecyclerViewAdapter(nlist), true);
         }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         this.currentSpinnerSelection = position;
+        if (position == 0 || position == 3) {
+            String[] autoCompleteItems = getAutoCompleteItems(position);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.auto_complete_item, autoCompleteItems);
+            inputSearch.setAdapter(adapter);
+        }else{
+            inputSearch.setAdapter(null);
+        }
         filterList(this.inputSearch.getText());
     }
+
+    private String[] getAutoCompleteItems(int position) {
+        Set<String> autoCompleteItems = new HashSet<>();
+        for (int i = 0; i < notes.size(); i++) {
+            Note note = notes.get(i);
+            autoCompleteItems.add(note.getInfoFromPosition(position));
+        }
+        return autoCompleteItems.toArray(new String[autoCompleteItems.size()]);
+
+    }
+
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

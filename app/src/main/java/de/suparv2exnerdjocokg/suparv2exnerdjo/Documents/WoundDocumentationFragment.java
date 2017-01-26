@@ -16,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -52,7 +54,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
 public class WoundDocumentationFragment extends Fragment{
-    private ScrollView layMain;
+    private FrameLayout layMain;
     private TableGenerator mTable;
     private Button addRow;
     private Button saveIt;
@@ -76,11 +78,11 @@ public class WoundDocumentationFragment extends Fragment{
 
     private void showTable() {
         mTable = new TableGenerator(getActivity());
-        layMain = (ScrollView) view.findViewById(R.id.table);
+        layMain = (FrameLayout) view.findViewById(R.id.table);
 
         String[] firstRow = {view.getContext().getString(R.string.wounddate), view.getContext().getString(R.string.woundphase),
                 view.getContext().getString(R.string.woundsizel), view.getContext().getString(R.string.woundsizew),
-                view.getContext().getString(R.string.woundsized), view.getContext().getString(R.string.woundsized),
+                view.getContext().getString(R.string.woundsized),
                 view.getContext().getString(R.string.wounddescription),
                 view.getContext().getString(R.string.woundkindfrequency), view.getContext().getString(R.string.wounddescription),
                 view.getContext().getString(R.string.hdz), view.getContext().getString(R.string.picture)};
@@ -90,7 +92,7 @@ public class WoundDocumentationFragment extends Fragment{
             if(c.getDocumentation().get(i).getName().equals( getString(R.string.wounddocname) + " " + c.getFullName())){
                 this.index = i;
                 this.overwrite =  c.getDocumentation().get(i);
-                int rowCount =1;
+                int rowCount =2;
                 int fillCount = 0;
 
                 try {
@@ -104,33 +106,38 @@ public class WoundDocumentationFragment extends Fragment{
 
                         String receiveString = "";
 
-                                while ((receiveString = bufferedReader.readLine()) != null) {
-                                    View view = mTable.getTable().getChildAt(rowCount);
-                                    if (view instanceof TableRowExpand) {
-                                        TableRowExpand t = (TableRowExpand) view;
-                                        String s = receiveString;
-                                        if (fillCount == mTable.getHeadLenght()-1) {
-                                            PictureButton pb = (PictureButton) t.getChildAt(fillCount);
-                                            pb.setPicPath(s);
-                                            pb.setText(getString(R.string.showpicture));
-                                            fillCount++;
-                                        }else {
-                                            EditText firstTextView = (EditText) t.getChildAt(fillCount);
-                                            firstTextView.setText(s);
-                                            fillCount++;
-                                        }
+                        while ((receiveString = bufferedReader.readLine()) != null) {
+                            View view = mTable.getTable().getChildAt(rowCount);
+                            if (view instanceof TableRowExpand) {
+                                TableRowExpand t = (TableRowExpand) view;
+                                String s = receiveString;
 
-                                    if (fillCount == t.getChildCount()) {
-                                        mTable.addwRow();
-                                        fillCount =0;
-                                        rowCount++;
-                                    }
+                                while(!(t.getChildAt(fillCount) instanceof EditText) && !(t.getChildAt(fillCount) instanceof PictureButton)) {
+                                    fillCount++;
+                                }
+
+                                if (t.getChildAt(fillCount) instanceof PictureButton) {
+                                    PictureButton pb = (PictureButton) t.getChildAt(fillCount);
+                                    pb.setPicPath(s);
+                                    pb.setText(getString(R.string.showpicture));
+
+                                }else if(t.getChildAt(fillCount) instanceof  EditText){
+                                    EditText firstTextView = (EditText) t.getChildAt(fillCount);
+                                    firstTextView.setText(s);
+                                }
+                                    fillCount++;
+
+                                if (fillCount == t.getChildCount()) {
+                                    mTable.addwRow();
+                                    fillCount = 0;
+                                    rowCount+=2;
                                 }
                             }
+                        }
                         bufferedReader.close();
                     }else{
                         bufferedReader.close();
-                            mTable.addwRow();
+                        mTable.addwRow();
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -149,50 +156,53 @@ public class WoundDocumentationFragment extends Fragment{
             }
         });
 
-            saveIt = (Button) view.findViewById(R.id.saveStuff);
-            saveIt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FileOutputStream outputStream = null;
+        saveIt = (Button) view.findViewById(R.id.saveStuff);
+        saveIt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FileOutputStream outputStream = null;
 
-                    try {
+                try {
 
-                        outputStream = new FileOutputStream(overwrite);
-                        OutputStreamWriter myOutWriter = new OutputStreamWriter(outputStream);
-                        for (int i = 1; i < mTable.getHeadLenght(); i++) {
-                            View view = mTable.getTable().getChildAt(i);
-                            if (view instanceof TableRowExpand) {
-                                TableRowExpand t = (TableRowExpand) view;
+                    outputStream = new FileOutputStream(overwrite);
+                    OutputStreamWriter myOutWriter = new OutputStreamWriter(outputStream);
+                    for (int i = 1; i < mTable.getChildCount(); i++) {
+                        View view = mTable.getTable().getChildAt(i);
+                        if (view instanceof TableRowExpand) {
+                            TableRowExpand t = (TableRowExpand) view;
+                            if(t.getChildCount() > 1) {
                                 String textLine = "";
                                 myOutWriter.write(" " + "/" + "\n");
-                                for (int j = 0; j < mTable.getHeadLenght(); j++) {
-                                    if(j == mTable.getHeadLenght()-1){
+                                for (int j = 0; j < mTable.getHeadLenght()*2; j+=2) {
+                                    if (t.getChildAt(j) instanceof PictureButton) {
                                         PictureButton pButton = (PictureButton) t.getChildAt(j);
                                         textLine += pButton.getPicPath() + "\n";
-                                    }else {
+                                    } else if (t.getChildAt(j) instanceof EditText) {
                                         EditText text = (EditText) t.getChildAt(j);
                                         //if(firstTextView == null) break;
                                         textLine += " " + text.getText().toString() + "\n";
                                     }
+
                                 }
                                 myOutWriter.write(textLine);
                                 myOutWriter.flush();
                                 outputStream.flush();
                             }
                         }
-                        myOutWriter.close();
-                        outputStream.close();
-                        Context context = getContext();
-                        CharSequence text = getString(R.string.saved);
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                    myOutWriter.close();
+                    outputStream.close();
+                    Context context = getContext();
+                    CharSequence text = getString(R.string.saved);
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+            }
 
-            });
-        }
+        });
+    }
 
 }

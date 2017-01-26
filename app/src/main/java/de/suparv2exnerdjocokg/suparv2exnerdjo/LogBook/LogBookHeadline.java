@@ -27,16 +27,19 @@ public class LogBookHeadline extends Fragment {
                                  Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_logbook_item, container, false);
 
-            view.setBackgroundColor(getResources().getColor(R.color.colorPrimaryLight));
 
             time = (TextView) view.findViewById(R.id.frag_logB_date);
-            time.setTextAppearance(getContext(), R.style.AppTextNormal);
+            time.setTextAppearance(getContext(), R.style.AppTextHeadline);
+            time.setTextSize(16);
             note = (TextView) view.findViewById(R.id.frag_logB_content);
-            note.setTextAppearance(getContext(), R.style.AppTextNormal);
+            note.setTextAppearance(getContext(), R.style.AppTextHeadline);
+            note.setTextSize(16);
             tag = (TextView) view.findViewById(R.id.frag_logB_tag);
-            tag.setTextAppearance(getContext(), R.style.AppTextNormal);
+            tag.setTextAppearance(getContext(), R.style.AppTextHeadline);
+            tag.setTextSize(16);
             carer = (TextView) view.findViewById(R.id.frag_logB_carer);
-            carer.setTextAppearance(getContext(), R.style.AppTextNormal);
+            carer.setTextAppearance(getContext(), R.style.AppTextHeadline);
+            carer.setTextSize(16);
 
             time.setText(R.string.date);
             note.setText(R.string.note);
