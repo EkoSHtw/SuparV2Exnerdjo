@@ -57,13 +57,11 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
 
     @Override
     public int getGroupCount() {
-        Log.i("", "groupCount: "+mClients.size());
         return mClients.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        Log.i("", "childCount: "+mClients.get(groupPosition).getToDoList().size());
         return mClients.get(groupPosition).getToDoList().size();
     }
 
@@ -150,19 +148,15 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
 
         Date currentTime = new Date();
         int hour = currentTime.getHours() - (int)start;
-        Log.i("", "Stunde: "+hour);
         int minute = currentTime.getMinutes();
-        Log.i("", "Minute: "+minute);
 
         double max = timePerClient;
         double progress = hour+((double)minute/60);
 
 
         progressBar.setMax((int)(timePerClient*100));
-        Log.i("", "Max: "+timePerClient);
 
         progressBar.setProgress((int)(progress*100));
-        Log.i("", "Progress: "+progress);
 
         if(progress >= max){
             progressBar.setVisibility(View.INVISIBLE);
