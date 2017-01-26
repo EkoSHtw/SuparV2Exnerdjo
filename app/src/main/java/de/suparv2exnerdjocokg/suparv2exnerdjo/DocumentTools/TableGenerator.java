@@ -45,13 +45,14 @@ public class TableGenerator {
     private static final int REQUEST_TAKE_PHOTO = 1;
     private PictureButton currentButton;
 
-
+    public int getChildCount() {
+        return childCount;
+    }
+    private int childCount=0;
     public int getHeadLenght() {
         return headLenght;
     }
-
     private int headLenght;
-
     public int getIdCount() {
         return idCount;
     }
@@ -81,7 +82,7 @@ public class TableGenerator {
 
     public void addwRow() {
         TableRowExpand tr = new TableRowExpand(mContext);
-        tr.setId(idCount);
+       childCount++;
 
         tr.setBackgroundColor(mContext.getResources().getColor(
                 R.color.table_background));
@@ -93,7 +94,7 @@ public class TableGenerator {
                 pb.setGravity(Gravity.CENTER | Gravity.CENTER);
                 pb.setPadding(3, 3, 3, 3);
                 pb.setTextColor(mContext.getResources().getColor(
-                        R.color.black));
+                        R.color.colorPrimaryDark));
                 pb.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 pb.setMaxHeight(ViewGroup.LayoutParams.MATCH_PARENT);
                 pb.setLayoutParams(colParams);
@@ -103,7 +104,7 @@ public class TableGenerator {
                 if (pb.getPicPath() != "") {
                     pb.setText("Bild anzeigen");
                 } else {
-                    pb.setText("Bild hinzufügen");
+                    pb.setText(mContext.getString(R.string.addpicture));
                 }
 
                 pb.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +115,7 @@ public class TableGenerator {
 
                             // Bild wird aufgenommen
                             dispatchTakePictureIntent();
-                            pb.setText("Bild anzeigen");
+                            pb.setText(mContext.getString(R.string.showpicture));
 
                         } else {
 
@@ -129,7 +130,7 @@ public class TableGenerator {
                 tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
                 tvCol.setPadding(3, 3, 3, 3);
                 tvCol.setTextColor(mContext.getResources().getColor(
-                        R.color.black));
+                        R.color.colorPrimaryDark));
                 tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 tvCol.setLayoutParams(colParams);
                 tvCol.setBackgroundColor(mContext.getResources().getColor(
@@ -137,9 +138,8 @@ public class TableGenerator {
                 tr.addView(tvCol);
             }
         }
-
         mTable.addView(tr);
-        idCount++;
+
     }
 
     private void showImage(PictureButton pb) {
@@ -153,7 +153,7 @@ public class TableGenerator {
 
     public void addRow() {
         TableRowExpand tr = new TableRowExpand(mContext);
-        tr.setId(idCount);
+        childCount++;
 
         tr.setBackgroundColor(mContext.getResources().getColor(
                 R.color.table_background));
@@ -163,7 +163,7 @@ public class TableGenerator {
             tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
             tvCol.setTextColor(mContext.getResources().getColor(
-                    R.color.black));
+                    R.color.colorPrimaryDark));
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
@@ -180,14 +180,14 @@ public class TableGenerator {
                 R.color.table_background));
         headLenght = data.length;
         tr.setLayoutParams(rowParams);
-
+        childCount++;
         for (int iCol = 0; iCol < data.length; iCol++) {
             TextView tvCol = new TextView(mContext);
             tvCol.setText(data[iCol]);
             tvCol.setGravity(Gravity.CENTER | Gravity.CENTER);
             tvCol.setPadding(3, 3, 3, 3);
             tvCol.setTextColor(mContext.getResources().getColor(
-                    R.color.black));
+                    R.color.colorPrimaryDark));
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
@@ -205,26 +205,7 @@ public class TableGenerator {
 
 
     private void dispatchTakePictureIntent() {
-        //TODO
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        // Ensure that there's a camera activity to handle the intent
-//        if (takePictureIntent.resolveActivity(act.getPackageManager()) != null) {
-//            // Create the File where the photo should go
-//            File photoFile = null;
-//            try {
-//                photoFile = createImageFile();
-//            } catch (IOException ex) {
-//              ex.printStackTrace();
-//            }
-//            // Continue only if the File was successfully created
-//            if (photoFile != null) {
-//                Uri photoURI = FileProvider.getUriForFile(mContext,
-//                        "de.suparv2exnerdjo.android.fileprovider",
-//                        photoFile);
-//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-//                act.startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-//            }
-//        }
+
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(act.getPackageManager()) != null) {
@@ -238,7 +219,6 @@ public class TableGenerator {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Log.println(Log.INFO, "", "HELLO URI !!");
 
                 Uri photoURI = FileProvider.getUriForFile(mContext,
                         "com.example.android.fileprovider",
@@ -264,7 +244,6 @@ public class TableGenerator {
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
         currentButton.setPicPath(mCurrentPhotoPath);
-        Log.println(Log.INFO, "", "FILE WURDE ERSTELLT !!");
         return image;
     }
 
@@ -275,7 +254,4 @@ public class TableGenerator {
         }
     }
 
-
 }
-
-

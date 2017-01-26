@@ -20,12 +20,14 @@
             android:layout_height="match_parent"
             android:layout_weight="0.8">
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/logbook_search_bar"
                 style="@style/AppTextNormal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/logbook_searchbar_search" />
+                android:hint="@string/logbook_searchbar_search"
+                android:textColorHint="@color/colorPrimary"
+                />
 
         </FrameLayout>
 
@@ -38,7 +40,9 @@
                 android:id="@+id/search_bar_spinner"
                 style="@style/AppTextSmall"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                />
+
         </FrameLayout>
 
     </LinearLayout>
@@ -55,7 +59,7 @@
         android:id="@+id/list"
         android:name="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBookFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:divider="@android:color/darker_gray"
         app:layoutManager="LinearLayoutManager"
         tools:context="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.LogBookFragment"

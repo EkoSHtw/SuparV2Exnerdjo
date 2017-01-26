@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dialog_add_todo"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:minWidth="400dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+
+    >
 
     <TextView
         android:id="@+id/dialog_add_todo_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_todo" />
+        android:text="@string/add_new_todo"
+        style="@style/DialogHeadline"
+        />
 
     <!--<TextView-->
     <!--android:layout_width="wrap_content"-->
@@ -22,27 +30,52 @@
     <!--android:layout_height="wrap_content"-->
     <!--android:hint="@string/type_here" />-->
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tag"
+            style="@style/AppTextNormal"
+            android:paddingRight="10dp"
+            android:paddingLeft="3dp"
+            />
+
+        <AutoCompleteTextView
+            android:id="@+id/dialog_add_todo_tag"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_tags"
+            android:textColorHint="@color/colorPrimary"
+            style="@style/AppTextNormal"
+            />
+
+    </LinearLayout>
+
+    <!--
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tag" />
+        android:text="@string/description"
+        style="@style/AppTextNormal"
+        />
 
-    <AutoCompleteTextView
-        android:id="@+id/dialog_add_todo_tag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/type_here" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/description" />
+        -->
 
     <EditText
         android:id="@+id/dialog_add_todo_description"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/type_here" />
+        android:hint="@string/input_description"
+        android:textColorHint="@color/colorPrimary"
+        android:minLines="5"
+        android:gravity="top|left"
+        style="@style/AppTextNormal"
+        />
 
 
     <!--<fragment-->
@@ -57,16 +90,29 @@
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content" />-->
 
-    <NumberPicker
-        android:id="@+id/dialog_number_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></NumberPicker>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
 
     <Button
         android:id="@+id/switch_picker"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Datum wählen"
+        style="@style/AppButton"
+        android:textSize="16dp"
+        android:paddingBottom="10dp"
+        />
 
+    <NumberPicker
+        android:id="@+id/dialog_number_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTextNormal"
+        />
 
     <DatePicker
         android:id="@+id/date_picker"
@@ -74,20 +120,35 @@
         android:layout_height="wrap_content"
         android:datePickerMode="spinner"
         android:spinnersShown="false"
-        android:visibility="gone"></DatePicker>
+        android:visibility="gone"
+        />
 
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/dialog_todo_button_confirm"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/confirm" />
+        android:orientation="horizontal"
+        >
 
-    <Button
-        android:id="@+id/dialog_todo_button_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancel" />
+        <Button
+            android:id="@+id/dialog_todo_button_cancel"
+            android:text="@string/cancel"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            style="@style/AppButton"
+        />
 
+        <Button
+            android:id="@+id/dialog_todo_button_confirm"
+            android:text="@string/confirm"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            style="@style/AppButton"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>
