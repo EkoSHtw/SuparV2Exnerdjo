@@ -82,7 +82,7 @@ public class WoundDocumentationFragment extends Fragment{
 
         String[] firstRow = {view.getContext().getString(R.string.wounddate), view.getContext().getString(R.string.woundphase),
                 view.getContext().getString(R.string.woundsizel), view.getContext().getString(R.string.woundsizew),
-                view.getContext().getString(R.string.woundsized), view.getContext().getString(R.string.woundsized),
+                view.getContext().getString(R.string.woundsized),
                 view.getContext().getString(R.string.wounddescription),
                 view.getContext().getString(R.string.woundkindfrequency), view.getContext().getString(R.string.wounddescription),
                 view.getContext().getString(R.string.hdz), view.getContext().getString(R.string.picture)};
@@ -92,7 +92,7 @@ public class WoundDocumentationFragment extends Fragment{
             if(c.getDocumentation().get(i).getName().equals( getString(R.string.wounddocname) + " " + c.getFullName())){
                 this.index = i;
                 this.overwrite =  c.getDocumentation().get(i);
-                int rowCount =1;
+                int rowCount =2;
                 int fillCount = 0;
 
                 try {
@@ -112,24 +112,25 @@ public class WoundDocumentationFragment extends Fragment{
                                 TableRowExpand t = (TableRowExpand) view;
                                 String s = receiveString;
 
+                                while(!(t.getChildAt(fillCount) instanceof EditText) && !(t.getChildAt(fillCount) instanceof PictureButton)) {
+                                    fillCount++;
+                                }
+
                                 if (t.getChildAt(fillCount) instanceof PictureButton) {
                                     PictureButton pb = (PictureButton) t.getChildAt(fillCount);
                                     pb.setPicPath(s);
                                     pb.setText(getString(R.string.showpicture));
-                                    Log.i("", "Reihe: "+ rowCount+ ", Zeile: "+fillCount+", PictureButton, Text: " + s);
+
                                 }else if(t.getChildAt(fillCount) instanceof  EditText){
                                     EditText firstTextView = (EditText) t.getChildAt(fillCount);
                                     firstTextView.setText(s);
-                                    Log.i("", "Reihe: "+ rowCount+ ", Zeile: "+fillCount+", EditText, Text: " + s);
-                                }else if(t.getChildAt(fillCount) instanceof TextView){
-                                    Log.i("", "Reihe: "+ rowCount+ ", Zeile: "+fillCount+", TextView, Text: " + s);
                                 }
                                     fillCount++;
 
                                 if (fillCount == t.getChildCount()) {
                                     mTable.addwRow();
                                     fillCount = 0;
-                                    rowCount++;
+                                    rowCount+=2;
                                 }
                             }
                         }
@@ -165,27 +166,28 @@ public class WoundDocumentationFragment extends Fragment{
 
                     outputStream = new FileOutputStream(overwrite);
                     OutputStreamWriter myOutWriter = new OutputStreamWriter(outputStream);
-                    for (int i = 1; i < mTable.getHeadLenght(); i++) {
+                    for (int i = 1; i < mTable.getChildCount(); i++) {
                         View view = mTable.getTable().getChildAt(i);
                         if (view instanceof TableRowExpand) {
                             TableRowExpand t = (TableRowExpand) view;
-                            String textLine = "";
-                            myOutWriter.write(" " + "/" + "\n");
-                            for (int j = 0; j < mTable.getHeadLenght(); j++) {
-                                if(t.getChildAt(j) instanceof PictureButton){
-                                    PictureButton pButton = (PictureButton) t.getChildAt(j);
-                                    textLine += pButton.getPicPath() + "\n";
-                                }else if(t.getChildAt(j) instanceof EditText){
-                                    EditText text = (EditText) t.getChildAt(j);
-                                    //if(firstTextView == null) break;
-                                    textLine += " " + text.getText().toString() + "\n";
-                                }
-                                Log.i("", j+": "+ (t.getChildAt(j) instanceof EditText));
+                            if(t.getChildCount() > 1) {
+                                String textLine = "";
+                                myOutWriter.write(" " + "/" + "\n");
+                                for (int j = 0; j < mTable.getHeadLenght()*2; j+=2) {
+                                    if (t.getChildAt(j) instanceof PictureButton) {
+                                        PictureButton pButton = (PictureButton) t.getChildAt(j);
+                                        textLine += pButton.getPicPath() + "\n";
+                                    } else if (t.getChildAt(j) instanceof EditText) {
+                                        EditText text = (EditText) t.getChildAt(j);
+                                        //if(firstTextView == null) break;
+                                        textLine += " " + text.getText().toString() + "\n";
+                                    }
 
+                                }
+                                myOutWriter.write(textLine);
+                                myOutWriter.flush();
+                                outputStream.flush();
                             }
-                            myOutWriter.write(textLine);
-                            myOutWriter.flush();
-                            outputStream.flush();
                         }
                     }
                     myOutWriter.close();

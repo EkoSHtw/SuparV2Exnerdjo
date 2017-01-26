@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -72,7 +73,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
             this.overwrite = c.getDocumentation().get(i);
             if (c.getDocumentation().get(i).getName().equals(filename + " " + c.getFullName())) {
                 index = i;
-                int rowCount = 1;
+                int rowCount = 2;
                 int fillCount = 0;
 
                 try {
@@ -87,21 +88,27 @@ public class DocumentsTableTemplateFragment extends Fragment {
                             TableRowExpand t = (TableRowExpand) v;
                             String s = receiveString.replace("/", "");
 
-                            if(t.getChildAt(fillCount) instanceof EditText) {
-                                EditText firstTextView = (EditText) t.getChildAt(fillCount);
-                                firstTextView.setText(s);
+                            while(!(t.getChildAt(fillCount) instanceof EditText)) {
                                 fillCount++;
                             }
-                            if (fillCount == mTable.getHeadLenght()) {
+
+                            Log.println(Log.INFO, ""+i, ""+t.getChildCount());
+                            Log.println(Log.INFO, "Row", ""+fillCount);
+
+                            EditText firstTextView = (EditText) t.getChildAt(fillCount);
+                            firstTextView.setText(s);
+                            fillCount++;
+
+                            if (fillCount == mTable.getHeadLenght()*2-1) {
                                 mTable.addRow();
                                 fillCount = 0;
-                                rowCount++;
+                                rowCount+=2;
                             }
                         }
                         bufferedReader.close();
                     } else {
                         bufferedReader.close();
-                            mTable.addRow();
+                        mTable.addRow();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -135,16 +142,15 @@ public class DocumentsTableTemplateFragment extends Fragment {
 
                         TableRowExpand t = (TableRowExpand) vi;
                         String textLine = "" ;
-                        for (int j = 0; j < mTable.getHeadLenght(); j++) {
-                            if(t.getChildAt(j) instanceof EditText) {
+                        if(t.getChildCount() > 1) {
+                            for (int j = 0; j < mTable.getHeadLenght() * 2; j += 2) {
                                 EditText text = (EditText) t.getChildAt(j);
                                 textLine += text.getText().toString() + "\n";
-                                Log.println(Log.INFO, "gelesener String", textLine);
                             }
+                            myOutWriter.write(textLine);
+                            myOutWriter.flush();
+                            outputStream.flush();
                         }
-                        myOutWriter.write(textLine);
-                        myOutWriter.flush();
-                        outputStream.flush();
                     }
                     myOutWriter.close();
                     outputStream.close();

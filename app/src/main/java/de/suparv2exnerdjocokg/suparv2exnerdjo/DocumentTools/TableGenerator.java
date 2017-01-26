@@ -36,7 +36,6 @@ import static de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton
 public class TableGenerator {
     private final Context mContext;
     private TableLayout mTable;
-    private FrameLayout mFrame;
     private TableLayout.LayoutParams rowParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     private TableRowExpand.LayoutParams colParams = new TableRowExpand.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     private Activity act;
@@ -63,18 +62,13 @@ public class TableGenerator {
         mContext = activity.getApplicationContext();
         act = activity;
         mTable = new TableLayout(activity);
-        mFrame = new FrameLayout(activity);
         rowParams.setMargins(0, 0, 0, 0);
         colParams.setMargins(0, 0, 0, 0);
 
         TableLayout.LayoutParams lptable = new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.MATCH_PARENT,
                 TableLayout.LayoutParams.MATCH_PARENT);
-        FrameLayout.LayoutParams frlay = new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT);
         mTable.setLayoutParams(lptable);
-        mFrame.setLayoutParams(frlay);
     }
 
     public void addwRow() {
@@ -164,7 +158,6 @@ public class TableGenerator {
             tvCol.setTextColor(mContext.getResources().getColor(
                     R.color.colorPrimary));
             tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-            colParams.setMargins(0,0,1,0);
             tvCol.setLayoutParams(colParams);
             tvCol.setBackgroundColor(mContext.getResources().getColor(
                     R.color.row_background));
@@ -176,9 +169,9 @@ public class TableGenerator {
 
         }
 
-        addDivider();
-
         mTable.addView(tr);
+
+        addDivider();
     }
 
     public void addDivider(){
@@ -194,7 +187,7 @@ public class TableGenerator {
         tr.addView(tvCol);
 
         mTable.addView(tr);
-        idCount++;
+        childCount++;
     }
 
     private void addColDivider(TableRow tr){
@@ -209,9 +202,7 @@ public class TableGenerator {
     }
 
     public void addHead(String[] data) {
-        TableRow tr = new TableRow(mContext);
-        tr.setBackgroundColor(mContext.getResources().getColor(
-                R.color.table_background));
+        TableRowExpand tr = new TableRowExpand(mContext);
         headLenght = data.length;
 
         mTable.setStretchAllColumns(false);
@@ -221,7 +212,7 @@ public class TableGenerator {
 
         tr.setLayoutParams(rowParams);
         childCount++;
-        for (int iCol = 0; iCol < data.length; iCol++) {
+        for (int iCol = 0; iCol < headLenght; iCol++) {
             TextView tvCol = new TextView(mContext);
             tvCol.setText(data[iCol]);
             tvCol.setGravity(Gravity.CENTER);
@@ -233,8 +224,10 @@ public class TableGenerator {
             tvCol.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
             tr.addView(tvCol);
 
-            if(iCol < data.length-1) {
+            if(iCol < headLenght-1) {
                 addColDivider(tr);
+                Log.println(Log.INFO, "Column", ""+iCol);
+                Log.println(Log.INFO, "Länge", ""+headLenght);
             }
         }
 
