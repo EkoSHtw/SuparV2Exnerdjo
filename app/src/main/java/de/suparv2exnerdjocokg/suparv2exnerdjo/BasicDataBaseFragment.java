@@ -1,6 +1,7 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,13 +48,11 @@ public class BasicDataBaseFragment extends Fragment {
     private TextView carelevel;
     private TextView infodump;
     private ListView documents;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     private static final String CLIENTKEY = "client_key";
 
-    private String mParam1;
-    private String mParam2;
     private Client c;
+    private Context con;
 
     private OnDocumentSelectedListener mCallback;
     private OnClickCall call;
@@ -62,9 +61,11 @@ public class BasicDataBaseFragment extends Fragment {
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_basic_data_base, container, false);
 
+        this.con = getContext();
         if (savedInstanceState == null) {
             this.c = ((ClientViewActivity)getActivity()).getClient();
             if(c!=null) {
+
                 img = (ImageView) rootView.findViewById(R.id.image);
 
                 img.setImageResource(R.drawable.woman_image);
@@ -82,42 +83,25 @@ public class BasicDataBaseFragment extends Fragment {
 
                 adapter = new PhonenumberListAdapter(rootView.getContext(), c, call);
                 numbers.setAdapter(adapter);
-                File f = new File(getString(R.string.wounddocname));
-                File f1 = new File(getString(R.string.mobdocname));
-                File f2 = new File(getString(R.string.doctorialprescription1));
-                File f3 = new File(getString(R.string.doctorialprescription2));
-                File f4 = new File(getString(R.string.doctorialprescription3));
-                ArrayList<File> b = new ArrayList<>();
-                b.add(f);
-                b.add(f1);
-                b.add(f2);
-                b.add(f3);
-                b.add(f4);
-                c.setDocumentation(b);
 
+                ArrayList<String> slist = new ArrayList<>();
+                for(int i =0; i<c.getDocumentation().size(); i++){
+                    String s = c.getDocumentation().get(i).getName().replace(" " + c.getFullName(), "");
+                    slist.add(s);
+                }
                 documents = (ListView) rootView.findViewById(document_list);
-                ArrayAdapter<File> arrayAdapter = new ArrayAdapter<File>(rootView.getContext(),
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(rootView.getContext(),
                         R.layout.simple_list_item,
-                        c.getDocumentation());
+                        slist);
                 documents.setAdapter(arrayAdapter);
                 documents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        File p = (File) parent.getItemAtPosition(position);
+                        Object o = parent.getItemAtPosition(position);
+                        String p = (String)o;
                         mCallback.onDocumentSelected(p);
                     }
                 });
-/*
-                ArrayList<String> docPic = new ArrayList<>();
-                String s1 = "Pfelgeplanung";
-                String s2 = "Pflegeplanungskontrolle";
-                String s3 = "Nachweiß Pflegevisited";
-                int a1 =(R.drawable.pflegeplanung);
-                int a2 = (R.drawable.pflegeplanungskontrolle);
-                int a3 = (R.drawable.nachweis_pflegevisite);
-*/
-            }else{
-
             }
         }  else{
         }
@@ -125,35 +109,9 @@ public class BasicDataBaseFragment extends Fragment {
         return rootView;
     }
 
-    public ArrayList<File> getLFile() {
-        Field[] fields = R.raw.class.getFields();
-        ArrayList<File> s = new ArrayList<>();
-        for (int count = 0; count < fields.length; count++) {
-            try {
-                copyFile(getResources().openRawResource(R.raw.test)
-                , new FileOutputStream(new File(getContext().getFilesDir(), "download/test.pdf")));
-
-                File pdfFile = new File(getContext().getFilesDir(), "download/test.pdf");
-
-              s.add(pdfFile);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return s;
-    }
-
-    private void copyFile(InputStream in, OutputStream out) throws IOException {
-        byte[] buffer = new byte[1024];
-        int read;
-        while((read = in.read(buffer)) != -1){
-            out.write(buffer, 0, read);
-        }
-    }
-
 
     public interface OnDocumentSelectedListener {
-            void onDocumentSelected(File position);
+            void onDocumentSelected(String position);
     }
 
     public interface OnClickCall{
@@ -174,19 +132,6 @@ public class BasicDataBaseFragment extends Fragment {
                     + " must implement OnHeadlineSelectedListener");
         }
     }
-
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-    }
-
 
 
 }

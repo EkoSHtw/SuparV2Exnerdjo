@@ -1,9 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
-import android.content.Context;
-import android.view.ContextThemeWrapper;
-
-import java.util.Vector;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 
 public class GeneralTask {
 
@@ -12,6 +9,8 @@ public class GeneralTask {
     private String tag;
     private boolean isDone;
     private int shiftetDays;
+    private String shiftedNote;
+    private Note note;
 
 
 
@@ -21,6 +20,22 @@ public class GeneralTask {
         this.tag = tag;
         this.isDone = false;
         this.shiftetDays = 0;
+    }
+
+    public Note getNote() {
+        return note;
+    }
+
+    public void setNote(Note note) {
+        this.note = note;
+    }
+
+    public String getShiftedNote() {
+        return shiftedNote;
+    }
+
+    public void setShiftedNote(String shiftedNote) {
+        this.shiftedNote = shiftedNote;
     }
 
     public String getName() {

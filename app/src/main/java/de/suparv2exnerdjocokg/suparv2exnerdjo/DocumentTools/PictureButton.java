@@ -18,8 +18,6 @@ public class PictureButton extends Button {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
-
-
     private Image image;
     private String picPath;
     private Context context;

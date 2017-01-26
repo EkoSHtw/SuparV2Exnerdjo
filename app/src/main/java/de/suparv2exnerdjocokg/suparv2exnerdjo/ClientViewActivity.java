@@ -2,6 +2,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -12,15 +13,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 
+import java.io.FileOutputStream;
 import java.io.File;
 import java.sql.Timestamp;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription1;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription2;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription3;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.MoblilisationBeddingFragment;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.MobilisationBeddingFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar.DialogAddNewNoteOrTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.LogBookFragment;
@@ -29,6 +32,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
+
 import java.util.ArrayList;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
@@ -54,23 +58,31 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         Intent intent = getIntent();
         client = DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
 
-        File f = new File(getFilesDir(),getString(R.string.wounddocname)+".txt");
-        File f1 = new File(getFilesDir(),getString(R.string.mobdocname)+".txt");
-        File f2 = new File(getFilesDir(),getString(R.string.doctorialprescription1)+".txt");
-        File f3 = new File(getFilesDir(),getString(R.string.doctorialprescription2)+".txt");
-        File f4 = new File(getFilesDir(),getString(R.string.doctorialprescription3)+".txt");
+        File f = new File(getFilesDir(), this.getString(R.string.wounddocname)+ " "  + client.getFullName());
+        File f1 = new File(getFilesDir(), this.getString(R.string.mobdocname) + " " + client.getFullName());
+
+        File f2 = new File(getFilesDir(), this.getString(R.string.doctorialprescription1) + " " +client.getFullName());
+        File f3 = new File(getFilesDir(), this.getString(R.string.doctorialprescription2) + " " + client.getFullName());
+        File f4 = new File(getFilesDir(), this.getString(R.string.doctorialprescription3) + " " + client.getFullName());
+
         ArrayList<File> b = new ArrayList<>();
         b.add(f);
-
         b.add(f1);
         b.add(f2);
         b.add(f3);
         b.add(f4);
+
+        try{
+            for(int i =0; i < b.size(); i++){
+                if(b.get(i).exists() != true){
+                    b.get(i).createNewFile();
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         client.setDocumentation(b);
-
-// Absoluter pfad gibt in wunddokument nur einen teilpfad zurück
-
-//        setContentView(R.layout.dialog_add_note);
 
         if (findViewById(R.id.menu) != null) {
             MenuFragment firstFragment = new MenuFragment();
@@ -212,14 +224,14 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         return client;
     }
 
-    public void onDocumentSelected(File position) {
+    public void onDocumentSelected(String position) {
         // The user selected the headline of an article from the HeadlinesFragment
         // Do something here to display that article
 
         Fragment wFrag = new Fragment();
-        String name = position.getName();
 
         ArrayList<String> doclist= new ArrayList<>();
+
         doclist.add(getString(R.string.wounddocname));
         doclist.add(getString(R.string.mobdocname));
         doclist.add(getString(R.string.doctorialprescription1));
@@ -228,23 +240,22 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
 
         ArrayList<Fragment> fragList = new ArrayList<>();
         fragList.add(new WoundDocumentationFragment());
-        fragList.add(new MoblilisationBeddingFragment());
+        fragList.add(new MobilisationBeddingFragment());
         fragList.add(new DoctorialPrescription1());
         fragList.add(new DoctorialPrescription2());
         fragList.add(new DoctorialPrescription3());
         for(int i =0; i < doclist.size(); i ++){
-            if (name == doclist.get(i)){
+            if (position.equals(doclist.get(i))){
                 wFrag = fragList.get(i);
                 break;
             }
         }
+
         FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
         trans.replace(R.id.fragment_container, wFrag);
         trans.addToBackStack(null);
-
             trans.commit();
     }
-
 
     public void addNote(String content, String tag) {
 //        EditText editText = (EditText)findViewById(R.id.dialog_input_text);

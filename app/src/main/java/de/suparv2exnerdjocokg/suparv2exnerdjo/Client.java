@@ -73,6 +73,12 @@ public class Client implements Serializable {
   }
 
 
+
+  public String getFullName(){
+    return (getFirstName()+" "+ getLastName());
+  }
+
+
   public ArrayList<File> getDocumentation() {
     return documentation;
   }
@@ -103,7 +109,7 @@ public class Client implements Serializable {
     int count =0;
 
     for (File e : documentation
-         ) {
+            ) {
       count++;
     }
     return count;

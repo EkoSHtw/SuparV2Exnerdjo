@@ -3,7 +3,7 @@
     <string-array name="search_bar_choices">
         <item>@string/tag</item>
         <item>@string/date</item>
-        <item>@string/note</item>
+        <item>@string/shiftedNote</item>
         <item>@string/carer</item>
     </string-array>
 </resources>
