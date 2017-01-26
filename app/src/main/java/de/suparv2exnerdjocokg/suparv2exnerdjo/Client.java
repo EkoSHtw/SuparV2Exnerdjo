@@ -79,32 +79,6 @@ public class Client implements Serializable {
   }
 
 
-  public ArrayList<File> getDocumentation() {
-    return documentation;
-  }
-
-  public void setNotes(ArrayList<Note> notes) {
-    this.notes = notes;
-  }
-
-
-  public void setDocumentation(ArrayList<File> f){
-    this.documentation = f;
-  }
-
-
-  public void addDocumentation(File documentation) {
-    this.documentation.add(documentation);
-  }
-
-
-
-  public int getImagePath() {
-    return imagePath;
-  }
-
-
-
   public int docsListLenghts(){
     int count =0;
 

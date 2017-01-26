@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -35,7 +37,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private ScrollView layMain;
+    private FrameLayout layMain;
     private TableGenerator mTable;
     private Button addRow;
     private Button saveIt;
@@ -64,14 +66,14 @@ public class DocumentsTableTemplateFragment extends Fragment {
 
     public void showTable(String[] firstRow, String filename, View view, final Client c) {
         mTable = new TableGenerator(getActivity());
-        layMain = (ScrollView) view.findViewById(R.id.table);
+        layMain = (FrameLayout) view.findViewById(R.id.table);
 
         mTable.addHead(firstRow);
         for (int i = 0; i < c.docsListLenghts(); i++) {
             this.overwrite = c.getDocumentation().get(i);
             if (c.getDocumentation().get(i).getName().equals(filename + " " + c.getFullName())) {
                 index = i;
-                int rowCount = 1;
+                int rowCount = 2;
                 int fillCount = 0;
 
                 try {
@@ -86,19 +88,27 @@ public class DocumentsTableTemplateFragment extends Fragment {
                             TableRowExpand t = (TableRowExpand) v;
                             String s = receiveString.replace("/", "");
 
+                            while(!(t.getChildAt(fillCount) instanceof EditText)) {
+                                fillCount++;
+                            }
+
+                            Log.println(Log.INFO, ""+i, ""+t.getChildCount());
+                            Log.println(Log.INFO, "Row", ""+fillCount);
+
                             EditText firstTextView = (EditText) t.getChildAt(fillCount);
                             firstTextView.setText(s);
                             fillCount++;
-                            if (fillCount == mTable.getHeadLenght()) {
+
+                            if (fillCount == mTable.getHeadLenght()*2-1) {
                                 mTable.addRow();
                                 fillCount = 0;
-                                rowCount++;
+                                rowCount+=2;
                             }
                         }
                         bufferedReader.close();
                     } else {
                         bufferedReader.close();
-                            mTable.addRow();
+                        mTable.addRow();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -132,14 +142,15 @@ public class DocumentsTableTemplateFragment extends Fragment {
 
                         TableRowExpand t = (TableRowExpand) vi;
                         String textLine = "" ;
-                        for (int j = 0; j < mTable.getHeadLenght(); j++) {
-                            EditText text = (EditText) t.getChildAt(j);
-                            textLine += text.getText().toString() + "\n";
-                            Log.println(Log.INFO, "gelesener String", textLine);
+                        if(t.getChildCount() > 1) {
+                            for (int j = 0; j < mTable.getHeadLenght() * 2; j += 2) {
+                                EditText text = (EditText) t.getChildAt(j);
+                                textLine += text.getText().toString() + "\n";
+                            }
+                            myOutWriter.write(textLine);
+                            myOutWriter.flush();
+                            outputStream.flush();
                         }
-                        myOutWriter.write(textLine);
-                        myOutWriter.flush();
-                        outputStream.flush();
                     }
                     myOutWriter.close();
                     outputStream.close();
