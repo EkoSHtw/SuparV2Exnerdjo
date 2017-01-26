@@ -101,11 +101,8 @@ public class TableGenerator {
                 pb.setBackgroundColor(mContext.getResources().getColor(
                         R.color.row_background));
                 pb.setPicPath("");
-                if (pb.getPicPath() != "") {
-                    pb.setText("Bild anzeigen");
-                } else {
-                    pb.setText(mContext.getString(R.string.addPicture));
-                }
+
+                pb.setText(mContext.getString(R.string.addpicture));
 
                 pb.setOnClickListener(new View.OnClickListener() {
                     @Override
