@@ -433,8 +433,8 @@ public class VitalFragment extends Fragment {
                 }
 
                 bloodPressureDates.add(time);
-                systolicValues.put(bloodPressureDates.get(last), value);
-                diastolicValues.put(bloodPressureDates.get(last), secondValue);
+                systolicValues.put(bloodPressureDates.get(bloodPressureDates.size() - 1), value);
+                diastolicValues.put(bloodPressureDates.get(bloodPressureDates.size() - 1), secondValue);
 
                 createGraph(graph, setBloodPressureTable());
                 setBloodPressureValues(graph);
@@ -457,7 +457,7 @@ public class VitalFragment extends Fragment {
                 }
 
                 bloodSugarDates.add(time);
-                bloodSugarValues.put(bloodSugarDates.get(lastI), value);
+                bloodSugarValues.put(bloodSugarDates.get(bloodSugarDates.size() - 1), value);
 
                 createGraph(graph, setBloodSugarTable());
                 setBloodSugarValues(graph);
