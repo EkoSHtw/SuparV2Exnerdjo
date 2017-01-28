@@ -15,9 +15,11 @@ import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -36,6 +38,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyPictograms;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 /**
@@ -116,11 +119,32 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         ImageView image = (ImageView) convertView.findViewById(R.id.image);
         image.setImageDrawable(convertView.getResources().getDrawable(client.getImagePath()));
 
+        LinearLayout pictogramContainer = (LinearLayout)  convertView.findViewById(R.id.pictrogram_container);
+        if(pictogramContainer.getChildCount() == 0) {
+            ViewGroup.LayoutParams pictogramParams = new ViewGroup.LayoutParams(50, 50);
+            for (int i = 0; i < client.getPictograms().size(); i++) {
+                final int myI = i;
+                ImageView pictogram = new ImageView(this.c);
+                pictogram.setLayoutParams(pictogramParams);
+                pictogram.setImageResource(client.getPictograms().get(i));
+                pictogramContainer.addView(pictogram);
+
+                pictogram.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String description = DummyPictograms.pictogramDescriptions.get(client.getPictograms().get(myI));
+                        Toast toast = Toast.makeText(c, description, Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+            }
+        }
+
         ImageButton routeButton = (ImageButton) convertView.findViewById(R.id.route_button);
-        routeButton.setColorFilter(convertView.getResources().getColor(R.color.colorPrimary));
+        routeButton.setColorFilter(convertView.getResources().getColor(R.color.colorPrimaryDark));
 
         ImageButton arrow = (ImageButton) convertView.findViewById(R.id.arrow);
-        arrow.setColorFilter(convertView.getResources().getColor(R.color.colorPrimary));
+        arrow.setColorFilter(convertView.getResources().getColor(R.color.colorPrimaryDark));
 
         arrow.setOnClickListener(new View.OnClickListener() {
             @Override

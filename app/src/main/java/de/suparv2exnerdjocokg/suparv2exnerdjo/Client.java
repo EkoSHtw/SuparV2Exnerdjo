@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
@@ -42,8 +43,10 @@ public class Client implements Serializable {
   private ArrayList<PhoneNumber> phoneNumber;
   private ArrayList<File> documentation;
 
+  private ArrayList<Integer> pictograms;
+
   public Client(int id, int imagePath, String firstName, String lastName, String dateString, DummyClientMedicine medicineList,
-                ArrayList<Note> notes, List<ToDo> toDoList, VitalValues vital, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber){
+                ArrayList<Note> notes, List<ToDo> toDoList, VitalValues vital, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber, ArrayList<Integer> pictograms){
     this.firstName = firstName;
     this.lastName = lastName;
     this.id = id;
@@ -59,6 +62,7 @@ public class Client implements Serializable {
     this.concerns= infodump;
     this.carelevel = carelevel;
     this.adress = adress;
+    this.pictograms = pictograms;
 
 
   /*  PhoneNumber num1 = new PhoneNumber(context.getString(R.string.fam1),
@@ -70,6 +74,14 @@ public class Client implements Serializable {
     this.phoneNumber = phoneNumber;
     String a = "" + phoneNumber.size();
     Log.println(Log.INFO, "test",a);
+  }
+
+  public ArrayList<Integer> getPictograms() {
+    return pictograms;
+  }
+
+  public void setPictograms(ArrayList<Integer> pictograms) {
+    this.pictograms = pictograms;
   }
 
   public int getImagePath() {

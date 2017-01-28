@@ -78,10 +78,21 @@
 
     </LinearLayout>
 
-    <View
+    <!--View
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.2" />
+        android:layout_weight="0.2" /-->
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/pictrogram_container">
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/route_button"
