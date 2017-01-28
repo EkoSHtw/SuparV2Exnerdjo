@@ -18,17 +18,13 @@
         <activity
             android:name=".LogIn"
             android:screenOrientation="landscape">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity android:name=".Splash" />
-
 
         <uses-permission android:name="android.permission.READ_CONTACTS" />
         <uses-permission android:name="android.permission.Call_Number" />
@@ -42,9 +38,8 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
-
 
         <uses-feature android:name="android.hardware.camera" />
 
@@ -55,8 +50,7 @@
         <activity
             android:name=".ClientViewActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan|adjustResize"
-            />
+            android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name=".Route.Route"
             android:screenOrientation="landscape" />

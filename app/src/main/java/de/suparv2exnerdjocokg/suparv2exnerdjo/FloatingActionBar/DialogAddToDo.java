@@ -208,7 +208,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
     private void setHint(EditText editText) {
         editText.setText("");
         editText.setHint(R.string.text_not_set);
-        editText.setHintTextColor(getActivity().getResources().getColor(R.color.text_not_set_color));
+        editText.setHintTextColor(getActivity().getResources().getColor(R.color.colorAccentRed));
     }
 
     private String[] getTags() {

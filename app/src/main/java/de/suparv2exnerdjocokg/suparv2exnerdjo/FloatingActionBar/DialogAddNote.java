@@ -100,7 +100,7 @@ public class DialogAddNote extends Dialog implements View.OnClickListener {
     private void setHint(EditText editText) {
         editText.setText("");
         editText.setHint(R.string.text_not_set);
-        editText.setHintTextColor(activity.getResources().getColor(R.color.text_not_set_color));
+        editText.setHintTextColor(activity.getResources().getColor(R.color.colorAccentRed));
     }
 
     private void dismissDialog(boolean added) {
