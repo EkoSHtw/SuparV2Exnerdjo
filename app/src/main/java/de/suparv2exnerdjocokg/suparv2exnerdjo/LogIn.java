@@ -95,11 +95,18 @@ public class LogIn extends AppCompatActivity {
         logInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // TODO: delete this lines and comment the ones below in !
+                Intent intent = new Intent(getApplicationContext(), Splash.class);
+                startActivity(intent);
+
+                /*
                 InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(
                                 Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(
                         activity.getCurrentFocus().getWindowToken(), 0);
                 attemptLogin();
+                */
             }
         });
 
