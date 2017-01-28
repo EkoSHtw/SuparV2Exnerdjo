@@ -169,7 +169,7 @@ public class VitalFragment extends Fragment {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogAddVitalValue dialog = new DialogAddVitalValue(context, mListener, oldSelection.getId());
+                DialogChangeValue dialog = new DialogChangeValue(context, mListener, oldSelection.getId());
                 dialog.show();
             }
         });

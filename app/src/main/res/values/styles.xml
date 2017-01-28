@@ -9,8 +9,8 @@
     </style>
 
     <style name="AppTextNormal" parent="@android:style/TextAppearance.DeviceDefault">
-    <item name="android:textColor">@color/colorPrimaryDark</item>
-    <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">14sp</item>
 
     </style>
 
