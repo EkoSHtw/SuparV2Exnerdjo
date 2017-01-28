@@ -2,7 +2,6 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -13,10 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.View;
 
-import java.io.FileOutputStream;
 import java.io.File;
 import java.sql.Timestamp;
 
@@ -35,6 +32,7 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 
 import java.util.ArrayList;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Vital.VitalFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
@@ -306,7 +304,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
     }
 
     @Override
-    public void newValueAdded(int value, int second, int id) {
+    public void newValueAdded(int value, int second, int id) throws InterruptedException {
 
         VitalFragment newFrag = (VitalFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (newFrag != null) {
@@ -322,6 +320,8 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
 
             trans.commit();
         }
+
+
     }
 
 

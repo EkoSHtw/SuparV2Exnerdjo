@@ -56,7 +56,7 @@
             android:screenOrientation="landscape" />
         <activity android:name=".DocumentTools.ImageActivity" />
         <activity
-            android:name=".DialogChangeValue"
+            android:name=".Vital.DialogChangeValue"
             android:label="@string/title_activity_dialog_change_value"
             android:theme="@style/AppTheme"></activity>
     </application>

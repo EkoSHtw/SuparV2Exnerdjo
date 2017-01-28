@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import de.suparv2exnerdjocokg.suparv2exnerdjo.VitalValues;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Vital.VitalValues;
 
 /**
  * Created by dsfd on 19.01.2017.

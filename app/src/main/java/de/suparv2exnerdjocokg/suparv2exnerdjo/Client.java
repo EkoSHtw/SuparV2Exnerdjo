@@ -1,6 +1,5 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
@@ -14,6 +13,7 @@ import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Vital.VitalValues;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClientMedicine;
 
 public class Client implements Serializable {

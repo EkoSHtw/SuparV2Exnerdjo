@@ -1,17 +1,11 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.dummy;
 
-import android.graphics.drawable.Drawable;
-import android.util.Log;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientMedicine;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.PhoneNumber;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.VitalValues;
 
 /**
  * Created by dsfd on 19.12.2016.

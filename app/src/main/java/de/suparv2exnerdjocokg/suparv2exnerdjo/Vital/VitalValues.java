@@ -1,4 +1,4 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.Vital;
 
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
