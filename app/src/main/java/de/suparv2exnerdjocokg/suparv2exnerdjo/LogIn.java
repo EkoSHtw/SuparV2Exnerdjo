@@ -3,6 +3,7 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -24,6 +25,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,7 +51,7 @@ public class LogIn extends AppCompatActivity {
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "TvO:letmein", "bar@example.com:world"
+            "TvO:letmein", "test:test"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -86,11 +88,17 @@ public class LogIn extends AppCompatActivity {
             }
         });
 
+        final Activity activity = this;
+
         Button logInButton = (Button) findViewById(R.id.submitButton);
         logInButton.setText(R.string.weiter);
         logInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(
+                                Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(
+                        activity.getCurrentFocus().getWindowToken(), 0);
                 attemptLogin();
             }
         });
