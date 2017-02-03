@@ -257,6 +257,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
             trans.commit();
     }
 
+
     public void addNote(String content, String tag) {
 //        EditText editText = (EditText)findViewById(R.id.dialog_input_text);
 //        String content = editText.getText().toString();
