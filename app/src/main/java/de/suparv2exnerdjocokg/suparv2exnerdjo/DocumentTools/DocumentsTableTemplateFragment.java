@@ -99,7 +99,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
                             firstTextView.setText(s);
                             fillCount++;
 
-                            if (fillCount == mTable.getHeadLenght()*2-1) {
+                            if (fillCount == (mTable.getHeadLenght()*2)-1) {
                                 mTable.addRow();
                                 fillCount = 0;
                                 rowCount+=2;

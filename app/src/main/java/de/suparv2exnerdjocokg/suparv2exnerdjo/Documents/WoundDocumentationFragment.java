@@ -127,7 +127,7 @@ public class WoundDocumentationFragment extends Fragment{
                                 }
                                     fillCount++;
 
-                                if (fillCount == t.getChildCount()) {
+                                if (fillCount == (mTable.getHeadLenght()*2)-1) {
                                     mTable.addwRow();
                                     fillCount = 0;
                                     rowCount+=2;
@@ -166,13 +166,13 @@ public class WoundDocumentationFragment extends Fragment{
 
                     outputStream = new FileOutputStream(overwrite);
                     OutputStreamWriter myOutWriter = new OutputStreamWriter(outputStream);
+                    myOutWriter.write(" " + "/" + "\n");
                     for (int i = 1; i < mTable.getChildCount(); i++) {
                         View view = mTable.getTable().getChildAt(i);
                         if (view instanceof TableRowExpand) {
                             TableRowExpand t = (TableRowExpand) view;
                             if(t.getChildCount() > 1) {
                                 String textLine = "";
-                                myOutWriter.write(" " + "/" + "\n");
                                 for (int j = 0; j < mTable.getHeadLenght()*2; j+=2) {
                                     if (t.getChildAt(j) instanceof PictureButton) {
                                         PictureButton pButton = (PictureButton) t.getChildAt(j);
