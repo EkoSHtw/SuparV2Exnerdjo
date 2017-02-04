@@ -58,9 +58,25 @@ public class DummyToDos {
      */
     public static List<ToDo> ITEMS = new ArrayList<ToDo>();
 
+    public static List<ToDo> ITEMS_Erna = new ArrayList<>();
+    public static List<ToDo> ITEMS_Ernst = new ArrayList<>();
+    public static List<ToDo> ITEMS_Helga = new ArrayList<>();
+    public static List<ToDo> ITEMS_Emma = new ArrayList<>();
+    public static List<ToDo> ITEMS_Hans = new ArrayList<>();
+    public static List<ToDo> ITEMS_Karl = new ArrayList<>();
+    public static List<ToDo> ITEMS_Irmgard = new ArrayList<>();
+
 
     static {
         // Add some sample items.
+        fillErna();
+        fillErnst();
+        fillHelga();
+        fillEmma();
+        fillHans();
+        fillKarl();
+        fillIrmgard();
+
         String[] ganzWD = {"Waschen, Duschen, Baden","Mund-, Zahn- und Lippenpflege","Rasieren","Hautpflege","Haarpflege (Kämmen, ggf. Waschen)","Nagelpflege","An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken","Vorbereiten/Aufräumen des Pflegebereiches"};
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ganzwaschung", ganzWD, "Ganzwaschung")));
         String[] teilWD = {"Teilwaschung (z.B. Intimbereich)","Mund-, Zahn- und Lippenpflege","Rasieren","Hautpflege","Haarpflege (Kämmen, ggf. Waschen)","Nagelpflege","An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken","Vorbereiten/Aufräumen des Pflegebereiches"};
@@ -73,6 +89,185 @@ public class DummyToDos {
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Lagern/Betten", lagBetD, "Lagern/Betten")));
         String[] ausD = {"Utensilien bereitstellen, anreichen","Zur Toilette führen","Unterstützung u. allgem. Hilfestellung (Urin, Stuhl, Schweiß, Sputum, Erbrochenes)","Überwachung der Ausscheidung","Entsorgen, Reinigen des Gerätes und des Bettes","Katheterpflege (insb. Wechseln von Urinbeuteln), Stomaversorgung bei Anus praeter (Wechsel u. Entleerung des Stomabeutels)","Empfehlung zum Kontinenztraining/Inkontinenzversorgung","Nachbereiten des Pflegebedürftigen ggf. Intimpflege"};
         ITEMS.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ausscheidungen", ausD, "Ausscheidungen")));
+
+    }
+
+    private static void fillErna(){
+
+        String[] setBloodSugar = {"Zusätzlich Körpertemperatur kontrollieren"};
+        ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Blutzucker bestimmen", setBloodSugar, "Blutzucker")));
+
+        String[] setBloodPressure = {};
+        ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Blutdruck messen", setBloodPressure, "Blutdruck")));
+
+        String[] drinking = {"Trinkmenge erfragen"};
+        ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Flüssigkeitsbilanzierung", drinking, "Trinken")));
+
+        String[] skinCare = {};
+        ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Hautpflege", skinCare, "Haut")));
+
+        String[] wounds = {"Nutzen Sie Gelegenheiten, wie z.B. die Ganzkörperwäsche um den Körper auf Verletzungen und/oder Druckstellen zu überprüfen."};
+        ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Aus Verletzungen/Druckstellen prüfen", wounds, "Wunden")));
+
+        String[] medicaments = {"Ganz wichtig: Insulin"};
+        ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Medikamente verabreichen", medicaments, "Medikamente")));
+    }
+
+    private static void fillErnst(){
+
+        String[] freshAir = {"Fenster für mindestens 10 Minuten öffnen."};
+        ITEMS_Ernst.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Wohnung lüften", freshAir, "Wohnung")));
+
+        // ANLEITUNG
+        String[] breathing = {"Technik zum Ausatmen (Lippenbremse)", "Einatmen durch die Nase", "Atem Trainer Triflow für 2 Minuten"};
+        ITEMS_Ernst.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Atemübungen durschführen", breathing, "Atem")));
+
+        String[] drinking = {"Trinkmenge erfragen."};
+        ITEMS_Ernst.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Flüssigkeitsbilanzierung", drinking, "Trinken")));
+
+        String[] breath = {"Die Atemstimulierende Einreibung wird nicht AM Klienten, sondern MIT dem Klienten durchgeführt", "Die Einreibung wird OHNE Handschuhe durchgeführt.", "Die Lotion in den Händen anwärmen."
+        , "Die Lotion auf den Rücken vom Nacken bis zum unteren Rippenbogen auftragen, auch die Thoraxseiten mit einbeziehen.", "Niemals den Kontakt zum Klienten verlieren, d.h. eine Hand verbleibt ständig am Körper des Klienten.",
+        "Beginnen Sie ruhig und gleichmäßig zu atmen. Die Bewegungen werden dem eigenen Atem angepasst und beginnen im Nacken.", "Bei der Exspiration findet die Abwärts- und bei der Inspiration die Aufwärtsbewegung statt.",
+         "Es werden mehrere spiegelsymetrische Kreise beschrieben, bei den inspiratorischen Bewegungen lagert der Druck auf Daumen und Zeigefinger, bei den exspiratorischen auf der gesamten Hand.",
+                 "Hierbei lässt der Druck dann an den Thoraxseiten nach.", "Die Hand hierbei unbedingt geschlossen und flach halten.", "Der Patient sollte relativ schnell die eigene Atmung an die Bewegung der Einreibung anpassen.",
+                "Während der Einreibung unbedingt das Sprechen vermeiden und das Befinden des Patienten bzgl. Atmung und/oder Schmerzen beobachten." , "Nach ca. 5-10 Minuten (hier auch die Toleranz des Patienten beachten) streicht man abschließend mit beiden Händen entlang der Wirbelsäule von oben nach unten."};
+        ITEMS_Ernst.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Atemstimulierende Einreibung", breath, "Atem")));
+
+        String[] ganzWD = {"Waschen, Duschen, Baden","Mund-, Zahn- und Lippenpflege","Rasieren","Hautpflege","Haarpflege (Kämmen, ggf. Waschen)","Nagelpflege","An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken","Vorbereiten/Aufräumen des Pflegebereiches"};
+        ITEMS_Ernst.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ganzkörperwaschung", ganzWD, "Ganzkörperwaschung")));
+
+        String[] medicaments = {};
+        ITEMS_Ernst.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Medikamente verabreichen", medicaments, "Medikamente")));
+    }
+
+    private static void fillHelga(){
+
+        String[] freshAir = {"Fenster für mindestens 10 Minuten öffnen."};
+        ITEMS_Helga.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Wohnung lüften", freshAir, "Wohnung")));
+
+        String[] shit = {"Auscheidungen erfragen", "Ausscheidungen dokumentieren"};
+        ITEMS_Helga.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ausscheidungen dokumentieren", shit, "Ausscheidungen")));
+
+        // ANLEITUNG
+        String[] wound = {"Wunde am Steißbein versorgen und dokumentieren"};
+        ITEMS_Helga.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Wundversorgung durchführen", wound, "Wunden")));
+
+        String[] drinking = {"Trinkmenge erfragen."};
+        ITEMS_Helga.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Flüssigkeitsbilanzierung", drinking, "Trinken")));
+
+        String[] ganzWD = {"Waschen, Duschen, Baden","Mund-, Zahn- und Lippenpflege","Rasieren","Hautpflege","Haarpflege (Kämmen, ggf. Waschen)","Nagelpflege","An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken","Vorbereiten/Aufräumen des Pflegebereiches"};
+        ITEMS_Helga.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ganzkörperwaschung", ganzWD, "Ganzkörperwaschung")));
+
+        String[] medicaments = {};
+        ITEMS_Helga.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Medikamente verabreichen", medicaments, "Medikamente")));
+    }
+
+    private static void fillEmma(){
+
+        String[] freshAir = {"Fenster für mindestens 10 Minuten öffnen."};
+        ITEMS_Emma.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Wohnung lüften", freshAir, "Wohnung")));
+
+        String[] setBloodPressure = {};
+        ITEMS_Emma.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Blutdruck messen", setBloodPressure, "Blutdruck")));
+
+        String[] pulse = {};
+        ITEMS_Emma.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Puls messen", pulse, "Puls")));
+
+        String[] wound = {"Wunde am Unterarm versorgen und dokumentieren"};
+        ITEMS_Emma.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Wundversorgung durchführen", wound, "Wunden")));
+
+        String[] drinking = {"Trinkmenge erfragen."};
+        ITEMS_Emma.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Flüssigkeitsbilanzierung", drinking, "Trinken")));
+
+        String[] medicaments = {"Ganz wichtig: Insulin"};
+        ITEMS_Emma.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Medikamente verabreichen", medicaments, "Medikamente")));
+    }
+
+    private static void fillHans(){
+
+        String[] ear = {"Batterie der Hörgeräte prüfen", "Gegebenenfalls neue Batterien einlegen", "Hörgeräte anlegen"};
+        ITEMS_Hans.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Hörgeräte anlegen", ear, "Medikamente")));
+
+        String[] freshAir = {"Fenster für mindestens 10 Minuten öffnen."};
+        ITEMS_Hans.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Wohnung lüften", freshAir, "Wohnung")));
+
+        String[] setBloodPressure = {};
+        ITEMS_Hans.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Blutdruck messen", setBloodPressure, "Blutdruck")));
+
+        String[] pulse = {};
+        ITEMS_Hans.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Puls messen", pulse, "Puls")));
+
+        String[] wound = {};
+        ITEMS_Hans.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Gewicht messen", wound, "Gewicht")));
+
+        String[] drinking = {"Trinkmenge erfragen."};
+        ITEMS_Hans.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Flüssigkeitsbilanzierung", drinking, "Trinken")));
+
+        String[] medicaments = {};
+        ITEMS_Hans.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Medikamente verabreichen", medicaments, "Medikamente")));
+    }
+
+    private static void fillKarl(){
+
+        String[] ganzWD = {"Waschen, Duschen, Baden","Mund-, Zahn- und Lippenpflege","Rasieren","Hautpflege","Haarpflege (Kämmen, ggf. Waschen)","Nagelpflege","An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken","Vorbereiten/Aufräumen des Pflegebereiches"};
+        ITEMS_Karl.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Unterstützung der Ehefrau bei der Ganzkörperwaschung", ganzWD, "Ganzkörperwaschung")));
+
+        String[] wound = {"Wunde am Steißbein versorgen und dokumentieren"};
+        ITEMS_Karl.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Wundversorgung durchführen", wound, "Wunden")));
+
+        String[] setBloodPressure = {};
+        ITEMS_Karl.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Blutdruck messen", setBloodPressure, "Blutdruck")));
+
+        String[] pulse = {};
+        ITEMS_Karl.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Puls messen", pulse, "Puls")));
+
+        String[] weight = {};
+        ITEMS_Karl.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Gewicht messen", weight, "Gewicht")));
+
+        String[] drinking = {"Trinkmenge erfragen."};
+        ITEMS_Karl.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Flüssigkeitsbilanzierung", drinking, "Trinken")));
+
+        String[] medicaments = {};
+        ITEMS_Karl.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Medikamente verabreichen", medicaments, "Medikamente")));
+
+        String[] shit = {"Auscheidungen erfragen", "Ausscheidungen dokumentieren"};
+        ITEMS_Karl.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ausscheidungen dokumentieren", shit, "Ausscheidungen")));
+    }
+
+    private static void fillIrmgard(){
+
+        String[] freshAir = {"Fenster für mindestens 10 Minuten öffnen."};
+        ITEMS_Irmgard.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Wohnung lüften", freshAir, "Wohnung")));
+
+        // ANLEITUNG
+        String[] breathing = {"Technik zum Ausatmen (Lippenbremse)", "Einatmen durch die Nase", "Atem Trainer Triflow für 2 Minuten"};
+        ITEMS_Irmgard.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Atemübungen durschführen", breathing, "Atem")));
+
+        String[] drinking = {"Trinkmenge erfragen."};
+        ITEMS_Irmgard.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Flüssigkeitsbilanzierung", drinking, "Trinken")));
+
+        String[] breath = {"Die Atemstimulierende Einreibung wird nicht AM Klienten, sondern MIT dem Klienten durchgeführt", "Die Einreibung wird OHNE Handschuhe durchgeführt.", "Die Lotion in den Händen anwärmen."
+                , "Die Lotion auf den Rücken vom Nacken bis zum unteren Rippenbogen auftragen, auch die Thoraxseiten mit einbeziehen.", "Niemals den Kontakt zum Klienten verlieren, d.h. eine Hand verbleibt ständig am Körper des Klienten.",
+                "Beginnen Sie ruhig und gleichmäßig zu atmen. Die Bewegungen werden dem eigenen Atem angepasst und beginnen im Nacken.", "Bei der Exspiration findet die Abwärts- und bei der Inspiration die Aufwärtsbewegung statt.",
+                "Es werden mehrere spiegelsymetrische Kreise beschrieben, bei den inspiratorischen Bewegungen lagert der Druck auf Daumen und Zeigefinger, bei den exspiratorischen auf der gesamten Hand.",
+                "Hierbei lässt der Druck dann an den Thoraxseiten nach.", "Die Hand hierbei unbedingt geschlossen und flach halten.", "Der Patient sollte relativ schnell die eigene Atmung an die Bewegung der Einreibung anpassen.",
+                "Während der Einreibung unbedingt das Sprechen vermeiden und das Befinden des Patienten bzgl. Atmung und/oder Schmerzen beobachten." , "Nach ca. 5-10 Minuten (hier auch die Toleranz des Patienten beachten) streicht man abschließend mit beiden Händen entlang der Wirbelsäule von oben nach unten."};
+        ITEMS_Irmgard.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Atemstimulierende Einreibung", breath, "Atem")));
+
+        String[] ganzWD = {"Waschen, Duschen, Baden","Mund-, Zahn- und Lippenpflege","Rasieren","Hautpflege","Haarpflege (Kämmen, ggf. Waschen)","Nagelpflege","An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken","Vorbereiten/Aufräumen des Pflegebereiches"};
+        ITEMS_Irmgard.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ganzkörperwaschung", ganzWD, "Ganzkörperwaschung")));
+
+        String[] medicaments = {};
+        ITEMS_Irmgard.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Medikamente verabreichen", medicaments, "Medikamente")));
+
+        String[] setBloodPressure = {};
+        ITEMS_Irmgard.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Blutdruck messen", setBloodPressure, "Blutdruck")));
+
+        String[] pulse = {};
+        ITEMS_Irmgard.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Puls messen", pulse, "Puls")));
+
+        String[] weight = {};
+        ITEMS_Irmgard.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Gewicht messen", weight, "Gewicht")));
 
     }
 

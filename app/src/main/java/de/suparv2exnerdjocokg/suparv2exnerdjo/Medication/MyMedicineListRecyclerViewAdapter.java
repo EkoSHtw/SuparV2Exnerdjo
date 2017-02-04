@@ -41,7 +41,6 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = medicine.get(position);
         holder.substance.setText(holder.mItem.getSubstance());
-        holder.tradeName.setText(holder.mItem.getTradeName());
         holder.intensity.setText(holder.mItem.getIntensity());
         holder.form.setText(holder.mItem.getForm());
 
@@ -82,7 +81,6 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView substance;
-        public final TextView tradeName;
         public final TextView intensity;
         public final TextView form;
         public final TextView morning;
@@ -100,7 +98,6 @@ public class MyMedicineListRecyclerViewAdapter extends RecyclerView.Adapter<MyMe
             super(view);
             mView = view;
             substance = (TextView) view.findViewById(R.id.substance);
-            tradeName = (TextView) view.findViewById(R.id.trade_name);
             intensity = (TextView) view.findViewById(R.id.intensity);
             form = (TextView) view.findViewById(R.id.form);
             morning = (TextView) view.findViewById(R.id.morning);
