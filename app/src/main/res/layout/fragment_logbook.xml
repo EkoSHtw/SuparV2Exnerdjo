@@ -47,10 +47,18 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/header"
+    <!--<FrameLayout-->
+        <!--android:id="@+id/header"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <fragment
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:name="de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.LogBookHeadline"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/header">
+    </fragment>
 
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
