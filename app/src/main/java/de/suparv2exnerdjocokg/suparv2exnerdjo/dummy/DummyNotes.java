@@ -87,7 +87,7 @@ public class DummyNotes {
         return yesterday.getTime().getTime();
     }
 
-    public static void sortList(){
-        Collections.sort(ITEMS,Collections.<Note>reverseOrder());
+    public static void sortList(List<Note> items){
+        Collections.sort(items,Collections.<Note>reverseOrder());
     }
 }

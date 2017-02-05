@@ -16,10 +16,11 @@ public class DummyPictograms {
 
     static {
 
-        pictogramDescriptions.put(R.drawable.ear_, "Probleme bei dem Höhren");
+        pictogramDescriptions.put(R.drawable.ear_, "Schwerhörig");
         pictogramDescriptions.put(R.drawable.blizzard_, "Leicht reizbar");
         pictogramDescriptions.put(R.drawable.eye_, "Probleme bei dem Sehen");
         pictogramDescriptions.put(R.drawable.mouth__, "Spricht gerne viel");
+        pictogramDescriptions.put(R.drawable.brain, "Demenz");
 
     }
 

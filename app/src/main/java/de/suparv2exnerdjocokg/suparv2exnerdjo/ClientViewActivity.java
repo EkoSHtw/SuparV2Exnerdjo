@@ -274,8 +274,8 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
     public void addNote(String content, String tag) {
 //        EditText editText = (EditText)findViewById(R.id.dialog_input_text);
 //        String content = editText.getText().toString();
-        DummyNotes.ITEMS.add(new Note(tag, content, new Carer("John"), new Timestamp(System.currentTimeMillis())));
-        DummyNotes.sortList();
+        client.getNotes().add(new Note(tag, content, new Carer("John"), new Timestamp(System.currentTimeMillis())));
+        DummyNotes.sortList(client.getNotes());
         //update fragments
         // buggy, neue notizen nicht in reihenfolge
 

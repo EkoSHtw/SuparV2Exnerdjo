@@ -114,7 +114,7 @@ public class FixedNotesFragment extends Fragment {
             String note = notes.get(i).getTag();
             String todo = actualList.get(position).getTask().getName();
             if(note.equals(todo)){
-                items.add(DummyNotes.ITEMS.get(i));
+                items.add(notes.get(i));
             }
         }
 

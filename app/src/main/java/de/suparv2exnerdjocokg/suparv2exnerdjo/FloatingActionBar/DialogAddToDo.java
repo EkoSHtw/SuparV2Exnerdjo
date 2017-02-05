@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
@@ -21,8 +22,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
@@ -38,11 +41,15 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
 
     private DatePicker datePicker;
     private NumberPicker numberPicker;
-    ArrayList<ToDo> toDos;
+    List<ToDo> toDos;
 
 
     public DialogAddToDo() {
-        toDos = (ArrayList) DummyToDos.ITEMS;
+        Activity a = getActivity();
+        if (a instanceof ClientViewActivity){
+            Client c = ((ClientViewActivity)a).getClient();
+            toDos = c.getToDoList();
+        }
     }
 
 
@@ -148,7 +155,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
                         if (dateIsToday(datePickerDayOfMonth, datePickerMonth)) {
                             GeneralTask generalTask = new GeneralTask(tag, new String[]{description}, tag);
                             ToDo toDo = new ToDo(new Timestamp(calendar.getTimeInMillis()), generalTask);
-                            DummyToDos.ITEMS.add(toDo);
+                            toDos.add(toDo);
                         }
                     } else {
                         int val = numberPicker.getValue();
@@ -158,7 +165,7 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
 
                             GeneralTask generalTask = new GeneralTask(tag, new String[]{description}, tag);
                             ToDo toDo = new ToDo(new Timestamp(calendar.getTimeInMillis()), generalTask);
-                            DummyToDos.ITEMS.add(toDo);
+                            toDos.add(toDo);
                         }
                     }
                     dismissThis(true);

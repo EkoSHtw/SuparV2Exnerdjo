@@ -106,10 +106,14 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
 
         TextView time = (TextView) convertView.findViewById(R.id.time_route);
         int count = mClients.size();
-        double timePerClient = 8.0/count;
-        double start = groupPosition*timePerClient+8;
-        double end = ((groupPosition*timePerClient)+timePerClient+8);
-        time.setText((int)start +":00 Uhr\n - \n"+(int)end+":00 Uhr");
+        double timePerClientWithDrive = 8.0/count;
+        double twentyMintues = 20.0/60.0;
+        double timePerClientWithoutDrive = timePerClientWithDrive-twentyMintues;
+        double start = groupPosition*timePerClientWithDrive+8;
+        double startMinutes = (start-(int)start)*60;
+        double end = start+timePerClientWithoutDrive;
+        double endMinutes = (end-(int)end)*60;
+        time.setText((int)start +":"+ (int)startMinutes +" Uhr\n - \n"+(int)end+":"+ (int)endMinutes+" Uhr");
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
         name.setText(client.getFirstName()+" "+client.getLastName());
@@ -128,6 +132,7 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
                 ImageView pictogram = new ImageView(this.c);
                 pictogram.setLayoutParams(pictogramParams);
                 pictogram.setImageResource(client.getPictograms().get(i));
+                pictogram.setColorFilter(c.getResources().getColor(R.color.colorPrimaryDark));
                 pictogramContainer.addView(pictogram);
 
                 pictogram.setOnClickListener(new View.OnClickListener() {
@@ -168,40 +173,24 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
 
         taskStatus.setText(tasksDone+"/"+taskAmount);
 
-        //ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar1);
-
-        Date currentTime = new Date();
-        int hour = currentTime.getHours() - (int)start;
-        int minute = currentTime.getMinutes();
-        double max = timePerClient;
-        double progress = hour+((double)minute/60);
-
-
-        //progressBar.setMax((int)(timePerClient*100));
-
-       // progressBar.setProgress((int)(progress*100));
-
         ImageView checkmark = (ImageView) convertView.findViewById(R.id.checkmark);
         TextView fortschritt = (TextView) convertView.findViewById(R.id.forschritt);
 
-        if(progress >= max){
-            //progressBar.setVisibility(View.INVISIBLE);
-            if(DummyToDos.getUndone(todos).size() == 0) {
+        if(DummyToDos.getUndone(todos).size() == 0) {
                 /*LinearLayout container = (LinearLayout) convertView.findViewById(R.id.container_for_checkmark);
                 container.removeAllViews();
 
                 ImageView checkmark = new ImageView(c);
                 checkmark.setImageResource();
                 container.addView(checkmark);*/
-                checkmark.setColorFilter(c.getResources().getColor(R.color.colorAccent));
-                checkmark.setVisibility(View.VISIBLE);
-                taskStatus.setVisibility(View.GONE);
-                fortschritt.setVisibility(View.GONE);
-            }else{
-                checkmark.setVisibility(View.GONE);
-                taskStatus.setVisibility(View.VISIBLE);
-                fortschritt.setVisibility(View.VISIBLE);
-            }
+            checkmark.setColorFilter(c.getResources().getColor(R.color.colorAccent));
+            checkmark.setVisibility(View.VISIBLE);
+            taskStatus.setVisibility(View.GONE);
+            fortschritt.setVisibility(View.GONE);
+        }else{
+            checkmark.setVisibility(View.GONE);
+            taskStatus.setVisibility(View.VISIBLE);
+            fortschritt.setVisibility(View.VISIBLE);
         }
 
         return convertView;

@@ -27,6 +27,7 @@ public class Route extends AppCompatActivity implements ClientListFragment.OnLis
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
 
         Date currentTime = new Date();
+        currentTime.setHours(10);
         int hour = currentTime.getHours() - 8;
         int minute = currentTime.getMinutes();
 
