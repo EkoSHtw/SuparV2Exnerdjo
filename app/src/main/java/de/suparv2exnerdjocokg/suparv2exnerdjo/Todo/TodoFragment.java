@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
@@ -36,6 +39,8 @@ public class TodoFragment extends Fragment {
     private View view;
     private static View oldSelection;
     private Context context;
+    private Client c;
+    private List<ToDo> todos;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -62,6 +67,11 @@ public class TodoFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+        Activity a = getActivity();
+        if(a instanceof ClientViewActivity){
+            c = ((ClientViewActivity)a).getClient();
+            todos = c.getToDoList();
+        }
     }
 
     // Called to have the fragment instantiate its user interface view. This is optional, and non-graphical fragments can return null (which is the default implementation). This will be called between onCreate(Bundle) and onActivityCreated(Bundle).
@@ -78,7 +88,7 @@ public class TodoFragment extends Fragment {
     }
 
     private void createView() {
-        DummyToDos.sortAlphabet();
+        DummyToDos.sortAlphabet(todos);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.todolist);
         if (mColumnCount <= 1) {
@@ -86,7 +96,7 @@ public class TodoFragment extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(this, DummyToDos.getUndone(), mListener, infoListener));
+        recyclerView.setAdapter(new MyTodoRecyclerViewAdapter(this, DummyToDos.getUndone(todos), mListener, infoListener));
 
 
         RecyclerView recyclerViewDone = (RecyclerView) view.findViewById(R.id.todolist_done);
@@ -95,7 +105,7 @@ public class TodoFragment extends Fragment {
         } else {
             recyclerViewDone.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerViewDone.setAdapter(new MyTodoRecyclerViewAdapter(this, DummyToDos.getDone(), mListener, infoListener));
+        recyclerViewDone.setAdapter(new MyTodoRecyclerViewAdapter(this, DummyToDos.getDone(todos), mListener, infoListener));
 
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f);
         recyclerViewDone.setLayoutParams(layoutParams);
@@ -103,7 +113,7 @@ public class TodoFragment extends Fragment {
         recyclerView.setLayoutParams(layoutParams2);
 
         TextView doneHeader = (TextView) view.findViewById(R.id.done_headline);
-        if (DummyToDos.getDone().size() == 0) {
+        if (DummyToDos.getDone(todos).size() == 0) {
 
             doneHeader.setVisibility(View.GONE);
             recyclerViewDone.setVisibility(View.GONE);
@@ -119,7 +129,7 @@ public class TodoFragment extends Fragment {
         }
 
         TextView undoneHeader = (TextView) view.findViewById(R.id.undone_headline);
-        if (DummyToDos.getUndone().size() == 0) {
+        if (DummyToDos.getUndone(todos).size() == 0) {
             recyclerView.setVisibility(View.GONE);
 
             undoneHeader.setText("Sehr gut. Alle Aufgaben für heute sind erledigt.");

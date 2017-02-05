@@ -86,7 +86,7 @@ public class MedicineHeadlineFragment extends Fragment {
         reason = (TextView) view.findViewById(R.id.reason);
 
         substance.setText("Wirkstoff");
-        intensity.setText("Stärke");
+        intensity.setText("Menge");
         form.setText("Form");
         morning.setText("Morgens");
         morning.setTextSize(8);
@@ -96,7 +96,7 @@ public class MedicineHeadlineFragment extends Fragment {
         afternoon.setTextSize(8);
         night.setText("Zur Nacht");
         night.setTextSize(8);
-        unit.setText("Einheit");
+        unit.setText("Häufigkeit");
         information.setText("Hinweise");
         reason.setText("Grund");
 

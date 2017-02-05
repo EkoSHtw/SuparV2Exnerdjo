@@ -271,41 +271,41 @@ public class DummyToDos {
 
     }
 
-    public static void sortAlphabet(){
-        Collections.sort(ITEMS, new Comparator<ToDo>() {
+    public static void sortAlphabet(List<ToDo> items){
+        Collections.sort(items, new Comparator<ToDo>() {
             @Override
             public int compare(ToDo first, ToDo second){
                 return first.getTask().getName().compareTo(second.getTask().getName());
             }
         });
         List<ToDo> done = new ArrayList<>();
-        for(int i = 0; i < ITEMS.size(); i++){
-            if(ITEMS.get(i).getTask().isDone()){
-                done.add(ITEMS.get(i));
-                ITEMS.remove(i);
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getTask().isDone()){
+                done.add(items.get(i));
+                items.remove(i);
                 i = i-1;
             }
         }
         for(int i = 0; i < done.size(); i++){
-            ITEMS.add(done.get(i));
+            items.add(done.get(i));
         }
     }
 
-    public static List<ToDo> getDone(){
+    public static List<ToDo> getDone(List<ToDo> items){
         List<ToDo> done = new ArrayList<>();
-        for(int i = 0; i < ITEMS.size(); i++){
-            if(ITEMS.get(i).getTask().isDone()){
-                done.add(ITEMS.get(i));
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getTask().isDone()){
+                done.add(items.get(i));
             }
         }
         return done;
     }
 
-    public static List<ToDo> getUndone(){
+    public static List<ToDo> getUndone(List<ToDo> items){
         List<ToDo> undone = new ArrayList<>();
-        for(int i = 0; i < ITEMS.size(); i++){
-            if(!ITEMS.get(i).getTask().isDone()){
-                undone.add(ITEMS.get(i));
+        for(int i = 0; i < items.size(); i++){
+            if(!items.get(i).getTask().isDone()){
+                undone.add(items.get(i));
             }
         }
         return undone;

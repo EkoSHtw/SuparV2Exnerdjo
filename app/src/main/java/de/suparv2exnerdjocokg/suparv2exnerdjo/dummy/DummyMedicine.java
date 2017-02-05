@@ -59,7 +59,7 @@ public class DummyMedicine {
 
         ITEMS_PRESCRIBED_Erna.add(new Medicine("Thyroxin", "150 µg", "Tabletten", 1,0,0,0, "1x tgl.", "", "bei Schilddrüsenunterfunktion"));
         ITEMS_PRESCRIBED_Erna.add(new Medicine("Metropolol", "47,5 mg", "Retard-Tabletten", 1,0,0,1, "2x tgl.", "", "bei Bluthochdruck"));
-        ITEMS_PRESCRIBED_Erna.add(new Medicine("Protaphane", "20 IE", "Zylinderampullen", 1,0,0,0, "1x tgl.", "Injektionen immer subkutan (unter die Haut), niemals intravenör oder intrmuskulär injezieren.", "bei Diabetis mellitus"));
+        ITEMS_PRESCRIBED_Erna.add(new Medicine("Protaphane", "20 IE", "Zylinderampullen", 1,0,0,0, "1x tgl.", "Injektionen immer subkutan (unter die Haut), niemals intravenös oder intramuskulär injezieren.", "bei Diabetis mellitus"));
 
     }
 
@@ -88,7 +88,7 @@ public class DummyMedicine {
     private static void addEmmaMedication(){
 
 
-        ITEMS_PRESCRIBED_Emma.add(new Medicine("Protaphane", "20 IE", "Zylinderampullen", 1,0,0,0, "1x tgl.", "Injektionen immer subkutan (unter die Haut), niemals intravenör oder intrmuskulär injezieren.", "bei Diabetis mellitus"));
+        ITEMS_PRESCRIBED_Emma.add(new Medicine("Protaphane", "20 IE", "Zylinderampullen", 1,0,0,0, "1x tgl.", "Injektionen immer subkutan (unter die Haut), niemals intravenös oder intramuskulär injezieren.", "bei Diabetis mellitus"));
         ITEMS_PRESCRIBED_Emma.add(new Medicine("ACE Hemmer Captopril", "25 mg", "Tabletten", 1,0,1,0, "2x tgl.", "", "bei Herzinsuffizienz"));
         ITEMS_PRESCRIBED_Emma.add(new Medicine("Diuretika Furosemid", "40 mg", "Tabletten", 1,0,1,0, "2x tgl.", "", "bei Herzinsuffizienz"));
         ITEMS_PRESCRIBED_Emma.add(new Medicine("Betablocker Metoprolol", "47,5 mg", "Retard-Tabletten", 1,0,1,0, "2x tgl.", "", "bei Herzinsuffizienz"));

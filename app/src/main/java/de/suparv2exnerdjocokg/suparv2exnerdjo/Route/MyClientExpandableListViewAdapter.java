@@ -102,6 +102,7 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         }
 
         final Client client = mClients.get(groupPosition);
+        List<ToDo> todos = client.getToDoList();
 
         TextView time = (TextView) convertView.findViewById(R.id.time_route);
         int count = mClients.size();
@@ -141,10 +142,9 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         }
 
         ImageButton routeButton = (ImageButton) convertView.findViewById(R.id.route_button);
-        routeButton.setColorFilter(convertView.getResources().getColor(R.color.colorPrimaryDark));
 
         ImageButton arrow = (ImageButton) convertView.findViewById(R.id.arrow);
-        arrow.setColorFilter(convertView.getResources().getColor(R.color.colorPrimaryDark));
+        //arrow.setColorFilter(convertView.getResources().getColor(R.color.colorPrimaryDark));
 
         arrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,31 +163,44 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         routeButton.setFocusable(false);
 
         TextView taskStatus = (TextView) convertView.findViewById(R.id.task_status);
-        int taskAmount = DummyToDos.ITEMS.size();
-        int tasksDone = DummyToDos.getDone().size();
+        int taskAmount = todos.size();
+        int tasksDone = DummyToDos.getDone(todos).size();
 
         taskStatus.setText(tasksDone+"/"+taskAmount);
 
-        ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar1);
+        //ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar1);
 
         Date currentTime = new Date();
         int hour = currentTime.getHours() - (int)start;
         int minute = currentTime.getMinutes();
-
         double max = timePerClient;
         double progress = hour+((double)minute/60);
 
 
-        progressBar.setMax((int)(timePerClient*100));
+        //progressBar.setMax((int)(timePerClient*100));
 
-        progressBar.setProgress((int)(progress*100));
+       // progressBar.setProgress((int)(progress*100));
+
+        ImageView checkmark = (ImageView) convertView.findViewById(R.id.checkmark);
+        TextView fortschritt = (TextView) convertView.findViewById(R.id.forschritt);
 
         if(progress >= max){
-            progressBar.setVisibility(View.INVISIBLE);
-            if(DummyToDos.getUndone().size() == 0) {
-                convertView.setBackgroundColor(Color.argb(100, 104, 159, 56));
+            //progressBar.setVisibility(View.INVISIBLE);
+            if(DummyToDos.getUndone(todos).size() == 0) {
+                /*LinearLayout container = (LinearLayout) convertView.findViewById(R.id.container_for_checkmark);
+                container.removeAllViews();
+
+                ImageView checkmark = new ImageView(c);
+                checkmark.setImageResource();
+                container.addView(checkmark);*/
+                checkmark.setColorFilter(c.getResources().getColor(R.color.colorAccent));
+                checkmark.setVisibility(View.VISIBLE);
+                taskStatus.setVisibility(View.GONE);
+                fortschritt.setVisibility(View.GONE);
             }else{
-                convertView.setBackgroundColor(Color.argb(100, 159, 56, 56));
+                checkmark.setVisibility(View.GONE);
+                taskStatus.setVisibility(View.VISIBLE);
+                fortschritt.setVisibility(View.VISIBLE);
             }
         }
 

@@ -53,15 +53,12 @@
         <activity
             android:name=".ClientViewActivity"
             android:screenOrientation="landscape"
-            android:windowSoftInputMode="adjustPan|adjustResize" />
+            android:windowSoftInputMode="adjustPan|adjustResize"
+            android:hardwareAccelerated="true"/>
         <activity
             android:name=".Route.Route"
             android:screenOrientation="landscape" />
         <activity android:name=".DocumentTools.ImageActivity" />
-        <activity
-            android:name=".Vital.DialogChangeValue"
-            android:label="@string/title_activity_dialog_change_value"
-            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

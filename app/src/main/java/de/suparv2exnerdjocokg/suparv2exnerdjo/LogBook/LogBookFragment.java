@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +21,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
@@ -31,7 +34,8 @@ import static de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes.ITEMS;
 public class LogBookFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
 
-    private ArrayList<Note> notes;
+    private Client c;
+    private List<Note> notes;
     private RecyclerView mRecyclerView;
     private AutoCompleteTextView inputSearch;
     private MyLogBookRecyclerViewAdapter recyclerViewAdapter;
@@ -137,14 +141,18 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     private void prepareList() {
-        notes = (ArrayList) ITEMS;
+        Activity a = getActivity();
+        if(a instanceof ClientViewActivity) {
+            c = ((ClientViewActivity)a).getClient();
+            notes = c.getNotes();
+        }
     }
 
     public void update() {
 //        notes = ((ClientViewActivity)getActivity()).client.
-        Collections.copy(this.notes, DummyNotes.ITEMS);
+        Collections.copy(this.notes, notes);
 //        Collections.sort(notes);
-        Collections.sort(ITEMS, Collections.<Note>reverseOrder());
+        Collections.sort(notes, Collections.<Note>reverseOrder());
         recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
         mRecyclerView.swapAdapter(recyclerViewAdapter, true);
 //        mRecyclerView.setAdapter(recyclerViewAdapter);

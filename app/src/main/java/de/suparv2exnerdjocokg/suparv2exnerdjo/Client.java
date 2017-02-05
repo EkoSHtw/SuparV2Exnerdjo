@@ -32,7 +32,7 @@ public class Client implements Serializable {
 
   private DummyClientMedicine medicineList;
 
-  private ArrayList<Note> notes ;
+  private List<Note> notes ;
 
   private String concerns;
 
@@ -46,7 +46,7 @@ public class Client implements Serializable {
   private ArrayList<Integer> pictograms;
 
   public Client(int id, int imagePath, String firstName, String lastName, String dateString, DummyClientMedicine medicineList,
-                ArrayList<Note> notes, List<ToDo> toDoList, VitalValues vital, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber, ArrayList<Integer> pictograms){
+                List<Note> notes, List<ToDo> toDoList, VitalValues vital, String infodump, int carelevel, String adress, ArrayList<PhoneNumber> phoneNumber, ArrayList<Integer> pictograms){
     this.firstName = firstName;
     this.lastName = lastName;
     this.id = id;
@@ -187,7 +187,7 @@ public String getFullName(){
     this.concerns = concerns;
   }
 
-  public ArrayList<Note> getNotes() {
+  public List<Note> getNotes() {
     return this.notes;
   }
 

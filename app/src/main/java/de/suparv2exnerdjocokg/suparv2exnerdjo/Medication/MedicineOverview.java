@@ -70,17 +70,15 @@ public class MedicineOverview extends Fragment {
             MedicineListFragment mFrag = MedicineListFragment.newInstance("prediscribed");
             getChildFragmentManager().beginTransaction().add(R.id.prediscribed_medication, mFrag).commit();
         }
+
+        /*
         if(view.findViewById(R.id.temporary_medicine)!=null){
             MedicineListFragment mFrag = MedicineListFragment.newInstance("temporary");
             getChildFragmentManager().beginTransaction().add(R.id.temporary_medicine, mFrag).commit();
-        }
+        }*/
         if(view.findViewById(R.id.self_medication)!=null){
             MedicineListFragment mFrag = MedicineListFragment.newInstance("self");
             getChildFragmentManager().beginTransaction().add(R.id.self_medication, mFrag).commit();
-        }
-        if(view.findViewById(R.id.self_medication_demand)!=null){
-            MedicineListFragment mFrag = MedicineListFragment.newInstance("demand");
-            getChildFragmentManager().beginTransaction().add(R.id.self_medication_demand, mFrag).commit();
         }
 
         return view;

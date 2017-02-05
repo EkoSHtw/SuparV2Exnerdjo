@@ -15,8 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
-        android:rotation="180"
-        app:srcCompat="@drawable/arrow"
+        app:srcCompat="?android:attr/actionModeCloseDrawable"
         />
 
     <TextView
@@ -26,14 +25,16 @@
         android:layout_toRightOf="@id/back_to_clients"
         style="@style/AppTextMenu"
         android:layout_marginTop="0dp"
+        android:layout_marginLeft="5dp"
         />
 
     <TextView
+        android:layout_marginTop="20dp"
         android:id="@+id/client_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Aufgaben"
-        android:layout_below="@id/back_to_clients"
+        android:layout_below="@id/client_name"
         style="@style/AppTextMenu"
         />
     <TextView
@@ -47,7 +48,7 @@
         android:id="@+id/log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logbuch"
+        android:text="Verlauf"
         style="@style/AppTextMenu"
         android:layout_below="@id/basic_data"/>
     <TextView

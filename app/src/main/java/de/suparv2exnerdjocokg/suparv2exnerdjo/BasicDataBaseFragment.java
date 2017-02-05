@@ -68,7 +68,7 @@ public class BasicDataBaseFragment extends Fragment {
 
                 img = (ImageView) rootView.findViewById(R.id.image);
 
-                img.setImageResource(R.drawable.woman_image);
+                img.setImageResource(c.getImagePath());
                 name = (TextView) rootView.findViewById(R.id.clientname);
                 name.setText(c.getFirstName() + " " + c.getLastName());
                 adress = (TextView) rootView.findViewById(R.id.adress);

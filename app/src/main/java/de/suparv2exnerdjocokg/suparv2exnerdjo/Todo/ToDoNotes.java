@@ -86,7 +86,6 @@ public class ToDoNotes extends Fragment {
             FragmentTransaction trans = getChildFragmentManager().beginTransaction();
 
             trans.replace(R.id.fixedNotes, fnFrag);
-            trans.addToBackStack(null);
 
             trans.commit();
         }
@@ -106,7 +105,6 @@ public class ToDoNotes extends Fragment {
         FragmentTransaction trans = getChildFragmentManager().beginTransaction();
 
         trans.replace(R.id.fixedNotes, tFrag);
-        trans.addToBackStack(null);
 
         trans.commit();
     }

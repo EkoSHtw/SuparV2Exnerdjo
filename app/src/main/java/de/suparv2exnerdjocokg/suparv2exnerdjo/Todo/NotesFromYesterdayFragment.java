@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
@@ -36,6 +39,9 @@ public class NotesFromYesterdayFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private View view;
+    private Client c;
+    private List<Note> notes;
+    private List<ToDo> todos;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -60,6 +66,12 @@ public class NotesFromYesterdayFragment extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+        }
+        Activity a = getActivity();
+        if(a instanceof ClientViewActivity){
+            c = ((ClientViewActivity)a).getClient();
+            notes = c.getNotes();
+            todos = c.getToDoList();
         }
     }
 
@@ -88,9 +100,9 @@ public class NotesFromYesterdayFragment extends Fragment {
 
     private List<Note> getYesterday() throws ParseException {
         List<Note> list = new ArrayList<>();
-        for(int i = 0; i < DummyNotes.ITEMS.size(); i++){
-            if(equalsWithYesterday(DummyNotes.ITEMS.get(i).getTimestamp())){
-                list.add(DummyNotes.ITEMS.get(i));
+        for(int i = 0; i < notes.size(); i++){
+            if(equalsWithYesterday(notes.get(i).getTimestamp())){
+                list.add(notes.get(i));
             }
         }
         return list;
@@ -108,11 +120,11 @@ public class NotesFromYesterdayFragment extends Fragment {
 
     public void updateFragView(int position){
         List<Note> items = new ArrayList<>();
-        for(int i = 0; i < DummyNotes.ITEMS.size(); i++) {
-            String note = DummyNotes.ITEMS.get(i).getTag();
-            String todo = DummyToDos.ITEMS.get(position).getTask().getName();
+        for(int i = 0; i < notes.size(); i++) {
+            String note = notes.get(i).getTag();
+            String todo = todos.get(position).getTask().getName();
             if(note.equals(todo)){
-                items.add(DummyNotes.ITEMS.get(i));
+                items.add(notes.get(i));
             }
         }
 
