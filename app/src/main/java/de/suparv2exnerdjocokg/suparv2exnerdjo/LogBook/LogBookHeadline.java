@@ -27,7 +27,6 @@ public class LogBookHeadline extends Fragment {
                                  Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_logbook_item, container, false);
 
-
             time = (TextView) view.findViewById(R.id.frag_logB_date);
             time.setTextAppearance(getContext(), R.style.AppTextHeadline);
             time.setTextSize(16);
