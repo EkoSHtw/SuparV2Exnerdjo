@@ -1,31 +1,40 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.NoteComparators.CarerComparator;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.NoteComparators.DateComparator;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.NoteComparators.TagComparator;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.list;
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes.ITEMS;
+import static java.util.Collections.sort;
 
 
 public class LogBookFragment extends Fragment implements AdapterView.OnItemSelectedListener {
@@ -35,6 +44,10 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     private RecyclerView mRecyclerView;
     private AutoCompleteTextView inputSearch;
     private MyLogBookRecyclerViewAdapter recyclerViewAdapter;
+    //    private LinearLayout header;
+    private boolean flag_date = true;
+    private boolean flag_carer = true;
+    private boolean flag_tag = true;
 
     private int currentSpinnerSelection;
 
@@ -44,10 +57,12 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
         View view = inflater.inflate(R.layout.fragment_logbook, container, false);
 
-        if (view.findViewById(R.id.header) != null) {
-            LogBookHeadline lHead = new LogBookHeadline();
-            getChildFragmentManager().beginTransaction().add(R.id.header, lHead).commit();
-        }
+//        if (view.findViewById(R.id.header) != null) {
+//            LogBookHeadline lHead = new LogBookHeadline();
+//            getChildFragmentManager().beginTransaction().add(R.id.header, lHead).commit();
+////           header =(LinearLayout) lHead.getView();
+//            Log.i("if", "bin drinne");
+//        }
 
         Spinner spinner = (Spinner) view.findViewById(R.id.search_bar_spinner);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(getContext(),
@@ -56,6 +71,9 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
         arrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(this);
+
+
+//        header = (FrameLayout) getView().findViewById(R.id.header);
 
         mRecyclerView = (RecyclerView) view.findViewById(list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -80,6 +98,56 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
         });
         update();
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+//        FrameLayout header =
+        LinearLayout header = (LinearLayout) getView().findViewById(R.id.header);
+
+        TextView date = (TextView) header.findViewById(R.id.frag_logB_date);
+        TextView tag = (TextView) header.findViewById(R.id.frag_logB_tag);
+        TextView carer = (TextView) header.findViewById(R.id.frag_logB_carer);
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flag_date) {
+                    sortBy(new DateComparator());
+                    flag_date = false;
+                } else {
+                    sortBy(Collections.reverseOrder(new DateComparator()));
+                    flag_date = true;
+                }
+            }
+        });
+
+        tag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flag_tag) {
+                    sortBy(new TagComparator());
+                    flag_tag = false;
+                } else {
+                    sortBy(Collections.reverseOrder(new TagComparator()));
+                    flag_tag = true;
+                }
+            }
+        });
+        carer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flag_carer) {
+                    sortBy(new CarerComparator());
+                    flag_carer = false;
+                } else {
+                    sortBy(Collections.reverseOrder(new CarerComparator()));
+                    flag_carer = true;
+                }
+            }
+        });
+
+
     }
 
     public void filterList(CharSequence cs) {
@@ -115,7 +183,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
             String[] autoCompleteItems = getAutoCompleteItems(position);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.auto_complete_item, autoCompleteItems);
             inputSearch.setAdapter(adapter);
-        }else{
+        } else {
             inputSearch.setAdapter(null);
         }
         filterList(this.inputSearch.getText());
@@ -144,10 +212,37 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 //        notes = ((ClientViewActivity)getActivity()).client.
         Collections.copy(this.notes, DummyNotes.ITEMS);
 //        Collections.sort(notes);
-        Collections.sort(ITEMS, Collections.<Note>reverseOrder());
+//        Collections.sort(ITEMS, Collections.<Note>reverseOrder());
+        sort(this.notes, Collections.reverseOrder(new DateComparator()));
         recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
         mRecyclerView.swapAdapter(recyclerViewAdapter, true);
 //        mRecyclerView.setAdapter(recyclerViewAdapter);
+    }
 
+    private void groupBy(int id) {
+        Log.i("methode", "group by my side");
+        switch (id) {
+            case R.id.frag_logB_date:
+                Log.i("date my ass", "hello");
+                if (flag_date) {
+                    Log.i("first ", "if");
+                    sort(notes, new DateComparator());
+                    flag_date = false;
+                } else {
+                    Log.i("second ", "if");
+                    sort(notes, Collections.reverseOrder(new DateComparator()));
+                    flag_date = true;
+                }
+                recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
+                mRecyclerView.swapAdapter(recyclerViewAdapter, true);
+                break;
+        }
+
+    }
+
+    private void sortBy(Comparator<Note> comparator) {
+        sort(notes, comparator);
+        recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
+        mRecyclerView.swapAdapter(recyclerViewAdapter, true);
     }
 }
