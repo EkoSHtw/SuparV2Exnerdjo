@@ -2,39 +2,34 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.Image;
 import android.net.Uri;
-import android.content.pm.PackageManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import java.io.FileOutputStream;
 import java.io.File;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription1;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription2;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.DoctorialPrescription3;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.MobilisationBeddingFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Documents.WoundDocumentationFragment;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar.DialogAddNewNoteOrTask;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionButton.DialogAddNewNoteOrTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.LogBookFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Medication.MedicineOverview;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ClientView;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
-
-import java.util.ArrayList;
-
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
@@ -262,7 +257,6 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
 //        EditText editText = (EditText)findViewById(R.id.dialog_input_text);
 //        String content = editText.getText().toString();
         DummyNotes.ITEMS.add(new Note(tag, content, new Carer("John"), new Timestamp(System.currentTimeMillis())));
-        DummyNotes.sortList();
         //update fragments
         // buggy, neue notizen nicht in reihenfolge
 

@@ -1,4 +1,4 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionButton;
 
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;

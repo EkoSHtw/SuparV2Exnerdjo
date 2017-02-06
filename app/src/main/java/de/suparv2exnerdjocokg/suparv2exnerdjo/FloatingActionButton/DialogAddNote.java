@@ -1,4 +1,4 @@
-package de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionBar;
+package de.suparv2exnerdjocokg.suparv2exnerdjo.FloatingActionButton;
 
 import android.app.Activity;
 import android.app.Dialog;
