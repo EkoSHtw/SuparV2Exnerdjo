@@ -56,7 +56,7 @@ public class DialogAddNote extends Dialog implements View.OnClickListener {
     private String[] getTags() {
         Set<String> tags = new HashSet<>();
 //        DummyToDos.ITEMS
-        List<ToDo> items = DummyToDos.ITEMS;
+        List<ToDo> items = activity.getClient().getToDoList();
         for (int i = 0; i < items.size(); i++) {
             ToDo toDo = items.get(i);
             tags.add(toDo.getTask().getTag());

@@ -102,13 +102,44 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         }
 
         final Client client = mClients.get(groupPosition);
+        List<ToDo> todos = client.getToDoList();
+
 
         TextView time = (TextView) convertView.findViewById(R.id.time_route);
+        /*
         int count = mClients.size();
-        double timePerClient = 8.0/count;
-        double start = groupPosition*timePerClient+8;
-        double end = ((groupPosition*timePerClient)+timePerClient+8);
-        time.setText((int)start +":00 Uhr\n - \n"+(int)end+":00 Uhr");
+        double timePerClientWithDrive = 8.0/count;
+        double twentyMintues = 20.0/60.0;
+        double timePerClientWithoutDrive = timePerClientWithDrive-twentyMintues;
+        double start = groupPosition*timePerClientWithDrive+8;
+        double startMinutes = (start-(int)start)*60;
+        double end = start+timePerClientWithoutDrive;
+        double endMinutes = (end-(int)end)*60;
+        time.setText((int)start +":"+ (int)startMinutes +" Uhr\n - \n"+(int)end+":"+ (int)endMinutes+" Uhr");*/
+
+        switch (groupPosition){
+            case 0:
+                time.setText("08:15 Uhr\n - \n 08:55 Uhr");
+                break;
+            case 1:
+                time.setText("09:15 Uhr\n - \n 09:55 Uhr");
+                break;
+            case 2:
+                time.setText("10:15 Uhr\n - \n 10:55 Uhr");
+                break;
+            case 3:
+                time.setText("11:15 Uhr\n - \n 11:55 Uhr");
+                break;
+            case 4:
+                time.setText("12:45 Uhr\n - \n 13:25 Uhr");
+                break;
+            case 5:
+                time.setText("13:45 Uhr\n - \n 14:25 Uhr");
+                break;
+            case 6:
+                time.setText("14:45 Uhr\n - \n 16:15 Uhr");
+                break;
+        }
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
         name.setText(client.getFirstName()+" "+client.getLastName());
@@ -127,6 +158,7 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
                 ImageView pictogram = new ImageView(this.c);
                 pictogram.setLayoutParams(pictogramParams);
                 pictogram.setImageResource(client.getPictograms().get(i));
+                pictogram.setColorFilter(c.getResources().getColor(R.color.colorPrimaryDark));
                 pictogramContainer.addView(pictogram);
 
                 pictogram.setOnClickListener(new View.OnClickListener() {
@@ -141,10 +173,9 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         }
 
         ImageButton routeButton = (ImageButton) convertView.findViewById(R.id.route_button);
-        routeButton.setColorFilter(convertView.getResources().getColor(R.color.colorPrimaryDark));
 
         ImageButton arrow = (ImageButton) convertView.findViewById(R.id.arrow);
-        arrow.setColorFilter(convertView.getResources().getColor(R.color.colorPrimaryDark));
+        //arrow.setColorFilter(convertView.getResources().getColor(R.color.colorPrimaryDark));
 
         arrow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,32 +194,29 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         routeButton.setFocusable(false);
 
         TextView taskStatus = (TextView) convertView.findViewById(R.id.task_status);
-        int taskAmount = DummyToDos.ITEMS.size();
-        int tasksDone = DummyToDos.getDone().size();
+        int taskAmount = todos.size();
+        int tasksDone = DummyToDos.getDone(todos).size();
 
         taskStatus.setText(tasksDone+"/"+taskAmount);
 
-        ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar1);
+        ImageView checkmark = (ImageView) convertView.findViewById(R.id.checkmark);
+        TextView fortschritt = (TextView) convertView.findViewById(R.id.forschritt);
 
-        Date currentTime = new Date();
-        int hour = currentTime.getHours() - (int)start;
-        int minute = currentTime.getMinutes();
+        if(DummyToDos.getUndone(todos).size() == 0) {
+                /*LinearLayout container = (LinearLayout) convertView.findViewById(R.id.container_for_checkmark);
+                container.removeAllViews();
 
-        double max = timePerClient;
-        double progress = hour+((double)minute/60);
-
-
-        progressBar.setMax((int)(timePerClient*100));
-
-        progressBar.setProgress((int)(progress*100));
-
-        if(progress >= max){
-            progressBar.setVisibility(View.INVISIBLE);
-            if(DummyToDos.getUndone().size() == 0) {
-                convertView.setBackgroundColor(Color.argb(100, 104, 159, 56));
-            }else{
-                convertView.setBackgroundColor(Color.argb(100, 159, 56, 56));
-            }
+                ImageView checkmark = new ImageView(c);
+                checkmark.setImageResource();
+                container.addView(checkmark);*/
+            checkmark.setColorFilter(c.getResources().getColor(R.color.colorAccent));
+            checkmark.setVisibility(View.VISIBLE);
+            taskStatus.setVisibility(View.GONE);
+            fortschritt.setVisibility(View.GONE);
+        }else{
+            checkmark.setVisibility(View.GONE);
+            taskStatus.setVisibility(View.VISIBLE);
+            fortschritt.setVisibility(View.VISIBLE);
         }
 
         return convertView;

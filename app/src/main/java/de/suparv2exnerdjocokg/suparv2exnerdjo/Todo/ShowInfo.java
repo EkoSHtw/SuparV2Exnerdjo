@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
@@ -36,6 +39,8 @@ public class ShowInfo extends Fragment {
     // TODO: Rename and change types of parameters
     private int position;
     private boolean done;
+    private Client c;
+    private List<ToDo> todos;
 
 
     public ShowInfo() {
@@ -66,6 +71,11 @@ public class ShowInfo extends Fragment {
             if(getArguments().getBoolean("done")){
                 done = getArguments().getBoolean("done");
             }
+            Activity a = getActivity();
+            if(a instanceof ClientViewActivity){
+                c = ((ClientViewActivity)a).getClient();
+                todos = c.getToDoList();
+            }
         }
     }
 
@@ -76,9 +86,9 @@ public class ShowInfo extends Fragment {
 
         List<ToDo> actualList;
         if(done){
-            actualList = DummyToDos.getDone();
+            actualList = DummyToDos.getDone(todos);
         }else{
-            actualList = DummyToDos.getUndone();
+            actualList = DummyToDos.getUndone(todos);
         }
 
         TextView info = (TextView) view.findViewById(R.id.info_headline);

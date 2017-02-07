@@ -38,9 +38,8 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 public class ClientViewActivity extends AppCompatActivity implements VitalFragment.OnFragmentInteractionListener ,BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
-    public Client client;
-
-
+    private Client client;
+    private Carer carer;
 
     private FloatingActionButton fab;
     private Activity activity = this;
@@ -55,6 +54,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
 
         Intent intent = getIntent();
         client = DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
+        carer = new Carer("JD");
 
         File f = new File(getFilesDir(), this.getString(R.string.wounddocname)+ " "  + client.getFullName());
         File f1 = new File(getFilesDir(), this.getString(R.string.mobdocname) + " " + client.getFullName());
@@ -107,6 +107,22 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (newFrag != null) {
             newFrag.updateClientView(-2, false);
+        } else {
+            newFrag = new ClientView();
+            Bundle args = new Bundle();
+            newFrag.setArguments(args);
+
+            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+            trans.replace(R.id.fragment_container, newFrag);
+
+            trans.commit();}
+    }
+
+    public void updateRightView(){
+        ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (newFrag != null) {
+            newFrag.updateClientView(-1, false);
         } else {
             newFrag = new ClientView();
             Bundle args = new Bundle();
@@ -236,6 +252,9 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
     public Client getClient() {
         return client;
     }
+    public Carer getCarer() {
+        return carer;
+    }
 
     public void onDocumentSelected(String position) {
         // The user selected the headline of an article from the HeadlinesFragment
@@ -274,8 +293,8 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
     public void addNote(String content, String tag) {
 //        EditText editText = (EditText)findViewById(R.id.dialog_input_text);
 //        String content = editText.getText().toString();
-        DummyNotes.ITEMS.add(new Note(tag, content, new Carer("John"), new Timestamp(System.currentTimeMillis())));
-        DummyNotes.sortList();
+        client.getNotes().add(new Note(tag, content, new Carer("John"), new Timestamp(System.currentTimeMillis())));
+        DummyNotes.sortList(client.getNotes());
         //update fragments
         // buggy, neue notizen nicht in reihenfolge
 

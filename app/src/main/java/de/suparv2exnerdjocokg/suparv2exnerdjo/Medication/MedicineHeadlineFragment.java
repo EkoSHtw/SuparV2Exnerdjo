@@ -75,7 +75,6 @@ public class MedicineHeadlineFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_medication, container, false);
 
         substance = (TextView) view.findViewById(R.id.substance);
-        tradeName = (TextView) view.findViewById(R.id.trade_name);
         intensity = (TextView) view.findViewById(R.id.intensity);
         form = (TextView) view.findViewById(R.id.form);
         morning = (TextView) view.findViewById(R.id.morning);
@@ -87,8 +86,7 @@ public class MedicineHeadlineFragment extends Fragment {
         reason = (TextView) view.findViewById(R.id.reason);
 
         substance.setText("Wirkstoff");
-        tradeName.setText("Handelsname");
-        intensity.setText("Stärke");
+        intensity.setText("Menge");
         form.setText("Form");
         morning.setText("Morgens");
         morning.setTextSize(8);
@@ -98,7 +96,7 @@ public class MedicineHeadlineFragment extends Fragment {
         afternoon.setTextSize(8);
         night.setText("Zur Nacht");
         night.setTextSize(8);
-        unit.setText("Einheit");
+        unit.setText("Häufigkeit");
         information.setText("Hinweise");
         reason.setText("Grund");
 

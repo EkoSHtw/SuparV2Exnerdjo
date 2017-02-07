@@ -171,7 +171,6 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                         if (currentTask.getDaysShiftet() > 0) {
                             currentTask.setShiftedNote(input);
                         } else {
-                            Log.println(Log.INFO,"","HEEEEYAAA");
                             currentTask.getNote().setContent(input);
                         }
 

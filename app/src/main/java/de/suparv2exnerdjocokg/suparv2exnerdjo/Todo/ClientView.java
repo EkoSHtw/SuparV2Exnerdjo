@@ -89,7 +89,6 @@ public class ClientView extends Fragment {
                 FragmentTransaction trans = getChildFragmentManager().beginTransaction();
 
                 trans.replace(R.id.todoNotes, tFrag);
-                trans.addToBackStack(null);
 
                 trans.commit();
             }
@@ -104,10 +103,10 @@ public class ClientView extends Fragment {
                 args.putBoolean("done", done);
                 todoFrag.setArguments(args);
 
+
                 FragmentTransaction trans = getChildFragmentManager().beginTransaction();
 
                 trans.replace(R.id.todos, todoFrag);
-                trans.addToBackStack(null);
 
                 trans.commit();
             }
@@ -128,7 +127,6 @@ public class ClientView extends Fragment {
             FragmentTransaction trans = getChildFragmentManager().beginTransaction();
 
             trans.replace(R.id.todoNotes, tFrag);
-            trans.addToBackStack(null);
 
             trans.commit();
         }

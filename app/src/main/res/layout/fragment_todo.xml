@@ -36,7 +36,8 @@
         android:layout_height="match_parent"
         android:background="@color/transparent"
         android:layout_toLeftOf="@id/info"
-        app:srcCompat="@drawable/arrow"
+        app:srcCompat="?android:attr/actionModeCloseDrawable"
+        android:rotation="180"
         />
 
     <ImageButton

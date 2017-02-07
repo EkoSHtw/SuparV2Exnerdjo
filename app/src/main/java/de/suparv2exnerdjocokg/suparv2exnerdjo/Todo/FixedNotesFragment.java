@@ -1,5 +1,6 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
@@ -32,7 +35,9 @@ public class FixedNotesFragment extends Fragment {
     private View view;
     private static final String ARG_POSITION = "position";
     private int position = -1;
-    private List<Note> items;
+    private List<Note> notes;
+    private Client c;
+    private List<ToDo> todos;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -59,6 +64,12 @@ public class FixedNotesFragment extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
             position = getArguments().getInt(ARG_POSITION);
         }
+        Activity a = getActivity();
+        if(a instanceof ClientViewActivity){
+            c = ((ClientViewActivity)a).getClient();
+            notes = c.getFixedNotes();
+            todos = c.getToDoList();
+        }
     }
 
     @Override
@@ -66,15 +77,14 @@ public class FixedNotesFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fixed_notes_list, container, false);
 
-        if(position == -1){
-            items = DummyNotes.ITEMS;
-        }else{
+        List<Note> items = notes;
+        if(position != -1){
             items = new ArrayList<>();
-            for(int i = 0; i < DummyNotes.ITEMS.size(); i++) {
-                String note = DummyNotes.ITEMS.get(i).getTag();
-                String todo = DummyToDos.ITEMS.get(position).getTask().getName();
+            for(int i = 0; i < notes.size(); i++) {
+                String note = notes.get(i).getTag();
+                String todo = todos.get(position).getTask().getTag();
                 if(note.equals(todo)){
-                    items.add(DummyNotes.ITEMS.get(i));
+                    items.add(notes.get(i));
                 }
             }
         }
@@ -94,22 +104,28 @@ public class FixedNotesFragment extends Fragment {
     }
 
     public void updateFragView(int position, boolean done){
-        List<ToDo> actualList;
-        if(done){
-            actualList = DummyToDos.getDone();
-        }else{
-            actualList = DummyToDos.getUndone();
-        }
+
+
         List<Note> items = new ArrayList<>();
-        for(int i = 0; i < DummyNotes.ITEMS.size(); i++) {
-            String note = DummyNotes.ITEMS.get(i).getTag();
-            String todo = actualList.get(position).getTask().getName();
-            if(note.equals(todo)){
-                items.add(DummyNotes.ITEMS.get(i));
+        if(position!=-1) {
+            List<ToDo> actualList;
+            if (done) {
+                actualList = DummyToDos.getDone(todos);
+            } else {
+                actualList = DummyToDos.getUndone(todos);
             }
+            for (int i = 0; i < notes.size(); i++) {
+                String note = notes.get(i).getTag();
+                String todo = actualList.get(position).getTask().getTag();
+                if (note.equals(todo)) {
+                    items.add(notes.get(i));
+                }
+            }
+        }else{
+            items = notes;
         }
 
-        if(view != null && view instanceof RecyclerView) {
+        if (view != null && view instanceof RecyclerView) {
             RecyclerView rView = (RecyclerView) view;
             rView.setAdapter(new MyNoteRecyclerViewAdapter(items));
         }

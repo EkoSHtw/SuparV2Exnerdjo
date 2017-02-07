@@ -24,6 +24,13 @@ public class DummyNotes {
      * An array of sample (dummy) items.
      */
     public static final List<Note> ITEMS = new ArrayList<>();
+    public static final List<Note> ITEMS_Erna = new ArrayList<>();
+    public static final List<Note> ITEMS_Ernst = new ArrayList<>();
+    public static final List<Note> ITEMS_Helga = new ArrayList<>();
+    public static final List<Note> ITEMS_Emma = new ArrayList<>();
+    public static final List<Note> ITEMS_Hans = new ArrayList<>();
+    public static final List<Note> ITEMS_Karl = new ArrayList<>();
+    public static final List<Note> ITEMS_Irmgard = new ArrayList<>();
 
     /**
      * A map of sample (dummy) items, by ID.
@@ -32,6 +39,15 @@ public class DummyNotes {
 
 
     static {
+
+        fillErna();
+        fillErnst();
+        fillHelga();
+        fillEmma();
+        fillHans();
+        fillKarl();
+        fillIrmgard();
+
         ITEMS.add(new Note("Ganzwaschung", "Bitte immer den roten (weichen) Lappen benutzen.", new Carer("Jimmy"), new Timestamp(System.currentTimeMillis())));
         ITEMS.add(new Note("Teilwaschung", "Bitte immer den roten (weichen) Lappen benutzen.", new Carer("Jimmy"), new Timestamp(System.currentTimeMillis())));
         ITEMS.add(new Note("Hilfe bei der Nahrungsaufnahme", "Harte Speisen bitte zerkleinern", new Carer("Jimmy"), new Timestamp(System.currentTimeMillis())));
@@ -57,13 +73,25 @@ public class DummyNotes {
 
     }
 
+    public static void fillErna(){
+
+    };
+
+
+    public static void fillErnst(){};
+    public static void fillHelga(){};
+    public static void fillEmma(){};
+    public static void fillHans(){};
+    public static void fillKarl(){};
+    public static void fillIrmgard(){};
+
     public static long getYesterday() {
         GregorianCalendar yesterday = new GregorianCalendar();
         yesterday.add(Calendar.DATE, -1);
         return yesterday.getTime().getTime();
     }
 
-    public static void sortList(){
-        Collections.sort(ITEMS,Collections.<Note>reverseOrder());
+    public static void sortList(List<Note> items){
+        Collections.sort(items,Collections.<Note>reverseOrder());
     }
 }

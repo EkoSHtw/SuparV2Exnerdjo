@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
+            <!--TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="zeitlich befristete Medikation"
@@ -47,28 +47,16 @@
             <FrameLayout
                 android:id="@+id/temporary_medicine"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"/-->
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Selbstmediaktion"
+                android:text="Selbstmedikation"
                 style="@style/AppTextHeadline" />
 
             <FrameLayout
                 android:id="@+id/self_medication"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Selbstmediaktion nach Bedarf"
-                style="@style/AppTextHeadline" />
-
-
-            <FrameLayout
-                android:id="@+id/self_medication_demand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

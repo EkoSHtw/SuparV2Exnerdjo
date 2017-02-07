@@ -24,6 +24,18 @@ public class Route extends AppCompatActivity implements ClientListFragment.OnLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
 
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar1);
+
+        Date currentTime = new Date();
+        //currentTime.setHours(10);
+        int hour = currentTime.getHours() - 8;
+        int minute = currentTime.getMinutes();
+
+        double progress = hour+((double)minute/60);
+
+        progressBar.setMax(800);
+        progressBar.setProgress((int)(progress*100));
+
         if(findViewById(R.id.client_list)!=null){
             ClientListFragment lF = new ClientListFragment();
             getSupportFragmentManager().beginTransaction().add(R.id.client_list, lF).commit();

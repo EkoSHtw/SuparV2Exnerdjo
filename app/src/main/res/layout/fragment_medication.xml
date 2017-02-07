@@ -26,24 +26,11 @@
         android:background="@color/colorAccent" />
 
     <TextView
-        android:id="@+id/trade_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:text="Handelsname"
-        style="@style/AppTextTable"/>
-
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@color/colorAccent" />
-
-    <TextView
         android:id="@+id/intensity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:text="Stärke"
+        android:text="Menge"
         style="@style/AppTextTable"
         />
 
@@ -139,7 +126,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:text="Einheit"
+        android:text="Häufigkeit"
         style="@style/AppTextTable"
         />
 

@@ -78,25 +78,24 @@ public class PhonenumberListAdapter extends BaseAdapter{
 
             holder.relation = (TextView) convertView.findViewById(R.id.relation);
 
-            holder.call = (ImageButton) convertView.findViewById(R.id.call);
+            //holder.call = (ImageButton) convertView.findViewById(R.id.call);
         }else{
 
             holder = (PhonenumberListAdapter.ViewHolder) convertView.getTag();
         }
 
         Context context = parent.getContext();
-        c.getPhoneNumber().get(position);
         final PhoneNumber number = c.getPhoneNumber().get(position);
         holder.name.setText(number.getName());
         holder.phoneNum.setText(number.getNumber());
         holder.relation.setText(number.getRelation());
 
-        holder.call.setOnClickListener(new View.OnClickListener() {
+        /*holder.call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callListener.onClickCall(number.getNumber());
             }
-        });
+        });*/
 
         return convertView;
     }
@@ -107,6 +106,6 @@ public class PhonenumberListAdapter extends BaseAdapter{
         //TextView description;
         TextView phoneNum;
         TextView relation;
-        ImageButton call;
+        //ImageButton call;
     }
 }

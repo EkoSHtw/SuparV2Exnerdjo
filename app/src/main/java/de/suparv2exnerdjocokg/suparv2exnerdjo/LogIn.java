@@ -51,7 +51,7 @@ public class LogIn extends AppCompatActivity {
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "TvO:letmein", "test:test"
+            "JD:turk", "test:test"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -96,17 +96,18 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
                 // TODO: delete this lines and comment the ones below in !
                 Intent intent = new Intent(getApplicationContext(), Splash.class);
                 startActivity(intent);
 
-                /*
+
                 InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(
                                 Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(
                         activity.getCurrentFocus().getWindowToken(), 0);
                 attemptLogin();
-                */
+
             }
         });
 
@@ -174,7 +175,7 @@ public class LogIn extends AppCompatActivity {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >3;
     }
 
     /**

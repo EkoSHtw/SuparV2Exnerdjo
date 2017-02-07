@@ -7,7 +7,6 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.Medication;
 public class Medicine {
 
     String substance;
-    String tradeName;
     String intensity;
     String form;
     int mornings;
@@ -18,10 +17,9 @@ public class Medicine {
     String informatio;
     String reason;
 
-    public Medicine(String substance, String tradeName, String intensity, String form, int mornings, int noon, int afternoon, int night, String unit, String informatio, String reason) {
+    public Medicine(String substance, String intensity, String form, int mornings, int noon, int afternoon, int night, String unit, String informatio, String reason) {
         this.substance = substance;
         this.intensity = intensity;
-        this.tradeName = tradeName;
         this.form = form;
         this.mornings = mornings;
         this.noon = noon;
@@ -38,14 +36,6 @@ public class Medicine {
 
     public void setSubstance(String substance) {
         this.substance = substance;
-    }
-
-    public String getTradeName() {
-        return tradeName;
-    }
-
-    public void setTradeName(String tradeName) {
-        this.tradeName = tradeName;
     }
 
     public String getIntensity() {
