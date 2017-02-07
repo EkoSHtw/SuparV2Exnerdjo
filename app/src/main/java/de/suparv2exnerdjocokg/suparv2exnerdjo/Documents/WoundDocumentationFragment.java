@@ -107,7 +107,7 @@ public class WoundDocumentationFragment extends Fragment{
                     BufferedReader bufferedReader = new BufferedReader(
                             new FileReader(f));
                     if (bufferedReader.readLine() != null) {
-                        mTable.addwDateRow();
+                        mTable.addwRow();
 
                         String receiveString = "";
 
@@ -126,15 +126,18 @@ public class WoundDocumentationFragment extends Fragment{
                                     pb.setPicPath(s);
                                     pb.setText(getString(R.string.showpicture));
 
-                                } else if (t.getChildAt(fillCount) instanceof EditText ||
-                                        t.getChildAt(fillCount) instanceof TextView) {
+                                } else if (t.getChildAt(fillCount) instanceof EditText) {
                                     EditText firstTextView = (EditText) t.getChildAt(fillCount);
                                     firstTextView.setText(s);
+                                }else if(t.getChildAt(fillCount) instanceof TextView){
+                                    TextView textView = (TextView) t.getChildAt(fillCount);
+                                    textView.setText(s);
                                 }
                                 fillCount++;
 
                                 if (fillCount == (mTable.getHeadLenght()*2)-1) {
                                     mTable.addwRow();
+                                    addDate();
                                     fillCount = 0;
                                     rowCount += 2;
                                 }
@@ -147,6 +150,7 @@ public class WoundDocumentationFragment extends Fragment{
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                break;
             }
         }
 
@@ -167,7 +171,7 @@ public class WoundDocumentationFragment extends Fragment{
 
             @Override
             public void onClick(View v) {
-                FileOutputStream outputStream = null;
+                FileOutputStream outputStream;
 
                 try {
 
@@ -176,22 +180,20 @@ public class WoundDocumentationFragment extends Fragment{
                     myOutWriter.write(" " + "/" + "\n");
                     for (int i = 1; i < mTable.getChildCount(); i++) {
                         View view = mTable.getTable().getChildAt(i);
+
                         if (view instanceof TableRowExpand) {
                             TableRowExpand t = (TableRowExpand) view;
+                            String textLine = "";
                             if (t.getChildCount() > 1) {
-                                String textLine = "";
-
                                 for (int j = 0; j < mTable.getHeadLenght() * 2; j += 2) {
                                     if (t.getChildAt(j) instanceof PictureButton) {
                                         PictureButton pButton = (PictureButton) t.getChildAt(j);
                                         textLine += pButton.getPicPath() + "\n";
                                     } else if (t.getChildAt(j) instanceof EditText) {
                                         EditText text = (EditText) t.getChildAt(j);
-                                        //if(firstTextView == null) break;
                                         textLine += " " + text.getText().toString() + "\n";
-                                    } else{
+                                    } else if (t.getChildAt(j) instanceof TextView){
                                         TextView text = (TextView) t.getChildAt(j);
-                                        //if(firstTextView == null) break;
                                         textLine += " " + text.getText().toString() + "\n";
                                     }
 
@@ -222,7 +224,6 @@ public class WoundDocumentationFragment extends Fragment{
 
         View view = mTable.getTable().getChildAt(lastRow);
         TableRowExpand tre =(TableRowExpand) view;
-        Log.println(Log.INFO, "anzahl", "" +  tre.getChildCount());
         if (tre.getChildAt(0) instanceof TextView) {
             TextView text = (TextView) tre.getChildAt(0);
             Date date = new Date();

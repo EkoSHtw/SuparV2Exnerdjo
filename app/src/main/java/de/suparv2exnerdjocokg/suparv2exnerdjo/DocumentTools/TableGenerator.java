@@ -198,7 +198,7 @@ public class TableGenerator{
                     }
                 });
                 tr.addView(pb);
-            }else if(iCol == headLenght - (headLenght-1) ) {
+            }else if(iCol == 0) {
                 TextView tvCol = new EditText(mContext);
                 tvCol.setGravity(Gravity.CENTER);
                 tvCol.setPadding(3, 3, 3, 3);
@@ -213,7 +213,7 @@ public class TableGenerator{
 
                 addColDivider(tr);
             }else{
-                TextView tvCol = new TextView(mContext);
+                EditText tvCol = new EditText(mContext);
                 tvCol.setGravity(Gravity.CENTER);
                 tvCol.setPadding(3, 3, 3, 3);
                 tvCol.setTextColor(mContext.getResources().getColor(
@@ -239,9 +239,6 @@ public class TableGenerator{
                 ImageActivity.class);
         String message = pb.getPicPath();
         intent.putExtra("PICTURE_ID", message);
-        Bundle bun = new Bundle();
-        bun.putSerializable("PIC_BUTTON", pb);
-        intent.putExtras(bun);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
     }

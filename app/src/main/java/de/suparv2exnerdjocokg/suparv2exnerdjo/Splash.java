@@ -15,15 +15,13 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Route.Route;
 public class Splash extends Activity {
 
     /** Duration of wait **/
-    private final int SPLASH_DISPLAY_LENGTH = 3000;
+    private final int SPLASH_DISPLAY_LENGTH = 30;
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.welcome_screen);
-
-        Log.println(Log.INFO,"","SPLASHHHUU");
 
         /* New Handler to start the Menu-Activity
          * and close this de.suparv2exnerdjocokg.suparv2exnerdjo.Splash-Screen after some seconds.*/

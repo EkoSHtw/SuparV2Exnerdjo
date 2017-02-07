@@ -89,26 +89,24 @@ public class DocumentsTableTemplateFragment extends Fragment {
                         while ((receiveString = bufferedReader.readLine()) != null) {
                             View v = mTable.getTable().getChildAt(rowCount);
                             TableRowExpand t = (TableRowExpand) v;
-                            String s = receiveString.replace("/", "");
+                            String s = receiveString;
 
                             while(!(t.getChildAt(fillCount) instanceof EditText) || !(t.getChildAt(fillCount) instanceof TextView)) {
                                 fillCount++;
                             }
 
-                            Log.println(Log.INFO, ""+i, ""+t.getChildCount());
-                            Log.println(Log.INFO, "Row", ""+fillCount);
                             if(t.getChildAt(fillCount) instanceof EditText){
                                 EditText firstTextView = (EditText) t.getChildAt(fillCount);
                                 firstTextView.setText(s);
-                                fillCount++;
                             }else  if(t.getChildAt(fillCount) instanceof TextView){
                                 TextView firstTextView = (TextView) t.getChildAt(fillCount);
                                 firstTextView.setText(s);
-                                fillCount++;
                             };
+                            fillCount++;
 
                             if (fillCount == (mTable.getHeadLenght()*2)-1) {
                                 mTable.addRow();
+                                addDate();
                                 fillCount = 0;
                                 rowCount+=2;
                             }
@@ -116,8 +114,6 @@ public class DocumentsTableTemplateFragment extends Fragment {
                         bufferedReader.close();
                     } else {
                         bufferedReader.close();
-                        mTable.addRow();
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -132,7 +128,8 @@ public class DocumentsTableTemplateFragment extends Fragment {
         addRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTable.addRow();addDate();
+                mTable.addRow();
+                addDate();
             }
         });
         saveIt = (Button) view.findViewById(R.id.saveStuff);
@@ -141,7 +138,6 @@ public class DocumentsTableTemplateFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     FileOutputStream outputStream;
-                    int k = mTable.getChildCount();
 
                     outputStream = new FileOutputStream(overwrite);
                     OutputStreamWriter myOutWriter = new OutputStreamWriter(outputStream);
@@ -149,6 +145,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
                     for (int i = 1; i < mTable.getChildCount(); i++) {
                         View vi = mTable.getTable().getChildAt(i);
 
+                        if (vi instanceof TableRowExpand) {
                         TableRowExpand t = (TableRowExpand) vi;
                         String textLine = "" ;
                         if(t.getChildCount() > 1) {
@@ -156,7 +153,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
                                 if(t.getChildAt(j) instanceof  EditText) {
                                     EditText text = (EditText) t.getChildAt(j);
                                     textLine += text.getText().toString() + "\n";
-                                }else{
+                                }else if (t.getChildAt(j) instanceof TextView){
                                     TextView text = (TextView) t.getChildAt(j);
                                     textLine += text.getText().toString() + "\n";
                                 }
@@ -165,10 +162,10 @@ public class DocumentsTableTemplateFragment extends Fragment {
                             myOutWriter.flush();
                             outputStream.flush();
                         }
+                        }
                     }
                     myOutWriter.close();
                     outputStream.close();
-
                     Context context = getContext();
                     CharSequence text = getString(R.string.saved);
                     int duration = Toast.LENGTH_SHORT;
@@ -186,7 +183,6 @@ public class DocumentsTableTemplateFragment extends Fragment {
 
         View view = mTable.getTable().getChildAt(lastRow);
         TableRowExpand tre =(TableRowExpand) view;
-        Log.println(Log.INFO, "anzahl", "" +  tre.getChildCount());
         if (tre.getChildAt(0) instanceof TextView) {
             TextView text = (TextView) tre.getChildAt(0);
             Date date = new Date();
