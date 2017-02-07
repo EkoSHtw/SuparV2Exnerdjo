@@ -59,7 +59,7 @@
 
     <string name="wounddocname">Wunddokumentation</string>
     <string name="mobdocname">Mobilisations Lagerungsplan</string>
-    <string name="mobdate">Datum</string>
+    <string name="mobdate">Datum der Aufzeichnung</string>
     <string name="mobdestination">Mobilisierungsziel</string>
     <string name="mobMeasures">Mobilisierungsmaßnahmen</string>
     <string name="mobcharacteristics">Besonderheiten</string>;
@@ -80,6 +80,7 @@
     <string name="addPicture">hinzufügen</string>
     <string name="picture">Bild</string>
     <string name="saved">gespeichert</string>
+    <string name="changepic">Bild ändern</string>
 
     <!-- Add shiftedNote alert -->
     <string name="dialog_add_note_title">Neuer Logbucheintrag</string>

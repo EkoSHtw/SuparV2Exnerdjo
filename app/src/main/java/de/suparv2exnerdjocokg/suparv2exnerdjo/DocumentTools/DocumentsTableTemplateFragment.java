@@ -21,6 +21,9 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
@@ -88,16 +91,21 @@ public class DocumentsTableTemplateFragment extends Fragment {
                             TableRowExpand t = (TableRowExpand) v;
                             String s = receiveString.replace("/", "");
 
-                            while(!(t.getChildAt(fillCount) instanceof EditText)) {
+                            while(!(t.getChildAt(fillCount) instanceof EditText) || !(t.getChildAt(fillCount) instanceof TextView)) {
                                 fillCount++;
                             }
 
                             Log.println(Log.INFO, ""+i, ""+t.getChildCount());
                             Log.println(Log.INFO, "Row", ""+fillCount);
-
-                            EditText firstTextView = (EditText) t.getChildAt(fillCount);
-                            firstTextView.setText(s);
-                            fillCount++;
+                            if(t.getChildAt(fillCount) instanceof EditText){
+                                EditText firstTextView = (EditText) t.getChildAt(fillCount);
+                                firstTextView.setText(s);
+                                fillCount++;
+                            }else  if(t.getChildAt(fillCount) instanceof TextView){
+                                TextView firstTextView = (TextView) t.getChildAt(fillCount);
+                                firstTextView.setText(s);
+                                fillCount++;
+                            };
 
                             if (fillCount == mTable.getHeadLenght()*2-1) {
                                 mTable.addRow();
@@ -109,6 +117,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
                     } else {
                         bufferedReader.close();
                         mTable.addRow();
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -123,7 +132,7 @@ public class DocumentsTableTemplateFragment extends Fragment {
         addRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTable.addRow();
+                mTable.addRow();addDate();
             }
         });
         saveIt = (Button) view.findViewById(R.id.saveStuff);
@@ -144,8 +153,13 @@ public class DocumentsTableTemplateFragment extends Fragment {
                         String textLine = "" ;
                         if(t.getChildCount() > 1) {
                             for (int j = 0; j < mTable.getHeadLenght() * 2; j += 2) {
-                                EditText text = (EditText) t.getChildAt(j);
-                                textLine += text.getText().toString() + "\n";
+                                if(t.getChildAt(j) instanceof  EditText) {
+                                    EditText text = (EditText) t.getChildAt(j);
+                                    textLine += text.getText().toString() + "\n";
+                                }else{
+                                    TextView text = (TextView) t.getChildAt(j);
+                                    textLine += text.getText().toString() + "\n";
+                                }
                             }
                             myOutWriter.write(textLine);
                             myOutWriter.flush();
@@ -165,5 +179,21 @@ public class DocumentsTableTemplateFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void addDate(){
+        int lastRow = mTable.getChildCount()-2;
+
+        View view = mTable.getTable().getChildAt(lastRow);
+        TableRowExpand tre =(TableRowExpand) view;
+        Log.println(Log.INFO, "anzahl", "" +  tre.getChildCount());
+        if (tre.getChildAt(0) instanceof TextView) {
+            TextView text = (TextView) tre.getChildAt(0);
+            Date date = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy", Locale.GERMAN);
+
+            String dateString = format.format(date);
+            text.setText(dateString);
+        }
     }
 }

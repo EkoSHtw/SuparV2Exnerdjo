@@ -3,6 +3,8 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import java.util.Date;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
+import static android.R.attr.path;
 import static android.app.Activity.RESULT_OK;
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton.REQUEST_IMAGE_CAPTURE;
 
@@ -33,7 +36,7 @@ import static de.suparv2exnerdjocokg.suparv2exnerdjo.DocumentTools.PictureButton
  * Created by Eko on 08.12.2016.
  */
 
-public class TableGenerator {
+public class TableGenerator{
     private final Context mContext;
     private TableLayout mTable;
     private TableLayout.LayoutParams rowParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -100,9 +103,21 @@ public class TableGenerator {
                             // Bild wird aufgenommen
                             dispatchTakePictureIntent();
                             pb.setText(mContext.getString(R.string.showpicture));
+                           /* BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inJustDecodeBounds = true;
+                            Bitmap bitmap = BitmapFactory.decodeFile(pb.getPicPath(), options);
+                            if (options.outWidth != -1 && options.outHeight != -1) {
+                                // This is an image file.
+                                pb.setText(mContext.getString(R.string.showpicture));
+                            }
+                            else {
+                                // This is not an image file.
+                                pb.setPicPath("");
+                            }*/
+
 
                         } else {
-
+                            currentButton = pb;
                             showImage(pb);
 
                         }
@@ -132,11 +147,101 @@ public class TableGenerator {
         addDivider();
     }
 
+
+    public void addwDateRow() {
+        TableRowExpand tr = new TableRowExpand(mContext);
+        childCount++;
+
+        tr.setLayoutParams(rowParams);
+
+        for (int iCol = 0; iCol < headLenght; iCol++) {
+            if (iCol == headLenght - 1) {
+                final PictureButton pb = new PictureButton(mContext);
+                pb.setGravity(Gravity.CENTER);
+                pb.setTextAppearance(mContext, R.style.AppButton);
+                pb.setBackgroundColor(mContext.getResources().getColor(
+                        R.color.transparent));
+                pb.setLayoutParams(colParams);
+                pb.setPadding(3, 3, 3, 3);
+                pb.setTextSize(10);
+                pb.setPicPath("");
+
+                pb.setText(mContext.getString(R.string.addpicture));
+
+                pb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (pb.getPicPath() == "") {
+                            currentButton = pb;
+
+                            // Bild wird aufgenommen
+                            dispatchTakePictureIntent();
+                            pb.setText(mContext.getString(R.string.showpicture));
+                           /* BitmapFactory.Options options = new BitmapFactory.Options();
+                            options.inJustDecodeBounds = true;
+                            Bitmap bitmap = BitmapFactory.decodeFile(pb.getPicPath(), options);
+                            if (options.outWidth != -1 && options.outHeight != -1) {
+                                // This is an image file.
+                                pb.setText(mContext.getString(R.string.showpicture));
+                            }
+                            else {
+                                // This is not an image file.
+                                pb.setPicPath("");
+                            }*/
+
+
+                        } else {
+                            currentButton = pb;
+                            showImage(pb);
+
+                        }
+                    }
+                });
+                tr.addView(pb);
+            }else if(iCol == headLenght - (headLenght-1) ) {
+                TextView tvCol = new EditText(mContext);
+                tvCol.setGravity(Gravity.CENTER);
+                tvCol.setPadding(3, 3, 3, 3);
+                tvCol.setTextColor(mContext.getResources().getColor(
+                        R.color.colorPrimary));
+                tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                tvCol.setLayoutParams(colParams);
+                tvCol.setBackgroundColor(mContext.getResources().getColor(
+                        R.color.row_background));
+                tvCol.setTextSize(14);
+                tr.addView(tvCol);
+
+                addColDivider(tr);
+            }else{
+                TextView tvCol = new TextView(mContext);
+                tvCol.setGravity(Gravity.CENTER);
+                tvCol.setPadding(3, 3, 3, 3);
+                tvCol.setTextColor(mContext.getResources().getColor(
+                        R.color.colorPrimary));
+                tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                tvCol.setLayoutParams(colParams);
+                tvCol.setBackgroundColor(mContext.getResources().getColor(
+                        R.color.row_background));
+                tvCol.setTextSize(14);
+                tr.addView(tvCol);
+
+                addColDivider(tr);
+            }
+        }
+
+
+        mTable.addView(tr);
+
+        addDivider();
+    }
     private void showImage(PictureButton pb) {
         Intent intent = new Intent(mContext,
                 ImageActivity.class);
         String message = pb.getPicPath();
         intent.putExtra("PICTURE_ID", message);
+        Bundle bun = new Bundle();
+        bun.putSerializable("PIC_BUTTON", pb);
+        intent.putExtras(bun);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
     }
@@ -149,23 +254,38 @@ public class TableGenerator {
 
         tr.setLayoutParams(rowParams);
         for (int iCol = 0; iCol < headLenght; iCol++) {
-            EditText tvCol = new EditText(mContext);
-            tvCol.setGravity(Gravity.CENTER);
-            tvCol.setPadding(3, 3, 3, 3);
-            tvCol.setTextColor(mContext.getResources().getColor(
-                    R.color.colorPrimary));
-            tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-            tvCol.setLayoutParams(colParams);
-            tvCol.setBackgroundColor(mContext.getResources().getColor(
-                    R.color.row_background));
-            tr.addView(tvCol);
+            if (iCol == headLenght - (headLenght - 1)) {
+                TextView tvCol = new EditText(mContext);
+                tvCol.setGravity(Gravity.CENTER);
+                tvCol.setPadding(3, 3, 3, 3);
+                tvCol.setTextColor(mContext.getResources().getColor(
+                        R.color.colorPrimary));
+                tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                tvCol.setLayoutParams(colParams);
+                tvCol.setBackgroundColor(mContext.getResources().getColor(
+                        R.color.row_background));
+                tvCol.setTextSize(14);
+                tr.addView(tvCol);
 
-            if(iCol < headLenght-1) {
                 addColDivider(tr);
+            } else {
+                EditText tvCol = new EditText(mContext);
+                tvCol.setGravity(Gravity.CENTER);
+                tvCol.setPadding(3, 3, 3, 3);
+                tvCol.setTextColor(mContext.getResources().getColor(
+                        R.color.colorPrimary));
+                tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                tvCol.setLayoutParams(colParams);
+                tvCol.setBackgroundColor(mContext.getResources().getColor(
+                        R.color.row_background));
+                tr.addView(tvCol);
+
+                if (iCol < headLenght - 1) {
+                    addColDivider(tr);
+                }
+
             }
-
         }
-
         mTable.addView(tr);
 
         addDivider();
@@ -288,5 +408,4 @@ public class TableGenerator {
             currentPhoto = (Image) extras.get("data");
         }
     }
-
 }
