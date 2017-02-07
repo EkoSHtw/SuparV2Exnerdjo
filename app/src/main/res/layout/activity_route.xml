@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:layout_marginLeft="16dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
@@ -32,13 +32,14 @@
             android:id="@+id/client_list"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             />
 
     </LinearLayout>
 
     <!--
     <ExpandableListView
+
         android:id="@+id/expandable_client_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -82,10 +82,10 @@
     <string name="saved">gespeichert</string>
 
     <!-- Add shiftedNote alert -->
-    <string name="dialog_add_note_title">Neuer Logbucheintrag</string>
+    <string name="dialog_add_note_title">Neue Notiz</string>
     <string name="cancel">Abbrechen</string>
     <string name="confirm">Bestätigen</string>
-    <string name="carer_name_fill">Carer Name Filler</string>
+    <string name="carer_name_fill">JD</string>
 
 
     <string name="tag">Stichwort</string>

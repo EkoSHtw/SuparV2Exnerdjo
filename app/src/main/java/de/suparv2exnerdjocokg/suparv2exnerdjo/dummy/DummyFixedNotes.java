@@ -34,7 +34,11 @@ public class DummyFixedNotes {
 
     public static void fillErna(){
         ITEMS_Erna.add(new Note("Blutdruck", "test1", new Carer("John"), new Timestamp(System.currentTimeMillis())));
+
+
+
     };
+
     public static void fillErnst(){};
     public static void fillHelga(){};
     public static void fillEmma(){};

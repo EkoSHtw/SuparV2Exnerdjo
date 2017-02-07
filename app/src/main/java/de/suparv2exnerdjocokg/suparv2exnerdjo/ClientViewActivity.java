@@ -54,7 +54,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
 
         Intent intent = getIntent();
         client = DummyClients.ITEMS.get(intent.getIntExtra("CLIENT", 0));
-        carer = new Carer("John");
+        carer = new Carer("JD");
 
         File f = new File(getFilesDir(), this.getString(R.string.wounddocname)+ " "  + client.getFullName());
         File f1 = new File(getFilesDir(), this.getString(R.string.mobdocname) + " " + client.getFullName());
