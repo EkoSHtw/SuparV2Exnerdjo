@@ -1,6 +1,8 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Carer;
 
@@ -18,18 +20,13 @@ public class Note {
         this.timestamp = timestamp;
     }
 
-//    public Note(String tag, String content, Carer carer, Timestamp timestamp) {
-//        this.tag = tag;
-//        this.carer = carer;
-//        this.content = content;
-//        this.timestamp = timestamp;
-//    }
-
     public String getInfoFromPosition(int position) {
         if (position == 0) {
             return tag;
         } else if (position == 1) {
-            return timestamp.toString();
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy, HH:mm", Locale.GERMAN);
+            String dateString = format.format(timestamp);
+            return dateString;
         } else if (position == 2) {
             return content;
         } else if (position == 3) {

@@ -43,7 +43,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     private AutoCompleteTextView inputSearch;
     private MyLogBookRecyclerViewAdapter recyclerViewAdapter;
 
-    private Comparator<Note> currentComparator;
     private boolean flag_date = true;
     private boolean flag_carer = true;
     private boolean flag_tag = true;
@@ -162,6 +161,10 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
             for (int i = 0; i < count; i++) {
                 filterNote = list.get(i);
                 filterableString = filterNote.getInfoFromPosition(currentSpinnerSelection).toLowerCase().trim();
+//                if (currentSpinnerSelection == 1) {
+//                    filterString.replaceAll(".", "");
+//                    filterableString.replaceAll(".", "");
+//                }
                 if (filterableString.contains(filterString)) {
                     nlist.add(filterNote);
                 }
@@ -201,7 +204,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
     private void prepareList() {
         notes = (ArrayList) ITEMS;
-        currentComparator = new DateComparator();
     }
 
     public void update() {
@@ -211,14 +213,13 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 //        Collections.sort(ITEMS, Collections.<Note>reverseOrder());
         notes = (ArrayList) ITEMS;
         DateComparator dateComparator = new DateComparator();
-        currentComparator = dateComparator;
         sort(this.notes, Collections.reverseOrder(dateComparator));
         recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
         mRecyclerView.swapAdapter(recyclerViewAdapter, true);
     }
 
     private void sortBy(Comparator<Note> comparator) {
-       ArrayList<Note> items = (ArrayList)recyclerViewAdapter.getmValues();
+        ArrayList<Note> items = (ArrayList) recyclerViewAdapter.getmValues();
         sort(items, comparator);
 //        recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(filteredList);
         mRecyclerView.swapAdapter(new MyLogBookRecyclerViewAdapter(items), true);

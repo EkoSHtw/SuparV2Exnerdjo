@@ -47,7 +47,6 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy, HH:mm", Locale.GERMAN);
 
         String dateString = format.format(date);
-
         holder.date.setText(dateString+" Uhr");
         //holder.date.setText(note.getTimestamp().toString());
         holder.tag.setText(note.getTag());
