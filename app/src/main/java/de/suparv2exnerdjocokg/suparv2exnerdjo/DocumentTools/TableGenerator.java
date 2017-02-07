@@ -340,8 +340,6 @@ public class TableGenerator{
 
             if(iCol < headLenght-1) {
                 addColDivider(tr);
-                Log.println(Log.INFO, "Column", ""+iCol);
-                Log.println(Log.INFO, "Länge", ""+headLenght);
             }
         }
 
