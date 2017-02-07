@@ -104,35 +104,25 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
     }
 
     public void updateView(){
-        ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (newFrag != null) {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if(fragment instanceof ClientView) {
+            ClientView newFrag = (ClientView) fragment;
             newFrag.updateClientView(-2, false);
-        } else {
-            newFrag = new ClientView();
-            Bundle args = new Bundle();
-            newFrag.setArguments(args);
-
-            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
-
-            trans.replace(R.id.fragment_container, newFrag);
-
-            trans.commit();}
+        }
     }
 
     public void updateRightView(){
-        ClientView newFrag = (ClientView) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (newFrag != null) {
+        Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if(frag instanceof ClientView) {
+            ClientView newFrag = (ClientView) frag;
             newFrag.updateClientView(-1, false);
-        } else {
-            newFrag = new ClientView();
-            Bundle args = new Bundle();
-            newFrag.setArguments(args);
 
-            FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+        }else if(frag instanceof LogBookFragment){
+            LogBookFragment logBookFragment = (LogBookFragment) frag;
+            logBookFragment.update();
 
-            trans.replace(R.id.fragment_container, newFrag);
+        }
 
-            trans.commit();}
     }
 
     @Override
@@ -293,7 +283,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
     public void addNote(String content, String tag) {
 //        EditText editText = (EditText)findViewById(R.id.dialog_input_text);
 //        String content = editText.getText().toString();
-        client.getNotes().add(new Note(tag, content, new Carer("John"), new Timestamp(System.currentTimeMillis())));
+        client.getNotes().add(new Note(tag, content, getCarer(), new Timestamp(System.currentTimeMillis())));
         DummyNotes.sortList(client.getNotes());
         //update fragments
         // buggy, neue notizen nicht in reihenfolge

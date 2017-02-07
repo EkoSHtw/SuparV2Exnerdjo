@@ -227,26 +227,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 //        mRecyclerView.setAdapter(recyclerViewAdapter);
     }
 
-    private void groupBy(int id) {
-        Log.i("methode", "group by my side");
-        switch (id) {
-            case R.id.frag_logB_date:
-                Log.i("date my ass", "hello");
-                if (flag_date) {
-                    Log.i("first ", "if");
-                    sort(notes, new DateComparator());
-                    flag_date = false;
-                } else {
-                    Log.i("second ", "if");
-                    sort(notes, Collections.reverseOrder(new DateComparator()));
-                    flag_date = true;
-                }
-                recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
-                mRecyclerView.swapAdapter(recyclerViewAdapter, true);
-                break;
-        }
-
-    }
 
     private void sortBy(Comparator<Note> comparator) {
         sort(notes, comparator);
