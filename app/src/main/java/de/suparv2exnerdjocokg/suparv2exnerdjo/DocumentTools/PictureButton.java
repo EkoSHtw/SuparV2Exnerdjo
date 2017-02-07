@@ -8,13 +8,14 @@ import android.provider.MediaStore;
 import android.widget.Button;
 
 import java.io.File;
+import java.io.Serializable;
 import java.net.URI;
 
 /**
  * Created by Eko on 29.12.2016.
  */
 
-public class PictureButton extends Button {
+public class PictureButton extends Button  implements Serializable{
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 

@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/woundimage"/>
-</LinearLayout>
+        android:id="@+id/woundimage" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/picchange"
+        android:text="@string/changepic"
+        android:layout_gravity="center_vertical|center_horizontal"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        app:layout_anchor="@+id/woundimage" />
+
+
+</android.support.design.widget.CoordinatorLayout>

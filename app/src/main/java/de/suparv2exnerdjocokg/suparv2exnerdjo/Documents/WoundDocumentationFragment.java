@@ -35,7 +35,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import java.util.regex.Matcher;
 
@@ -67,13 +70,15 @@ public class WoundDocumentationFragment extends Fragment{
     private static final int REQUEST_TAKE_PHOTO = 0;
 
 
-    public WoundDocumentationFragment(){}
+    public WoundDocumentationFragment() {
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        this.view= inflater.inflate(R.layout.fragment_document_wound, container, false);
-        this.c = ((ClientViewActivity)getActivity()).getClient();
+        this.view = inflater.inflate(R.layout.fragment_document_wound, container, false);
+        this.c = ((ClientViewActivity) getActivity()).getClient();
         showTable();
-        return  view;
+        return view;
     }
 
     private void showTable() {
@@ -88,11 +93,11 @@ public class WoundDocumentationFragment extends Fragment{
                 view.getContext().getString(R.string.hdz), view.getContext().getString(R.string.picture)};
 
         mTable.addHead(firstRow);
-        for (int i =0; i < c.docsListLenghts(); i++){
-            if(c.getDocumentation().get(i).getName().equals( getString(R.string.wounddocname) + " " + c.getFullName())){
-                this.index = i;
-                this.overwrite =  c.getDocumentation().get(i);
-                int rowCount =2;
+        for (int i = 0; i < c.docsListLenghts(); i++) {
+            if (c.getDocumentation().get(i).getName().equals(getString(R.string.wounddocname) + " " + c.getFullName())) {
+                //this.index = i;
+                this.overwrite = c.getDocumentation().get(i);
+                int rowCount = 2;
                 int fillCount = 0;
 
                 try {
@@ -100,9 +105,9 @@ public class WoundDocumentationFragment extends Fragment{
                     String f = c.getDocumentation().get(i).getPath();
 
                     BufferedReader bufferedReader = new BufferedReader(
-                            new FileReader(f ));
-                    if ( bufferedReader.readLine() != null ) {
-                        mTable.addwRow();
+                            new FileReader(f));
+                    if (bufferedReader.readLine() != null) {
+                        mTable.addwDateRow();
 
                         String receiveString = "";
 
@@ -112,7 +117,7 @@ public class WoundDocumentationFragment extends Fragment{
                                 TableRowExpand t = (TableRowExpand) view;
                                 String s = receiveString;
 
-                                while(!(t.getChildAt(fillCount) instanceof EditText) && !(t.getChildAt(fillCount) instanceof PictureButton)) {
+                                while (!(t.getChildAt(fillCount) instanceof EditText) && !(t.getChildAt(fillCount) instanceof PictureButton)) {
                                     fillCount++;
                                 }
 
@@ -121,25 +126,25 @@ public class WoundDocumentationFragment extends Fragment{
                                     pb.setPicPath(s);
                                     pb.setText(getString(R.string.showpicture));
 
-                                }else if(t.getChildAt(fillCount) instanceof  EditText){
+                                } else if (t.getChildAt(fillCount) instanceof EditText ||
+                                        t.getChildAt(fillCount) instanceof TextView) {
                                     EditText firstTextView = (EditText) t.getChildAt(fillCount);
                                     firstTextView.setText(s);
                                 }
-                                    fillCount++;
+                                fillCount++;
 
                                 if (fillCount == (mTable.getHeadLenght()*2)-1) {
                                     mTable.addwRow();
                                     fillCount = 0;
-                                    rowCount+=2;
+                                    rowCount += 2;
                                 }
                             }
                         }
                         bufferedReader.close();
-                    }else{
+                    } else {
                         bufferedReader.close();
-                        mTable.addwRow();
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -152,12 +157,14 @@ public class WoundDocumentationFragment extends Fragment{
         addRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mTable.addwRow();
+                mTable.addwDateRow();
+                addDate();
             }
         });
 
         saveIt = (Button) view.findViewById(R.id.saveStuff);
         saveIt.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 FileOutputStream outputStream = null;
@@ -171,14 +178,19 @@ public class WoundDocumentationFragment extends Fragment{
                         View view = mTable.getTable().getChildAt(i);
                         if (view instanceof TableRowExpand) {
                             TableRowExpand t = (TableRowExpand) view;
-                            if(t.getChildCount() > 1) {
+                            if (t.getChildCount() > 1) {
                                 String textLine = "";
-                                for (int j = 0; j < mTable.getHeadLenght()*2; j+=2) {
+
+                                for (int j = 0; j < mTable.getHeadLenght() * 2; j += 2) {
                                     if (t.getChildAt(j) instanceof PictureButton) {
                                         PictureButton pButton = (PictureButton) t.getChildAt(j);
                                         textLine += pButton.getPicPath() + "\n";
                                     } else if (t.getChildAt(j) instanceof EditText) {
                                         EditText text = (EditText) t.getChildAt(j);
+                                        //if(firstTextView == null) break;
+                                        textLine += " " + text.getText().toString() + "\n";
+                                    } else{
+                                        TextView text = (TextView) t.getChildAt(j);
                                         //if(firstTextView == null) break;
                                         textLine += " " + text.getText().toString() + "\n";
                                     }
@@ -205,4 +217,19 @@ public class WoundDocumentationFragment extends Fragment{
         });
     }
 
+    public void addDate(){
+        int lastRow = mTable.getChildCount()-2;
+
+        View view = mTable.getTable().getChildAt(lastRow);
+        TableRowExpand tre =(TableRowExpand) view;
+        Log.println(Log.INFO, "anzahl", "" +  tre.getChildCount());
+        if (tre.getChildAt(0) instanceof TextView) {
+            TextView text = (TextView) tre.getChildAt(0);
+            Date date = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy", Locale.GERMAN);
+
+            String dateString = format.format(date);
+            text.setText(dateString);
+        }
+    }
 }
