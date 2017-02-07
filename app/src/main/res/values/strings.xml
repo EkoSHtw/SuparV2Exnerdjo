@@ -100,14 +100,14 @@
     <string name="logbook_searchbar_search">Suchen...</string>
     <string name="add_new_note_or_task">Neue Aufgabe oder Notiz</string>
     <string name="new_note">Neue Notiz</string>
-    <string name="add_new">Erstelle neue...</string>
+    <string name="add_new">Erstelle neue(n)...</string>
     <string name="task">Aufgabe</string>
     <string name="add_new_todo">Neue Aufgabe hinzufügen</string>
     <string name="description">Beschreibung</string>
     <string name="today">Heute</string>
     <string name="tomorrow">Morgen</string>
     <string name="day_after_tomorrow">Übermorgen</string>
-    <string name="new_logbook_entry">Logbucheintrag</string>
+    <string name="new_logbook_entry">Notiz für den Verlauf</string>
     <string name="note">Notiz</string>
     <string name="title_activity_login">Sign in</string>
 

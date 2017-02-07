@@ -81,7 +81,7 @@ public class MenuFragment extends Fragment {
         back.setColorFilter(getResources().getColor(R.color.colorAccent));
         name = (TextView) v.findViewById(R.id.client_name);
         ClientViewActivity baseActivitiy = (ClientViewActivity) getActivity();
-        name.setText(baseActivitiy.client.getFirstName()+" "+baseActivitiy.client.getLastName());
+        name.setText(baseActivitiy.getClient().getFirstName()+" "+baseActivitiy.getClient().getLastName());
         todo = (TextView) v.findViewById(R.id.client_view);
         todo.setTextColor(getResources().getColor(R.color.colorAccent));
         oldSelection = todo;

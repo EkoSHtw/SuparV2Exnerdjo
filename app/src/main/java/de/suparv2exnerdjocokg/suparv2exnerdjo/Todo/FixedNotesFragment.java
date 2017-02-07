@@ -67,7 +67,7 @@ public class FixedNotesFragment extends Fragment {
         Activity a = getActivity();
         if(a instanceof ClientViewActivity){
             c = ((ClientViewActivity)a).getClient();
-            notes = c.getNotes();
+            notes = c.getFixedNotes();
             todos = c.getToDoList();
         }
     }
@@ -77,13 +77,14 @@ public class FixedNotesFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_fixed_notes_list, container, false);
 
+        List<Note> items = notes;
         if(position != -1){
-            notes = new ArrayList<>();
+            items = new ArrayList<>();
             for(int i = 0; i < notes.size(); i++) {
                 String note = notes.get(i).getTag();
-                String todo = todos.get(position).getTask().getName();
+                String todo = todos.get(position).getTask().getTag();
                 if(note.equals(todo)){
-                    notes.add(notes.get(i));
+                    items.add(notes.get(i));
                 }
             }
         }
@@ -97,28 +98,34 @@ public class FixedNotesFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(notes));
+            recyclerView.setAdapter(new MyNoteRecyclerViewAdapter(items));
         }
         return view;
     }
 
     public void updateFragView(int position, boolean done){
-        List<ToDo> actualList;
-        if(done){
-            actualList = DummyToDos.getDone(todos);
-        }else{
-            actualList = DummyToDos.getUndone(todos);
-        }
+
+
         List<Note> items = new ArrayList<>();
-        for(int i = 0; i < notes.size(); i++) {
-            String note = notes.get(i).getTag();
-            String todo = actualList.get(position).getTask().getName();
-            if(note.equals(todo)){
-                items.add(notes.get(i));
+        if(position!=-1) {
+            List<ToDo> actualList;
+            if (done) {
+                actualList = DummyToDos.getDone(todos);
+            } else {
+                actualList = DummyToDos.getUndone(todos);
             }
+            for (int i = 0; i < notes.size(); i++) {
+                String note = notes.get(i).getTag();
+                String todo = actualList.get(position).getTask().getTag();
+                if (note.equals(todo)) {
+                    items.add(notes.get(i));
+                }
+            }
+        }else{
+            items = notes;
         }
 
-        if(view != null && view instanceof RecyclerView) {
+        if (view != null && view instanceof RecyclerView) {
             RecyclerView rView = (RecyclerView) view;
             rView.setAdapter(new MyNoteRecyclerViewAdapter(items));
         }

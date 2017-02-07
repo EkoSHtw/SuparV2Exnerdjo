@@ -11,7 +11,7 @@
         android:id="@+id/fixed_notes_headline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Feste Notizen"
+        android:text="Angepinnte Notizen"
         android:layout_marginTop="10dp"
         android:gravity="center"
         style="@style/AppTextSmall"
@@ -34,7 +34,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Notizen von Gestern"
+        android:text="Verlauf vom letzten Termin"
         android:layout_marginTop="10dp"
         android:gravity="center"
         style="@style/AppTextSmall"

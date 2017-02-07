@@ -104,7 +104,9 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         final Client client = mClients.get(groupPosition);
         List<ToDo> todos = client.getToDoList();
 
+
         TextView time = (TextView) convertView.findViewById(R.id.time_route);
+        /*
         int count = mClients.size();
         double timePerClientWithDrive = 8.0/count;
         double twentyMintues = 20.0/60.0;
@@ -113,7 +115,31 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         double startMinutes = (start-(int)start)*60;
         double end = start+timePerClientWithoutDrive;
         double endMinutes = (end-(int)end)*60;
-        time.setText((int)start +":"+ (int)startMinutes +" Uhr\n - \n"+(int)end+":"+ (int)endMinutes+" Uhr");
+        time.setText((int)start +":"+ (int)startMinutes +" Uhr\n - \n"+(int)end+":"+ (int)endMinutes+" Uhr");*/
+
+        switch (groupPosition){
+            case 0:
+                time.setText("08:15 Uhr\n - \n 08:55 Uhr");
+                break;
+            case 1:
+                time.setText("09:15 Uhr\n - \n 09:55 Uhr");
+                break;
+            case 2:
+                time.setText("10:15 Uhr\n - \n 10:55 Uhr");
+                break;
+            case 3:
+                time.setText("11:15 Uhr\n - \n 11:55 Uhr");
+                break;
+            case 4:
+                time.setText("12:45 Uhr\n - \n 13:25 Uhr");
+                break;
+            case 5:
+                time.setText("13:45 Uhr\n - \n 14:25 Uhr");
+                break;
+            case 6:
+                time.setText("14:45 Uhr\n - \n 16:15 Uhr");
+                break;
+        }
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
         name.setText(client.getFirstName()+" "+client.getLastName());

@@ -30,7 +30,7 @@ public class DummyClients {
 
         ArrayList<Integer> pictograms2 = new ArrayList<>();
 
-        ITEMS.add(new Client(1, R.drawable.ernst, "Ernst", "Meier", "25.11.1951", medicine2, DummyNotes.ITEMS_Ernst, DummyToDos.ITEMS_Ernst, vital2.vitalValues, "COPD: chronisch obstruktive Lungenerkrankung, Bluthochdruck", 2, "Rosenthaler Weg 10B, 13159 Berlin", phoneNumbers2, pictograms2));
+        ITEMS.add(new Client(1, R.drawable.ernst, "Ernst", "Meier", "25.11.1951", medicine2, DummyNotes.ITEMS_Ernst, DummyFixedNotes.ITEMS_Ernst, DummyToDos.ITEMS_Ernst, vital2.vitalValues, "COPD: chronisch obstruktive Lungenerkrankung, Bluthochdruck", 2, "Rosenthaler Weg 10B, 13159 Berlin", phoneNumbers2, pictograms2));
 
         // Client 3 ->  Helga Stern
 
@@ -44,7 +44,7 @@ public class DummyClients {
         ArrayList<Integer> pictograms3 = new ArrayList<>();
         pictograms3.add(R.drawable.ear_);
 
-        ITEMS.add(new Client(2, R.drawable.helga, "Helga", "Stern", "14.04.1958", medicine3, DummyNotes.ITEMS_Helga, DummyToDos.ITEMS_Helga, vital3.vitalValues, "Schwerhörig, Herzinsuffizienz, Bluthochdruck, Chronische Obstipation (Verstopfung), Schilddrüsenunterfunktion, Chronische Lungenentzündung", 3, "Schönerlinder Str. 56, 13127 Berlin", phoneNumbers3, pictograms3));
+        ITEMS.add(new Client(2, R.drawable.helga, "Helga", "Stern", "14.04.1958", medicine3, DummyNotes.ITEMS_Helga, DummyFixedNotes.ITEMS_Helga, DummyToDos.ITEMS_Helga, vital3.vitalValues, "Schwerhörig, Herzinsuffizienz, Bluthochdruck, Chronische Obstipation (Verstopfung), Schilddrüsenunterfunktion, Chronische Lungenentzündung", 3, "Schönerlinder Str. 56, 13127 Berlin", phoneNumbers3, pictograms3));
 
         // Client 4 ->  Emma Liesegang
 
@@ -58,7 +58,7 @@ public class DummyClients {
         ArrayList<Integer> pictograms4 = new ArrayList<>();
         pictograms4.add(R.drawable.brain);
 
-        ITEMS.add(new Client(3, R.drawable.emma, "Emma", "Liesegang", "13.03.1957", medicine4, DummyNotes.ITEMS_Emma, DummyToDos.ITEMS_Emma, vital4.vitalValues, "Diabetis mellitus, Wunde am rechter Unterarm, Demenz, Herzinsuffizienz, Grundpflege durch die Tochter", 3, "Pankgrafenstraße 12D, 13125 Berlin", phoneNumbers4, pictograms4));
+        ITEMS.add(new Client(3, R.drawable.emma, "Emma", "Liesegang", "13.03.1957", medicine4, DummyNotes.ITEMS_Emma, DummyFixedNotes.ITEMS_Emma, DummyToDos.ITEMS_Emma, vital4.vitalValues, "Diabetis mellitus, Wunde am rechter Unterarm, Demenz, Herzinsuffizienz, Grundpflege durch die Tochter", 3, "Pankgrafenstraße 12D, 13125 Berlin", phoneNumbers4, pictograms4));
 
         // Client 5 -> Hans Rüdiger Schmidt
 
@@ -72,7 +72,7 @@ public class DummyClients {
         ArrayList<Integer> pictograms5 = new ArrayList<>();
         pictograms5.add(R.drawable.ear_);
 
-        ITEMS.add(new Client(4, R.drawable.hans, "Hans Rüdiger", "Schmidt", "12.07.1949", medicine5, DummyNotes.ITEMS_Hans, DummyToDos.ITEMS_Hans, vital5.vitalValues, "Bluthochdruck, Schwerhörigkeit (Hörgerät beidseitig) -> langsam und deutlich reden!, Herzinsuffizienz", 2, "Kapellenweg 13, 13159 Berlin", phoneNumbers5, pictograms5));
+        ITEMS.add(new Client(4, R.drawable.hans, "Hans Rüdiger", "Schmidt", "12.07.1949", medicine5, DummyNotes.ITEMS_Hans, DummyFixedNotes.ITEMS_Hans, DummyToDos.ITEMS_Hans, vital5.vitalValues, "Bluthochdruck, Schwerhörigkeit (Hörgerät beidseitig) -> langsam und deutlich reden!, Herzinsuffizienz", 2, "Kapellenweg 13, 13159 Berlin", phoneNumbers5, pictograms5));
 
         // Client 6 -> Karl Heinz Hufschmied
 
@@ -86,7 +86,7 @@ public class DummyClients {
         ArrayList<Integer> pictograms6 = new ArrayList<>();
         pictograms6.add(R.drawable.brain);
 
-        ITEMS.add(new Client(5, R.drawable.karl, "Karl Heinz", "Hufschmied", "14.12.1939", medicine6, DummyNotes.ITEMS_Karl, DummyToDos.ITEMS_Karl, vital6.vitalValues, "Demenz, Bettlägerig, Herzinsuffizienz, Inkontinenz, Karls Frau wohnt im selben Haushalt und übernimmt die Grundpflege", 3, "Hauptstraße 45, 13159 Berlin", phoneNumbers6, pictograms6));
+        ITEMS.add(new Client(5, R.drawable.karl, "Karl Heinz", "Hufschmied", "14.12.1939", medicine6, DummyNotes.ITEMS_Karl, DummyFixedNotes.ITEMS_Karl,  DummyToDos.ITEMS_Karl, vital6.vitalValues, "Demenz, Bettlägerig, Herzinsuffizienz, Inkontinenz, Karls Frau wohnt im selben Haushalt und übernimmt die Grundpflege", 3, "Hauptstraße 45, 13159 Berlin", phoneNumbers6, pictograms6));
 
         // Client 7 -> Irmgard Weber
 
@@ -99,7 +99,7 @@ public class DummyClients {
 
         ArrayList<Integer> pictograms7 = new ArrayList<>();
 
-        ITEMS.add(new Client(6, R.drawable.irmgard, "Irmgard", "Weber", "31.08.1927", medicine7, DummyNotes.ITEMS_Irmgard, DummyToDos.ITEMS_Irmgard, vital7.vitalValues, "COPD, Herzinsuffizienz", 2, "Buchholzer Str. 67, 13156 Berlin", phoneNumbers7, pictograms7));
+        ITEMS.add(new Client(6, R.drawable.irmgard, "Irmgard", "Weber", "31.08.1927", medicine7, DummyNotes.ITEMS_Irmgard, DummyFixedNotes.ITEMS_Irmgard, DummyToDos.ITEMS_Irmgard, vital7.vitalValues, "COPD, Herzinsuffizienz", 2, "Buchholzer Str. 67, 13156 Berlin", phoneNumbers7, pictograms7));
 
     }
 
@@ -120,7 +120,7 @@ public class DummyClients {
 
         DummyClientMedicine medicine1 = new DummyClientMedicine(DummyMedicine.ITEMS_PRESCRIBED_Erna, DummyMedicine.ITEMS_TEMPORARY, DummyMedicine.ITEMS_SELF_ORDERED);
 
-        Client c = new Client(0,R.drawable.erna, "Erna","Schubert","17.08.1943",medicine1,DummyNotes.ITEMS_Erna,DummyToDos.ITEMS_Erna, vital1.vitalValues, "Diabetes mellitus, Adipositas, Schilddrüsenunterfuntion",1,"Blankenfelder Str. 82, 13127 Berlin",phoneNumbers1, pictograms1);
+        Client c = new Client(0,R.drawable.erna, "Erna","Schubert","17.08.1943",medicine1,DummyNotes.ITEMS_Erna, DummyFixedNotes.ITEMS_Erna, DummyToDos.ITEMS_Erna, vital1.vitalValues, "Diabetes mellitus, Adipositas, Schilddrüsenunterfuntion",1,"Blankenfelder Str. 82, 13127 Berlin",phoneNumbers1, pictograms1);
 
         return c;
     }

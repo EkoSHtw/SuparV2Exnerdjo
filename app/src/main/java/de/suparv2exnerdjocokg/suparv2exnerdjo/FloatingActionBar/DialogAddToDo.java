@@ -44,19 +44,18 @@ public class DialogAddToDo extends DialogFragment implements DatePickerDialog.On
     List<ToDo> toDos;
 
 
-    public DialogAddToDo() {
-        Activity a = getActivity();
-        if (a instanceof ClientViewActivity){
-            Client c = ((ClientViewActivity)a).getClient();
-            toDos = c.getToDoList();
-        }
-    }
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
+        Activity a = getActivity();
+        if (a instanceof ClientViewActivity){
+            Client c = ((ClientViewActivity)a).getClient();
+            toDos = c.getToDoList();
+        }
 
         LinearLayout rootView = (LinearLayout) inflater.inflate(R.layout.dialog_add_todo, container, false);
         Button confirm = (Button) rootView.findViewById(R.id.dialog_todo_button_confirm);
