@@ -34,7 +34,6 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.list;
-import static de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes.ITEMS;
 import static java.util.Collections.sort;
 
 
@@ -220,7 +219,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 //        Collections.copy(this.notes, DummyNotes.ITEMS);
 //        Collections.sort(notes);
 //        Collections.sort(ITEMS, Collections.<Note>reverseOrder());
-        notes = (ArrayList) ITEMS;
+//        notes = (ArrayList) ITEMS;
         DateComparator dateComparator = new DateComparator();
         sort(this.notes, Collections.reverseOrder(dateComparator));
         recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
