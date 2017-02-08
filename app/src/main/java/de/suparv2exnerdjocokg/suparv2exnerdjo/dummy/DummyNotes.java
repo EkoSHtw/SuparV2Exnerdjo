@@ -66,11 +66,6 @@ public class DummyNotes {
         ITEMS.add(first);
         ITEMS.add(second);
         ITEMS.add(third);
-
-//        ITEMS.sort();
-//        Collections.sort(ITEMS);
-        // oder sort und dann Collections.reverse()
-
     }
 
     public static void fillErna(){
@@ -94,4 +89,5 @@ public class DummyNotes {
     public static void sortList(List<Note> items){
         Collections.sort(items,Collections.<Note>reverseOrder());
     }
+
 }

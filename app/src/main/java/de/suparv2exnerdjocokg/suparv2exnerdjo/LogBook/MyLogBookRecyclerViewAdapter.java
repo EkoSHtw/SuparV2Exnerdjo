@@ -1,14 +1,12 @@
 package de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -34,6 +32,9 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
         this.mValues = values;
     }
 
+    public List<Note> getmValues() {
+        return mValues;
+    }
 
     @Override
     public void onBindViewHolder(final LogBookItemHolder holder, int position) {
@@ -46,7 +47,6 @@ public class MyLogBookRecyclerViewAdapter extends RecyclerView.Adapter<MyLogBook
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy, HH:mm", Locale.GERMAN);
 
         String dateString = format.format(date);
-
         holder.date.setText(dateString+" Uhr");
         //holder.date.setText(note.getTimestamp().toString());
         holder.tag.setText(note.getTag());

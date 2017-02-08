@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,6 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.NoteComparators.DateCompar
 import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.NoteComparators.TagComparator;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.R.id.list;
 import static de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes.ITEMS;
@@ -48,7 +46,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     private RecyclerView mRecyclerView;
     private AutoCompleteTextView inputSearch;
     private MyLogBookRecyclerViewAdapter recyclerViewAdapter;
-    //    private LinearLayout header;
+
     private boolean flag_date = true;
     private boolean flag_carer = true;
     private boolean flag_tag = true;
@@ -75,9 +73,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
         arrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener(this);
-
-
-//        header = (FrameLayout) getView().findViewById(R.id.header);
 
         mRecyclerView = (RecyclerView) view.findViewById(list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -107,7 +102,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        FrameLayout header =
         LinearLayout header = (LinearLayout) getView().findViewById(R.id.header);
 
         TextView date = (TextView) header.findViewById(R.id.frag_logB_date);
@@ -158,8 +152,8 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
         String filterString = cs.toString().toLowerCase();
 
         if (filterString.equals("")) {
-            mRecyclerView.swapAdapter(new MyLogBookRecyclerViewAdapter(notes), true);
-//            mRecyclerView.swapAdapter();
+            recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
+            mRecyclerView.swapAdapter(recyclerViewAdapter, true);
         } else {
             final List<Note> list = notes;
 
@@ -171,12 +165,16 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
             for (int i = 0; i < count; i++) {
                 filterNote = list.get(i);
                 filterableString = filterNote.getInfoFromPosition(currentSpinnerSelection).toLowerCase().trim();
+//                if (currentSpinnerSelection == 1) {
+//                    filterString.replaceAll(".", "");
+//                    filterableString.replaceAll(".", "");
+//                }
                 if (filterableString.contains(filterString)) {
                     nlist.add(filterNote);
                 }
             }
-
-            mRecyclerView.swapAdapter(new MyLogBookRecyclerViewAdapter(nlist), true);
+            recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(nlist);
+            mRecyclerView.swapAdapter(recyclerViewAdapter, true);
         }
     }
 
@@ -219,18 +217,23 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     public void update() {
 //        notes = ((ClientViewActivity)getActivity()).client.
         //Collections.copy(this.notes, notes);
+//        Collections.copy(this.notes, DummyNotes.ITEMS);
 //        Collections.sort(notes);
 //        Collections.sort(ITEMS, Collections.<Note>reverseOrder());
-        sort(this.notes, Collections.reverseOrder(new DateComparator()));
+        notes = (ArrayList) ITEMS;
+        DateComparator dateComparator = new DateComparator();
+        sort(this.notes, Collections.reverseOrder(dateComparator));
         recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
         mRecyclerView.swapAdapter(recyclerViewAdapter, true);
 //        mRecyclerView.setAdapter(recyclerViewAdapter);
     }
 
 
+
     private void sortBy(Comparator<Note> comparator) {
-        sort(notes, comparator);
-        recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
-        mRecyclerView.swapAdapter(recyclerViewAdapter, true);
+        ArrayList<Note> items = (ArrayList) recyclerViewAdapter.getmValues();
+        sort(items, comparator);
+//        recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(filteredList);
+        mRecyclerView.swapAdapter(new MyLogBookRecyclerViewAdapter(items), true);
     }
 }
