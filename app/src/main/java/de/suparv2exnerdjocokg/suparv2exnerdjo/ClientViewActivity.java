@@ -32,7 +32,6 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.Note;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.TodoFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Vital.VitalFragment;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyClients;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 public class ClientViewActivity extends AppCompatActivity implements VitalFragment.OnFragmentInteractionListener ,BasicDataBaseFragment.OnDocumentSelectedListener, MenuFragment.OnMenuFragmentInteractionListener, TodoFragment.OnListFragmentInteractionListener, TodoFragment.OnInfoClickedInteractionListener, BasicDataBaseFragment.OnClickCall {
 
@@ -290,6 +289,10 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         if (newFrag instanceof LogBookFragment) {
             ((LogBookFragment) newFrag).update();
         }
+    }
+
+    public void addNote (Note note){
+        client.getNotes().add(note);
     }
 
     @Override

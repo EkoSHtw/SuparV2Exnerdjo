@@ -3,7 +3,6 @@ package de.suparv2exnerdjocokg.suparv2exnerdjo.Todo;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-
 import java.sql.Timestamp;
 import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Carer;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
 
 /**
 
@@ -103,7 +101,8 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 if (isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
                     Note note = new Note(currentTask.getTag(), "" + currentTask.getName() + " durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis()));
-                    DummyNotes.ITEMS.add(note);
+                    ClientViewActivity activity = (ClientViewActivity)fragment.getActivity();
+                    activity.addNote(note);
                     currentTask.setNote(note);
                 } else {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.transparent));
