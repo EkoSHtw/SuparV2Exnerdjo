@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Carer;
@@ -96,12 +97,14 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
         holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                holder.mItem.getTask().setDone(isChecked);
+                GeneralTask task = holder.mItem.getTask();
+                task.setDone(isChecked);
                 mListener.onListFragmentInteraction(-2, true);
+                ClientViewActivity activity = (ClientViewActivity)fragment.getActivity();
                 if (isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
                     Note note = new Note(currentTask.getTag(), "" + currentTask.getName() + " durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis()));
-                    ClientViewActivity activity = (ClientViewActivity)fragment.getActivity();
+                   task.setNote(note);
                     activity.addNote(note);
                     currentTask.setNote(note);
                 } else {
@@ -114,6 +117,8 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                             if (timestamp == secondTimestamp) {
                                 mValues.remove(i);
                             }
+                            ArrayList<Note> notes =(ArrayList<Note>) activity.getClient().getNotes();
+                            notes.remove(task.getNote());
                         }
                     }
                     currentTask.setShiftet(0);
