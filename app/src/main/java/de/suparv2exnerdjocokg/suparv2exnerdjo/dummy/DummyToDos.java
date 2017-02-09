@@ -107,7 +107,7 @@ public class DummyToDos {
         ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Hautpflege", skinCare, "Haut")));
 
         String[] wounds = {"Nutzen Sie Gelegenheiten, wie z.B. die Ganzkörperwäsche um den Körper auf Verletzungen und/oder Druckstellen zu überprüfen."};
-        ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Aus Verletzungen/Druckstellen prüfen", wounds, "Wunden")));
+        ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Auf Verletzungen/Druckstellen prüfen", wounds, "Wunden")));
 
         String[] medicaments = {"Ganz wichtig: Insulin"};
         ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Medikamente verabreichen", medicaments, "Medikamente")));
@@ -120,7 +120,7 @@ public class DummyToDos {
 
         // ANLEITUNG
         String[] breathing = {"Technik zum Ausatmen (Lippenbremse)", "Einatmen durch die Nase", "Atem Trainer Triflow für 2 Minuten"};
-        ITEMS_Ernst.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Atemübungen durschführen", breathing, "Atem")));
+        ITEMS_Ernst.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Atemübungen durchführen", breathing, "Atem")));
 
         String[] drinking = {"Trinkmenge erfragen."};
         ITEMS_Ernst.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Flüssigkeitsbilanzierung", drinking, "Trinken")));
@@ -130,7 +130,7 @@ public class DummyToDos {
         "Beginnen Sie ruhig und gleichmäßig zu atmen. Die Bewegungen werden dem eigenen Atem angepasst und beginnen im Nacken.", "Bei der Exspiration findet die Abwärts- und bei der Inspiration die Aufwärtsbewegung statt.",
          "Es werden mehrere spiegelsymetrische Kreise beschrieben, bei den inspiratorischen Bewegungen lagert der Druck auf Daumen und Zeigefinger, bei den exspiratorischen auf der gesamten Hand.",
                  "Hierbei lässt der Druck dann an den Thoraxseiten nach.", "Die Hand hierbei unbedingt geschlossen und flach halten.", "Der Patient sollte relativ schnell die eigene Atmung an die Bewegung der Einreibung anpassen.",
-                "Während der Einreibung unbedingt das Sprechen vermeiden und das Befinden des Patienten bzgl. Atmung und/oder Schmerzen beobachten." , "Nach ca. 5-10 Minuten (hier auch die Toleranz des Patienten beachten) streicht man abschließend mit beiden Händen entlang der Wirbelsäule von oben nach unten."};
+                "Während der Einreibung unbedingt das Sprechen vermeiden und das Befinden des Patienten bzgl. Atmung und/oder Schmerzen beobachten."};
         ITEMS_Ernst.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Atemstimulierende Einreibung", breath, "Atem")));
 
         String[] ganzWD = {"Waschen, Duschen, Baden","Mund-, Zahn- und Lippenpflege","Rasieren","Hautpflege","Haarpflege (Kämmen, ggf. Waschen)","Nagelpflege","An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken","Vorbereiten/Aufräumen des Pflegebereiches"};
@@ -145,7 +145,7 @@ public class DummyToDos {
         String[] freshAir = {"Fenster für mindestens 10 Minuten öffnen."};
         ITEMS_Helga.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Wohnung lüften", freshAir, "Wohnung")));
 
-        String[] shit = {"Auscheidungen erfragen", "Ausscheidungen dokumentieren"};
+        String[] shit = {"Ausscheidungen erfragen", "Ausscheidungen dokumentieren"};
         ITEMS_Helga.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ausscheidungen dokumentieren", shit, "Ausscheidungen")));
 
         // ANLEITUNG
@@ -230,7 +230,7 @@ public class DummyToDos {
         String[] medicaments = {};
         ITEMS_Karl.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Medikamente verabreichen", medicaments, "Medikamente")));
 
-        String[] shit = {"Auscheidungen erfragen", "Ausscheidungen dokumentieren"};
+        String[] shit = {"Ausscheidungen erfragen", "Ausscheidungen dokumentieren"};
         ITEMS_Karl.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Ausscheidungen dokumentieren", shit, "Ausscheidungen")));
     }
 
@@ -251,7 +251,7 @@ public class DummyToDos {
                 "Beginnen Sie ruhig und gleichmäßig zu atmen. Die Bewegungen werden dem eigenen Atem angepasst und beginnen im Nacken.", "Bei der Exspiration findet die Abwärts- und bei der Inspiration die Aufwärtsbewegung statt.",
                 "Es werden mehrere spiegelsymetrische Kreise beschrieben, bei den inspiratorischen Bewegungen lagert der Druck auf Daumen und Zeigefinger, bei den exspiratorischen auf der gesamten Hand.",
                 "Hierbei lässt der Druck dann an den Thoraxseiten nach.", "Die Hand hierbei unbedingt geschlossen und flach halten.", "Der Patient sollte relativ schnell die eigene Atmung an die Bewegung der Einreibung anpassen.",
-                "Während der Einreibung unbedingt das Sprechen vermeiden und das Befinden des Patienten bzgl. Atmung und/oder Schmerzen beobachten." , "Nach ca. 5-10 Minuten (hier auch die Toleranz des Patienten beachten) streicht man abschließend mit beiden Händen entlang der Wirbelsäule von oben nach unten."};
+                "Während der Einreibung unbedingt das Sprechen vermeiden und das Befinden des Patienten bzgl. Atmung und/oder Schmerzen beobachten."};
         ITEMS_Irmgard.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Atemstimulierende Einreibung", breath, "Atem")));
 
         String[] ganzWD = {"Waschen, Duschen, Baden","Mund-, Zahn- und Lippenpflege","Rasieren","Hautpflege","Haarpflege (Kämmen, ggf. Waschen)","Nagelpflege","An- und Auskleiden incl. An- und Ablegen von Körperersatzstücken","Vorbereiten/Aufräumen des Pflegebereiches"};

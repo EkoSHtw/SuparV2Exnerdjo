@@ -78,6 +78,10 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         return mClients.get(groupPosition).getToDoList().get(childPosition);
     }
 
+    public Object getParent(int groupPosition){
+        return mClients.get(groupPosition);
+    }
+
     @Override
     public long getGroupId(int groupPosition) {
         return groupPosition;
@@ -231,15 +235,31 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         }
 
         TextView tView = (TextView) convertView.findViewById(R.id.todo);
-        ToDo todo = (ToDo) getChild(groupPosition, childPosition);
+        final ToDo todo = (ToDo) getChild(groupPosition, childPosition);
         tView.setText(todo.getTask().getName());
 
-        ImageView taskDone = (ImageView) convertView.findViewById(R.id.check_box_task);
+        CheckBox taskDone = (CheckBox) convertView.findViewById(R.id.check_box_task);
         if(todo.getTask().isDone()){
-            taskDone.setImageResource(android.R.drawable.checkbox_on_background);
+            //taskDone.setImageResource(android.R.drawable.checkbox_on_background);
+            taskDone.setChecked(true);
         }else{
-            taskDone.setImageResource(android.R.drawable.checkbox_off_background);
+            //taskDone.setImageResource(android.R.drawable.checkbox_off_background);
+            taskDone.setChecked(false);
         }
+
+        taskDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(todo.getTask().isDone()){
+                    todo.getTask().setDone(false);
+                }else{
+                    todo.getTask().setDone(true);
+                }
+                notifyDataSetChanged();
+            }
+        });
+
+
 
         return convertView;
     }

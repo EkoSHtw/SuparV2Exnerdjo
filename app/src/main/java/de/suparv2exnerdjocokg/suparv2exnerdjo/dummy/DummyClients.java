@@ -86,6 +86,7 @@ public class DummyClients {
         ArrayList<Integer> pictograms6 = new ArrayList<>();
         pictograms6.add(R.drawable.brain);
 
+
         ITEMS.add(new Client(5, R.drawable.karl, "Karl Heinz", "Hufschmied", "14.12.1939", medicine6, DummyNotes.ITEMS_Karl, DummyFixedNotes.ITEMS_Karl,  DummyToDos.ITEMS_Karl, vital6.vitalValues, "Demenz, Bettlägerig, Herzinsuffizienz, Inkontinenz, Karls Frau wohnt im selben Haushalt und übernimmt die Grundpflege", 3, "Hauptstraße 45, 13159 Berlin", phoneNumbers6, pictograms6));
 
         // Client 7 -> Irmgard Weber
