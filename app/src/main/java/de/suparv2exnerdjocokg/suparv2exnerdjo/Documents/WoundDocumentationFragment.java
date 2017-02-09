@@ -88,7 +88,7 @@ public class WoundDocumentationFragment extends Fragment{
         String[] firstRow = {view.getContext().getString(R.string.wounddate), view.getContext().getString(R.string.woundphase),
                 view.getContext().getString(R.string.woundsizel), view.getContext().getString(R.string.woundsizew),
                 view.getContext().getString(R.string.woundsized),
-                view.getContext().getString(R.string.wounddescription),
+                view.getContext().getString(R.string.woundlocation),
                 view.getContext().getString(R.string.woundkindfrequency), view.getContext().getString(R.string.wounddescription),
                 view.getContext().getString(R.string.hdz), view.getContext().getString(R.string.picture)};
 
@@ -228,7 +228,6 @@ public class WoundDocumentationFragment extends Fragment{
             TextView text = (TextView) tre.getChildAt(0);
             Date date = new Date();
             SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy", Locale.GERMAN);
-
             String dateString = format.format(date);
             text.setText(dateString);
         }

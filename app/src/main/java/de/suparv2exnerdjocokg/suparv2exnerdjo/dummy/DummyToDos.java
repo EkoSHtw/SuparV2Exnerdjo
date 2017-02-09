@@ -109,7 +109,7 @@ public class DummyToDos {
         String[] wounds = {"Nutzen Sie Gelegenheiten, wie z.B. die Ganzkörperwäsche um den Körper auf Verletzungen und/oder Druckstellen zu überprüfen."};
         ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Auf Verletzungen/Druckstellen prüfen", wounds, "Wunden")));
 
-        String[] medicaments = {"Ganz wichtig: Insulin"};
+        String[] medicaments = {"Ganz wichtig: Insulin", "Thyroxin: 150 µg", "Metropolol: 47,5 mg", "Protaphane: 20 IE"};
         ITEMS_Erna.add(new ToDo(new Timestamp(System.currentTimeMillis()), new GeneralTask("Medikamente verabreichen", medicaments, "Medikamente")));
     }
 

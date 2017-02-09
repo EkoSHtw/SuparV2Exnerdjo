@@ -69,16 +69,123 @@ public class DummyNotes {
     }
 
     public static void fillErna(){
+        Carer c1 = new Carer("John") ;
+        Carer c2 = new Carer ("Hilde");
+        Calendar cal = Calendar.getInstance();
+        final int year = 2017;
+        final int month = cal.FEBRUARY;
+        cal.set(year, month, 7, 8, 30);
+        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", c1,
+                new Timestamp(cal.getTimeInMillis()));
+        cal.set(year, month, 8, 8, 28);
+        Note second = new Note("Bluthochdruck","Arm leicht angeschwollen",c1, new Timestamp(cal.getTimeInMillis()));
+        ITEMS_Erna.add(second);
+        ITEMS_Erna.add(first);
+        ITEMS_Erna.add(new Note("Nahrungsaufnahme", "Zahnschmerzen bei dem Kauen", c2, new Timestamp(getYesterday())));
+        ITEMS_Erna.add(new Note("Wunden", "Wunde Arm eitert stark", c2, new Timestamp(getYesterday())));
+
 
     };
 
 
-    public static void fillErnst(){};
-    public static void fillHelga(){};
-    public static void fillEmma(){};
-    public static void fillHans(){};
-    public static void fillKarl(){};
-    public static void fillIrmgard(){};
+    public static void fillErnst(){
+        Carer c1 = new Carer("John") ;
+        Carer c2 = new Carer ("Hilde");
+        Calendar cal = Calendar.getInstance();
+        final int year = 2017;
+        final int month = cal.FEBRUARY;
+        cal.set(year, month, 7, 8, 30);
+        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", c1,
+                new Timestamp(cal.getTimeInMillis()));
+        cal.set(year, month, 8, 8, 28);
+        Note second = new Note("Bluthochdruck","Arm leicht angeschwollen",c1, new Timestamp(cal.getTimeInMillis()));
+        ITEMS_Ernst.add(second);
+        ITEMS_Ernst.add(first);
+        ITEMS_Ernst.add(new Note("Nahrungsaufnahme", "Zahnschmerzen bei dem Kauen", c2, new Timestamp(getYesterday())));
+        ITEMS_Ernst.add(new Note("Wunden", "Wunde Arm eitert stark", c2, new Timestamp(getYesterday())));
+
+    };
+    public static void fillHelga(){
+        Carer c1 = new Carer("John") ;
+        Carer c2 = new Carer ("Hilde");
+        Calendar cal = Calendar.getInstance();
+        final int year = 2017;
+        final int month = cal.FEBRUARY;
+        cal.set(year, month, 7, 8, 30);
+        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", c1,
+                new Timestamp(cal.getTimeInMillis()));
+        cal.set(year, month, 8, 8, 28);
+        Note second = new Note("Bluthochdruck","Arm leicht angeschwollen",c1, new Timestamp(cal.getTimeInMillis()));
+        ITEMS_Helga.add(second);
+        ITEMS_Helga.add(first);
+        ITEMS_Helga.add(new Note("Nahrungsaufnahme", "Zahnschmerzen bei dem Kauen", c2, new Timestamp(getYesterday())));
+        ITEMS_Helga.add(new Note("Wunden", "Wunde Arm eitert stark", c2, new Timestamp(getYesterday())));
+
+    };
+    public static void fillEmma(){
+        Carer c1 = new Carer("John") ;
+        Carer c2 = new Carer ("Hilde");
+        Calendar cal = Calendar.getInstance();
+        final int year = 2017;
+        final int month = cal.FEBRUARY;
+        cal.set(year, month, 7, 8, 30);
+        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", c1,
+                new Timestamp(cal.getTimeInMillis()));
+        cal.set(year, month, 8, 8, 28);
+        Note second = new Note("Bluthochdruck","Arm leicht angeschwollen",c1, new Timestamp(cal.getTimeInMillis()));
+        ITEMS_Emma.add(second);
+        ITEMS_Emma.add(first);
+        ITEMS_Emma.add(new Note("Nahrungsaufnahme", "Zahnschmerzen bei dem Kauen", c2, new Timestamp(getYesterday())));
+        ITEMS_Emma.add(new Note("Wunden", "Wunde Arm eitert stark", c2, new Timestamp(getYesterday())));
+    };
+    public static void fillHans(){
+        Carer c1 = new Carer("John") ;
+        Carer c2 = new Carer ("Hilde");
+        Calendar cal = Calendar.getInstance();
+        final int year = 2017;
+        final int month = cal.FEBRUARY;
+        cal.set(year, month, 7, 8, 30);
+        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", c1,
+                new Timestamp(cal.getTimeInMillis()));
+        cal.set(year, month, 8, 8, 28);
+        Note second = new Note("Bluthochdruck","Arm leicht angeschwollen",c1, new Timestamp(cal.getTimeInMillis()));
+        ITEMS_Hans.add(second);
+        ITEMS_Hans.add(first);
+        ITEMS_Hans.add(new Note("Nahrungsaufnahme", "Zahnschmerzen bei dem Kauen", c2, new Timestamp(getYesterday())));
+        ITEMS_Hans.add(new Note("Wunden", "Wunde Arm eitert stark", c2, new Timestamp(getYesterday())));
+    };
+    public static void fillKarl(){
+        Carer c1 = new Carer("John") ;
+        Carer c2 = new Carer ("Hilde");
+        Calendar cal = Calendar.getInstance();
+        final int year = 2017;
+        final int month = cal.FEBRUARY;
+        cal.set(year, month, 7, 8, 30);
+        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", c1,
+                new Timestamp(cal.getTimeInMillis()));
+        cal.set(year, month, 8, 8, 28);
+        Note second = new Note("Bluthochdruck","Arm leicht angeschwollen",c1, new Timestamp(cal.getTimeInMillis()));
+        ITEMS_Karl.add(second);
+        ITEMS_Karl.add(first);
+        ITEMS_Karl.add(new Note("Nahrungsaufnahme", "Zahnschmerzen bei dem Kauen", c2, new Timestamp(getYesterday())));
+        ITEMS_Karl.add(new Note("Wunden", "Wunde Arm eitert stark", c2, new Timestamp(getYesterday())));
+    };
+    public static void fillIrmgard(){
+        Carer c1 = new Carer("John") ;
+        Carer c2 = new Carer ("Hilde");
+        Calendar cal = Calendar.getInstance();
+        final int year = 2017;
+        final int month = cal.FEBRUARY;
+        cal.set(year, month, 7, 8, 30);
+        Note first = new Note("Zähne putzen", "Ich habe dem Clienten die Zähne geputzt", c1,
+                new Timestamp(cal.getTimeInMillis()));
+        cal.set(year, month, 8, 8, 28);
+        Note second = new Note("Bluthochdruck","Arm leicht angeschwollen",c1, new Timestamp(cal.getTimeInMillis()));
+        ITEMS_Irmgard.add(second);
+        ITEMS_Irmgard.add(first);
+        ITEMS_Irmgard.add(new Note("Nahrungsaufnahme", "Zahnschmerzen bei dem Kauen", c2, new Timestamp(getYesterday())));
+        ITEMS_Irmgard.add(new Note("Wunden", "Wunde Arm eitert stark", c2, new Timestamp(getYesterday())));
+    };
 
     public static long getYesterday() {
         GregorianCalendar yesterday = new GregorianCalendar();
