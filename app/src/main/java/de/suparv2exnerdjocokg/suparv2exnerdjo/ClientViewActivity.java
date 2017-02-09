@@ -289,6 +289,7 @@ public class ClientViewActivity extends AppCompatActivity implements VitalFragme
         if (newFrag instanceof LogBookFragment) {
             ((LogBookFragment) newFrag).update();
         }
+        updateRightView();
     }
 
     public void addNote (Note note){

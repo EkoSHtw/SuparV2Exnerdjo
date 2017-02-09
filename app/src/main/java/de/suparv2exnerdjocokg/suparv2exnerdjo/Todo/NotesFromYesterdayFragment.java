@@ -17,14 +17,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
+import de.suparv2exnerdjocokg.suparv2exnerdjo.LogBook.NoteComparators.DateComparator;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyNotes;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 
 /**
@@ -68,8 +68,8 @@ public class NotesFromYesterdayFragment extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
         Activity a = getActivity();
-        if(a instanceof ClientViewActivity){
-            c = ((ClientViewActivity)a).getClient();
+        if (a instanceof ClientViewActivity) {
+            c = ((ClientViewActivity) a).getClient();
             notes = c.getNotes();
             todos = c.getToDoList();
         }
@@ -99,13 +99,31 @@ public class NotesFromYesterdayFragment extends Fragment {
     }
 
     private List<Note> getYesterday() throws ParseException {
-        List<Note> list = new ArrayList<>();
-        for(int i = 0; i < notes.size(); i++){
-            if(equalsWithYesterday(notes.get(i).getTimestamp())){
-                list.add(notes.get(i));
+        ClientViewActivity clientViewActivity = (ClientViewActivity) getActivity();
+        List<Note> list = clientViewActivity.getClient().getNotes();
+        Collections.sort(list, new DateComparator());
+        List<Note> returnList = new ArrayList<>();
+//        for(int i = 0; i < notes.size(); i++){
+//            if(equalsWithYesterday(notes.get(i).getTimestamp())){
+//                list.add(notes.get(i));
+//            }
+//        }
+
+        int i = list.size()-1;
+        if (i >= 0) {
+            int count;
+            if (i+1 >= 7) {
+                count = 7;
+            } else {
+                count = i;
+            }
+
+            while (count >= 0) {
+                returnList.add(list.get(count));
+                count--;
             }
         }
-        return list;
+        return returnList;
     }
 
     public boolean equalsWithYesterday(Timestamp st) throws ParseException {
@@ -114,21 +132,21 @@ public class NotesFromYesterdayFragment extends Fragment {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -1);
         Date yesterday = dateFormat.parse(dateFormat.format(cal.getTime())); // get yesterday's Date without time part
-        Date srcDateWithoutTime =dateFormat.parse(dateFormat.format(date));
-        return yesterday.equals(srcDateWithoutTime ); // checks src date equals yesterday.
+        Date srcDateWithoutTime = dateFormat.parse(dateFormat.format(date));
+        return yesterday.equals(srcDateWithoutTime); // checks src date equals yesterday.
     }
 
-    public void updateFragView(int position){
+    public void updateFragView(int position) {
         List<Note> items = new ArrayList<>();
-        for(int i = 0; i < notes.size(); i++) {
+        for (int i = 0; i < notes.size(); i++) {
             String note = notes.get(i).getTag();
             String todo = todos.get(position).getTask().getName();
-            if(note.equals(todo)){
+            if (note.equals(todo)) {
                 items.add(notes.get(i));
             }
         }
 
-        if(view != null && view instanceof RecyclerView) {
+        if (view != null && view instanceof RecyclerView) {
             RecyclerView rView = (RecyclerView) view;
             rView.setAdapter(new MyNoteRecyclerViewAdapter(items));
         }

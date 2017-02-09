@@ -16,7 +16,6 @@ import java.util.Set;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Todo.ToDo;
-import de.suparv2exnerdjocokg.suparv2exnerdjo.dummy.DummyToDos;
 
 /**
  * Created by V2 on 25.12.2016.
@@ -55,7 +54,6 @@ public class DialogAddNote extends Dialog implements View.OnClickListener {
 
     private String[] getTags() {
         Set<String> tags = new HashSet<>();
-//        DummyToDos.ITEMS
         List<ToDo> items = activity.getClient().getToDoList();
         for (int i = 0; i < items.size(); i++) {
             ToDo toDo = items.get(i);
@@ -70,8 +68,6 @@ public class DialogAddNote extends Dialog implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.dialog_button_positive:
                 EditText input = (EditText) findViewById(R.id.dialog_input_text);
-
-
 
                 String sInput = input.getText().toString().trim();
                 String sTag = tag.getText().toString();

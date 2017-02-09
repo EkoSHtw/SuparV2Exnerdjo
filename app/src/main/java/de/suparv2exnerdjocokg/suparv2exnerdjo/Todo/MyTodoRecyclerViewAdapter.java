@@ -22,7 +22,6 @@ import de.suparv2exnerdjocokg.suparv2exnerdjo.GeneralTask;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.R;
 
 /**
-
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecyclerViewAdapter.ViewHolder> {
@@ -100,11 +99,11 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 GeneralTask task = holder.mItem.getTask();
                 task.setDone(isChecked);
                 mListener.onListFragmentInteraction(-2, true);
-                ClientViewActivity activity = (ClientViewActivity)fragment.getActivity();
+                ClientViewActivity activity = (ClientViewActivity) fragment.getActivity();
                 if (isChecked) {
                     holder.mView.setBackgroundColor(holder.mView.getResources().getColor(R.color.grey));
                     Note note = new Note(currentTask.getTag(), "" + currentTask.getName() + " durchgeführt", new Carer("John"), new Timestamp(System.currentTimeMillis()));
-                   task.setNote(note);
+                    task.setNote(note);
                     activity.addNote(note);
                     currentTask.setNote(note);
                 } else {
@@ -117,7 +116,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                             if (timestamp == secondTimestamp) {
                                 mValues.remove(i);
                             }
-                            ArrayList<Note> notes =(ArrayList<Note>) activity.getClient().getNotes();
+                            ArrayList<Note> notes = (ArrayList<Note>) activity.getClient().getNotes();
                             notes.remove(task.getNote());
                         }
                     }
@@ -171,7 +170,7 @@ public class MyTodoRecyclerViewAdapter extends RecyclerView.Adapter<MyTodoRecycl
                 builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                         String input = editText.getText().toString();
+                        String input = editText.getText().toString();
                         if (currentTask.getDaysShiftet() > 0) {
                             currentTask.setShiftedNote(input);
                         } else {

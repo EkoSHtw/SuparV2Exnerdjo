@@ -89,6 +89,18 @@ public class ToDoNotes extends Fragment {
 
             trans.commit();
         }
+
+        NotesFromYesterdayFragment fnFrag = new NotesFromYesterdayFragment();
+        Bundle args = new Bundle();
+        args.putInt("position", position);
+        args.putBoolean("done", done);
+        fnFrag.setArguments(args);
+
+        FragmentTransaction trans = getChildFragmentManager().beginTransaction();
+
+        trans.replace(R.id.olderNotes, fnFrag);
+
+        trans.commit();
     }
 
     public void updateFragViewInfo(int position, boolean done){
