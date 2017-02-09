@@ -228,7 +228,6 @@ public class WoundDocumentationFragment extends Fragment{
             TextView text = (TextView) tre.getChildAt(0);
             Date date = new Date();
             SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy", Locale.GERMAN);
-
             String dateString = format.format(date);
             text.setText(dateString);
         }

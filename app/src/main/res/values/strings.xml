@@ -16,31 +16,9 @@
     <string name="logout">Abmelden</string>
 
     <!--Basic Data -->
-    <string name="clientfirstname">Helga</string>
-    <string name="clientlastname">Stein</string>
-    <string name="clientAddress">Rotsteinweg 21A</string>
-    <string name="postalcCode">1457 Berlin</string>
-    <string name="clientBirthdate">14.04.1958</string>
-    <string name="careLevel">2</string>
-    <string name="fam1">Arnold Stein</string>
-    <string name="fam2">Helene Stein</string>
-    <string name="telephonenumber">015123456</string>
-    <string name="telephonenumber2">017123456</string>
-    <string name="infodump">Schwerhörig.
-    Trinkt gerne Tee. Redet gerne über Formel 1.</string>
-    <string name="concerns">test</string>
-    <string name="clientmartial_status">ledig</string>
-    <string name="clientcitizenship">Deutsch</string>
-    <string name="clientlivingcon">lebt allein</string>
-    <string name="healthinsurance">Techniker Krankenkasse</string>
-    <string name="insurancenumber">5492854</string>
-    <string name="clientdoctor">Gert Witter</string>
-    <string name="clientdoctelnumber">82483037</string>
 
 
     <!-- Logbook search bar -->
-    <string name="search_bar">search bar filler</string>
-    <string name="title_activity_main2">Main2Activity</string>
 
 
     <!-- Wound Documentation-->
@@ -59,7 +37,6 @@
 
     <string name="wounddocname">Wunddokumentation</string>
     <string name="mobdocname">Mobilisations Lagerungsplan</string>
-    <string name="mobdate">Datum der Aufzeichnung</string>
     <string name="mobdestination">Mobilisierungsziel</string>
     <string name="mobMeasures">Mobilisierungsmaßnahmen</string>
     <string name="mobcharacteristics">Besonderheiten</string>;
@@ -78,10 +55,8 @@
     <string name="injec_infu">Injektion/Infusion</string>
     <string name="specialdiet">Verabreichung von Sondenkost / enterale Ernährung </string>
 
-    <string name="addPicture">hinzufügen</string>
     <string name="picture">Bild</string>
     <string name="saved">gespeichert</string>
-    <string name="changepic">Bild ändern</string>
 
     <!-- Add shiftedNote alert -->
     <string name="dialog_add_note_title">Neue Notiz</string>
@@ -94,38 +69,27 @@
     <string name="input_tags">Geben Sie Stichwörter ein</string>
     <string name="input_description">Beschreibung...</string>
     <string name="note_comment">Kommentar...</string>
-    <string name="type_here">Hier tippen...</string>
     <string name="text_not_set">Wird benötigt!</string>
     <string name="date">Zeit</string>
     <string name="shiftedNote">Notiz</string>
     <string name="carer">Pfleger</string>
     <string name="logbook_searchbar_search">Suchen...</string>
-    <string name="add_new_note_or_task">Neue Aufgabe oder Notiz</string>
     <string name="new_note">Neue Notiz</string>
     <string name="add_new">Erstelle neue(n)...</string>
     <string name="task">Aufgabe</string>
     <string name="add_new_todo">Neue Aufgabe hinzufügen</string>
-    <string name="description">Beschreibung</string>
     <string name="today">Heute</string>
     <string name="tomorrow">Morgen</string>
     <string name="day_after_tomorrow">Übermorgen</string>
     <string name="new_logbook_entry">Notiz für den Verlauf</string>
     <string name="note">Notiz</string>
-    <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="title_activity_dialog_change_value">DialogChangeValue</string>
 
 
 </resources>
