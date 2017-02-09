@@ -64,6 +64,7 @@
     <string name="mobMeasures">Mobilisierungsmaßnahmen</string>
     <string name="mobcharacteristics">Besonderheiten</string>;
     <string name="mobtime">Uhrpunkt</string>
+    <string name="woundlocation">Lokation</string>
 
     <string name="doctorialprescription1">Ärztlich Verordnung 1 Verbandswechsel etc</string>
     <string name="doctorialprescription2">Ärztlich Verordnung 2 Injektion Infusion</string>

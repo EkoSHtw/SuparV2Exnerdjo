@@ -85,6 +85,7 @@ public class TableGenerator{
                 final PictureButton pb = new PictureButton(mContext);
                 pb.setGravity(Gravity.CENTER);
                 pb.setTextAppearance(mContext, R.style.AppButton);
+
                 pb.setBackgroundColor(mContext.getResources().getColor(
                         R.color.transparent));
                 pb.setLayoutParams(colParams);
@@ -130,7 +131,7 @@ public class TableGenerator{
                 tvCol.setPadding(3, 3, 3, 3);
                 tvCol.setTextColor(mContext.getResources().getColor(
                         R.color.colorPrimary));
-                tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                tvCol.setMinWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 tvCol.setLayoutParams(colParams);
                 tvCol.setBackgroundColor(mContext.getResources().getColor(
                         R.color.row_background));
@@ -204,7 +205,6 @@ public class TableGenerator{
                 tvCol.setPadding(3, 3, 3, 3);
                 tvCol.setTextColor(mContext.getResources().getColor(
                         R.color.colorPrimary));
-                tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 tvCol.setLayoutParams(colParams);
                 tvCol.setBackgroundColor(mContext.getResources().getColor(
                         R.color.row_background));
@@ -218,7 +218,7 @@ public class TableGenerator{
                 tvCol.setPadding(3, 3, 3, 3);
                 tvCol.setTextColor(mContext.getResources().getColor(
                         R.color.colorPrimary));
-                tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                tvCol.setMinWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 tvCol.setLayoutParams(colParams);
                 tvCol.setBackgroundColor(mContext.getResources().getColor(
                         R.color.row_background));
