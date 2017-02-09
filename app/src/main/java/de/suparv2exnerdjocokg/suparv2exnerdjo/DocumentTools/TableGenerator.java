@@ -204,7 +204,7 @@ public class TableGenerator{
                 tvCol.setPadding(3, 3, 3, 3);
                 tvCol.setTextColor(mContext.getResources().getColor(
                         R.color.colorPrimary));
-                tvCol.setMaxWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+                tvCol.setMinWidth(ViewGroup.LayoutParams.MATCH_PARENT);
                 tvCol.setLayoutParams(colParams);
                 tvCol.setBackgroundColor(mContext.getResources().getColor(
                         R.color.row_background));
@@ -340,6 +340,7 @@ public class TableGenerator{
             tvCol.setTextSize(14);
             tvCol.setTextColor(mContext.getResources().getColor(R.color.colorAccent));
             tr.addView(tvCol);
+            tvCol.setMinWidth(ViewGroup.LayoutParams.MATCH_PARENT);
 
             if(iCol < headLenght-1) {
                 addColDivider(tr);
@@ -389,7 +390,8 @@ public class TableGenerator{
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = act.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        Log.println(Log.INFO, ",", storageDir.toString());
+   
+       // Log.println(Log.INFO, ",", storageDir.getAbsolutePath());
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */

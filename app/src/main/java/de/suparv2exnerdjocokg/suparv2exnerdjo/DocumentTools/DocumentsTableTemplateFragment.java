@@ -116,7 +116,6 @@ public class DocumentsTableTemplateFragment extends Fragment {
                         bufferedReader.close();
                     } else {
                         bufferedReader.close();
-                        mTable.addRow();
 
                     }
                 } catch (Exception e) {
