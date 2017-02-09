@@ -36,7 +36,7 @@
         android:layout_height="match_parent"
         android:background="@color/transparent"
         android:layout_toLeftOf="@id/info"
-        app:srcCompat="?android:attr/actionModeCloseDrawable"
+        app:srcCompat="@drawable/arrow2"
         android:rotation="180"
         />
 

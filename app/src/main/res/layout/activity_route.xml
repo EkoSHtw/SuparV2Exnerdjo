@@ -26,7 +26,8 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="5dp"
             android:layout_height="match_parent"
-            android:progressDrawable="@drawable/progressbar_vertical" />
+            android:progressDrawable="@drawable/progressbar_vertical"
+            android:layout_marginBottom="50dp"/>
 
         <FrameLayout
             android:id="@+id/client_list"

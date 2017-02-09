@@ -78,10 +78,6 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         return mClients.get(groupPosition).getToDoList().get(childPosition);
     }
 
-    public Object getParent(int groupPosition){
-        return mClients.get(groupPosition);
-    }
-
     @Override
     public long getGroupId(int groupPosition) {
         return groupPosition;
@@ -155,7 +151,10 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         image.setImageDrawable(convertView.getResources().getDrawable(client.getImagePath()));
 
         LinearLayout pictogramContainer = (LinearLayout)  convertView.findViewById(R.id.pictrogram_container);
-        if(pictogramContainer.getChildCount() == 0) {
+
+        if(pictogramContainer.getChildCount() != 0) {
+            pictogramContainer.removeAllViewsInLayout();
+        }
             ViewGroup.LayoutParams pictogramParams = new ViewGroup.LayoutParams(50, 50);
             for (int i = 0; i < client.getPictograms().size(); i++) {
                 final int myI = i;
@@ -174,7 +173,7 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
                     }
                 });
             }
-        }
+
 
         ImageButton routeButton = (ImageButton) convertView.findViewById(R.id.route_button);
 
@@ -234,6 +233,7 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
             convertView = infalInflater.inflate(R.layout.todo_for_client_route, null);
         }
 
+
         TextView tView = (TextView) convertView.findViewById(R.id.todo);
         final ToDo todo = (ToDo) getChild(groupPosition, childPosition);
         tView.setText(todo.getTask().getName());
@@ -258,8 +258,6 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
                 notifyDataSetChanged();
             }
         });
-
-
 
         return convertView;
     }

@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!--item name="android:windowBackground">@color/colorPrimaryLight</item-->
+        <item name="android:colorBackground">@color/colorPrimaryLight</item>
     </style>
 
     <style name="AppTextNormal" parent="@android:style/TextAppearance.DeviceDefault">
@@ -53,7 +55,7 @@
     </style>
 
     <style name="AppTextMenu" parent="@android:style/TextAppearance.DeviceDefault">
-        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:paddingTop">15dp</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textSize">20sp</item>
     </style>

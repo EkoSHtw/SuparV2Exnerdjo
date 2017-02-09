@@ -42,6 +42,7 @@ public class ClientListFragment extends Fragment{
         ExpandableListView mExpandableListView = (ExpandableListView) view.findViewById(R.id.expandable_client_list);
         mExpandableListView.setAdapter(new MyClientExpandableListViewAdapter(getContext(), DummyClients.ITEMS, mListener));
         mExpandableListView.setDivider(getResources().getDrawable(R.drawable.divider_transparent));
+        mExpandableListView.setChildDivider(getResources().getDrawable(R.drawable.divider_transparent));
 
         /*
         mRecyclerView = (RecyclerView) view.findViewById(R.id.clientListRecycler);

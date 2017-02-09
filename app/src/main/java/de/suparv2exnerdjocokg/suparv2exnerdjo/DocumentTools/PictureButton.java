@@ -28,9 +28,9 @@ public class PictureButton extends Button  implements Serializable{
         this.context = context;
     }
 
-    public Image getImage() {
+    /*public Image getImage() {
         return image;
-    }
+    }*/
 
     public void setImage(Image image) {
         this.image = image;

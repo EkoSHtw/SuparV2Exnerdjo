@@ -383,7 +383,7 @@ public class TableGenerator{
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = act.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = act.getFilesDir();
         Log.println(Log.INFO, ",", storageDir.toString());
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -397,10 +397,4 @@ public class TableGenerator{
         return image;
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            currentPhoto = (Image) extras.get("data");
-        }
-    }
 }
