@@ -241,6 +241,8 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
             taskDone.setImageResource(android.R.drawable.checkbox_off_background);
         }
 
+
+
         return convertView;
     }
 

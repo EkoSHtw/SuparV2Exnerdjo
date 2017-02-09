@@ -54,6 +54,7 @@ public class DialogAddVitalValue extends Dialog {
 
                 note.setMinValue(105);
                 note.setMaxValue(190);
+                note.setValue(120);
 
                 container.setVisibility(View.VISIBLE);
 
@@ -61,6 +62,7 @@ public class DialogAddVitalValue extends Dialog {
 
                 second.setMinValue(65);
                 second.setMaxValue(120);
+                second.setValue(80);
                 break;
             case R.id.blood_sugar:
                 first.setText("Blutzucker");
