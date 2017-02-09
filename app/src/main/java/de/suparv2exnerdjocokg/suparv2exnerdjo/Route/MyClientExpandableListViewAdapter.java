@@ -155,6 +155,7 @@ public class MyClientExpandableListViewAdapter extends BaseExpandableListAdapter
         image.setImageDrawable(convertView.getResources().getDrawable(client.getImagePath()));
 
         LinearLayout pictogramContainer = (LinearLayout)  convertView.findViewById(R.id.pictrogram_container);
+        pictogramContainer.removeAllViews();
         if(pictogramContainer.getChildCount() == 0) {
             ViewGroup.LayoutParams pictogramParams = new ViewGroup.LayoutParams(50, 50);
             for (int i = 0; i < client.getPictograms().size(); i++) {

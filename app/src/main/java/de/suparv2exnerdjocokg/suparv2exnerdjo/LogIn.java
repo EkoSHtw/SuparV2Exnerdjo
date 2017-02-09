@@ -96,10 +96,10 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+/*
                 // TODO: delete this lines and comment the ones below in !
                 Intent intent = new Intent(getApplicationContext(), Splash.class);
-                startActivity(intent);
+                startActivity(intent);*/
 
 
                 InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(
