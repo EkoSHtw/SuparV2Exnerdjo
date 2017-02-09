@@ -24,6 +24,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Semaphore;
 
 import de.suparv2exnerdjocokg.suparv2exnerdjo.Client;
 import de.suparv2exnerdjocokg.suparv2exnerdjo.ClientViewActivity;
@@ -58,13 +59,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
         View view = inflater.inflate(R.layout.fragment_logbook, container, false);
 
-        //        if (view.findViewById(R.id.header) != null) {
-//            LogBookHeadline lHead = new LogBookHeadline();
-//            getChildFragmentManager().beginTransaction().add(R.id.header, lHead).commit();
-////           header =(LinearLayout) lHead.getView();
-//            Log.i("if", "bin drinne");
-//        }
-
         Spinner spinner = (Spinner) view.findViewById(R.id.search_bar_spinner);
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.search_bar_choices, R.layout.spinner_item);
@@ -75,7 +69,21 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
 
         mRecyclerView = (RecyclerView) view.findViewById(list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        prepareList();
+//        Semaphore semaphore = new Semaphore()
+        final Semaphore semaphore = new Semaphore(0);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+               try{
+                   prepareList();
+               }finally {
+                   semaphore.release();
+               }
+            }
+        };
+        Thread prepareListThread = new Thread(runnable);
+        prepareListThread.start();
+
         recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
 
         inputSearch = (AutoCompleteTextView) view.findViewById(R.id.logbook_search_bar);
@@ -94,6 +102,7 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
             public void afterTextChanged(Editable arg0) {
             }
         });
+        semaphore.acquireUninterruptibly();
         update();
         return view;
     }
@@ -164,10 +173,6 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
             for (int i = 0; i < count; i++) {
                 filterNote = list.get(i);
                 filterableString = filterNote.getInfoFromPosition(currentSpinnerSelection).toLowerCase().trim();
-//                if (currentSpinnerSelection == 1) {
-//                    filterString.replaceAll(".", "");
-//                    filterableString.replaceAll(".", "");
-//                }
                 if (filterableString.contains(filterString)) {
                     nlist.add(filterNote);
                 }
@@ -214,17 +219,10 @@ public class LogBookFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     public void update() {
-//        notes = ((ClientViewActivity)getActivity()).client.
-        //Collections.copy(this.notes, notes);
-//        Collections.copy(this.notes, DummyNotes.ITEMS);
-//        Collections.sort(notes);
-//        Collections.sort(ITEMS, Collections.<Note>reverseOrder());
-//        notes = (ArrayList) ITEMS;
         DateComparator dateComparator = new DateComparator();
         sort(this.notes, Collections.reverseOrder(dateComparator));
         recyclerViewAdapter = new MyLogBookRecyclerViewAdapter(notes);
         mRecyclerView.swapAdapter(recyclerViewAdapter, true);
-//        mRecyclerView.setAdapter(recyclerViewAdapter);
     }
 
 
